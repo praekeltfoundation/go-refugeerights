@@ -52,6 +52,9 @@ go.app = function() {
                 // Total unique users
                 .add.total_unique_users('total.unique_users')
 
+                // Total sessions
+                .add.total_sessions('total.sessions')
+
                 // Total times reached state_end
                 .add.total_state_actions(
                     {

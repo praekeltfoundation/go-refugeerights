@@ -272,7 +272,7 @@ describe("app", function() {
                         .run();
                 });
 
-                it("should adjust unique_users metrics", function() {
+                it("should fire metrics", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
@@ -280,9 +280,11 @@ describe("app", function() {
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
-                            assert.equal(Object.keys(metrics).length, 2);
+                            assert.equal(Object.keys(metrics).length, 4);
                             assert.deepEqual(metrics['total.unique_users'].values, [1]);
                             assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.sessions'].values, [1]);
+                            assert.deepEqual(metrics['total.sessions.transient'].values, [1]);
                         })
                         .run();
                 });
@@ -440,9 +442,11 @@ describe("app", function() {
                             // check metrics
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
-                                assert.equal(Object.keys(metrics).length, 2);
+                                assert.equal(Object.keys(metrics).length, 4);
                                 assert.deepEqual(metrics['total.unique_users'].values, [1]);
                                 assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.sessions'].values, [1]);
+                                assert.deepEqual(metrics['total.sessions.transient'].values, [1]);
                             })
                             // check user extras
                             .check(function(api) {
@@ -493,9 +497,11 @@ describe("app", function() {
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
-                            assert.equal(Object.keys(metrics).length, 10);
+                            assert.equal(Object.keys(metrics).length, 12);
                             assert.deepEqual(metrics['total.unique_users'].values, [1]);
                             assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.sessions'].values, [1]);
+                            assert.deepEqual(metrics['total.sessions.transient'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
@@ -592,9 +598,11 @@ describe("app", function() {
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
-                            assert.equal(Object.keys(metrics).length, 10);
+                            assert.equal(Object.keys(metrics).length, 12);
                             assert.deepEqual(metrics['total.unique_users'].values, [1]);
                             assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.sessions'].values, [1]);
+                            assert.deepEqual(metrics['total.sessions.transient'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.migrant.last'].values, [1]);
