@@ -47,13 +47,27 @@ describe("app", function() {
                     });
                 })
                 .setup(function(api) {
-                    // registered user 1
+                    // registered refugee 1
                     api.contacts.add({
                         msisdn: '+064001',
                         extra: {
                             language: 'french',
                             country: 'drc',
                             status: 'refugee',
+                            registered: 'true'
+                        },
+                        key: "contact_key",
+                        user_account: "contact_user_account"
+                    });
+                })
+                .setup(function(api) {
+                    // registered migrant 1
+                    api.contacts.add({
+                        msisdn: '+064002',
+                        extra: {
+                            language: 'french',
+                            country: 'drc',
+                            status: 'migrant',
                             registered: 'true'
                         },
                         key: "contact_key",
@@ -66,39 +80,13 @@ describe("app", function() {
 
         describe("PaginatedChoiceState testing using Refugee Main Menu", function() {
             describe("forward navigation", function() {
-                it("should display page 1 on arrival", function() {
-                    return tester
-                        .setup.user.addr('082111')
-                        .setup.user.state('state_refugee_main')
-                        .inputs(
-                            {session_event: 'new'}  // dial in
-                        )
-                        // check navigation
-                        .check.interaction({
-                            state: 'state_refugee_main',
-                            reply: [
-                                'MAIN MENU',
-                                '1. New to SA',
-                                '2. The asylum application process',
-                                '3. Asylum applications from children',
-                                '4. Permits',
-                                '5. Support services',
-                                '6. Right to work',
-                                '7. Next'
-                            ].join('\n')
-                        })
-                        .run();
-                });
-
                 it("should display page 2 on Next", function() {
                     return tester
                         .setup.user.addr('082111')
                         .setup.user.state('state_refugee_main')
                         .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '7'  // state_refugee_main (Next)
+                            '7'  // state_refugee_main (Next)
                         )
-                        // check navigation
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
@@ -122,11 +110,9 @@ describe("app", function() {
                         .setup.user.addr('082111')
                         .setup.user.state('state_refugee_main')
                         .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '7'  // state_refugee_main (Next p1)
+                            '7'  // state_refugee_main (Next p1)
                             , '8'  // state_refugee_main (Next p2)
                         )
-                        // check navigation
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
@@ -149,12 +135,10 @@ describe("app", function() {
                         .setup.user.addr('082111')
                         .setup.user.state('state_refugee_main')
                         .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '7'  // state_refugee_main (Next p1)
+                            '7'  // state_refugee_main (Next p1)
                             , '8'  // state_refugee_main (Next p2)
                             , '7'  // state_refugee_main (Next p3)
                         )
-                        // check navigation
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
@@ -174,13 +158,11 @@ describe("app", function() {
                         .setup.user.addr('082111')
                         .setup.user.state('state_refugee_main')
                         .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '7'  // state_refugee_main (Next p1)
+                            '7'  // state_refugee_main (Next p1)
                             , '8'  // state_refugee_main (Next p2)
                             , '7'  // state_refugee_main (Next p3)
                             , '3'  // state_refugee_main (Back p4)
                         )
-                        // check navigation
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
@@ -203,14 +185,12 @@ describe("app", function() {
                         .setup.user.addr('082111')
                         .setup.user.state('state_refugee_main')
                         .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '7'  // state_refugee_main (Next p1)
+                            '7'  // state_refugee_main (Next p1)
                             , '8'  // state_refugee_main (Next p2)
                             , '7'  // state_refugee_main (Next p3)
                             , '3'  // state_refugee_main (Back p4)
                             , '8'  // state_refugee_main (Back p3)
                         )
-                        // check navigation
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
@@ -234,15 +214,13 @@ describe("app", function() {
                         .setup.user.addr('082111')
                         .setup.user.state('state_refugee_main')
                         .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '7'  // state_refugee_main (Next p1)
+                            '7'  // state_refugee_main (Next p1)
                             , '8'  // state_refugee_main (Next p2)
                             , '7'  // state_refugee_main (Next p3)
                             , '3'  // state_refugee_main (Back p4)
                             , '8'  // state_refugee_main (Back p3)
                             , '9'  // state_refugee_main (Back p3)
                         )
-                        // check navigation
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
@@ -272,17 +250,175 @@ describe("app", function() {
                             {session_event: 'new'}  // dial in
                         )
                         .check.interaction({
-                            state: 'state_refugee_main',
+                            state: 'state_refugee_main'
+                        })
+                        .run();
+                });
+            });
+        });
+
+        // TEST TIMEOUT REDIALING
+
+        describe("Timeout redial testing", function() {
+            describe("should not show timeout question for:", function() {
+                it("state_language", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_language'
+                        })
+                        .run();
+                });
+
+                it("state_refugee_main", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_main'
+                        })
+                        .run();
+                });
+
+                it("state_migrant_main", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_migrant_main'
+                        })
+                        .run();
+                });
+            });
+
+            describe("if the user was busy with registration and redials", function() {
+                it("should display timeout continuation page", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_timed_out',
                             reply: [
-                                'MAIN MENU',
-                                '1. New to SA',
-                                '2. The asylum application process',
-                                '3. Asylum applications from children',
-                                '4. Permits',
-                                '5. Support services',
-                                '6. Right to work',
-                                '7. Next'
+                                "Would you like to continue where you left off?",
+                                "1. Yes",
+                                "2. No, start over"
                             ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should continue where they left off if chosen", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '1'  // state_timed_out (yes)
+                        )
+                        .check.interaction({
+                            state: 'state_status'
+                        })
+                        .run();
+                });
+
+                it("should take them back to language page if they start over", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '2'  // state_timed_out (no)
+                        )
+                        .check.interaction({
+                            state: 'state_language'
+                        })
+                        .run();
+                });
+            });
+
+            describe("if the user was already registered redials", function() {
+                it("should display timeout continuation page", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_timed_out',
+                            reply: [
+                                "Would you like to continue where you left off?",
+                                "1. Yes",
+                                "2. No, start over"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should continue where they left off if chosen", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '1'  // state_timed_out (yes)
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_rights_info'
+                        })
+                        .run();
+                });
+
+                it("should take them back to language page if they start over", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '2'  // state_timed_out (no)
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_main'
                         })
                         .run();
                 });
@@ -474,7 +610,6 @@ describe("app", function() {
                                 , '5'  // state_country (burundi)
                                 , '3'  // state_status (neither)
                             )
-                            // check navigation
                             .check.interaction({
                                 state: 'state_neither',
                                 reply: [
@@ -690,7 +825,6 @@ describe("app", function() {
                             , '1'  // state_who_migrant (yes - migrant)
                             , '2'  // state_migrant_rights_info (exit)
                         )
-                        // check navigation
                         .check.interaction({
                             state: 'state_migrant_main',
                             reply: [

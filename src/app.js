@@ -12,6 +12,14 @@ go.app = function() {
 
     go.utils = {
 
+        timed_out: function(im) {
+            return im.msg.session_event === 'new'
+                && im.user.state.name
+                && im.user.state.name !== 'state_language'
+                && im.user.state.name !== 'state_migrant_main'
+                && im.user.state.name !== 'state_refugee_main';
+        },
+
         register_user: function(contact, im, status) {
             contact.extra.status = status;
             var country = contact.extra.country;
@@ -36,6 +44,7 @@ go.app = function() {
     var GoApp = App.extend(function(self) {
         App.call(self, 'state_start');
         var $ = self.$;
+        var interrupt = true;
 
         self.init = function() {
 
@@ -65,10 +74,42 @@ go.app = function() {
                 });
         };
 
+
+    // TIMEOUT HANDLING
+
+        // override normal state adding
+        self.add = function(name, creator) {
+            self.states.add(name, function(name, opts) {
+                if (!interrupt || !go.utils.timed_out(self.im))
+                    return creator(name, opts);
+
+                interrupt = false;
+                opts = opts || {};
+                opts.name = name;
+                return self.states.create('state_timed_out', opts);
+            });
+        };
+
+        // timeout 01
+        self.states.add('state_timed_out', function(name, creator_opts) {
+
+            return new ChoiceState(name, {
+                question: $('Would you like to continue where you left off?'),
+                choices: [
+                    new Choice(creator_opts.name, $('Yes')),
+                    new Choice('state_start', $('No, start over'))
+                ],
+
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
     // START STATE
 
         // delegator 01
-        self.states.add('state_start', function(name) {
+        self.add('state_start', function(name) {
             if (self.contact.extra.status === 'refugee') {
                 return self.states.create('state_refugee_main');
             } else if (self.contact.extra.status === 'migrant') {
@@ -82,7 +123,7 @@ go.app = function() {
     // REGISTRATION STATES
 
         // 001
-        self.states.add('state_language', function(name) {
+        self.add('state_language', function(name) {
             return new ChoiceState(name, {
                 question: $('Welcome! Find info about migrants, asylum, refugees & support services. Pls choose ur language:'),
                 choices: [
@@ -106,7 +147,7 @@ go.app = function() {
         });
 
         // 002
-        self.states.add('state_country', function(name) {
+        self.add('state_country', function(name) {
             return new PaginatedChoiceState(name, {
                 question: $('Select your country of origin:'),
                 characters_per_page: 160,
@@ -142,7 +183,7 @@ go.app = function() {
         });
 
         // 003
-        self.states.add('state_status', function(name) {
+        self.add('state_status', function(name) {
             return new ChoiceState(name, {
                 question: $('Are you a refugee or migrant?'),
                 choices: [
@@ -169,7 +210,7 @@ go.app = function() {
         });
 
         // unknown 01
-        self.states.add('state_neither', function(name) {
+        self.add('state_neither', function(name) {
             return new EndState(name, {
                 text: $('Unknown 01'),
                 next: 'state_language'
@@ -177,7 +218,7 @@ go.app = function() {
         });
 
         // 004
-        self.states.add('state_who_refugee', function(name) {
+        self.add('state_who_refugee', function(name) {
             return new ChoiceState(name, {
                 question: $('CONTENT 004'),
                 choices: [
@@ -199,7 +240,7 @@ go.app = function() {
         });
 
         // 005
-        self.states.add('state_who_migrant', function(name) {
+        self.add('state_who_migrant', function(name) {
             return new ChoiceState(name, {
                 question: $('CONTENT 005'),
                 choices: [
@@ -221,7 +262,7 @@ go.app = function() {
         });
 
         // 006
-        self.states.add('state_refugee_rights_info', function(name) {
+        self.add('state_refugee_rights_info', function(name) {
             return new PaginatedState(name, {
                 text: $('Welcome to Refugee Rights. Here is some information and tips on how to user this service. Info info info info info info info  info info info info info info info info info info info info info info info info info info info info'),
                 characters_per_page: 160,
@@ -233,7 +274,7 @@ go.app = function() {
         });
 
         // 007
-        self.states.add('state_migrant_rights_info', function(name) {
+        self.add('state_migrant_rights_info', function(name) {
             return new PaginatedState(name, {
                 text: $('Welcome to Migrant Rights. Here is some information and tips on how to user this service. Info info info info info info info  info info info info info info info info info info info info info info info info info info info info'),
                 characters_per_page: 160,
@@ -248,7 +289,7 @@ go.app = function() {
     // MAIN MENU STATES
 
         // delegator 02
-        self.states.add('state_main_menu', function(name) {
+        self.add('state_main_menu', function(name) {
             if (self.contact.extra.status === 'refugee') {
                 return self.states.create('state_refugee_main');
             } else if (self.contact.extra.status === 'migrant') {
@@ -257,7 +298,7 @@ go.app = function() {
         });
 
         // 010
-        self.states.add('state_refugee_main', function(name) {
+        self.add('state_refugee_main', function(name) {
             return new PaginatedChoiceState(name, {
                 question: $('MAIN MENU'),
                 characters_per_page: 160,
@@ -294,7 +335,7 @@ go.app = function() {
         });
 
         // 011
-        self.states.add('state_migrant_main', function(name) {
+        self.add('state_migrant_main', function(name) {
             return new PaginatedChoiceState(name, {
                 question: $('MAIN MENU'),
                 characters_per_page: 160,
