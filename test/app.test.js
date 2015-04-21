@@ -319,9 +319,314 @@ describe("app", function() {
                             state: 'state_timed_out',
                             reply: [
                                 "Would you like to continue where you left off?",
-                                "1. Yes",
-                                "2. No, start over"
+                                "1. Yes, continue",
+                                "2. No, restart"
                             ].join('\n')
+                        })
+                        .run();
+                });
+
+                describe("if they choose to continue", function() {
+                    it("should go back to state they timed out", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out (continue)
+                            )
+                            .check.interaction({
+                                state: 'state_status'
+                            })
+                            .run();
+                    });
+
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out (continue)
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.continue.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+
+                });
+
+                describe("if they choose to restart", function() {
+                    it("should take them back to language page", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out (restart)
+                            )
+                            .check.interaction({
+                                state: 'state_language'
+                            })
+                            .run();
+                    });
+
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out (restart)
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.restart.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.restart.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.restart.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.restart.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("if the user was already registered and redials", function() {
+                it("should display timeout continuation page", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_timed_out',
+                            reply: [
+                                "Would you like to continue where you left off?",
+                                "1. Yes, continue",
+                                "2. No, restart"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                describe("if they choose to continue", function() {
+                    it("should continue where they left off", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , '1'  // state_status (who is refugee)
+                                , '1'  // state_who_refugee (yes - refugee)
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out (continue)
+                            )
+                            .check.interaction({
+                                state: 'state_refugee_rights_info'
+                            })
+                            .run();
+                    });
+
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , '1'  // state_status (who is refugee)
+                                , '1'  // state_who_refugee (yes - refugee)
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out (continue)
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 22);
+                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.registrations.last'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.refugee.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.burundi.last'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.burundi.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.refugee.burundi.last'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.refugee.burundi.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.continue.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if they choose to restart", function() {
+                    it("should take them back to menu page", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , '1'  // state_status (who is refugee)
+                                , '1'  // state_who_refugee (yes - refugee)
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out (restart)
+                            )
+                            .check.interaction({
+                                state: 'state_refugee_main'
+                            })
+                            .run();
+                    });
+
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , '1'  // state_status (who is refugee)
+                                , '1'  // state_who_refugee (yes - refugee)
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out (restart)
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 22);
+                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.registrations.last'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.refugee.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.burundi.last'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.burundi.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.refugee.burundi.last'].values, [1]);
+                                assert.deepEqual(metrics['total.registrations.refugee.burundi.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.restart.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.restart.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.restart.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.restart.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("if the user times out on timeout page and redials", function() {
+                it("should display timeout continuation page", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial again
+                        )
+                        .check.interaction({
+                            state: 'state_timed_out',
+                            reply: [
+                                "Would you like to continue where you left off?",
+                                "1. Yes, continue",
+                                "2. No, restart"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial again
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.equal(Object.keys(metrics).length, 6);
+                            assert.deepEqual(metrics['total.unique_users'].values, [1]);
+                            assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.sessions'].values, [1, 2, 3]);
+                            assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1, 1]);
+                            // note metrics below do not increment twice - 'enter' doesn't happen twice
+                            assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                            assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
                         })
                         .run();
                 });
@@ -333,6 +638,8 @@ describe("app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
                             , {session_event: 'close'}  // may or may not work
                             , {session_event: 'new'}  // redial
                             , '1'  // state_timed_out (yes)
@@ -352,73 +659,12 @@ describe("app", function() {
                             , '5'  // state_country (burundi)
                             , {session_event: 'close'}  // may or may not work
                             , {session_event: 'new'}  // redial
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
                             , '2'  // state_timed_out (no)
                         )
                         .check.interaction({
                             state: 'state_language'
-                        })
-                        .run();
-                });
-            });
-
-            describe("if the user was already registered redials", function() {
-                it("should display timeout continuation page", function() {
-                    return tester
-                        .setup.user.addr('082111')
-                        .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '2'  // state_language (french)
-                            , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
-                            , {session_event: 'close'}  // may or may not work
-                            , {session_event: 'new'}  // redial
-                        )
-                        .check.interaction({
-                            state: 'state_timed_out',
-                            reply: [
-                                "Would you like to continue where you left off?",
-                                "1. Yes",
-                                "2. No, start over"
-                            ].join('\n')
-                        })
-                        .run();
-                });
-
-                it("should continue where they left off if chosen", function() {
-                    return tester
-                        .setup.user.addr('082111')
-                        .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '2'  // state_language (french)
-                            , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
-                            , {session_event: 'close'}  // may or may not work
-                            , {session_event: 'new'}  // redial
-                            , '1'  // state_timed_out (yes)
-                        )
-                        .check.interaction({
-                            state: 'state_refugee_rights_info'
-                        })
-                        .run();
-                });
-
-                it("should take them back to language page if they start over", function() {
-                    return tester
-                        .setup.user.addr('082111')
-                        .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '2'  // state_language (french)
-                            , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
-                            , {session_event: 'close'}  // may or may not work
-                            , {session_event: 'new'}  // redial
-                            , '2'  // state_timed_out (no)
-                        )
-                        .check.interaction({
-                            state: 'state_refugee_main'
                         })
                         .run();
                 });

@@ -37,6 +37,20 @@ go.app = function() {
             ]);
         },
 
+        track_redials: function(contact, im, decision) {
+            var status = contact.extra.status || 'unregistered';
+            return Q.all([
+                im.metrics.fire.inc(['total', 'redials', 'choice_made', 'last'].join('.')),
+                im.metrics.fire.sum(['total', 'redials', 'choice_made', 'sum'].join('.'), 1),
+                im.metrics.fire.inc(['total', 'redials', status, 'last'].join('.')),
+                im.metrics.fire.sum(['total', 'redials', status, 'sum'].join('.'), 1),
+                im.metrics.fire.inc(['total', 'redials', decision, 'last'].join('.')),
+                im.metrics.fire.sum(['total', 'redials', decision, 'sum'].join('.'), 1),
+                im.metrics.fire.inc(['total', 'redials', status, decision, 'last'].join('.')),
+                im.metrics.fire.sum(['total', 'redials', status, decision, 'sum'].join('.'), 1),
+            ]);
+        },
+
         "commas": "commas"
     };
 
@@ -60,10 +74,10 @@ go.app = function() {
                 // Total times reached state_end
                 .add.total_state_actions(
                     {
-                        state: 'state_end',
+                        state: 'state_timed_out',
                         action: 'enter'
                     },
-                    'total.reached_state_end'
+                    'total.reached_state_timed_out'
                 );
 
             // Load self.contact
@@ -96,12 +110,20 @@ go.app = function() {
             return new ChoiceState(name, {
                 question: $('Would you like to continue where you left off?'),
                 choices: [
-                    new Choice(creator_opts.name, $('Yes')),
-                    new Choice('state_start', $('No, start over'))
+                    new Choice('continue', $('Yes, continue')),
+                    new Choice('restart', $('No, restart'))
                 ],
 
                 next: function(choice) {
-                    return choice.value;
+                    return go.utils
+                        .track_redials(self.contact, self.im, choice.value)
+                        .then(function() {
+                            if (choice.value === 'restart') {
+                                return 'state_start';
+                            } else {
+                                return creator_opts.name;
+                            }
+                        });
                 }
             });
         });
