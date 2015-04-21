@@ -493,13 +493,15 @@ describe("app", function() {
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
-                            assert.equal(Object.keys(metrics).length, 8);
+                            assert.equal(Object.keys(metrics).length, 10);
                             assert.deepEqual(metrics['total.unique_users'].values, [1]);
                             assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.refugee.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.burundi.last'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.burundi.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.refugee.burundi.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.refugee.burundi.sum'].values, [1]);
                         })
@@ -590,13 +592,15 @@ describe("app", function() {
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
-                            assert.equal(Object.keys(metrics).length, 8);
+                            assert.equal(Object.keys(metrics).length, 10);
                             assert.deepEqual(metrics['total.unique_users'].values, [1]);
                             assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.migrant.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.migrant.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.burundi.last'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.burundi.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.migrant.burundi.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.migrant.burundi.sum'].values, [1]);
                         })

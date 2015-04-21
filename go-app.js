@@ -29,6 +29,8 @@ go.app = function() {
                 im.metrics.fire.sum(['total', 'registrations', 'sum'].join('.'), 1),
                 im.metrics.fire.inc(['total', 'registrations', status, 'last'].join('.')),
                 im.metrics.fire.sum(['total', 'registrations', status, 'sum'].join('.'), 1),
+                im.metrics.fire.inc(['total', 'registrations', country, 'last'].join('.')),
+                im.metrics.fire.sum(['total', 'registrations', country, 'sum'].join('.'), 1),
                 im.metrics.fire.inc(['total', 'registrations', status, country, 'last'].join('.')),
                 im.metrics.fire.sum(['total', 'registrations', status, country, 'sum'].join('.'), 1)
             ]);
