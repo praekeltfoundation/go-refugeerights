@@ -16,6 +16,28 @@ go.app = function() {
     var PaginatedState = vumigo.states.PaginatedState;
     var EndState = vumigo.states.EndState;
 
+
+    go.utils = {
+
+        register_user: function(contact, im, status) {
+            contact.extra.status = status;
+            var country = contact.extra.country;
+
+            return Q.all([
+                im.contacts.save(contact),
+                im.metrics.fire.inc(['total', 'registrations', 'last'].join('.')),
+                im.metrics.fire.sum(['total', 'registrations', 'sum'].join('.'), 1),
+                im.metrics.fire.inc(['total', 'registrations', status, 'last'].join('.')),
+                im.metrics.fire.sum(['total', 'registrations', status, 'sum'].join('.'), 1),
+                im.metrics.fire.inc(['total', 'registrations', status, country, 'last'].join('.')),
+                im.metrics.fire.sum(['total', 'registrations', status, country, 'sum'].join('.'), 1)
+            ]);
+        },
+
+        "commas": "commas"
+    };
+
+
     var GoApp = App.extend(function(self) {
         App.call(self, 'state_language');
         var $ = self.$;
@@ -155,13 +177,11 @@ go.app = function() {
                     if (choice.value === 'back') {
                         return 'state_status';
                     } else {
-                        self.contact.extra.status = 'refugee';
-                        return Q.all([
-                            self.im.contacts.save(self.contact)
-                        ])
-                        .then(function() {
-                            return 'state_refugee_rights_info';
-                        });
+                        return go.utils
+                            .register_user(self.contact, self.im, choice.value)
+                            .then(function() {
+                                return 'state_refugee_rights_info';
+                            });
                     }
                 }
             });
@@ -179,13 +199,11 @@ go.app = function() {
                     if (choice.value === 'back') {
                         return 'state_status';
                     } else {
-                        self.contact.extra.status = 'migrant';
-                        return Q.all([
-                            self.im.contacts.save(self.contact)
-                        ])
-                        .then(function() {
-                            return 'state_migrant_rights_info';
-                        });
+                        return go.utils
+                            .register_user(self.contact, self.im, choice.value)
+                            .then(function() {
+                                return 'state_migrant_rights_info';
+                            });
                     }
                 }
             });

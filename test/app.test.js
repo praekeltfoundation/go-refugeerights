@@ -48,7 +48,7 @@ describe("app", function() {
                 });
         });
 
-    // TEST PAGINATEDCHOICESTATE PAGING
+        // TEST PAGINATEDCHOICESTATE PAGING
 
         describe("PaginatedChoiceState testing using Refugee Main Menu", function() {
             describe("forward navigation", function() {
@@ -248,123 +248,219 @@ describe("app", function() {
         });
 
 
-    // TEST REGISTRATION
+        // TEST REGISTRATION
+        describe("Regisration testing", function() {
 
-        describe("starting session", function() {
-            it("should ask for their language", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_language',
-                        reply: [
-                            "Welcome! Find info about migrants, asylum, refugees & support services. Pls choose ur language:",
-                            "1. English",
-                            "2. French",
-                            "3. Amharic",
-                            "4. Swahili",
-                            "5. Somail"
-                        ].join('\n')
-                    })
-                    // check metrics
-                    .check(function(api) {
-                        var metrics = api.metrics.stores.refugeerights_test;
-                        assert.equal(Object.keys(metrics).length, 2);
-                        assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                        assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                    })
-                    .run();
+            describe("starting session", function() {
+                it("should ask for their language", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                        )
+                        .check.interaction({
+                            state: 'state_language',
+                            reply: [
+                                "Welcome! Find info about migrants, asylum, refugees & support services. Pls choose ur language:",
+                                "1. English",
+                                "2. French",
+                                "3. Amharic",
+                                "4. Swahili",
+                                "5. Somail"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should adjust unique_users metrics", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.equal(Object.keys(metrics).length, 2);
+                            assert.deepEqual(metrics['total.unique_users'].values, [1]);
+                            assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                        })
+                        .run();
+                });
             });
-        });
 
-        describe("upon language selection", function() {
-            it("should ask for their country of origin", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_country',
-                        reply: [
-                            'Select your country of origin:',
-                            '1. Somalia',
-                            '2. Ethiopia',
-                            '3. Eritrea',
-                            '4. Democratic Republic of Congo',
-                            '5. Burundi',
-                            '6. Kenya',
-                            '7. Rwanda',
-                            '8. Next'
-                        ].join('\n')
-                    })
-                    // check metrics
-                    .check(function(api) {
-                        var metrics = api.metrics.stores.refugeerights_test;
-                        assert.equal(Object.keys(metrics).length, 2);
-                        assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                        assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                    })
-                    // check user extras
-                    .check(function(api) {
-                        var contact = _.find(api.contacts.store, {
-                            msisdn: '+082111'
-                        });
-                        assert.equal(contact.extra.language, 'french');
-                    })
-                    // check user language is set
-                    .check.user.properties({lang: 'french'})
-                    .run();
+            describe("upon language selection", function() {
+                it("should ask for their country of origin", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language
+                        )
+                        .check.interaction({
+                            state: 'state_country',
+                            reply: [
+                                'Select your country of origin:',
+                                '1. Somalia',
+                                '2. Ethiopia',
+                                '3. Eritrea',
+                                '4. Democratic Republic of Congo',
+                                '5. Burundi',
+                                '6. Kenya',
+                                '7. Rwanda',
+                                '8. Next'
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should save their language choice", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language
+                        )
+                        // check user extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(contact.extra.language, 'french');
+                        })
+                        // check user language is set
+                        .check.user.properties({lang: 'french'})
+                        .run();
+                });
             });
-        });
 
-        describe("upon country selection", function() {
-            it("should ask for their status", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language (french)
-                        , '5'  // state_country (burundi)
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_status',
-                        reply: [
-                            'Are you a refugee or migrant?',
-                            '1. Who is a refugee?',
-                            '2. Who is a migrant?',
-                            '3. I am neither'
-                        ].join('\n')
-                    })
-                    // check metrics
-                    .check(function(api) {
-                        var metrics = api.metrics.stores.refugeerights_test;
-                        assert.equal(Object.keys(metrics).length, 2);
-                        assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                        assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                    })
-                    // check user extras
-                    .check(function(api) {
-                        var contact = _.find(api.contacts.store, {
-                            msisdn: '+082111'
-                        });
-                        assert.equal(Object.keys(contact.extra).length, 2);
-                        assert.equal(contact.extra.language, 'french');
-                        assert.equal(contact.extra.country, 'burundi');
-                    })
-                    .run();
+            describe("upon country selection", function() {
+                it("should ask for their status", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                        )
+                        .check.interaction({
+                            state: 'state_status',
+                            reply: [
+                                'Are you a refugee or migrant?',
+                                '1. Who is a refugee?',
+                                '2. Who is a migrant?',
+                                '3. I am neither'
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should save their country choice", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(Object.keys(contact.extra).length, 2);
+                            assert.equal(contact.extra.language, 'french');
+                            assert.equal(contact.extra.country, 'burundi');
+                        })
+                        .run();
+                });
             });
-        });
 
-        describe("upon status selection", function() {
-            describe("if the user selected refugee info", function() {
-                it("should show refugee info", function() {
+            describe("upon status question selection", function() {
+                describe("if the user selected refugee info", function() {
+                    it("should show refugee info", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , '1'  // state_status (who is refugee)
+                            )
+                            .check.interaction({
+                                state: 'state_who_refugee',
+                                reply: [
+                                    'CONTENT 004',
+                                    '1. Yes, I am a refugee',
+                                    '2. No, back to menu'
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if the user selected migrant info", function() {
+                    it("should show migrant info", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , '2'  // state_status (who is migrant)
+                            )
+                            .check.interaction({
+                                state: 'state_who_migrant',
+                                reply: [
+                                    'CONTENT 005',
+                                    '1. Yes, I am a migrant',
+                                    '2. No, back to menu'
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+
+                // TODO: requires SOW update
+                describe("if the user indicates they are neither refugee nor migrant", function() {
+                    it("should do something", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language (french)
+                                , '5'  // state_country (burundi)
+                                , '3'  // state_status (neither)
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_neither',
+                                reply: [
+                                    'Unknown 01',
+                                ].join('\n')
+                            })
+                            // check metrics
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 2);
+                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                            })
+                            // check user extras
+                            .check(function(api) {
+                                var contact = _.find(api.contacts.store, {
+                                    msisdn: '+082111'
+                                });
+                                assert.equal(Object.keys(contact.extra).length, 3);
+                                assert.equal(contact.extra.language, 'french');
+                                assert.equal(contact.extra.country, 'burundi');
+                                assert.equal(contact.extra.status, 'neither');
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("upon refugee status selection", function() {
+                it("should show them info on using the system", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
@@ -372,68 +468,54 @@ describe("app", function() {
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
                             , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
                         )
-                        // check navigation
                         .check.interaction({
-                            state: 'state_who_refugee',
+                            state: 'state_refugee_rights_info',
                             reply: [
-                                'CONTENT 004',
-                                '1. Yes, I am a refugee',
-                                '2. No, back to menu'
+                                'Welcome to Refugee Rights. Here is some information and tips on how to user this service. Info info info info info info info  info info',
+                                '1. More',
+                                '2. Exit'
                             ].join('\n')
                         })
                         .run();
                 });
-            });
 
-            describe("if the user selected migrant info", function() {
-                it("should show migrant info", function() {
+                it("should fire metrics since they are now registered", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '2'  // state_status (who is migrant)
+                            , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
                         )
-                        // check navigation
-                        .check.interaction({
-                            state: 'state_who_migrant',
-                            reply: [
-                                'CONTENT 005',
-                                '1. Yes, I am a migrant',
-                                '2. No, back to menu'
-                            ].join('\n')
-                        })
-                        .run();
-                });
-            });
-
-            describe("if the user indicates they are neither refugee nor migrant", function() {
-                it("should do something", function() {
-                    return tester
-                        .setup.user.addr('082111')
-                        .inputs(
-                            {session_event: 'new'}  // dial in
-                            , '2'  // state_language (french)
-                            , '5'  // state_country (burundi)
-                            , '3'  // state_status (neither)
-                        )
-                        // check navigation
-                        .check.interaction({
-                            state: 'state_neither',
-                            reply: [
-                                'Unknown 01',
-                            ].join('\n')
-                        })
-                        // check metrics
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
-                            assert.equal(Object.keys(metrics).length, 2);
+                            assert.equal(Object.keys(metrics).length, 8);
                             assert.deepEqual(metrics['total.unique_users'].values, [1]);
                             assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.last'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.refugee.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.refugee.burundi.last'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.refugee.burundi.sum'].values, [1]);
                         })
-                        // check user extras
+                        .run();
+                });
+
+                it("should save their status choice", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
+                        )
                         .check(function(api) {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
@@ -441,189 +523,137 @@ describe("app", function() {
                             assert.equal(Object.keys(contact.extra).length, 3);
                             assert.equal(contact.extra.language, 'french');
                             assert.equal(contact.extra.country, 'burundi');
-                            assert.equal(contact.extra.status, 'neither');
+                            assert.equal(contact.extra.status, 'refugee');
+                        })
+                        .run();
+                });
+
+                it("should take them to refugee main menu if they choose exit", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
+                            , '2'  // state_refugee_rights_info (exit)
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_main',
+                            reply: [
+                                'MAIN MENU',
+                                '1. New to SA',
+                                '2. The asylum application process',
+                                '3. Asylum applications from children',
+                                '4. Permits',
+                                '5. Support services',
+                                '6. Right to work',
+                                '7. Next'
+                            ].join('\n')
                         })
                         .run();
                 });
             });
-        });
 
-        describe("upon refugee status selection", function() {
-            it("should show them info on using the system", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language (french)
-                        , '5'  // state_country (burundi)
-                        , '1'  // state_status (who is refugee)
-                        , '1'  // state_who_refugee (yes - refugee)
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_refugee_rights_info',
-                        reply: [
-                            'Welcome to Refugee Rights. Here is some information and tips on how to user this service. Info info info info info info info  info info',
-                            '1. More',
-                            '2. Exit'
-                        ].join('\n')
-                    })
-                    .run();
+            describe("upon migrant status selection", function() {
+                it("should show them info on using the system", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '2'  // state_status (who is migrant)
+                            , '1'  // state_who_migrant (yes - migrant)
+                        )
+                        .check.interaction({
+                            state: 'state_migrant_rights_info',
+                            reply: [
+                                'Welcome to Migrant Rights. Here is some information and tips on how to user this service. Info info info info info info info  info info',
+                                '1. More',
+                                '2. Exit'
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should fire metrics since they are now registered", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '2'  // state_status (who is migrant)
+                            , '1'  // state_who_migrant (yes - migrant)
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.equal(Object.keys(metrics).length, 8);
+                            assert.deepEqual(metrics['total.unique_users'].values, [1]);
+                            assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.last'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.migrant.last'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.migrant.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.migrant.burundi.last'].values, [1]);
+                            assert.deepEqual(metrics['total.registrations.migrant.burundi.sum'].values, [1]);
+                        })
+                        .run();
+                });
+
+                it("should save their status choice", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '2'  // state_status (who is migrant)
+                            , '1'  // state_who_migrant (yes - migrant)
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(Object.keys(contact.extra).length, 3);
+                            assert.equal(contact.extra.language, 'french');
+                            assert.equal(contact.extra.country, 'burundi');
+                            assert.equal(contact.extra.status, 'migrant');
+                        })
+                        .run();
+                });
+
+                it("should take them to migrant main menu if they choose exit", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '2'  // state_status (who is migrant)
+                            , '1'  // state_who_migrant (yes - migrant)
+                            , '2'  // state_migrant_rights_info (exit)
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_migrant_main',
+                            reply: [
+                                'MAIN MENU',
+                                '1. New to SA',
+                                '2. The visa application process',
+                                '3. Unaccompanied / separated children',
+                                '4. Support services',
+                                '5. Employment',
+                                '6. Healthcare',
+                                '7. Next'
+                            ].join('\n')
+                        })
+                        .run();
+                });
             });
 
-            it("should display page 2 of info if More is selected", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language (french)
-                        , '5'  // state_country (burundi)
-                        , '1'  // state_status (who is refugee)
-                        , '1'  // state_who_refugee (yes - refugee)
-                        , '1'  // state_refugee_rights_info
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_refugee_rights_info',
-                        reply: [
-                            'info info info info info info info info info info info info info info info info info info',
-                            '1. Back',
-                            '2. Exit'
-                        ].join('\n')
-                    })
-                    .run();
-            });
-
-            it("should take them to refugee main menu if they choose exit", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language (french)
-                        , '5'  // state_country (burundi)
-                        , '1'  // state_status (who is refugee)
-                        , '1'  // state_who_refugee (yes - refugee)
-                        , '2'  // state_refugee_rights_info (exit)
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_refugee_main',
-                        reply: [
-                            'MAIN MENU',
-                            '1. New to SA',
-                            '2. The asylum application process',
-                            '3. Asylum applications from children',
-                            '4. Permits',
-                            '5. Support services',
-                            '6. Right to work',
-                            '7. Next'
-                        ].join('\n')
-                    })
-                    .run();
-            });
-        });
-
-        describe("upon migrant status selection", function() {
-            it("should show them info on using the system", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language (french)
-                        , '5'  // state_country (burundi)
-                        , '2'  // state_status (who is migrant)
-                        , '1'  // state_who_migrant (yes - migrant)
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_migrant_rights_info',
-                        reply: [
-                            'Welcome to Migrant Rights. Here is some information and tips on how to user this service. Info info info info info info info  info info',
-                            '1. More',
-                            '2. Exit'
-                        ].join('\n')
-                    })
-                    .run();
-            });
-
-            it("should display page 2 of info if More is selected", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language (french)
-                        , '5'  // state_country (burundi)
-                        , '2'  // state_status (who is migrant)
-                        , '1'  // state_who_migrant (yes - migrant)
-                        , '1'  // state_migrant_rights_info
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_migrant_rights_info',
-                        reply: [
-                            'info info info info info info info info info info info info info info info info info info',
-                            '1. Back',
-                            '2. Exit'
-                        ].join('\n')
-                    })
-                    .run();
-            });
-
-            it("should take them to migrant main menu if they choose exit", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language (french)
-                        , '5'  // state_country (burundi)
-                        , '2'  // state_status (who is migrant)
-                        , '1'  // state_who_migrant (yes - migrant)
-                        , '2'  // state_migrant_rights_info (exit)
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_migrant_main',
-                        reply: [
-                            'MAIN MENU',
-                            '1. New to SA',
-                            '2. The visa application process',
-                            '3. Unaccompanied / separated children',
-                            '4. Support services',
-                            '5. Employment',
-                            '6. Healthcare',
-                            '7. Next'
-                        ].join('\n')
-                    })
-                    .run();
-            });
-
-            it("should take them to migrant main menu if they choose exit", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language (french)
-                        , '5'  // state_country (burundi)
-                        , '2'  // state_status (who is migrant)
-                        , '1'  // state_who_migrant (yes - migrant)
-                        , '2'  // state_migrant_rights_info (exit)
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_migrant_main',
-                        reply: [
-                            'MAIN MENU',
-                            '1. New to SA',
-                            '2. The visa application process',
-                            '3. Unaccompanied / separated children',
-                            '4. Support services',
-                            '5. Employment',
-                            '6. Healthcare',
-                            '7. Next'
-                        ].join('\n')
-                    })
-                    .run();
-            });
         });
 
     });
