@@ -34,7 +34,7 @@ go.app = function() {
 
 
     var GoApp = App.extend(function(self) {
-        App.call(self, 'state_language');
+        App.call(self, 'state_start');
         var $ = self.$;
 
         self.init = function() {
@@ -64,6 +64,19 @@ go.app = function() {
                    self.contact = user_contact;
                 });
         };
+
+    // START STATE
+
+        // delegator 01
+        self.states.add('state_start', function(name) {
+            if (self.contact.extra.status === 'refugee') {
+                return self.states.create('state_refugee_main');
+            } else if (self.contact.extra.status === 'migrant') {
+                return self.states.create('state_migrant_main');
+            } else {
+                return self.states.create('state_language');
+            }
+        });
 
 
     // REGISTRATION STATES
@@ -234,6 +247,7 @@ go.app = function() {
 
     // MAIN MENU STATES
 
+        // delegator 02
         self.states.add('state_main_menu', function(name) {
             if (self.contact.extra.status === 'refugee') {
                 return self.states.create('state_refugee_main');

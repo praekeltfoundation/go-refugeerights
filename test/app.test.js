@@ -45,6 +45,20 @@ describe("app", function() {
                         key: "contact_key",
                         user_account: "contact_user_account"
                     });
+                })
+                .setup(function(api) {
+                    // registered user 1
+                    api.contacts.add({
+                        msisdn: '+064001',
+                        extra: {
+                            language: 'french',
+                            country: 'drc',
+                            status: 'refugee',
+                            registered: 'true'
+                        },
+                        key: "contact_key",
+                        user_account: "contact_user_account"
+                    });
                 });
         });
 
@@ -247,8 +261,36 @@ describe("app", function() {
             });
         });
 
+        // TEST REDIS KEY EXPIRY
+
+        describe("Redis expiry testing", function() {
+            describe("when a user registers, then returns after state expiration", function() {
+                it("should show them the main menu", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_main',
+                            reply: [
+                                'MAIN MENU',
+                                '1. New to SA',
+                                '2. The asylum application process',
+                                '3. Asylum applications from children',
+                                '4. Permits',
+                                '5. Support services',
+                                '6. Right to work',
+                                '7. Next'
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+        });
 
         // TEST REGISTRATION
+
         describe("Regisration testing", function() {
 
             describe("starting session", function() {
