@@ -321,59 +321,6 @@ describe("app", function() {
                     .check.user.properties({lang: 'french'})
                     .run();
             });
-
-            it("should display page 2 of countries if Next is selected", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language
-                        , '8'  // state_country
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_country',
-                        reply: [
-                            'Select your country of origin:',
-                            '1. Sudan/South Sudan',
-                            '2. Zimbabwe',
-                            '3. Uganda',
-                            '4. Egypt',
-                            '5. Mozambique',
-                            '6. Syria',
-                            '7. Angola',
-                            '8. Back'
-                        ].join('\n')
-                    })
-                    .run();
-            });
-
-            it("should display page 1 if Next then Back is selected", function() {
-                return tester
-                    .setup.user.addr('082111')
-                    .inputs(
-                        {session_event: 'new'}  // dial in
-                        , '2'  // state_language
-                        , '8'  // state_country
-                        , '8'  // state_country
-                    )
-                    // check navigation
-                    .check.interaction({
-                        state: 'state_country',
-                        reply: [
-                            'Select your country of origin:',
-                            '1. Somalia',
-                            '2. Ethiopia',
-                            '3. Eritrea',
-                            '4. Democratic Republic of Congo',
-                            '5. Burundi',
-                            '6. Kenya',
-                            '7. Rwanda',
-                            '8. Next'
-                        ].join('\n')
-                    })
-                    .run();
-            });
         });
 
         describe("upon country selection", function() {
@@ -383,8 +330,7 @@ describe("app", function() {
                     .inputs(
                         {session_event: 'new'}  // dial in
                         , '2'  // state_language (french)
-                        , '8'  // state_country (next page)
-                        , '6'  // state_country (syria)
+                        , '5'  // state_country (burundi)
                     )
                     // check navigation
                     .check.interaction({
@@ -410,7 +356,7 @@ describe("app", function() {
                         });
                         assert.equal(Object.keys(contact.extra).length, 2);
                         assert.equal(contact.extra.language, 'french');
-                        assert.equal(contact.extra.country, 'syria');
+                        assert.equal(contact.extra.country, 'burundi');
                     })
                     .run();
             });
@@ -424,8 +370,7 @@ describe("app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
-                            , '8'  // state_country (next page)
-                            , '6'  // state_country (syria)
+                            , '5'  // state_country (burundi)
                             , '1'  // state_status (who is refugee)
                         )
                         // check navigation
@@ -448,8 +393,7 @@ describe("app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
-                            , '8'  // state_country (next page)
-                            , '6'  // state_country (syria)
+                            , '5'  // state_country (burundi)
                             , '2'  // state_status (who is migrant)
                         )
                         // check navigation
@@ -472,8 +416,7 @@ describe("app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
-                            , '8'  // state_country (next page)
-                            , '6'  // state_country (syria)
+                            , '5'  // state_country (burundi)
                             , '3'  // state_status (neither)
                         )
                         // check navigation
@@ -497,7 +440,7 @@ describe("app", function() {
                             });
                             assert.equal(Object.keys(contact.extra).length, 3);
                             assert.equal(contact.extra.language, 'french');
-                            assert.equal(contact.extra.country, 'syria');
+                            assert.equal(contact.extra.country, 'burundi');
                             assert.equal(contact.extra.status, 'neither');
                         })
                         .run();
@@ -512,8 +455,7 @@ describe("app", function() {
                     .inputs(
                         {session_event: 'new'}  // dial in
                         , '2'  // state_language (french)
-                        , '8'  // state_country (next page)
-                        , '6'  // state_country (syria)
+                        , '5'  // state_country (burundi)
                         , '1'  // state_status (who is refugee)
                         , '1'  // state_who_refugee (yes - refugee)
                     )
@@ -535,8 +477,7 @@ describe("app", function() {
                     .inputs(
                         {session_event: 'new'}  // dial in
                         , '2'  // state_language (french)
-                        , '8'  // state_country (next page)
-                        , '6'  // state_country (syria)
+                        , '5'  // state_country (burundi)
                         , '1'  // state_status (who is refugee)
                         , '1'  // state_who_refugee (yes - refugee)
                         , '1'  // state_refugee_rights_info
@@ -559,8 +500,7 @@ describe("app", function() {
                     .inputs(
                         {session_event: 'new'}  // dial in
                         , '2'  // state_language (french)
-                        , '8'  // state_country (next page)
-                        , '6'  // state_country (syria)
+                        , '5'  // state_country (burundi)
                         , '1'  // state_status (who is refugee)
                         , '1'  // state_who_refugee (yes - refugee)
                         , '2'  // state_refugee_rights_info (exit)
@@ -590,8 +530,7 @@ describe("app", function() {
                     .inputs(
                         {session_event: 'new'}  // dial in
                         , '2'  // state_language (french)
-                        , '8'  // state_country (next page)
-                        , '6'  // state_country (syria)
+                        , '5'  // state_country (burundi)
                         , '2'  // state_status (who is migrant)
                         , '1'  // state_who_migrant (yes - migrant)
                     )
@@ -613,8 +552,7 @@ describe("app", function() {
                     .inputs(
                         {session_event: 'new'}  // dial in
                         , '2'  // state_language (french)
-                        , '8'  // state_country (next page)
-                        , '6'  // state_country (syria)
+                        , '5'  // state_country (burundi)
                         , '2'  // state_status (who is migrant)
                         , '1'  // state_who_migrant (yes - migrant)
                         , '1'  // state_migrant_rights_info
@@ -637,8 +575,7 @@ describe("app", function() {
                     .inputs(
                         {session_event: 'new'}  // dial in
                         , '2'  // state_language (french)
-                        , '8'  // state_country (next page)
-                        , '6'  // state_country (syria)
+                        , '5'  // state_country (burundi)
                         , '2'  // state_status (who is migrant)
                         , '1'  // state_who_migrant (yes - migrant)
                         , '2'  // state_migrant_rights_info (exit)
@@ -666,8 +603,7 @@ describe("app", function() {
                     .inputs(
                         {session_event: 'new'}  // dial in
                         , '2'  // state_language (french)
-                        , '8'  // state_country (next page)
-                        , '6'  // state_country (syria)
+                        , '5'  // state_country (burundi)
                         , '2'  // state_status (who is migrant)
                         , '1'  // state_who_migrant (yes - migrant)
                         , '2'  // state_migrant_rights_info (exit)
