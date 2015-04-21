@@ -215,7 +215,7 @@ go.app = function() {
                 back: $('Back'),
                 more: $('More'),
                 exit: $('Exit'),
-                next: 'state_refugee_main'
+                next: 'state_main_menu'
             });
         });
 
@@ -227,12 +227,20 @@ go.app = function() {
                 back: $('Back'),
                 more: $('More'),
                 exit: $('Exit'),
-                next: 'state_migrant_main'
+                next: 'state_main_menu'
             });
         });
 
 
     // MAIN MENU STATES
+
+        self.states.add('state_main_menu', function(name) {
+            if (self.contact.extra.status === 'refugee') {
+                return self.states.create('state_refugee_main');
+            } else if (self.contact.extra.status === 'migrant') {
+                return self.states.create('state_migrant_main');
+            }
+        });
 
         // 010
         self.states.add('state_refugee_main', function(name) {
@@ -305,6 +313,7 @@ go.app = function() {
                 }
             });
         });
+
 
     });
 
