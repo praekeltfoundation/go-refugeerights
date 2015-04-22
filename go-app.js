@@ -20,11 +20,35 @@ go.app = function() {
     go.utils = {
 
         timed_out: function(im) {
+            var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main'];
             return im.msg.session_event === 'new'
                 && im.user.state.name
-                && im.user.state.name !== 'state_language'
-                && im.user.state.name !== 'state_migrant_main'
-                && im.user.state.name !== 'state_refugee_main';
+                && no_redirects.indexOf(im.user.state.name) === -1;
+        },
+
+        save_language: function(im, contact, lang) {
+            var lang_map = {
+                en: 'english',
+                fr: 'french',
+                am: 'amharic',
+                sw: 'swahili',
+                so: 'somali'
+            };
+            contact.extra.lang = lang;
+            contact.extra.language = lang_map[lang];
+
+            return Q.all([
+                im.user.set_lang(lang),
+                im.contacts.save(contact)
+            ]);
+        },
+
+        set_language: function(im, contact) {
+            if (contact.extra.lang !== undefined) {
+                return im.user.set_lang(contact.extra.lang);
+            } else {
+                return Q();
+            }
         },
 
         register_user: function(contact, im, status) {
@@ -139,13 +163,17 @@ go.app = function() {
 
         // delegator 01
         self.add('state_start', function(name) {
-            if (self.contact.extra.status === 'refugee') {
-                return self.states.create('state_refugee_main');
-            } else if (self.contact.extra.status === 'migrant') {
-                return self.states.create('state_migrant_main');
-            } else {
-                return self.states.create('state_language');
-            }
+            return go.utils
+                .set_language(self.im, self.contact)
+                .then(function() {
+                    if (self.contact.extra.status === 'refugee') {
+                        return self.states.create('state_refugee_main');
+                    } else if (self.contact.extra.status === 'migrant') {
+                        return self.states.create('state_migrant_main');
+                    } else {
+                        return self.states.create('state_language');
+                    }
+                });
         });
 
 
@@ -156,21 +184,18 @@ go.app = function() {
             return new ChoiceState(name, {
                 question: $('Welcome! Find info about migrants, asylum, refugees & support services. Pls choose ur language:'),
                 choices: [
-                    new Choice('english', $("English")),
-                    new Choice('french', $("French")),
-                    new Choice('amharic', $("Amharic")),
-                    new Choice('swahili', $("Swahili")),
-                    new Choice('somail', $("Somail")),
+                    new Choice('en', $("English")),
+                    new Choice('fr', $("French")),
+                    new Choice('am', $("Amharic")),
+                    new Choice('sw', $("Swahili")),
+                    new Choice('so', $("Somali")),
                 ],
                 next: function(choice) {
-                    self.contact.extra.language = choice.value;
-                    return Q.all([
-                        self.im.user.set_lang(choice.value),
-                        self.im.contacts.save(self.contact)
-                    ])
-                    .then(function() {
-                        return 'state_country';
-                    });
+                    return go.utils
+                        .save_language(self.im, self.contact, choice.value)
+                        .then(function() {
+                            return 'state_country';
+                        });
                 }
             });
         });

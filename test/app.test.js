@@ -52,6 +52,7 @@ describe("app", function() {
                         msisdn: '+064001',
                         extra: {
                             language: 'french',
+                            lang: 'fr',
                             country: 'drc',
                             status: 'refugee',
                             registered: 'true'
@@ -66,6 +67,7 @@ describe("app", function() {
                         msisdn: '+064002',
                         extra: {
                             language: 'french',
+                            lang: 'fr',
                             country: 'drc',
                             status: 'migrant',
                             registered: 'true'
@@ -243,15 +245,18 @@ describe("app", function() {
 
         describe("Redis expiry testing", function() {
             describe("when a user registers, then returns after state expiration", function() {
-                it("should show them the main menu", function() {
+                it("should show them the main menu in their language", function() {
                     return tester
                         .setup.user.addr('064001')
                         .inputs(
                             {session_event: 'new'}  // dial in
                         )
+                        // check navigation
                         .check.interaction({
                             state: 'state_refugee_main'
                         })
+                        // check user language is set
+                        .check.user.properties({lang: 'fr'})
                         .run();
                 });
             });
@@ -305,7 +310,7 @@ describe("app", function() {
             });
 
             describe("if the user was busy with registration and redials", function() {
-                it("should display timeout continuation page", function() {
+                it("should display timeout continuation page in their language", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
@@ -315,6 +320,7 @@ describe("app", function() {
                             , {session_event: 'close'}  // may or may not work
                             , {session_event: 'new'}  // redial
                         )
+                        // check navigation
                         .check.interaction({
                             state: 'state_timed_out',
                             reply: [
@@ -323,6 +329,8 @@ describe("app", function() {
                                 "2. No, restart"
                             ].join('\n')
                         })
+                        // check user language is set
+                        .check.user.properties({lang: 'fr'})
                         .run();
                 });
 
@@ -690,7 +698,7 @@ describe("app", function() {
                                 "2. French",
                                 "3. Amharic",
                                 "4. Swahili",
-                                "5. Somail"
+                                "5. Somali"
                             ].join('\n')
                         })
                         .run();
@@ -752,9 +760,10 @@ describe("app", function() {
                                 msisdn: '+082111'
                             });
                             assert.equal(contact.extra.language, 'french');
+                            assert.equal(contact.extra.lang, 'fr');
                         })
                         // check user language is set
-                        .check.user.properties({lang: 'french'})
+                        .check.user.properties({lang: 'fr'})
                         .run();
                 });
             });
@@ -792,8 +801,9 @@ describe("app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 2);
+                            assert.equal(Object.keys(contact.extra).length, 3);
                             assert.equal(contact.extra.language, 'french');
+                            assert.equal(contact.extra.lang, 'fr');
                             assert.equal(contact.extra.country, 'burundi');
                         })
                         .run();
@@ -876,8 +886,9 @@ describe("app", function() {
                                 var contact = _.find(api.contacts.store, {
                                     msisdn: '+082111'
                                 });
-                                assert.equal(Object.keys(contact.extra).length, 3);
+                                assert.equal(Object.keys(contact.extra).length, 4);
                                 assert.equal(contact.extra.language, 'french');
+                                assert.equal(contact.extra.lang, 'fr');
                                 assert.equal(contact.extra.country, 'burundi');
                                 assert.equal(contact.extra.status, 'neither');
                             })
@@ -951,8 +962,9 @@ describe("app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 3);
+                            assert.equal(Object.keys(contact.extra).length, 4);
                             assert.equal(contact.extra.language, 'french');
+                            assert.equal(contact.extra.lang, 'fr');
                             assert.equal(contact.extra.country, 'burundi');
                             assert.equal(contact.extra.status, 'refugee');
                         })
@@ -1052,8 +1064,9 @@ describe("app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 3);
+                            assert.equal(Object.keys(contact.extra).length, 4);
                             assert.equal(contact.extra.language, 'french');
+                            assert.equal(contact.extra.lang, 'fr');
                             assert.equal(contact.extra.country, 'burundi');
                             assert.equal(contact.extra.status, 'migrant');
                         })
