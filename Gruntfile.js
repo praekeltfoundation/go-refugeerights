@@ -7,12 +7,18 @@ module.exports = function (grunt) {
     grunt.initConfig({
         paths: {
             src: {
-                app: [
-                    'src/app.js'
-                ],
-                prd: [
+                app: {
+                    ussdapp: 'src/ussdapp.js',
+                    smsapp: 'src/smsapp.js'
+                },
+                ussdapp: [
                     'src/index.js',
-                    '<%= paths.src.app %>',
+                    '<%= paths.src.app.ussdapp %>',
+                    'src/init.js'
+                ],
+                smsapp: [
+                    'src/index.js',
+                    '<%= paths.src.app.smsapp %>',
                     'src/init.js'
                 ],
                 all: [
@@ -20,31 +26,37 @@ module.exports = function (grunt) {
                 ]
             },
             dest: {
-                prd: 'go-app.js'
+                ussdapp: 'go-app-ussd.js',
+                smsapp: 'go-app-sms.js'
             },
-            test: [
-                'test/setup.js',
-                '<%= paths.src.app %>',
-                'test/**/*.test.js'
-            ]
+            test: {
+                ussdapp: [
+                    'test/setup.js',
+                    '<%= paths.src.app.ussdapp %>',
+                    'test/ussdapp.test.js'
+                ],
+                smsapp: [
+                    'test/setup.js',
+                    '<%= paths.src.app.smsapp %>',
+                    'test/smsapp.test.js'
+                ]
+            }
         },
 
         jshint: {
             options: {jshintrc: '.jshintrc'},
             all: [
                 'Gruntfile.js',
-                '<%= paths.src.all %>',
-                '<%= paths.test %>'
+                '<%= paths.src.all %>'
             ]
         },
 
         watch: {
             src: {
                 files: [
-                    '<%= paths.src.all %>',
-                    '<%= paths.test %>'
+                    '<%= paths.src.all %>'
                 ],
-                tasks: ['default'],
+                tasks: ['default', 'build'],
                 options: {
                     atBegin: true
                 }
@@ -60,18 +72,28 @@ module.exports = function (grunt) {
                     '\n' // Newline between banner and content.
                 ].join('\n')
             },
-            prd: {
-                src: ['<%= paths.src.prd %>'],
-                dest: '<%= paths.dest.prd %>'
-            }
+
+            ussdapp: {
+                src: ['<%= paths.src.ussdapp %>'],
+                dest: '<%= paths.dest.ussdapp %>'
+            },
+
+            smsapp: {
+                src: ['<%= paths.src.smsapp %>'],
+                dest: '<%= paths.dest.smsapp %>'
+            },
+
         },
 
         mochaTest: {
-            test: {
-                src: ['<%= paths.test %>'],
-                options: {
-                    reporter: 'spec'
-                }
+            options: {
+                reporter: 'spec'
+            },
+            test_ussdapp: {
+                src: ['<%= paths.test.ussdapp %>']
+            },
+            test_smsapp: {
+                src: ['<%= paths.test.smsapp %>']
             }
         }
     });

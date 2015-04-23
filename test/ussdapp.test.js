@@ -5,13 +5,13 @@ var _ = require('lodash');
 var AppTester = vumigo.AppTester;
 
 
-describe("app", function() {
-    describe("GoApp", function() {
+describe("refugeerights app", function() {
+    describe("for ussd use", function() {
         var app;
         var tester;
 
         beforeEach(function() {
-            app = new go.app.GoApp();
+            app = new go.app.GoRRUssd();
 
             tester = new AppTester(app);
 

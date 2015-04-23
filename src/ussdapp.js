@@ -79,7 +79,7 @@ go.app = function() {
     };
 
 
-    var GoApp = App.extend(function(self) {
+    var GoRRUssd = App.extend(function(self) {
         App.call(self, 'state_start');
         var $ = self.$;
         var interrupt = true;
@@ -416,10 +416,9 @@ go.app = function() {
             });
         });
 
-
     });
 
     return {
-        GoApp: GoApp
+        GoRRUssd: GoRRUssd
     };
 }();
