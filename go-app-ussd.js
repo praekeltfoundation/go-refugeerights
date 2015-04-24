@@ -5,19 +5,11 @@
 var go = {};
 go;
 
-go.app = function() {
-    var vumigo = require('vumigo_v02');
-    var MetricsHelper = require('go-jsbox-metrics-helper');
-    var Q = require('q');
-    var App = vumigo.App;
-    var Choice = vumigo.states.Choice;
-    var ChoiceState = vumigo.states.ChoiceState;
-    var PaginatedChoiceState = vumigo.states.PaginatedChoiceState;
-    var PaginatedState = vumigo.states.PaginatedState;
-    var EndState = vumigo.states.EndState;
+var Q = require('q');
+var moment = require('moment');
 
-
-    go.utils = {
+// Shared utils lib
+go.utils = {
 
         timed_out: function(im) {
             var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main'];
@@ -82,8 +74,115 @@ go.app = function() {
             ]);
         },
 
+        get_clean_first_word: function(user_message) {
+            return user_message
+                .split(" ")[0]          // split off first word
+                .replace(/\W/g, '')     // remove non letters
+                .toUpperCase();         // capitalise
+        },
+
+        control_api_call: function (method, params, payload, endpoint, im) {
+            var http = new HttpApi(im, {
+                headers: {
+                    'Content-Type': ['application/json'],
+                    'Authorization': ['ApiKey ' + im.config.control.username + ':' + im.config.control.api_key]
+                }
+            });
+            switch (method) {
+                case "post":
+                    return http.post(im.config.control.url + endpoint, {
+                        data: JSON.stringify(payload)
+                    });
+                case "get":
+                    return http.get(im.config.control.url + endpoint, {
+                        params: params
+                    });
+                case "patch":
+                    return http.patch(im.config.control.url + endpoint, {
+                        data: JSON.stringify(payload)
+                    });
+                case "put":
+                    return http.put(im.config.control.url + endpoint, {
+                        params: params,
+                      data: JSON.stringify(payload)
+                    });
+                case "delete":
+                    return http.delete(im.config.control.url + endpoint);
+                }
+        },
+
+        subscription_unsubscribe_all: function(contact, im) {
+            var params = {
+                to_addr: contact.msisdn
+            };
+            return go.utils
+            .control_api_call("get", params, null, 'subscription/', im)
+            .then(function(json_result) {
+                // make all subscriptions inactive
+                var update = JSON.parse(json_result.data);
+                var clean = true;  // clean tracks if api call is unnecessary
+                for (i=0; i<update.objects.length; i++) {
+                    if (update.objects[i].active === true) {
+                        update.objects[i].active = false;
+                        clean = false;
+                    }
+                }
+                if (!clean) {
+                    return go.utils.control_api_call("patch", {}, update, 'subscription/', im);
+                } else {
+                    return Q();
+                }
+            });
+        },
+
+        opt_out: function(im, contact) {
+            contact.extra.optout_last_attempt = go.utils.get_today(im.config);
+
+            return im.contacts
+            .save(contact);
+            // .then(function() {
+            //     // vumi api optout
+            //     return im.api_request('optout.optout', {
+            //         address_type: "msisdn",
+            //         address_value: contact.msisdn,
+            //         message_id: im.msg.message_id
+            //     })
+            //     .then(function() {
+            //         // unsubscribe from message sets
+            //         return go.utils.subscription_unsubscribe_all(contact, im);
+            //     });
+            // });
+        },
+
+        opt_in: function(im, contact) {
+            contact.extra.optin_last_attempt = go.utils.get_today(im.config);
+            return Q.all([
+                im.contacts.save(contact)
+            ]);
+        },
+
+        get_today: function(config) {
+            var today;
+            if (config.testing_today) {
+                today = new moment(config.testing_today);
+            } else {
+                today = new moment();
+            }
+            return today.format('YYYY-MM-DD hh:mm:ss.SSS');
+        },
+
         "commas": "commas"
     };
+go.app = function() {
+    var vumigo = require('vumigo_v02');
+    var MetricsHelper = require('go-jsbox-metrics-helper');
+    var Q = require('q');
+    var App = vumigo.App;
+    var Choice = vumigo.states.Choice;
+    var ChoiceState = vumigo.states.ChoiceState;
+    var PaginatedChoiceState = vumigo.states.PaginatedChoiceState;
+    var PaginatedState = vumigo.states.PaginatedState;
+    var EndState = vumigo.states.EndState;
 
 
     var GoRRUssd = App.extend(function(self) {

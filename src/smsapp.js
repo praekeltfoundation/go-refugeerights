@@ -1,44 +1,9 @@
 go.app = function() {
     var vumigo = require('vumigo_v02');
     var MetricsHelper = require('go-jsbox-metrics-helper');
-    var Q = require('q');
-    var moment = require('moment');
     var App = vumigo.App;
     var EndState = vumigo.states.EndState;
 
-
-    go.utils = {
-        get_clean_first_word: function(user_message) {
-            return user_message
-                .split(" ")[0]          // split off first word
-                .replace(/\W/g, '')     // remove non letters
-                .toUpperCase();         // capitalise
-        },
-
-        opt_out: function(im, contact) {
-            contact.extra.optout_last_attempt = go.utils.get_today(im.config);
-            return Q.all([
-                im.contacts.save(contact)
-            ]);
-        },
-
-        opt_in: function(im, contact) {
-            contact.extra.optin_last_attempt = go.utils.get_today(im.config);
-            return Q.all([
-                im.contacts.save(contact)
-            ]);
-        },
-
-        get_today: function(config) {
-            var today;
-            if (config.testing_today) {
-                today = new moment(config.testing_today);
-            } else {
-                today = new moment();
-            }
-            return today.format('YYYY-MM-DD hh:mm:ss.SSS');
-        },
-    };
 
     var GoRRSms = App.extend(function(self) {
         App.call(self, 'state_start');

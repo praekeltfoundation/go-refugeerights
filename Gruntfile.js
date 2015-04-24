@@ -13,11 +13,13 @@ module.exports = function (grunt) {
                 },
                 ussdapp: [
                     'src/index.js',
+                    'src/utils.js',
                     '<%= paths.src.app.ussdapp %>',
                     'src/init.js'
                 ],
                 smsapp: [
                     'src/index.js',
+                    'src/utils.js',
                     '<%= paths.src.app.smsapp %>',
                     'src/init.js'
                 ],
@@ -32,11 +34,13 @@ module.exports = function (grunt) {
             test: {
                 ussdapp: [
                     'test/setup.js',
+                    'src/utils.js',
                     '<%= paths.src.app.ussdapp %>',
                     'test/ussdapp.test.js'
                 ],
                 smsapp: [
                     'test/setup.js',
+                    'src/utils.js',
                     '<%= paths.src.app.smsapp %>',
                     'test/smsapp.test.js'
                 ]
@@ -89,9 +93,9 @@ module.exports = function (grunt) {
             options: {
                 reporter: 'spec'
             },
-            // test_ussdapp: {
-            //     src: ['<%= paths.test.ussdapp %>']
-            // },
+            test_ussdapp: {
+                src: ['<%= paths.test.ussdapp %>']
+            },
             test_smsapp: {
                 src: ['<%= paths.test.smsapp %>']
             }
