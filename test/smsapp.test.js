@@ -22,7 +22,7 @@ describe("refugeerights app", function() {
                     name: 'smsapp',
                     env: 'test',
                     testing_today: '2015-04-03 06:07:08.999',
-                    metric_store: 'refugeerights_test',
+                    metric_store: 'refugeerights_test',  // _env at the end
                     channel: "longcode555",
                     control: {
                         username: 'test_user',
@@ -62,7 +62,7 @@ describe("refugeerights app", function() {
                     });
                 })
                 .setup(function(api) {
-                    // registered refugee 1
+                    // registered refugee 3 (opted out contact)
                     api.contacts.add({
                         msisdn: '+064003',
                         extra: {
@@ -82,7 +82,7 @@ describe("refugeerights app", function() {
 
         describe("when the user sends a STOP message", function() {
             it("should opt them out", function() {
-                // note optout functionality is also being tested via fixtures
+                // note opt-out functionality is also being tested via fixtures
                 return tester
                     .setup.user.addr('064001')
                     .inputs('"stop" in the name of love')
@@ -100,13 +100,22 @@ describe("refugeerights app", function() {
                         assert.equal(contact.extra.optout_last_attempt, '2015-04-03 06:07:08.999');
                         assert.equal(contact.extra.optin_last_attempt, undefined);
                     })
+                    // check metrics
+                    .check(function(api) {
+                        var metrics = api.metrics.stores.refugeerights_test;
+                        assert.equal(Object.keys(metrics).length, 4);
+                        assert.deepEqual(metrics['total.sms.unique_users'].values, [1]);
+                        assert.deepEqual(metrics['total.sms.unique_users.transient'].values, [1]);
+                        assert.deepEqual(metrics['total.optouts'].values, [1]);
+                        assert.deepEqual(metrics['total.optouts.transient'].values, [1]);
+                    })
                     .run();
             });
         });
 
         describe("when the user sends a BLOCK message", function() {
             it("should opt them out", function() {
-                // note optout functionality is also being tested via fixtures
+                // note opt-out functionality is also being tested via fixtures
                 return tester
                     .setup.user.addr('064001')
                     .inputs('BLOCK')
@@ -124,13 +133,22 @@ describe("refugeerights app", function() {
                         assert.equal(contact.extra.optout_last_attempt, '2015-04-03 06:07:08.999');
                         assert.equal(contact.extra.optin_last_attempt, undefined);
                     })
+                    // check metrics
+                    .check(function(api) {
+                        var metrics = api.metrics.stores.refugeerights_test;
+                        assert.equal(Object.keys(metrics).length, 4);
+                        assert.deepEqual(metrics['total.sms.unique_users'].values, [1]);
+                        assert.deepEqual(metrics['total.sms.unique_users.transient'].values, [1]);
+                        assert.deepEqual(metrics['total.optouts'].values, [1]);
+                        assert.deepEqual(metrics['total.optouts.transient'].values, [1]);
+                    })
                     .run();
             });
         });
 
         describe("when the user sends a START message", function() {
             it("should opt them in", function() {
-                // note optin functionality is also being tested via fixtures
+                // note opt-in functionality is also being tested via fixtures
                 return tester
                     .setup.user.addr('064003')
                     .inputs('start')
@@ -147,6 +165,15 @@ describe("refugeerights app", function() {
                             });
                         assert.equal(contact.extra.optout_last_attempt, '2015-01-01 01:01:01.111');
                         assert.equal(contact.extra.optin_last_attempt, '2015-04-03 06:07:08.999');
+                    })
+                    // check metrics
+                    .check(function(api) {
+                        var metrics = api.metrics.stores.refugeerights_test;
+                        assert.equal(Object.keys(metrics).length, 4);
+                        assert.deepEqual(metrics['total.sms.unique_users'].values, [1]);
+                        assert.deepEqual(metrics['total.sms.unique_users.transient'].values, [1]);
+                        assert.deepEqual(metrics['total.optins'].values, [1]);
+                        assert.deepEqual(metrics['total.optins.transient'].values, [1]);
                     })
                     .run();
             });
@@ -170,6 +197,15 @@ describe("refugeerights app", function() {
                             });
                         assert.equal(contact.extra.optout_last_attempt, undefined);
                         assert.equal(contact.extra.optin_last_attempt, undefined);
+                    })
+                    // check metrics
+                    .check(function(api) {
+                        var metrics = api.metrics.stores.refugeerights_test;
+                        assert.equal(Object.keys(metrics).length, 4);
+                        assert.deepEqual(metrics['total.sms.unique_users'].values, [1]);
+                        assert.deepEqual(metrics['total.sms.unique_users.transient'].values, [1]);
+                        assert.deepEqual(metrics['total.unrecognised_sms'].values, [1]);
+                        assert.deepEqual(metrics['total.unrecognised_sms.transient'].values, [1]);
                     })
                     .run();
             });

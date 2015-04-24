@@ -56,7 +56,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= paths.src.all %>'
                 ],
-                tasks: ['default', 'build'],
+                tasks: ['default'],
                 options: {
                     atBegin: true
                 }
@@ -89,9 +89,9 @@ module.exports = function (grunt) {
             options: {
                 reporter: 'spec'
             },
-            test_ussdapp: {
-                src: ['<%= paths.test.ussdapp %>']
-            },
+            // test_ussdapp: {
+            //     src: ['<%= paths.test.ussdapp %>']
+            // },
             test_smsapp: {
                 src: ['<%= paths.test.smsapp %>']
             }

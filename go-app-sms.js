@@ -7,6 +7,7 @@ go;
 
 go.app = function() {
     var vumigo = require('vumigo_v02');
+    var MetricsHelper = require('go-jsbox-metrics-helper');
     var Q = require('q');
     var moment = require('moment');
     var App = vumigo.App;
@@ -51,6 +52,39 @@ go.app = function() {
         var $ = self.$;
 
         self.init = function() {
+
+            // Use the metrics helper to add some metrics
+            mh = new MetricsHelper(self.im);
+            mh
+                // Total unique users
+                .add.total_unique_users('total.sms.unique_users')
+
+                // Total opt-outs
+                .add.total_state_actions(
+                    {
+                        state: 'state_opt_out',
+                        action: 'enter'
+                    },
+                    'total.optouts'
+                )
+
+                // Total opt-ins
+                .add.total_state_actions(
+                    {
+                        state: 'state_opt_in',
+                        action: 'enter'
+                    },
+                    'total.optins'
+                )
+
+                // Total opt-ins
+                .add.total_state_actions(
+                    {
+                        state: 'state_unrecognised',
+                        action: 'enter'
+                    },
+                    'total.unrecognised_sms'
+                );
 
             // Load self.contact
             return self.im.contacts

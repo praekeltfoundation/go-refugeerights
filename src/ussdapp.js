@@ -90,12 +90,12 @@ go.app = function() {
             mh = new MetricsHelper(self.im);
             mh
                 // Total unique users
-                .add.total_unique_users('total.unique_users')
+                .add.total_unique_users('total.ussd.unique_users')
 
                 // Total sessions
-                .add.total_sessions('total.sessions')
+                .add.total_sessions('total.ussd.sessions')
 
-                // Total times reached state_end
+                // Total times reached state_timed_out
                 .add.total_state_actions(
                     {
                         state: 'state_timed_out',

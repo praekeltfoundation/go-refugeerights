@@ -20,7 +20,7 @@ describe("refugeerights app", function() {
                 .setup.config.app({
                     name: 'refugeerights',
                     env: 'test',
-                    metric_store: 'refugeerights_test',
+                    metric_store: 'refugeerights_test',  // _env at the end
                     channel: "555",
                     control: {
                         username: "test_user",
@@ -366,10 +366,10 @@ describe("refugeerights app", function() {
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
                                 assert.equal(Object.keys(metrics).length, 14);
-                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                                assert.deepEqual(metrics['total.sessions'].values, [1, 2]);
-                                assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
                                 assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
                                 assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
@@ -418,10 +418,10 @@ describe("refugeerights app", function() {
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
                                 assert.equal(Object.keys(metrics).length, 14);
-                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                                assert.deepEqual(metrics['total.sessions'].values, [1, 2]);
-                                assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
                                 assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
                                 assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
@@ -498,10 +498,10 @@ describe("refugeerights app", function() {
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
                                 assert.equal(Object.keys(metrics).length, 22);
-                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                                assert.deepEqual(metrics['total.sessions'].values, [1, 2]);
-                                assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
                                 assert.deepEqual(metrics['total.registrations.last'].values, [1]);
                                 assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
@@ -561,10 +561,10 @@ describe("refugeerights app", function() {
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
                                 assert.equal(Object.keys(metrics).length, 22);
-                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                                assert.deepEqual(metrics['total.sessions'].values, [1, 2]);
-                                assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
                                 assert.deepEqual(metrics['total.registrations.last'].values, [1]);
                                 assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
@@ -628,10 +628,10 @@ describe("refugeerights app", function() {
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
                             assert.equal(Object.keys(metrics).length, 6);
-                            assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                            assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                            assert.deepEqual(metrics['total.sessions'].values, [1, 2, 3]);
-                            assert.deepEqual(metrics['total.sessions.transient'].values, [1, 1, 1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2, 3]);
+                            assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1, 1]);
                             // note metrics below do not increment twice - 'enter' doesn't happen twice
                             assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
                             assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
@@ -713,10 +713,10 @@ describe("refugeerights app", function() {
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
                             assert.equal(Object.keys(metrics).length, 4);
-                            assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                            assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                            assert.deepEqual(metrics['total.sessions'].values, [1]);
-                            assert.deepEqual(metrics['total.sessions.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.sessions'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1]);
                         })
                         .run();
                 });
@@ -876,10 +876,10 @@ describe("refugeerights app", function() {
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
                                 assert.equal(Object.keys(metrics).length, 4);
-                                assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                                assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                                assert.deepEqual(metrics['total.sessions'].values, [1]);
-                                assert.deepEqual(metrics['total.sessions.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1]);
                             })
                             // check user extras
                             .check(function(api) {
@@ -932,10 +932,10 @@ describe("refugeerights app", function() {
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
                             assert.equal(Object.keys(metrics).length, 12);
-                            assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                            assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                            assert.deepEqual(metrics['total.sessions'].values, [1]);
-                            assert.deepEqual(metrics['total.sessions.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.sessions'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
@@ -1034,10 +1034,10 @@ describe("refugeerights app", function() {
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
                             assert.equal(Object.keys(metrics).length, 12);
-                            assert.deepEqual(metrics['total.unique_users'].values, [1]);
-                            assert.deepEqual(metrics['total.unique_users.transient'].values, [1]);
-                            assert.deepEqual(metrics['total.sessions'].values, [1]);
-                            assert.deepEqual(metrics['total.sessions.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.sessions'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.migrant.last'].values, [1]);
