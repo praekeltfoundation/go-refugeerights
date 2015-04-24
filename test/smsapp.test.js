@@ -2,8 +2,8 @@ var vumigo = require('vumigo_v02');
 var fixtures = require('./fixtures');
 var AppTester = vumigo.AppTester;
 var assert = require('assert');
-// var optoutstore = require('./optoutstore');
-// var DummyOptoutResource = optoutstore.DummyOptoutResource;
+var optoutstore = require('./optoutstore');
+var DummyOptoutResource = optoutstore.DummyOptoutResource;
 var _ = require('lodash');
 
 describe("refugeerights app", function() {
@@ -33,10 +33,10 @@ describe("refugeerights app", function() {
                         "sms": {"delivery_class": "sms"}
                     }
                 })
-                // .setup(function(api) {
-                //     api.resources.add(new DummyOptoutResource());
-                //     api.resources.attach(api);
-                // })
+                .setup(function(api) {
+                    api.resources.add(new DummyOptoutResource());
+                    api.resources.attach(api);
+                })
                 .setup(function(api) {
                     api.metrics.stores = {'refugeerights_test': {}};
                 })
@@ -82,7 +82,7 @@ describe("refugeerights app", function() {
 
         describe("when the user sends a STOP message", function() {
             it("should opt them out", function() {
-                // note opt-out functionality is also being tested via fixtures
+                // opt-out functionality is also being tested via fixture 01
                 return tester
                     .setup.user.addr('064001')
                     .inputs('"stop" in the name of love')
@@ -109,13 +109,18 @@ describe("refugeerights app", function() {
                         assert.deepEqual(metrics['total.optouts'].values, [1]);
                         assert.deepEqual(metrics['total.optouts.transient'].values, [1]);
                     })
+                    // check optout_store
+                    .check(function(api) {
+                        var optout_store = api.resources.resources.optout.optout_store;
+                        assert.deepEqual(optout_store.length, 2);
+                    })
                     .run();
             });
         });
 
         describe("when the user sends a BLOCK message", function() {
             it("should opt them out", function() {
-                // note opt-out functionality is also being tested via fixtures
+                // opt-out functionality is also being tested via fixture 01
                 return tester
                     .setup.user.addr('064001')
                     .inputs('BLOCK')
@@ -142,13 +147,18 @@ describe("refugeerights app", function() {
                         assert.deepEqual(metrics['total.optouts'].values, [1]);
                         assert.deepEqual(metrics['total.optouts.transient'].values, [1]);
                     })
+                    // check optout_store
+                    .check(function(api) {
+                        var optout_store = api.resources.resources.optout.optout_store;
+                        assert.deepEqual(optout_store.length, 2);
+                    })
                     .run();
             });
         });
 
         describe("when the user sends a START message", function() {
             it("should opt them in", function() {
-                // note opt-in functionality is also being tested via fixtures
+                // opt-in functionality is also being tested via fixtures
                 return tester
                     .setup.user.addr('064003')
                     .inputs('start')
@@ -175,12 +185,17 @@ describe("refugeerights app", function() {
                         assert.deepEqual(metrics['total.optins'].values, [1]);
                         assert.deepEqual(metrics['total.optins.transient'].values, [1]);
                     })
+                    // check optout_store
+                    .check(function(api) {
+                        var optout_store = api.resources.resources.optout.optout_store;
+                        assert.deepEqual(optout_store.length, 0);
+                    })
                     .run();
             });
         });
 
         describe("when the user sends a different message", function() {
-            it("should opt them in", function() {
+            it("should tell them off", function() {
                 return tester
                     .setup.user.addr('064001')
                     .inputs('lhr')
@@ -206,6 +221,10 @@ describe("refugeerights app", function() {
                         assert.deepEqual(metrics['total.sms.unique_users.transient'].values, [1]);
                         assert.deepEqual(metrics['total.unrecognised_sms'].values, [1]);
                         assert.deepEqual(metrics['total.unrecognised_sms.transient'].values, [1]);
+                    })
+                    .check(function(api) {
+                        var optout_store = api.resources.resources.optout.optout_store;
+                        assert.deepEqual(optout_store.length, 1);
                     })
                     .run();
             });
