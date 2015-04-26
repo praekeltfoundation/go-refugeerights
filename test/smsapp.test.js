@@ -27,7 +27,7 @@ describe("refugeerights app", function() {
                     control: {
                         username: 'test_user',
                         api_key: 'test_key',
-                        url: 'http://fixture/subscription/api/v1/'
+                        url: 'http://fixture/api/v1/'
                     },
                     endpoints: {
                         "sms": {"delivery_class": "sms"}
@@ -103,11 +103,13 @@ describe("refugeerights app", function() {
                     // check metrics
                     .check(function(api) {
                         var metrics = api.metrics.stores.refugeerights_test;
-                        assert.equal(Object.keys(metrics).length, 4);
+                        assert.equal(Object.keys(metrics).length, 6);
                         assert.deepEqual(metrics['total.sms.unique_users'].values, [1]);
                         assert.deepEqual(metrics['total.sms.unique_users.transient'].values, [1]);
                         assert.deepEqual(metrics['total.optouts'].values, [1]);
                         assert.deepEqual(metrics['total.optouts.transient'].values, [1]);
+                        assert.deepEqual(metrics['total.subscription_unsubscribe_success.last'].values, [1]);
+                        assert.deepEqual(metrics['total.subscription_unsubscribe_success.sum'].values, [1]);
                     })
                     // check optout_store
                     .check(function(api) {
@@ -141,11 +143,13 @@ describe("refugeerights app", function() {
                     // check metrics
                     .check(function(api) {
                         var metrics = api.metrics.stores.refugeerights_test;
-                        assert.equal(Object.keys(metrics).length, 4);
+                        assert.equal(Object.keys(metrics).length, 6);
                         assert.deepEqual(metrics['total.sms.unique_users'].values, [1]);
                         assert.deepEqual(metrics['total.sms.unique_users.transient'].values, [1]);
                         assert.deepEqual(metrics['total.optouts'].values, [1]);
                         assert.deepEqual(metrics['total.optouts.transient'].values, [1]);
+                        assert.deepEqual(metrics['total.subscription_unsubscribe_success.last'].values, [1]);
+                        assert.deepEqual(metrics['total.subscription_unsubscribe_success.sum'].values, [1]);
                     })
                     // check optout_store
                     .check(function(api) {

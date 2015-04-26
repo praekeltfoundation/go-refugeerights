@@ -44,6 +44,7 @@ go.utils = {
 
         return Q.all([
             im.contacts.save(contact),
+            go.utils.subscription_subscribe(contact, im),
             im.metrics.fire.inc(['total', 'registrations', 'last'].join('.')),
             im.metrics.fire.sum(['total', 'registrations', 'sum'].join('.'), 1),
             im.metrics.fire.inc(['total', 'registrations', status, 'last'].join('.')),
@@ -106,6 +107,35 @@ go.utils = {
             }
     },
 
+    subscription_subscribe: function(contact, im) {
+        // TODO update payload to new message subscription protocol
+        var payload = {
+            contact_key: contact.key,
+            lang: contact.extra.lang,
+            message_set: "/api/v1/message_set/" + '1' + "/",
+            next_sequence_number: 1,
+            schedule: "/api/v1/periodic_task/" + '1' + "/",
+            to_addr: contact.msisdn,
+            user_account: contact.user_account
+        };
+
+        return go.utils
+            .control_api_call("post", null, payload, 'subscription/', im)
+            .then(function(result) {
+                if (result.code >= 200 && result.code < 300){
+                    return Q.all([
+                        im.metrics.fire.inc(["total", "subscription_subscribe_success", "last"].join('.')),
+                        im.metrics.fire.sum(["total", "subscription_subscribe_success", "sum"].join('.'), 1)
+                    ]);
+                } else {
+                    return Q.all([
+                        im.metrics.fire.inc(["total", "subscription_subscribe_fail", "last"].join('.')),
+                        im.metrics.fire.inc(["total", "subscription_subscribe_fail", "sum"].join('.'), 1)
+                    ]);
+                }
+        });
+    },
+
     subscription_unsubscribe_all: function(contact, im) {
         var params = {
             to_addr: contact.msisdn
@@ -123,7 +153,21 @@ go.utils = {
                 }
             }
             if (!clean) {
-                return go.utils.control_api_call("patch", {}, update, 'subscription/', im);
+                return go.utils
+                .control_api_call("patch", {}, update, 'subscription/', im)
+                .then(function(result) {
+                    if (result.code >= 200 && result.code < 300) {
+                        return Q.all([
+                            im.metrics.fire.inc(["total", "subscription_unsubscribe_success", "last"].join('.')),
+                            im.metrics.fire.sum(["total", "subscription_unsubscribe_success", "sum"].join('.'), 1)
+                        ]);
+                    } else {
+                        return Q.all([
+                            im.metrics.fire.inc(["total", "subscription_unsubscribe_fail", "last"].join('.')),
+                            im.metrics.fire.sum(["total", "subscription_unsubscribe_fail", "sum"].join('.'), 1)
+                        ]);
+                    }
+                });
             } else {
                 return Q();
             }

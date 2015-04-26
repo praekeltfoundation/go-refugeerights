@@ -25,7 +25,7 @@ describe("refugeerights app", function() {
                     control: {
                         username: "test_user",
                         api_key: "test_key",
-                        url: "http://fixture/subscription/api/v1/"
+                        url: "http://fixture/api/v1/"
                     }
                 })
                 .setup(function(api) {
@@ -497,7 +497,7 @@ describe("refugeerights app", function() {
                             )
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
-                                assert.equal(Object.keys(metrics).length, 22);
+                                assert.equal(Object.keys(metrics).length, 24);
                                 assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
                                 assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
                                 assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
@@ -520,6 +520,8 @@ describe("refugeerights app", function() {
                                 assert.deepEqual(metrics['total.redials.continue.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.refugee.continue.last'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.refugee.continue.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.subscription_subscribe_success.last'].values, [1]);
+                                assert.deepEqual(metrics['total.subscription_subscribe_success.sum'].values, [1]);
                             })
                             .run();
                     });
@@ -560,7 +562,7 @@ describe("refugeerights app", function() {
                             )
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
-                                assert.equal(Object.keys(metrics).length, 22);
+                                assert.equal(Object.keys(metrics).length, 24);
                                 assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
                                 assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
                                 assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
@@ -583,6 +585,8 @@ describe("refugeerights app", function() {
                                 assert.deepEqual(metrics['total.redials.restart.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.refugee.restart.last'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.refugee.restart.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.subscription_subscribe_success.last'].values, [1]);
+                                assert.deepEqual(metrics['total.subscription_subscribe_success.sum'].values, [1]);
                             })
                             .run();
                     });
@@ -931,7 +935,7 @@ describe("refugeerights app", function() {
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
-                            assert.equal(Object.keys(metrics).length, 12);
+                            assert.equal(Object.keys(metrics).length, 14);
                             assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
                             assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
                             assert.deepEqual(metrics['total.ussd.sessions'].values, [1]);
@@ -944,6 +948,8 @@ describe("refugeerights app", function() {
                             assert.deepEqual(metrics['total.registrations.burundi.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.refugee.burundi.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.refugee.burundi.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.subscription_subscribe_success.last'].values, [1]);
+                            assert.deepEqual(metrics['total.subscription_subscribe_success.sum'].values, [1]);
                         })
                         .run();
                 });
@@ -1033,7 +1039,7 @@ describe("refugeerights app", function() {
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
-                            assert.equal(Object.keys(metrics).length, 12);
+                            assert.equal(Object.keys(metrics).length, 14);
                             assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
                             assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
                             assert.deepEqual(metrics['total.ussd.sessions'].values, [1]);
@@ -1046,6 +1052,8 @@ describe("refugeerights app", function() {
                             assert.deepEqual(metrics['total.registrations.burundi.sum'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.migrant.burundi.last'].values, [1]);
                             assert.deepEqual(metrics['total.registrations.migrant.burundi.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.subscription_subscribe_success.last'].values, [1]);
+                            assert.deepEqual(metrics['total.subscription_subscribe_success.sum'].values, [1]);
                         })
                         .run();
                 });

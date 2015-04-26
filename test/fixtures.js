@@ -13,7 +13,7 @@ return [
                     'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
                     'Content-Type': ['application/json']
                 },
-                'url': 'http://fixture/subscription/api/v1/subscription/',
+                'url': 'http://fixture/api/v1/subscription/',
             },
             'response': {
                 "code": 200,
@@ -70,7 +70,7 @@ return [
                     'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
                     'Content-Type': ['application/json']
                 },
-                'url': 'http://fixture/subscription/api/v1/subscription/',
+                'url': 'http://fixture/api/v1/subscription/',
                 "data": {
                     "objects": [
                         {
@@ -113,6 +113,31 @@ return [
                 "data": {
                     "success": "true"
                 }
+            }
+        },
+
+    // 02 Subscription
+        // Vumi Subscription to messages for: 082111
+        {
+            "request": {
+              "method": "POST",
+              'headers': {
+                    'Authorization': ['ApiKey test_user:test_key'],
+                    'Content-Type': ['application/json']
+                },
+              "url": 'http://fixture/api/v1/subscription/',
+              "data": {
+                "contact_key": "contact_key",
+                "lang": "fr",
+                "message_set": "/api/v1/message_set/1/",
+                "next_sequence_number": 1,
+                "schedule": "/api/v1/periodic_task/1/",
+                "to_addr": "+082111",
+                "user_account": "contact_user_account"
+              }
+            },
+            "response": {
+                "code": 201,
             }
         },
 
