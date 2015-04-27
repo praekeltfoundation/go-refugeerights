@@ -10,76 +10,7 @@ go.app = function() {
     var EndState = vumigo.states.EndState;
 
 
-    go.utils = {
-
-        timed_out: function(im) {
-            var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main'];
-            return im.msg.session_event === 'new'
-                && im.user.state.name
-                && no_redirects.indexOf(im.user.state.name) === -1;
-        },
-
-        save_language: function(im, contact, lang) {
-            var lang_map = {
-                en: 'english',
-                fr: 'french',
-                am: 'amharic',
-                sw: 'swahili',
-                so: 'somali'
-            };
-            contact.extra.lang = lang;
-            contact.extra.language = lang_map[lang];
-
-            return Q.all([
-                im.user.set_lang(lang),
-                im.contacts.save(contact)
-            ]);
-        },
-
-        set_language: function(im, contact) {
-            if (contact.extra.lang !== undefined) {
-                return im.user.set_lang(contact.extra.lang);
-            } else {
-                return Q();
-            }
-        },
-
-        register_user: function(contact, im, status) {
-            contact.extra.status = status;
-            var country = contact.extra.country;
-
-            return Q.all([
-                im.contacts.save(contact),
-                im.metrics.fire.inc(['total', 'registrations', 'last'].join('.')),
-                im.metrics.fire.sum(['total', 'registrations', 'sum'].join('.'), 1),
-                im.metrics.fire.inc(['total', 'registrations', status, 'last'].join('.')),
-                im.metrics.fire.sum(['total', 'registrations', status, 'sum'].join('.'), 1),
-                im.metrics.fire.inc(['total', 'registrations', country, 'last'].join('.')),
-                im.metrics.fire.sum(['total', 'registrations', country, 'sum'].join('.'), 1),
-                im.metrics.fire.inc(['total', 'registrations', status, country, 'last'].join('.')),
-                im.metrics.fire.sum(['total', 'registrations', status, country, 'sum'].join('.'), 1)
-            ]);
-        },
-
-        track_redials: function(contact, im, decision) {
-            var status = contact.extra.status || 'unregistered';
-            return Q.all([
-                im.metrics.fire.inc(['total', 'redials', 'choice_made', 'last'].join('.')),
-                im.metrics.fire.sum(['total', 'redials', 'choice_made', 'sum'].join('.'), 1),
-                im.metrics.fire.inc(['total', 'redials', status, 'last'].join('.')),
-                im.metrics.fire.sum(['total', 'redials', status, 'sum'].join('.'), 1),
-                im.metrics.fire.inc(['total', 'redials', decision, 'last'].join('.')),
-                im.metrics.fire.sum(['total', 'redials', decision, 'sum'].join('.'), 1),
-                im.metrics.fire.inc(['total', 'redials', status, decision, 'last'].join('.')),
-                im.metrics.fire.sum(['total', 'redials', status, decision, 'sum'].join('.'), 1),
-            ]);
-        },
-
-        "commas": "commas"
-    };
-
-
-    var GoApp = App.extend(function(self) {
+    var GoRRUssd = App.extend(function(self) {
         App.call(self, 'state_start');
         var $ = self.$;
         var interrupt = true;
@@ -90,12 +21,12 @@ go.app = function() {
             mh = new MetricsHelper(self.im);
             mh
                 // Total unique users
-                .add.total_unique_users('total.unique_users')
+                .add.total_unique_users('total.ussd.unique_users')
 
                 // Total sessions
-                .add.total_sessions('total.sessions')
+                .add.total_sessions('total.ussd.sessions')
 
-                // Total times reached state_end
+                // Total times reached state_timed_out
                 .add.total_state_actions(
                     {
                         state: 'state_timed_out',
@@ -416,10 +347,9 @@ go.app = function() {
             });
         });
 
-
     });
 
     return {
-        GoApp: GoApp
+        GoRRUssd: GoRRUssd
     };
 }();
