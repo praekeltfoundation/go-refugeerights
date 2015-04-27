@@ -218,6 +218,7 @@ go.utils = {
 
     "commas": "commas"
 };
+
 go.app = function() {
     var vumigo = require('vumigo_v02');
     var MetricsHelper = require('go-jsbox-metrics-helper');
