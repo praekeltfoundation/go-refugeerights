@@ -1,0 +1,601 @@
+{
+    "layout": [
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Unique Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.ussd.unique_users",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Unique Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.ussd.unique_users.transient",
+                "aggregator": "sum"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Registered Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Registered Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.sum",
+                "aggregator": "sum"
+            }
+        },
+
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Unique and Registered Users Per Week (Last 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 6,
+            "metrics": [
+                {
+                    "name": "Total Unique Users",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.ussd.unique_users",
+                        "aggregator": "last"
+                    }
+                },
+                {
+                    "name": "Total Registered Users",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.registrations.last",
+                        "aggregator": "last"
+                    }
+                }
+            ]
+        },
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Unique and Registered Users Per Week (Sum 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 6,
+            "metrics": [
+                {
+                    "name": "Total Unique Users",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.ussd.unique_users.transient",
+                        "aggregator": "sum"
+                    }
+                },
+                {
+                    "name": "Total Registered Users",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.registrations.sum",
+                        "aggregator": "sum"
+                    }
+                }
+            ]
+        },
+
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Refugee Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.sum",
+                "aggregator": "sum"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Migrant Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.sum",
+                "aggregator": "sum"
+            }
+        },
+
+
+
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Refugee and Migrant Users Per Week (Last 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 6,
+            "metrics": [
+                {
+                    "name": "Total Refugee Users",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.registrations.refugee.last",
+                        "aggregator": "last"
+                    }
+                },
+                {
+                    "name": "Total Migrant Users",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.registrations.migrant.last",
+                        "aggregator": "last"
+                    }
+                }
+            ]
+        },
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Refugee and Migrant Users Per Week (Sum 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 6,
+            "metrics": [
+                {
+                    "name": "Total Refugee Users",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.registrations.refugee.sum",
+                        "aggregator": "sum"
+                    }
+                },
+                {
+                    "name": "Total Migrant Users",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.registrations.migrant.sum",
+                        "aggregator": "sum"
+                    }
+                }
+            ]
+        },
+
+
+
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Somalia Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.somalia.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Ethiopia Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.ethiopia.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Eritrea Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.eritrea.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Democratic Republic of Congo Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.drc.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Burundi Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.burundi.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Kenya Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.kenya.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Rwanda Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.rwanda.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Sudan / South Sudan Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.sudan.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Zimbabwe Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.zimbabwe.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Uganda Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.uganda.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Egypt Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.egypt.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Mozambique Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.mozambique.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Syria Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.syria.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Angola Refugee Users (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.refugee.angola.last",
+                "aggregator": "last"
+            }
+        },
+
+
+
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Somalia Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.somalia.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Ethiopia Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.ethiopia.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Eritrea Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.eritrea.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Democratic Republic of Congo Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.drc.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Burundi Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.burundi.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Kenya Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.kenya.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Rwanda Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.rwanda.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Sudan / South Sudan Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.sudan.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Zimbabwe Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.zimbabwe.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Uganda Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.uganda.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Egypt Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.egypt.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Mozambique Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.mozambique.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Syria Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.syria.sum",
+                "aggregator": "sum"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total Angola Migrant Users (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.registrations.migrant.angola.sum",
+                "aggregator": "sum"
+            }
+        },
+
+
+
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total USSD Sessions (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.ussd.sessions",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Total USSD Sessions (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.ussd.sessions.transient",
+                "aggregator": "sum"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Total Sessions (Last 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 3,
+            "metrics": [
+                {
+                    "name": "Total USSD Sessions",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.ussd.sessions",
+                        "aggregator": "last"
+                    }
+                }
+            ]
+        },
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Total Sessions (Sum 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 3,
+            "metrics": [
+                {
+                    "name": "Total USSD Sessions",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.ussd.sessions.transient",
+                        "aggregator": "sum"
+                    }
+                }
+            ]
+        }
+
+
+    ]
+}
