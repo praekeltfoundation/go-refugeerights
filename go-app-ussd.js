@@ -255,7 +255,7 @@ go.app = function() {
     var EndState = vumigo.states.EndState;
 
 
-    var GoRRUssd = App.extend(function(self) {
+    var GoRR = App.extend(function(self) {
         App.call(self, 'state_start');
         var $ = self.$;
         var interrupt = true;
@@ -600,15 +600,15 @@ go.app = function() {
     });
 
     return {
-        GoRRUssd: GoRRUssd
+        GoRR: GoRR
     };
 }();
 go.init = function() {
     var vumigo = require('vumigo_v02');
     var InteractionMachine = vumigo.InteractionMachine;
-    var GoApp = go.app.GoApp;
+    var GoRR = go.app.GoRR;
 
     return {
-        im: new InteractionMachine(api, new GoApp())
+        im: new InteractionMachine(api, new GoRR())
     };
 }();

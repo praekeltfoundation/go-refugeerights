@@ -12,7 +12,7 @@ describe("refugeerights app", function() {
         var tester;
 
         beforeEach(function() {
-            app = new go.app.GoRRSms();
+            app = new go.app.GoRR();
 
             tester = new AppTester(app);
 
