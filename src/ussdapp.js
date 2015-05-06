@@ -35,6 +35,11 @@ go.app = function() {
                     'total.reached_state_timed_out'
                 );
 
+            // Record returning users metrics
+            self.im.on('session:new', function(e) {
+                return go.utils.fire_returning_user_metrics(self.im, self.contact);
+            });
+
             // Load self.contact
             return self.im.contacts
                 .for_user()
