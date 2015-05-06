@@ -5,7 +5,7 @@ go.app = function() {
     var EndState = vumigo.states.EndState;
 
 
-    var GoRRSms = App.extend(function(self) {
+    var GoRR = App.extend(function(self) {
         App.call(self, 'state_start');
         var $ = self.$;
 
@@ -113,6 +113,6 @@ go.app = function() {
     });
 
     return {
-        GoRRSms: GoRRSms
+        GoRR: GoRR
     };
 }();
