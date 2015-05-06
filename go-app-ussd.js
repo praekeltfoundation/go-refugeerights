@@ -327,7 +327,7 @@ go.app = function() {
         // 001
         self.add('state_language', function(name) {
             return new ChoiceState(name, {
-                question: $('Welcome! Find info about migrants, asylum, refugees & support services. Pls choose ur language:'),
+                question: $('Welcome! Find info about migrants, asylum, refugees & support services. Please choose your language:'),
                 choices: [
                     new Choice('en', $("English")),
                     new Choice('fr', $("French")),

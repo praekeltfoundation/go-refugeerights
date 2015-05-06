@@ -697,7 +697,7 @@ describe("refugeerights app", function() {
                         .check.interaction({
                             state: 'state_language',
                             reply: [
-                                "Welcome! Find info about migrants, asylum, refugees & support services. Pls choose ur language:",
+                                'Welcome! Find info about migrants, asylum, refugees & support services. Please choose your language:',
                                 "1. English",
                                 "2. French",
                                 "3. Amharic",
