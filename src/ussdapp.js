@@ -10,7 +10,7 @@ go.app = function() {
     var EndState = vumigo.states.EndState;
 
 
-    var GoRRUssd = App.extend(function(self) {
+    var GoRR = App.extend(function(self) {
         App.call(self, 'state_start');
         var $ = self.$;
         var interrupt = true;
@@ -350,6 +350,6 @@ go.app = function() {
     });
 
     return {
-        GoRRUssd: GoRRUssd
+        GoRR: GoRR
     };
 }();
