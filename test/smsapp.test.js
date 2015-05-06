@@ -23,7 +23,6 @@ describe("refugeerights app", function() {
                     env: 'test',
                     testing_today: '2015-04-03 06:07:08.999',
                     metric_store: 'refugeerights_test',  // _env at the end
-                    channel: "longcode555",
                     control: {
                         username: 'test_user',
                         api_key: 'test_key',

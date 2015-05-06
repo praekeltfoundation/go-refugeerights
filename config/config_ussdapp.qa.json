@@ -2,7 +2,6 @@
     "name": "ussd-infohub-qa",
     "env": "qa",
     "metric_store": "refugeerights_qa",
-    "channel": "*120*8864*1538#",
     "control": {
         "username": "test_user",
         "api_key": "test_key",

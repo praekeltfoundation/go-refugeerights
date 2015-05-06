@@ -698,6 +698,43 @@
                     }
                 }
             ]
+        },
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Redial Usage (Sum 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 6,
+            "metrics": [
+                {
+                    "name": "Total Redials",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.reached_state_timed_out.transient",
+                        "aggregator": "sum"
+                    }
+                },
+                {
+                    "name": "Total Redials that Continued",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.redials.continue.sum",
+                        "aggregator": "sum"
+                    }
+                },
+                {
+                    "name": "Total Redials that Restarted",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.redials.restart.sum",
+                        "aggregator": "sum"
+                    }
+                }
+            ]
         }
 
 
