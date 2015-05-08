@@ -1605,8 +1605,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                // TODO
-                it.skip("064 - 079", function() {
+                it("064 - 079", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(

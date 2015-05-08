@@ -793,6 +793,16 @@ go.app = function() {
 
             // 079
             // TODO
+            self.add('state_079', function(name) {
+                return new PaginatedState(name, {
+                    text: $("CONTENT REQUIRED"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
 
             // 080
             self.add('state_080', function(name) {
