@@ -463,7 +463,7 @@ go.app = function() {
         // 006
         self.add('state_refugee_rights_info', function(name) {
             return new PaginatedState(name, {
-                text: $('Welcome! This is a step-by-step guide for foreign nationals in South Africa. Read all the Menu options to find the help you need. Choose ‘Word Definitions’ for an explanation of words you may not be familiar with. Choose ‘Tips’ for a short-cut to helpful advice at each stage of your visa process - with more detail in each Menu section. Choose ‘Useful Contacts’ for the phone numbers of government, private or blah'),
+                text: $('Welcome! This is a step-by-step guide for foreign nationals in South Africa. Read all the Menu options to find the help you need. Choose ‘Word Definitions’ for an explanation of words you may not be familiar with. Choose ‘Tips’ for a short-cut to helpful advice at each stage of your visa process - with more detail in each Menu section. Choose ‘Useful Contacts’ for the phone numbers of government, private or blah blah blah'),
                 characters_per_page: 160,
                 back: $('Back'),
                 more: $('More'),
@@ -475,7 +475,7 @@ go.app = function() {
         // 007
         self.add('state_migrant_rights_info', function(name) {
             return new PaginatedState(name, {
-                text: $('Welcome! This is a step-by-step guide for foreign nationals in South Africa. Read all the Menu options to find the help you need. Choose ‘Word Definitions’ for an explanation of words you may not be familiar with. Choose ‘Tips’ for a short-cut to helpful advice at each stage of your visa process - with more detail in each Menu section. Choose ‘Useful Contacts’ for the phone numbers of government, private or blah'),
+                text: $('Welcome! This is a step-by-step guide for foreign nationals in South Africa. Read all the Menu options to find the help you need. Choose ‘Word Definitions’ for an explanation of words you may not be familiar with. Choose ‘Tips’ for a short-cut to helpful advice at each stage of your visa process - with more detail in each Menu section. Choose ‘Useful Contacts’ for the phone numbers of government, private or blah blah blah'),
                 characters_per_page: 160,
                 back: $('Back'),
                 more: $('More'),

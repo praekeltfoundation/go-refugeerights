@@ -241,9 +241,9 @@ describe("refugeerights app", function() {
             });
         });
 
-        // TEST BOOKLETSTATE PAGING
+        // TEST PAGINATEDSTATE PAGING
 
-        describe("PaginatedState testing using Refugee Rights Info State (006)", function() {
+        describe.only("PaginatedState testing using Refugee Rights Info State (006)", function() {
             describe("forward navigation", function() {
                 it("should display page 2 on More", function() {
                     return tester
@@ -264,7 +264,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it.only("should display page 3 on Next", function() {
+                it("should display page 3 on Next", function() {
                     return tester
                         .setup.user.addr('082111')
                         .setup.user.state('state_refugee_rights_info')
@@ -275,7 +275,7 @@ describe("refugeerights app", function() {
                         .check.interaction({
                             state: 'state_refugee_rights_info',
                             reply: [
-                                "‘Word Definitions’ for an explanation of words you may not be familiar with. Choose ‘Tips’ for a short-cut to helpful advice at each",
+                                "stage of your visa process - with more detail in each Menu section. Choose ‘Useful Contacts’ for the phone numbers of government, private or blah blah blah",
                                 '1. More',
                                 '2. Back',
                                 '3. Exit'
@@ -284,26 +284,6 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("should display page 4 on Next", function() {
-                    return tester
-                        .setup.user.addr('082111')
-                        .setup.user.state('state_refugee_main')
-                        .inputs(
-                            '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
-                        )
-                        .check.interaction({
-                            state: 'state_refugee_main',
-                            reply: [
-                                'MAIN MENU',
-                                '1. Ts & Cs of this service',
-                                '2. About LHR',
-                                '3. Back'
-                            ].join('\n')
-                        })
-                        .run();
-                });
             });
         });
 
