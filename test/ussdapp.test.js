@@ -80,7 +80,7 @@ describe("refugeerights app", function() {
 
         // TEST PAGINATEDCHOICESTATE PAGING
 
-        describe("PaginatedChoiceState testing using Refugee Main Menu", function() {
+        describe("PaginatedChoiceState testing using Refugee Main Menu State (010)", function() {
             describe("forward navigation", function() {
                 it("should display page 2 on Next", function() {
                     return tester
@@ -240,6 +240,73 @@ describe("refugeerights app", function() {
                 });
             });
         });
+
+        // TEST BOOKLETSTATE PAGING
+
+        describe("PaginatedState testing using Refugee Rights Info State (006)", function() {
+            describe("forward navigation", function() {
+                it("should display page 2 on More", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .setup.user.state('state_refugee_rights_info')
+                        .inputs(
+                            '1'  // state_refugee_rights_info (More)
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_rights_info',
+                            reply: [
+                                "‘Word Definitions’ for an explanation of words you may not be familiar with. Choose ‘Tips’ for a short-cut to helpful advice at each",
+                                '1. More',
+                                '2. Back',
+                                '3. Exit'
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it.only("should display page 3 on Next", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .setup.user.state('state_refugee_rights_info')
+                        .inputs(
+                            '1'  // state_refugee_rights_info (More)
+                            , '1' // state_refugee_rights_info (More)
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_rights_info',
+                            reply: [
+                                "‘Word Definitions’ for an explanation of words you may not be familiar with. Choose ‘Tips’ for a short-cut to helpful advice at each",
+                                '1. More',
+                                '2. Back',
+                                '3. Exit'
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should display page 4 on Next", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .setup.user.state('state_refugee_main')
+                        .inputs(
+                            '7'  // state_refugee_main (Next p1)
+                            , '8'  // state_refugee_main (Next p2)
+                            , '7'  // state_refugee_main (Next p3)
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_main',
+                            reply: [
+                                'MAIN MENU',
+                                '1. Ts & Cs of this service',
+                                '2. About LHR',
+                                '3. Back'
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+        });
+
 
         // TEST REDIS KEY EXPIRY
 
