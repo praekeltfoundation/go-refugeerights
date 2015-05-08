@@ -83,6 +83,7 @@ go.app = function() {
             });
         });
 
+
     // START STATE
 
         // delegator 01
@@ -733,8 +734,12 @@ go.app = function() {
 
         // 064
         self.add('state_064', function(name) {
-            return new ChoiceState(name, {
+            return new PaginatedChoiceState(name, {
                 question: $('Select an option'),
+                characters_per_page: 160,
+                options_per_page: null,
+                more: $('Next'),
+                back: $('Back'),
                 choices: [
                     new Choice('state_111', $('Your employment rights')),
                     new Choice('state_112', $('Setting up your own business')),
@@ -742,7 +747,7 @@ go.app = function() {
                     new Choice('state_079', $('By-laws')),
                     new Choice('state_080', $('Working for a salary')),
                     new Choice('state_123', $('Unfair discrimination')),
-                    new Choice('state_124', $('UIF & Compensation Fund')),
+                    new Choice('state_124', $('UIF & Compensation Fund'))
                 ],
                 next: function(choice) {
                     return choice.value;
@@ -880,8 +885,12 @@ go.app = function() {
 
         // 065
         self.add('state_065', function(name) {
-            return new ChoiceState(name, {
+            return new PaginatedChoiceState(name, {
                 question: $('Select an option'),
+                characters_per_page: 160,
+                options_per_page: null,
+                more: $('Next'),
+                back: $('Back'),
                 choices: [
                     new Choice('state_125', $("Your visa holder rights")),
                     new Choice('state_126', $("Health care costs")),
@@ -889,7 +898,7 @@ go.app = function() {
                     new Choice('state_128', $("Trauma assistance")),
                     new Choice('state_129', $("HIV/AIDS")),
                     new Choice('state_130', $("More about HIV/AIDS")),
-                    new Choice('state_134', $("Help & treatment for sexual abuse")),
+                    new Choice('state_134', $("Help & treatment for sexual abuse"))
                 ],
                 next: function(choice) {
                     return choice.value;
