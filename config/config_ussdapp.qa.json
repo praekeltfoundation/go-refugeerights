@@ -1,6 +1,5 @@
 {
     "name": "ussd-infohub-qa",
-    "env": "qa",
     "metric_store": "refugeerights_qa",
     "control": {
         "username": "test_user",
