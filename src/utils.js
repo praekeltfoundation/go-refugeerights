@@ -209,5 +209,32 @@ go.utils = {
         return today.format('YYYY-MM-DD hh:mm:ss.SSS');
     },
 
+    date_difference: function(date1, date2) {
+        // returns the difference between the dates in days - true adds decimals
+        return moment(date1).diff(moment(date2), 'days', true);
+    },
+
+    fire_returning_user_metrics: function(im, contact) {
+        var today = go.utils.get_today(im.config);
+        contact.extra.last_seen = today;
+        var user_registered = contact.extra.status === 'refugee' || contact.extra.status === 'migrant';
+        var no_last_returning_metric = contact.extra.last_returning_metric_fire === undefined;
+        var old_last_returning_metric = go.utils.date_difference(today, contact.extra.last_returning_metric_fire) > 7;
+
+        // For tracking weekly returning users. Only tracking returning registered users.  If the
+        // user has never returned before or the user was last tracked more than a week ago, it
+        // should fire a new metric and save the fact to the contact
+        if (user_registered && (no_last_returning_metric || old_last_returning_metric)) {
+            contact.extra.last_returning_metric_fire = today;
+            return Q.all([
+                im.metrics.fire.inc(["total", "returning_users", "last"].join('.')),
+                im.metrics.fire.sum(["total", "returning_users", "sum"].join('.'), 1),
+                im.contacts.save(contact)
+            ]);
+        } else {
+            return im.contacts.save(contact);
+        }
+    },
+
     "commas": "commas"
 };

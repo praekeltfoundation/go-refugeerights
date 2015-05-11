@@ -19,13 +19,15 @@ describe("refugeerights app", function() {
                 .setup.char_limit(160)
                 .setup.config.app({
                     name: 'refugeerights',
-                    env: 'test',
+                    testing_today: '2015-04-03 06:07:08.999',
                     metric_store: 'refugeerights_test',  // _env at the end
-                    channel: "555",
                     control: {
                         username: "test_user",
                         api_key: "test_key",
                         url: "http://fixture/api/v1/"
+                    },
+                    endpoints: {
+                        "sms": {"delivery_class": "sms"}
                     }
                 })
                 .setup(function(api) {
@@ -55,7 +57,8 @@ describe("refugeerights app", function() {
                             lang: 'fr',
                             country: 'drc',
                             status: 'refugee',
-                            registered: 'true'
+                            last_seen: '2015-03-03 12:00:00.000',
+                            last_returning_metric_fire: '2015-03-03 12:00:00.000'  // >7d ago
                         },
                         key: "contact_key",
                         user_account: "contact_user_account"
@@ -70,7 +73,8 @@ describe("refugeerights app", function() {
                             lang: 'fr',
                             country: 'drc',
                             status: 'migrant',
-                            registered: 'true'
+                            last_seen: '2015-03-31 12:00:00.000',
+                            last_returning_metric_fire: '2015-03-31 12:00:00.000'  // <7d ago
                         },
                         key: "contact_key",
                         user_account: "contact_user_account"
@@ -497,7 +501,7 @@ describe("refugeerights app", function() {
                             )
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
-                                assert.equal(Object.keys(metrics).length, 24);
+                                assert.equal(Object.keys(metrics).length, 26);
                                 assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
                                 assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
                                 assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
@@ -522,6 +526,8 @@ describe("refugeerights app", function() {
                                 assert.deepEqual(metrics['total.redials.refugee.continue.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.subscription_subscribe_success.last'].values, [1]);
                                 assert.deepEqual(metrics['total.subscription_subscribe_success.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.returning_users.last'].values, [1]);
+                                assert.deepEqual(metrics['total.returning_users.sum'].values, [1]);
                             })
                             .run();
                     });
@@ -562,7 +568,7 @@ describe("refugeerights app", function() {
                             )
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
-                                assert.equal(Object.keys(metrics).length, 24);
+                                assert.equal(Object.keys(metrics).length, 26);
                                 assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
                                 assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
                                 assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
@@ -587,6 +593,8 @@ describe("refugeerights app", function() {
                                 assert.deepEqual(metrics['total.redials.refugee.restart.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.subscription_subscribe_success.last'].values, [1]);
                                 assert.deepEqual(metrics['total.subscription_subscribe_success.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.returning_users.last'].values, [1]);
+                                assert.deepEqual(metrics['total.returning_users.sum'].values, [1]);
                             })
                             .run();
                     });
@@ -724,6 +732,22 @@ describe("refugeerights app", function() {
                         })
                         .run();
                 });
+
+                it("should save extras", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(Object.keys(contact.extra).length, 1);
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
+                        })
+                        .run();
+                });
             });
 
             describe("upon language selection", function() {
@@ -805,10 +829,11 @@ describe("refugeerights app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 3);
+                            assert.equal(Object.keys(contact.extra).length, 4);
                             assert.equal(contact.extra.language, 'french');
                             assert.equal(contact.extra.lang, 'fr');
                             assert.equal(contact.extra.country, 'burundi');
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                         })
                         .run();
                 });
@@ -890,11 +915,12 @@ describe("refugeerights app", function() {
                                 var contact = _.find(api.contacts.store, {
                                     msisdn: '+082111'
                                 });
-                                assert.equal(Object.keys(contact.extra).length, 4);
+                                assert.equal(Object.keys(contact.extra).length, 5);
                                 assert.equal(contact.extra.language, 'french');
                                 assert.equal(contact.extra.lang, 'fr');
                                 assert.equal(contact.extra.country, 'burundi');
                                 assert.equal(contact.extra.status, 'neither');
+                                assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                             })
                             .run();
                     });
@@ -968,11 +994,12 @@ describe("refugeerights app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 4);
+                            assert.equal(Object.keys(contact.extra).length, 5);
                             assert.equal(contact.extra.language, 'french');
                             assert.equal(contact.extra.lang, 'fr');
                             assert.equal(contact.extra.country, 'burundi');
                             assert.equal(contact.extra.status, 'refugee');
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                         })
                         .run();
                 });
@@ -1072,11 +1099,12 @@ describe("refugeerights app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 4);
+                            assert.equal(Object.keys(contact.extra).length, 5);
                             assert.equal(contact.extra.language, 'french');
                             assert.equal(contact.extra.lang, 'fr');
                             assert.equal(contact.extra.country, 'burundi');
                             assert.equal(contact.extra.status, 'migrant');
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                         })
                         .run();
                 });
@@ -1109,6 +1137,176 @@ describe("refugeerights app", function() {
                 });
             });
 
+        });
+
+        // TEST RETURNING USER METRICS
+
+        describe("Returning user metrics & extras testing", function() {
+            describe("when a new user logs on", function() {
+                it("should update extra.last_seen", function() {
+                    return tester
+                        .setup(function(api) {
+                            api.contacts.add({
+                                msisdn: '+082111',
+                                extra : {},
+                                key: "contact_key",
+                                user_account: "contact_user_account"
+                            });
+                        })
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                        )
+                        // check metrics
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.returning_users.last'], undefined);
+                        })
+                        // check extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(Object.keys(contact.extra).length, 1);
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
+                        })
+                        .run();
+                });
+            });
+
+            describe("when an unregistered user returns", function() {
+                it("should update extra.last_seen", function() {
+                    return tester
+                        .setup(function(api) {
+                            api.contacts.add({
+                                msisdn: '+082111',
+                                extra : {
+                                    last_seen: '2015-03-03'  // 31d ago
+                                },
+                                key: "contact_key",
+                                user_account: "contact_user_account"
+                            });
+                        })
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , {session_event: 'close'}
+                            , {session_event: 'new'}
+                        )
+                        // check metrics
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.returning_users.last'], undefined);
+                        })
+                        // check extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(Object.keys(contact.extra).length, 3);
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
+                            assert.equal(contact.extra.lang, 'fr');
+                            assert.equal(contact.extra.language, 'french');
+                        })
+                        .run();
+                });
+            });
+
+            describe("when a user returns the first time after registering", function() {
+                it("should fire returning user metric", function() {
+                    return tester
+                        .setup(function(api) {
+                            api.contacts.add({
+                                msisdn: '+082111',
+                                extra : {},
+                                key: "contact_key",
+                                user_account: "contact_user_account"
+                            });
+                        })
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '1'  // state_status (who is refugee)
+                            , '1'  // state_who_refugee (yes - refugee)
+                            , '3'  // state_refugee_rights_info (exit)
+                            , {session_event: 'close'}
+                            , {session_event: 'new'}  // redial
+                        )
+                        // check metrics
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.equal(Object.keys(metrics).length, 18);
+                            assert.deepEqual(metrics['total.returning_users.last'].values, [1]);
+                            assert.deepEqual(metrics['total.returning_users.sum'].values, [1]);
+                        })
+                        // check extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(Object.keys(contact.extra).length, 6);
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
+                            assert.equal(contact.extra.last_returning_metric_fire, '2015-04-03 06:07:08.999');
+                        })
+                        .run();
+                });
+            });
+
+            describe("when a registered user returns after less than a week", function() {
+                it("should not fire returning user metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                        )
+                        // check metrics
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.equal(Object.keys(metrics).length, 4);
+                            assert.deepEqual(metrics['total.returning_users.last'], undefined);
+                        })
+                        // check extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064002'
+                            });
+                            assert.equal(Object.keys(contact.extra).length, 6);
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
+                            assert.equal(contact.extra.last_returning_metric_fire, '2015-03-31 12:00:00.000');
+                        })
+                        .run();
+                });
+            });
+
+            describe("when a registered user returns after more than a week", function() {
+                it("should fire returning user metrics", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                        )
+                        // check metrics
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.equal(Object.keys(metrics).length, 6);
+                            assert.deepEqual(metrics['total.returning_users.last'].values, [1]);
+                            assert.deepEqual(metrics['total.returning_users.sum'].values, [1]);
+                        })
+                        // check extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064001'
+                            });
+                            assert.equal(Object.keys(contact.extra).length, 6);
+                            assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
+                            assert.equal(contact.extra.last_returning_metric_fire, '2015-04-03 06:07:08.999');
+                        })
+                        .run();
+                });
+            });
         });
 
     });

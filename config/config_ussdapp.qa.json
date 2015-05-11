@@ -1,0 +1,14 @@
+{
+    "name": "ussd-infohub-qa",
+    "metric_store": "refugeerights_qa",
+    "control": {
+        "username": "test_user",
+        "api_key": "test_key",
+        "url": "http://rr.qa.praekelt.com/subscription/api/v1/"
+    },
+    "endpoints": {
+        "sms": {
+            "delivery_class": "sms"
+        }
+    }
+}
