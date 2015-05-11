@@ -1619,6 +1619,96 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
+                    it("079 - 164", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '5'  // state_migrant_main
+                                , '4'  // state_064
+                                , '1'  // state_079
+                            )
+                            .check.interaction({
+                                state: 'state_164'
+                            })
+                            .run();
+                    });
+
+                    it("079 - 114", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '5'  // state_migrant_main
+                                , '4'  // state_064
+                                , '2'  // state_079
+                            )
+                            .check.interaction({
+                                state: 'state_114'
+                            })
+                            .run();
+                    });
+
+                    it("079 - 115", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '5'  // state_migrant_main
+                                , '4'  // state_064
+                                , '3'  // state_079
+                            )
+                            .check.interaction({
+                                state: 'state_115'
+                            })
+                            .run();
+                    });
+
+                    it("079 - 116", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '5'  // state_migrant_main
+                                , '4'  // state_064
+                                , '4'  // state_079
+                            )
+                            .check.interaction({
+                                state: 'state_116'
+                            })
+                            .run();
+                    });
+
+                    it("079 - 117", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '5'  // state_migrant_main
+                                , '4'  // state_064
+                                , '5'  // state_079
+                            )
+                            .check.interaction({
+                                state: 'state_117'
+                            })
+                            .run();
+                    });
+
+                    it("079 - 118", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '5'  // state_migrant_main
+                                , '4'  // state_064
+                                , '6'  // state_079
+                            )
+                            .check.interaction({
+                                state: 'state_118'
+                            })
+                            .run();
+                    });
+
                 it("064 - 080", function() {
                     return tester
                         .setup.user.addr('064002')

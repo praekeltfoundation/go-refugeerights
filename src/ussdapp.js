@@ -792,17 +792,94 @@ go.app = function() {
             });
 
             // 079
-            // TODO
             self.add('state_079', function(name) {
-                return new PaginatedState(name, {
-                    text: $("CONTENT REQUIRED"),
-                    characters_per_page: 160,
-                    back: $('Back'),
-                    more: $('More'),
-                    exit: $('Exit'),
-                    next: 'state_main_menu'
+                return new ChoiceState(name, {
+                    question: $('Select an option'),
+                    choices: [
+                        new Choice('state_164', $("About")),
+                        new Choice('state_114', $("Cape Town by-laws")),
+                        new Choice('state_115', $("Pretoria by-laws")),
+                        new Choice('state_116', $("Durban by-laws")),
+                        new Choice('state_117', $("Port Elizabeth by-laws")),
+                        new Choice('state_118', $("Johannesburg by-laws"))
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
                 });
             });
+
+                // 164
+                self.add('state_164', function(name) {
+                    return new PaginatedState(name, {
+                        text: $("The laws of a municipality are called by-laws. By-laws control the way businesses and services work in that area. By-laws are not valid outside of the municipalities in which they are passed. Know the by-laws of the municipality you want to trade in. TIP: It’s important to obey all the by-laws. If you don’t follow the by-laws, you may lose your goods or go to jail."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+                // 114
+                self.add('state_114', function(name) {
+                    return new PaginatedState(name, {
+                        text: $("The application fee may be cancelled if you can prove you can’t pay it. You also need to hand in a written explanation. The city needs to give you enough notice if you are asked to move your business, or if your permit is cancelled. Your permit can be passed on to someone else on death, illness or if you have long-lasting cultural or religious duties. Informal traders can’t block traffic or trade next to important or religious buildings, national monuments or fire hydrants. Your trading site must be clean. If you don’t follow the by-laws your property can be impounded. You will pay a penalty. If you can’t claim your impounded goods within 1 month, it may be sold or destroyed. The city may sell your impounded food products. You can get some money if you paid the penalty & have an inventory list. If you break any of the by-laws you can be fined R5000 or go to prison for 3 months. Go to www.capetown.gov.za for more info."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+                // 115
+                self.add('state_115', function(name) {
+                    return new PaginatedState(name, {
+                        text: $("You can’t trade in or next to public facilities (like toilets, pools or parks) or ATMs unless you have permission. You can’t trade next to important, religious or heritage buildings or in front of fire hydrants. You can’t block any traffic. If your stall is in a public space, it can’t be larger than 3 square meters. Your stall and goods must be removed at the end of the day. You may be asked to move your stall for a short while if the city needs to work on the road or the space you’re trading in. Your stall must be kept clean at all times. You are not allowed to sleep in your stall at night. You can rent a stall from the local authority. You’ll get a lease agreement & a token to prove your lease to the police. Children aren’t allowed to trade. If you break any of the by-laws, an authorised official can take away your products. Go to www.tshwane.gov.za or call 012-358-9999 for more information."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+                // 116
+                self.add('state_116', function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Preference will be given to permit applications made by the unemployed, registered taxpayers or those new to the informal sector. Your permit may have an expiry date. Check other conditions like trading hours, products you can trade & allowed stall types. Your permit must be for a specific trading bay. You aren’t allowed to build structures for your stall. Your permit can be cancelled if you don’t follow the rules, if you give the wrong information or if you sell illegal goods. Before your permit is cancelled, you’re allowed to make a written statement first. Go to www.durban.gov.za for more info. You may not sleep in your stall at night. Your products cannot cover a public space area bigger than 6 square meters. No trading next to public & religious buildings, national monuments, homes, CCTV cameras, ATMs, fire hydrants or blocking traffic. You can only use an open-flame or gas fire if you are allowed to cook food. Your stall must be clean at all times."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+                // 117
+                self.add('state_117', function(name) {
+                    return new PaginatedState(name, {
+                        text: $("No trading in public parks, monuments or important buildings, near fire hydrants, ATMs or blocking traffic. Your stall & goods must be removed at the end of the day, unless you have permission from the municipality. You can’t sleep in your stall at night or put your stall on a public road or facility. It must be kept clean at all times. You may be asked to move your stall for a short while if the city needs to clean or work in the area where you trade. You cannot sell your products in front of another business that sells the same products. If you trade where you’re not allowed to, an official can take away your goods. Remember: you must get a written receipt. Your receipt for impounded goods must say where, when & how you can get your goods back. Unclaimed goods will be sold. If you break the by-laws, you can be fined or imprisoned for up to 3 months. Go to www.nelsonmandelabay.gov.za for more info."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+                // 118
+                self.add('state_118', function(name) {
+                    return new PaginatedState(name, {
+                        text: $("You can rent a stall from the local authority. You’ll get a lease agreement & a token to prove your lease to the police. Your stall must be kept clean at all times. You cannot sleep in your stall at night. Your permit may have an expiry date. Check other conditions like trading hours, products you can trade & allowed stall types. No trading in parks, important/religious buildings, public monuments, near fire hydrants, ATMs or blocking traffic. Your goods can’t cover a public area bigger than 6 square meters. If you’re trading in front of a shop, you can’t block the window. If you trade where you’re not allowed to, an official can take away your goods. Remember: you must get a written receipt. Your receipt for impounded goods must say where, when & how much it will cost to get your goods back. If you break any of the by-laws you may be fined up to R500 or 3 months in jail. Go to www.joburg.org.za for more info."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
 
             // 080
             self.add('state_080', function(name) {
