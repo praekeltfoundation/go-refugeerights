@@ -80,7 +80,7 @@ describe("refugeerights app", function() {
 
         // TEST PAGINATEDCHOICESTATE PAGING
 
-        describe("PaginatedChoiceState testing using Refugee Main Menu", function() {
+        describe.only("PaginatedChoiceState testing using Refugee Main Menu", function() {
             describe("forward navigation", function() {
                 it("should display page 2 on Next", function() {
                     return tester
@@ -98,10 +98,11 @@ describe("refugeerights app", function() {
                                 '3. Social services',
                                 '4. Banking',
                                 '5. Tips page',
-                                '6. Helpful contact numbers',
+                                '6. Useful contacts',
                                 '7. Safety concerns',
-                                '8. Next',
-                                '9. Back'
+                                '8. Statelessness',
+                                '9. Next',
+                                '10. Back'
                             ].join('\n')
                         })
                         .run();
@@ -113,20 +114,19 @@ describe("refugeerights app", function() {
                         .setup.user.state('state_refugee_main')
                         .inputs(
                             '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
+                            , '9'  // state_refugee_main (Next p2)
                         )
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
                                 'MAIN MENU',
-                                '1. Statelessness',
-                                '2. LGBTI rights',
-                                '3. Violence against women',
-                                '4. Word definitions',
-                                '5. More word definitions',
-                                '6. Change settings',
-                                '7. Next',
-                                '8. Back'
+                                '1. LGBTI rights',
+                                '2. Violence against women',
+                                '3. Word definitions',
+                                '4. More word definitions',
+                                '5. Change settings',
+                                '6. Next',
+                                '7. Back'
                             ].join('\n')
                         })
                         .run();
@@ -138,8 +138,8 @@ describe("refugeerights app", function() {
                         .setup.user.state('state_refugee_main')
                         .inputs(
                             '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
+                            , '9'  // state_refugee_main (Next p2)
+                            , '6'  // state_refugee_main (Next p3)
                         )
                         .check.interaction({
                             state: 'state_refugee_main',
@@ -161,84 +161,27 @@ describe("refugeerights app", function() {
                         .setup.user.state('state_refugee_main')
                         .inputs(
                             '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
+                            , '9'  // state_refugee_main (Next p2)
+                            , '6'  // state_refugee_main (Next p3)
                             , '3'  // state_refugee_main (Back p4)
                         )
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
                                 'MAIN MENU',
-                                '1. Statelessness',
-                                '2. LGBTI rights',
-                                '3. Violence against women',
-                                '4. Word definitions',
-                                '5. More word definitions',
-                                '6. Change settings',
-                                '7. Next',
-                                '8. Back'
-                            ].join('\n')
-                        })
-                        .run();
-                });
-
-                it("should display page 2 on Back", function() {
-                    return tester
-                        .setup.user.addr('082111')
-                        .setup.user.state('state_refugee_main')
-                        .inputs(
-                            '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
-                            , '3'  // state_refugee_main (Back p4)
-                            , '8'  // state_refugee_main (Back p3)
-                        )
-                        .check.interaction({
-                            state: 'state_refugee_main',
-                            reply: [
-                                'MAIN MENU',
-                                '1. Health rights',
-                                '2. Education',
-                                '3. Social services',
-                                '4. Banking',
-                                '5. Tips page',
-                                '6. Helpful contact numbers',
-                                '7. Safety concerns',
-                                '8. Next',
-                                '9. Back'
-                            ].join('\n')
-                        })
-                        .run();
-                });
-
-                it("should display page 1 on Back", function() {
-                    return tester
-                        .setup.user.addr('082111')
-                        .setup.user.state('state_refugee_main')
-                        .inputs(
-                            '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
-                            , '3'  // state_refugee_main (Back p4)
-                            , '8'  // state_refugee_main (Back p3)
-                            , '9'  // state_refugee_main (Back p3)
-                        )
-                        .check.interaction({
-                            state: 'state_refugee_main',
-                            reply: [
-                                'MAIN MENU',
-                                '1. New to SA',
-                                '2. The asylum application process',
-                                '3. Asylum applications from children',
-                                '4. Permits',
-                                '5. Support services',
-                                '6. Right to work',
-                                '7. Next'
+                                '1. LGBTI rights',
+                                '2. Violence against women',
+                                '3. Word definitions',
+                                '4. More word definitions',
+                                '5. Change settings',
+                                '6. Next',
+                                '7. Back'
                             ].join('\n')
                         })
                         .run();
                 });
             });
+
         });
 
         // TEST REDIS KEY EXPIRY
