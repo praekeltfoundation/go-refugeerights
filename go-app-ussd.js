@@ -228,6 +228,9 @@ go.utils = {
         var no_last_returning_metric = contact.extra.last_returning_metric_fire === undefined;
         var old_last_returning_metric = go.utils.date_difference(today, contact.extra.last_returning_metric_fire) > 7;
 
+        // For tracking weekly returning users. Only tracking returning registered users.  If the
+        // user has never returned before or the user was last tracked more than a week ago, it
+        // should fire a new metric and save the fact to the contact
         if (user_registered && (no_last_returning_metric || old_last_returning_metric)) {
             contact.extra.last_returning_metric_fire = today;
             return Q.all([
