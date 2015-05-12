@@ -656,6 +656,218 @@
             ]
         },
 
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> New to SA",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_060.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Visa application process",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_061.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Unaccompanied / separated children",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_062.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Support services",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_063.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Employment",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_064.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Healthcare",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_065.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Education",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_066.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Banking",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_067.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> LGBTI rights",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_068.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Violence against women & children",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_069.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Safety concerns",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_070.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Statelessness",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_071.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Change settings",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_072.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Ts & Cs of this service",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_073.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Word definitions",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_074.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> More word definitions",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_075.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Tips",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_076.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> Useful contacts",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_077.last",
+                "aggregator": "last"
+            }
+        },
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Migrant Main Menu -> About LHR",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.migrant.state_078.last",
+                "aggregator": "last"
+            }
+        },
+
 
 
 

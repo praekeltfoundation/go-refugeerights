@@ -283,6 +283,13 @@ go.utils = {
         }
     },
 
+    fire_main_menu_metrics: function(im, from_state, to_state) {
+        return Q.all([
+            im.metrics.fire.inc(["total", from_state, to_state, "last"].join('.')),
+            im.metrics.fire.sum(["total", from_state, to_state, "sum"].join('.'), 1)
+        ]);
+    },
+
     "commas": "commas"
 };
 
@@ -606,7 +613,11 @@ go.app = function() {
                     new Choice('state_040', $('About LHR')),
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    return go.utils
+                        .fire_main_menu_metrics(self.im, 'refugee', choice.value)
+                        .then(function() {
+                            return choice.value;
+                        });
                 }
             });
         });
@@ -641,7 +652,11 @@ go.app = function() {
                     new Choice('state_078', $('About LHR')),
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    return go.utils
+                        .fire_main_menu_metrics(self.im, 'migrant', choice.value)
+                        .then(function() {
+                            return choice.value;
+                        });
                 }
             });
         });
