@@ -898,7 +898,8 @@ describe("refugeerights app", function() {
                                 '5. Burundi',
                                 '6. Kenya',
                                 '7. Rwanda',
-                                '8. Next'
+                                '8. Sudan/South Sudan',
+                                '9. Next'
                             ].join('\n')
                         })
                         .run();
