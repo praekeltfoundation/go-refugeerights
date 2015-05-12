@@ -20,6 +20,46 @@ go.utils = {
             && no_redirects.indexOf(im.user.state.name) === -1;
     },
 
+    eval_dialback_reminder: function(e, im, contact, $) {
+        return go.utils.should_send_dialback_reminder(e, contact)
+            ? go.utils.send_dialback_reminder(im, contact, $)
+            : Q();
+    },
+
+    should_send_dialback_reminder: function(e, contact) {
+        var dialback_states = [
+            'state_language',
+            'state_country',
+            'state_status',
+            'state_who_refugee',
+            'state_who_migrant',
+            'state_refugee_rights_info',
+            'state_migrant_rights_info'
+        ];
+        return e.user_terminated
+            && (contact.extra.dialback_reminder_sent !== 'true')
+            && dialback_states.indexOf(e.im.state.name) !== -1;
+    },
+
+    send_dialback_reminder: function(im, contact, $) {
+        return im.outbound
+            .send_to_user({
+                endpoint: 'sms',
+                content: go.utils.get_dialback_reminder_sms(im, $)
+            })
+            .then(function() {
+                contact.extra.dialback_reminder_sent = 'true';
+                return im.contacts.save(contact);
+            });
+    },
+
+    get_dialback_reminder_sms: function(im, $) {
+        return $("Please dial back in to {{ USSD_number }} to complete the registration.")
+            .context({
+                USSD_number: im.config.channel
+            });
+    },
+
     save_language: function(im, contact, lang) {
         var lang_map = {
             en: 'english',
@@ -293,6 +333,11 @@ go.app = function() {
             // Record returning users metrics
             self.im.on('session:new', function(e) {
                 return go.utils.fire_returning_user_metrics(self.im, self.contact);
+            });
+
+            // Send a dial back reminder via sms the first time someone times out
+            self.im.on('session:close', function(e) {
+                return go.utils.eval_dialback_reminder(e, self.im, self.contact, $);
             });
 
             // Load self.contact
