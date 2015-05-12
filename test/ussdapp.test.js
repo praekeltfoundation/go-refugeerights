@@ -103,10 +103,11 @@ describe("refugeerights app", function() {
                                 '3. Social services',
                                 '4. Banking',
                                 '5. Tips page',
-                                '6. Helpful contact numbers',
+                                '6. Useful contacts',
                                 '7. Safety concerns',
-                                '8. Next',
-                                '9. Back'
+                                '8. Statelessness',
+                                '9. Next',
+                                '10. Back'
                             ].join('\n')
                         })
                         .run();
@@ -118,20 +119,19 @@ describe("refugeerights app", function() {
                         .setup.user.state('state_refugee_main')
                         .inputs(
                             '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
+                            , '9'  // state_refugee_main (Next p2)
                         )
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
                                 'MAIN MENU',
-                                '1. Statelessness',
-                                '2. LGBTI rights',
-                                '3. Violence against women',
-                                '4. Word definitions',
-                                '5. More word definitions',
-                                '6. Change settings',
-                                '7. Next',
-                                '8. Back'
+                                '1. LGBTI rights',
+                                '2. Violence against women',
+                                '3. Word definitions',
+                                '4. More word definitions',
+                                '5. Change settings',
+                                '6. Next',
+                                '7. Back'
                             ].join('\n')
                         })
                         .run();
@@ -143,8 +143,8 @@ describe("refugeerights app", function() {
                         .setup.user.state('state_refugee_main')
                         .inputs(
                             '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
+                            , '9'  // state_refugee_main (Next p2)
+                            , '6'  // state_refugee_main (Next p3)
                         )
                         .check.interaction({
                             state: 'state_refugee_main',
@@ -166,22 +166,21 @@ describe("refugeerights app", function() {
                         .setup.user.state('state_refugee_main')
                         .inputs(
                             '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
+                            , '9'  // state_refugee_main (Next p2)
+                            , '6'  // state_refugee_main (Next p3)
                             , '3'  // state_refugee_main (Back p4)
                         )
                         .check.interaction({
                             state: 'state_refugee_main',
                             reply: [
                                 'MAIN MENU',
-                                '1. Statelessness',
-                                '2. LGBTI rights',
-                                '3. Violence against women',
-                                '4. Word definitions',
-                                '5. More word definitions',
-                                '6. Change settings',
-                                '7. Next',
-                                '8. Back'
+                                '1. LGBTI rights',
+                                '2. Violence against women',
+                                '3. Word definitions',
+                                '4. More word definitions',
+                                '5. Change settings',
+                                '6. Next',
+                                '7. Back'
                             ].join('\n')
                         })
                         .run();
@@ -193,10 +192,10 @@ describe("refugeerights app", function() {
                         .setup.user.state('state_refugee_main')
                         .inputs(
                             '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
+                            , '9'  // state_refugee_main (Next p2)
+                            , '6'  // state_refugee_main (Next p3)
                             , '3'  // state_refugee_main (Back p4)
-                            , '8'  // state_refugee_main (Back p3)
+                            , '7'  // state_refugee_main (Back p3)
                         )
                         .check.interaction({
                             state: 'state_refugee_main',
@@ -207,10 +206,11 @@ describe("refugeerights app", function() {
                                 '3. Social services',
                                 '4. Banking',
                                 '5. Tips page',
-                                '6. Helpful contact numbers',
+                                '6. Useful contacts',
                                 '7. Safety concerns',
-                                '8. Next',
-                                '9. Back'
+                                '8. Statelessness',
+                                '9. Next',
+                                '10. Back'
                             ].join('\n')
                         })
                         .run();
@@ -222,11 +222,11 @@ describe("refugeerights app", function() {
                         .setup.user.state('state_refugee_main')
                         .inputs(
                             '7'  // state_refugee_main (Next p1)
-                            , '8'  // state_refugee_main (Next p2)
-                            , '7'  // state_refugee_main (Next p3)
+                            , '9'  // state_refugee_main (Next p2)
+                            , '6'  // state_refugee_main (Next p3)
                             , '3'  // state_refugee_main (Back p4)
-                            , '8'  // state_refugee_main (Back p3)
-                            , '9'  // state_refugee_main (Back p3)
+                            , '7'  // state_refugee_main (Back p3)
+                            , '10'  // state_refugee_main (Back p3)
                         )
                         .check.interaction({
                             state: 'state_refugee_main',
