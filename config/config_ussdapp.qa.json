@@ -1,5 +1,6 @@
 {
     "name": "ussd-infohub-qa",
+    "channel": "*120*8864*1538#",
     "metric_store": "refugeerights_qa",
     "control": {
         "username": "test_user",

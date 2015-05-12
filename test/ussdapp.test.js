@@ -19,6 +19,7 @@ describe("refugeerights app", function() {
                 .setup.char_limit(160)
                 .setup.config.app({
                     name: 'refugeerights',
+                    channel: '*120*8864*0000',
                     testing_today: '2015-04-03 06:07:08.999',
                     metric_store: 'refugeerights_test',  // _env at the end
                     control: {
@@ -691,6 +692,134 @@ describe("refugeerights app", function() {
             });
         });
 
+        // TEST SENDING REDIAL REMINDER SMS
+
+        describe("Redial reminder testing", function() {
+            describe("if the user times out once during registration", function() {
+                it("should send redial reminder sms", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 1);
+                        })
+                        .run();
+                });
+
+                it("should save extras", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(contact.extra.dialback_reminder_sent, 'true');
+                        })
+                        .run();
+                });
+            });
+
+            describe("if the user times out twice during registration", function() {
+                it("should only send one redial reminder sms", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 1);
+                        })
+                        .run();
+                });
+
+                it("should save extras", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '5'  // state_country (burundi)
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(contact.extra.dialback_reminder_sent, 'true');
+                        })
+                        .run();
+                });
+            });
+
+            describe("if the user times out only after registration", function() {
+                it("should not send a redial reminder sms", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '2'  // state_status (who is migrant)
+                            , '1'  // state_who_migrant (yes - migrant)
+                            , '2'  // state_migrant_rights_info (exit)
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 0);
+                        })
+                        .run();
+                });
+
+                it("should not save extras", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language (french)
+                            , '5'  // state_country (burundi)
+                            , '2'  // state_status (who is migrant)
+                            , '1'  // state_who_migrant (yes - migrant)
+                            , '2'  // state_migrant_rights_info (exit)
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(contact.extra.dialback_reminder_sent, undefined);
+                        })
+                        .run();
+                });
+            });
+        });
+
         // TEST REGISTRATION
 
         describe("Regisration testing", function() {
@@ -1136,7 +1265,6 @@ describe("refugeerights app", function() {
                         .run();
                 });
             });
-
         });
 
         // TEST RETURNING USER METRICS
@@ -1204,7 +1332,7 @@ describe("refugeerights app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 3);
+                            assert.equal(Object.keys(contact.extra).length, 4);
                             assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                             assert.equal(contact.extra.lang, 'fr');
                             assert.equal(contact.extra.language, 'french');
@@ -1247,7 +1375,7 @@ describe("refugeerights app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 6);
+                            assert.equal(Object.keys(contact.extra).length, 7);
                             assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                             assert.equal(contact.extra.last_returning_metric_fire, '2015-04-03 06:07:08.999');
                         })
