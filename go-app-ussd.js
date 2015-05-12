@@ -594,7 +594,7 @@ go.app = function() {
                     new Choice('state_028', $('Social services')),
                     new Choice('state_029', $('Banking')),
                     new Choice('state_030', $('Tips page')),
-                    new Choice('state_031', $('Useful contacts')),
+                    new Choice('state_031', $('Helpful contact numbers')),
                     new Choice('state_032', $('Safety concerns')),
                     new Choice('state_033', $('Statelessness')),
                     new Choice('state_034', $('LGBTI rights')),
