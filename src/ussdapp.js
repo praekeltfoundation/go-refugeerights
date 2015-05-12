@@ -40,6 +40,11 @@ go.app = function() {
                 return go.utils.fire_returning_user_metrics(self.im, self.contact);
             });
 
+            // Send a dial back reminder via sms the first time someone times out
+            self.im.on('session:close', function(e) {
+                return go.utils.eval_dialback_reminder(e, self.im, self.contact, $);
+            });
+
             // Load self.contact
             return self.im.contacts
                 .for_user()
