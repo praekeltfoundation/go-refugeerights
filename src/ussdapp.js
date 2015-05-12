@@ -318,7 +318,11 @@ go.app = function() {
                     new Choice('state_040', $('About LHR')),
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    return go.utils
+                        .fire_main_menu_metrics(self.im, 'refugee', choice.value)
+                        .then(function() {
+                            return choice.value;
+                        });
                 }
             });
         });
@@ -353,7 +357,11 @@ go.app = function() {
                     new Choice('state_078', $('About LHR')),
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    return go.utils
+                        .fire_main_menu_metrics(self.im, 'migrant', choice.value)
+                        .then(function() {
+                            return choice.value;
+                        });
                 }
             });
         });

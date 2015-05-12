@@ -1272,6 +1272,23 @@ describe("refugeerights app", function() {
 
         describe("Migrant menu navigation testing", function() {
 
+            describe("When navigating away from the migrant main menu", function() {
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_migrant_main
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.migrant.state_060.last'].values, [1]);
+                            assert.deepEqual(metrics['total.migrant.state_060.sum'].values, [1]);
+                        })
+                        .run();
+                });
+            });
+
             it("starting a new session - main menu", function() {
                 return tester
                     .setup.user.addr('064002')
