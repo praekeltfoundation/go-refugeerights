@@ -243,6 +243,13 @@ go.utils = {
         }
     },
 
+    fire_main_menu_metrics: function(im, from_state, to_state) {
+        return Q.all([
+            im.metrics.fire.inc(["total", from_state, to_state, "last"].join('.')),
+            im.metrics.fire.sum(["total", from_state, to_state, "sum"].join('.'), 1)
+        ]);
+    },
+
     "commas": "commas"
 };
 
