@@ -290,6 +290,15 @@ go.utils = {
         ]);
     },
 
+    manual_locate: function(contact) {
+        return Q.all([
+            // self.http.post(self.req_lookup_url, {
+            //     data: self.make_lookup_data(contact,
+            //         self.make_location_data(contact))
+            // })
+        ]);
+    },
+
     "commas": "commas"
 };
 

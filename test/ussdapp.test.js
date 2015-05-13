@@ -3,17 +3,20 @@ var fixtures = require('./fixtures');
 var assert = require('assert');
 var _ = require('lodash');
 var AppTester = vumigo.AppTester;
+var location = require('go-jsbox-location');
+var openstreetmap = location.providers.openstreetmap;
 
 
 describe("refugeerights app", function() {
     describe("for ussd use", function() {
         var app;
         var tester;
+        var locations;
 
         beforeEach(function() {
             app = new go.app.GoRR();
-
             tester = new AppTester(app);
+            locations = [];
 
             tester
                 .setup.char_limit(160)
@@ -35,6 +38,9 @@ describe("refugeerights app", function() {
                     fixtures().forEach(function(d) {
                         d.repeatable = true;
                         api.http.fixtures.add(d);
+                    });
+                    locations.forEach(function(location) {
+                        api.http.fixtures.add(openstreetmap.fixture(location));
                     });
                 })
                 .setup(function(api) {
@@ -81,6 +87,76 @@ describe("refugeerights app", function() {
                         user_account: "contact_user_account"
                     });
                 });
+
+            locations.push({
+                query: "Quad Street",
+                bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
+                address_limit: 4,
+                response_data: [
+                    {
+                        display_name:"Quad St 1, Sub 1",
+                        lon: '1.1',
+                        lat: '1.11',
+                        address: {
+                            road: "Quad St 1",
+                            suburb: "Suburb number 1",
+                            city: "City number 1",
+                            town: "Town 1",
+                            postcode: "0001",
+                            country: "RSA",
+                            country_code: "za"
+                        }
+                    },{
+                        display_name:"Quad St 2, Sub 2",
+                        lon: '2.2',
+                        lat: '2.22',
+                        address: {
+                            road: "Quad St 2",
+                            suburb: "Suburb number 2",
+                            town: "Town number 2",
+                            postcode: "0002",
+                            country: "RSA",
+                            country_code: "za"
+                        }
+                    },{
+                        display_name:"Quad St 3, Sub 3",
+                        lon: '3.3',
+                        lat: '3.33',
+                        address: {
+                            road: "Quad St 3",
+                            suburb: "Suburb number 3",
+                            city: "City number 3",
+                            postcode: "0003",
+                            country: "RSA",
+                            country_code: "za"
+                        }
+                    },{
+                        display_name:"Quad St 4, Sub 4",
+                        lon: '4.4',
+                        lat: '4.44',
+                        address: {
+                            road: "Quad St 4",
+                            suburb: "Suburb number 4",
+                            postcode: "0004",
+                            country: "RSA",
+                            country_code: "za"
+                        }
+                    }
+                ]
+            });
+
+            locations.push({
+                query: "Friend Street",
+                bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
+                address_limit: 4,
+                response_data: [
+                    {
+                        display_name: "Friend Street, Suburb",
+                        lon: '3.1415',
+                        lat: '2.7182'
+                    }
+                ]
+            });
         });
 
         // TEST PAGINATEDCHOICESTATE PAGING
@@ -1261,6 +1337,71 @@ describe("refugeerights app", function() {
                                 '5. Employment',
                                 '6. Healthcare',
                                 '7. Next'
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+        });
+
+        // TEST LOCATION FINDING
+        describe.only("Location finder testing", function() {
+            describe("when a user initialises location finding", function() {
+                it("should ask them to enter their suburb", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                        )
+                        .check.interaction({
+                            state: 'state_locate_me',
+                            reply:
+                                "To find your closest SService we need to know what suburb or area u are in. Please be specific. e.g. Inanda Sandton",
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user enters data that returns 1 location result", function() {
+                it("should stall them", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall',
+                            reply: [
+                                "Buying time to find the actual location",
+                                "1. Continue"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the nearest SService locations have been found", function() {
+                it("should let them select the options for more info", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall
+                        )
+                        .check.interaction({
+                            state: 'state_locate_results',
+                            reply: [
+                                "Select a service for more info",
+                                "1. Service 1",
+                                "2. Service 2"
                             ].join('\n')
                         })
                         .run();
