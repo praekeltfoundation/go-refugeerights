@@ -1368,7 +1368,7 @@ describe("refugeerights app", function() {
         });
 
         // TEST LOCATION FINDING
-        describe.only("Location finder testing", function() {
+        describe("Location finder testing", function() {
             describe("when a user initialises location finding", function() {
                 it("should ask them to enter their suburb", function() {
                     return tester
