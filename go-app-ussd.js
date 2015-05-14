@@ -15,7 +15,8 @@ var JsonApi = vumigo.http.api.JsonApi;
 go.utils = {
 
     timed_out: function(im) {
-        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main'];
+        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main',
+                            'state_locate_exit'];
         return im.msg.session_event === 'new'
             && im.user.state.name
             && no_redirects.indexOf(im.user.state.name) === -1;
@@ -300,6 +301,10 @@ go.utils = {
         });
         return http.post(req_lookup_url, {
             data: go.utils.make_lookup_data(im, contact, go.utils.make_user_location_data(contact))
+        })
+        .then(function(response) {
+            contact.extra.poi_url = response.data.url;
+            return im.contacts.save(contact);
         });
     },
 
@@ -341,6 +346,18 @@ go.utils = {
             search_data[poi_type_wanted] = "true";
         }
         return search_data;
+    },
+
+    get_poi_results: function(im, contact) {
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.api_key]
+            }
+        });
+        return http.get(contact.extra.poi_url)
+        .then(function(response) {
+            return response.data.response.results;
+        });
     },
 
     "commas": "commas"
@@ -806,17 +823,17 @@ go.app = function() {
                         .locate_poi(self.im, self.contact)
                         .then(function() {
                             return self.states.create(
-                                'state_locate_stall');
+                                'state_locate_stall_initial');
                         });
                 });
         });
 
-        // state_locate_stall
-        self.add('state_locate_stall', function(name) {
+        // state_locate_stall_initial
+        self.add('state_locate_stall_initial', function(name) {
             return new ChoiceState(name, {
-                question: $("Buying time to find the actual location"),
+                question: $("The system is looking up services near you. This usually takes less than a minute."),
                 choices: [
-                    new Choice('state_locate_results', $("Continue"))
+                    new Choice('state_locate_get_results', $("View services"))
                 ],
                 next: function(choice) {
                     return choice.value;
@@ -824,14 +841,58 @@ go.app = function() {
             });
         });
 
-        // state_locate_results
-        self.add('state_locate_results', function(name) {
+        // state_locate_stall_again
+        self.add('state_locate_stall_again', function(name) {
+            return new ChoiceState(name, {
+                question: $("The system was still busy finding your services. Please try again now or choose Exit and dial back later."),
+                choices: [
+                    new Choice('state_locate_get_results', $("View services")),
+                    new Choice('state_locate_exit', $("Exit"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // state_locate_exit
+        self.add('state_locate_exit', function(name) {
+            return new EndState(name, {
+                text: $('Please dial back in a few minutes to see your services results'),
+                next: 'state_locate_stall_again'
+            });
+        });
+
+
+        // state_locate_get_results
+        self.add('state_locate_get_results', function(name) {
+            return go.utils.get_poi_results(self.im, self.contact)
+            .then(function(poi_results) {
+                if (poi_results.length === 0) {
+                    // stall again if results are not available
+                    return self.states.create('state_locate_stall_again');
+                } else {
+                    var opts = { poi_results: poi_results };
+                    return self.states.create('state_locate_show_results', opts);
+                }
+            });
+        });
+
+        // state_locate_show_results
+        self.add('state_locate_show_results', function(name, opts) {
+            var choices = [];
+            opts.poi_results.forEach(function(poi_result) {
+                choices.push(new Choice('state_locate_details', poi_result));
+            });
+
             return new ChoiceState(name, {
                 question: $('Select a service for more info'),
-                choices: [
-                    new Choice('service1', $("Service 1")),
-                    new Choice('service2', $("Service 2"))
-                ],
+                choices: choices,
+                next: function(choice) {
+                    // TODO create state that shows the selected service's details after Api has
+                    // been implemented
+                    return choice.value;
+                }
             });
         });
 

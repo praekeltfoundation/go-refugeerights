@@ -75,6 +75,22 @@ describe("refugeerights app", function() {
                     });
                 })
                 .setup(function(api) {
+                    // registered refugee 2
+                    api.contacts.add({
+                        msisdn: '+064003',
+                        extra: {
+                            language: 'french',
+                            lang: 'fr',
+                            country: 'drc',
+                            status: 'refugee',
+                            last_seen: '2015-03-03 12:00:00.000',
+                            last_returning_metric_fire: '2015-03-03 12:00:00.000'  // >7d ago
+                        },
+                        key: "contact_key",
+                        user_account: "contact_user_account"
+                    });
+                })
+                .setup(function(api) {
                     // registered migrant 1
                     api.contacts.add({
                         msisdn: '+064002',
@@ -1378,10 +1394,10 @@ describe("refugeerights app", function() {
                             , 'Friend Street'  // state_locate_me
                         )
                         .check.interaction({
-                            state: 'state_locate_stall',
+                            state: 'state_locate_stall_initial',
                             reply: [
-                                "Buying time to find the actual location",
-                                "1. Continue"
+                                "The system is looking up services near you. This usually takes less than a minute.",
+                                "1. View services"
                             ].join('\n')
                         })
                         .run();
@@ -1397,15 +1413,79 @@ describe("refugeerights app", function() {
                             , '5'  // state_refugee_main (support services)
                             , '1'  // state_024 (find nearest SService)
                             , 'Friend Street'  // state_locate_me
-                            , '1'  // state_locate_stall
+                            , '1'  // state_locate_stall_initial
                         )
                         .check.interaction({
-                            state: 'state_locate_results',
+                            state: 'state_locate_show_results',
                             reply: [
                                 "Select a service for more info",
-                                "1. Service 1",
-                                "2. Service 2"
+                                "1. Mowbray Police station",
+                                "2. Turkmenistan Police station"
                             ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user tries to view service locations too quickly", function() {
+                it("should stall them again", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_again',
+                            reply: [
+                                "The system was still busy finding your services. Please try again now or choose Exit and dial back later.",
+                                "1. View services",
+                                "2. Exit"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user decides to exit rather than retry", function() {
+                it("should exit, remind to redial later", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                            , '2'  // state_locate_stall_again
+                        )
+                        .check.interaction({
+                            state: 'state_locate_exit',
+                            reply: 'Please dial back in a few minutes to see your services results'
+                        })
+                        .check.reply.ends_session()
+                        .run();
+                });
+            });
+
+            describe("when the user dials back to retry location finding", function() {
+                it("should show them stalling state", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                            , '2'  // state_locate_stall_again
+                            , {session_event: 'new'}
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_again'
                         })
                         .run();
                 });

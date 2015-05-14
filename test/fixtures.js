@@ -142,7 +142,7 @@ return [
         },
 
     // 03 Location finding
-        //
+        // POST user data 064001
         {
             "request": {
                 "method": "POST",
@@ -177,10 +177,118 @@ return [
                         "type": "USSD",
                         "to_addr": "+064001",
                         "template": "Nearby services: {{ results }}.",
+                        "results": []
+                    },
+                    "location": {
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [3.1415, 2.7182]
+                        }
+                    }
+                }
+            }
+        },
+
+        // GET location data 064001 - locations available
+        {
+            "request": {
+                "method": "GET",
+                "url": "http://location_fixture/poifinder/requestlookup/1/"
+            },
+            "response": {
+                "data": {
+                    "id": 1,
+                    "url": "http://location_fixture/poifinder/requestlookup/1/",
+                    "search": {
+                        "lawyer": "true",
+                        "police": "true"
+                    },
+                    "response": {
+                        "type": "USSD",
+                        "to_addr": "+064001",
+                        "template": "Nearby services: {{ results }}.",
+                        // TODO update 'results' after setting up API
                         "results": ["Mowbray Police station", "Turkmenistan Police station"]
                     },
                     "location": {
                         "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [3.1415, 2.7182]
+                        }
+                    }
+                }
+            }
+        },
+
+        // POST user data 064003
+        {
+            "request": {
+                "method": "POST",
+                "url": "http://location_fixture/poifinder/requestlookup/",
+                "data": {
+                    "search": {
+                        "lawyer": "true",
+                        "police": "true"
+                    },
+                    "response": {
+                        "type": "USSD",
+                        "to_addr": "+064003",
+                        "template": "Nearby services: {{ results }}."
+                    },
+                    "location": {
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [3.1415, 2.7182]
+                        }
+                    }
+                }
+            },
+            "response": {
+                "data": {
+                    "id": 3,
+                    "url": "http://location_fixture/poifinder/requestlookup/3/",
+                    "search": {
+                        "lawyer": "true",
+                        "police": "true"
+                    },
+                    "response": {
+                        "type": "USSD",
+                        "to_addr": "+064003",
+                        "template": "Nearby services: {{ results }}.",
+                        "results": []
+                    },
+                    "location": {
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [3.1415, 2.7182]
+                        }
+                    }
+                }
+            }
+        },
+
+        // GET location data - locations NOT available
+        {
+            "request": {
+                "method": "GET",
+                "url": "http://location_fixture/poifinder/requestlookup/3/"
+            },
+            "response": {
+                "data": {
+                    "id": 3,
+                    "url": "http://location_fixture/poifinder/requestlookup/3/",
+                    "search": {
+                        "lawyer": "true",
+                        "police": "true"
+                    },
+                    "response": {
+                        "type": "USSD",
+                        "to_addr": "+064003",
+                        "template": "Nearby services: {{ results }}.",
+                        "results": []
+                    },
+                    "location": {
                         "point": {
                             "type": "Point",
                             "coordinates": [3.1415, 2.7182]

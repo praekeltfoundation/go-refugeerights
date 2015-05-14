@@ -8,7 +8,8 @@ var JsonApi = vumigo.http.api.JsonApi;
 go.utils = {
 
     timed_out: function(im) {
-        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main'];
+        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main',
+                            'state_locate_exit'];
         return im.msg.session_event === 'new'
             && im.user.state.name
             && no_redirects.indexOf(im.user.state.name) === -1;
@@ -293,6 +294,10 @@ go.utils = {
         });
         return http.post(req_lookup_url, {
             data: go.utils.make_lookup_data(im, contact, go.utils.make_user_location_data(contact))
+        })
+        .then(function(response) {
+            contact.extra.poi_url = response.data.url;
+            return im.contacts.save(contact);
         });
     },
 
@@ -334,6 +339,18 @@ go.utils = {
             search_data[poi_type_wanted] = "true";
         }
         return search_data;
+    },
+
+    get_poi_results: function(im, contact) {
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.api_key]
+            }
+        });
+        return http.get(contact.extra.poi_url)
+        .then(function(response) {
+            return response.data.response.results;
+        });
     },
 
     "commas": "commas"
