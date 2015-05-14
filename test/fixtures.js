@@ -120,26 +120,76 @@ return [
         // Vumi Subscription to messages for: 082111
         {
             "request": {
-              "method": "POST",
-              'headers': {
+                "method": "POST",
+                'headers': {
                     'Authorization': ['ApiKey test_user:test_key'],
                     'Content-Type': ['application/json']
                 },
-              "url": 'http://fixture/api/v1/subscription/',
-              "data": {
-                "contact_key": "contact_key",
-                "lang": "fr",
-                "message_set": "/api/v1/message_set/1/",
-                "next_sequence_number": 1,
-                "schedule": "/api/v1/periodic_task/1/",
-                "to_addr": "+082111",
-                "user_account": "contact_user_account"
-              }
+                "url": 'http://fixture/api/v1/subscription/',
+                "data": {
+                    "contact_key": "contact_key",
+                    "lang": "fr",
+                    "message_set": "/api/v1/message_set/1/",
+                    "next_sequence_number": 1,
+                    "schedule": "/api/v1/periodic_task/1/",
+                    "to_addr": "+082111",
+                    "user_account": "contact_user_account"
+                }
             },
             "response": {
                 "code": 201,
             }
         },
+
+    // 03 Location finding
+        //
+        {
+            "request": {
+                "method": "POST",
+                "url": "http://location_fixture/poifinder/requestlookup/",
+                "data": {
+                    "search": {
+                        "lawyer": "true",
+                        "police": "true"
+                    },
+                    "response": {
+                        "type": "USSD",
+                        "to_addr": "+064001",
+                        "template": "Nearby services: {{ results }}."
+                    },
+                    "location": {
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [3.1415, 2.7182]
+                        }
+                    }
+                }
+            },
+            "response": {
+                "data": {
+                    "id": 1,
+                    "url": "http://location_fixture/poifinder/requestlookup/1/",
+                    "search": {
+                        "lawyer": "true",
+                        "police": "true"
+                    },
+                    "response": {
+                        "type": "USSD",
+                        "to_addr": "+064001",
+                        "template": "Nearby services: {{ results }}.",
+                        "results": ["Mowbray Police station", "Turkmenistan Police station"]
+                    },
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [3.1415, 2.7182]
+                        }
+                    }
+                }
+            }
+        }
+
 
 ];
 };

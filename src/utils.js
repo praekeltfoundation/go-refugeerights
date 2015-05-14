@@ -2,6 +2,7 @@ var Q = require('q');
 var moment = require('moment');
 var vumigo = require('vumigo_v02');
 var HttpApi = vumigo.http.api.HttpApi;
+var JsonApi = vumigo.http.api.JsonApi;
 
 // Shared utils lib
 go.utils = {
@@ -283,13 +284,56 @@ go.utils = {
         ]);
     },
 
-    manual_locate: function(contact) {
-        return Q.all([
-            // self.http.post(self.req_lookup_url, {
-            //     data: self.make_lookup_data(contact,
-            //         self.make_location_data(contact))
-            // })
-        ]);
+    locate_poi: function(im, contact) {
+        var req_lookup_url = im.config.location_api_url + 'requestlookup/';
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.api_key]
+            }
+        });
+        return http.post(req_lookup_url, {
+            data: go.utils.make_lookup_data(im, contact, go.utils.make_user_location_data(contact))
+        });
+    },
+
+    make_user_location_data: function(contact) {
+        var location_data = {
+            point: {
+                type: "Point",
+                coordinates: [
+                    parseFloat(contact.extra['location:lon']),
+                    parseFloat(contact.extra['location:lat'])
+                ]
+            }
+        };
+        return location_data;
+    },
+
+    make_lookup_data: function(im, contact, user_location) {
+        var lookup_data = {
+            search: go.utils.make_poi_search_params(im),
+            response: {
+                type: "USSD",
+                to_addr: contact.msisdn,
+                template: im.config.template  // used for SMS only
+            },
+            location: user_location
+        };
+        return lookup_data;
+    },
+
+    make_poi_search_params: function(im) {
+        var poi_type_wanted = "all";  // hardcoded as no more info currently available
+        var search_data = {};
+
+        if (poi_type_wanted === "all") {
+            im.config.poi_types.forEach(function(poi_type) {
+                search_data[poi_type] = "true";
+            });
+        } else {
+            search_data[poi_type_wanted] = "true";
+        }
+        return search_data;
     },
 
     "commas": "commas"

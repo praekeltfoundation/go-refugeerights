@@ -9,6 +9,7 @@ var Q = require('q');
 var moment = require('moment');
 var vumigo = require('vumigo_v02');
 var HttpApi = vumigo.http.api.HttpApi;
+var JsonApi = vumigo.http.api.JsonApi;
 
 // Shared utils lib
 go.utils = {
@@ -290,13 +291,56 @@ go.utils = {
         ]);
     },
 
-    manual_locate: function(contact) {
-        return Q.all([
-            // self.http.post(self.req_lookup_url, {
-            //     data: self.make_lookup_data(contact,
-            //         self.make_location_data(contact))
-            // })
-        ]);
+    locate_poi: function(im, contact) {
+        var req_lookup_url = im.config.location_api_url + 'requestlookup/';
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.api_key]
+            }
+        });
+        return http.post(req_lookup_url, {
+            data: go.utils.make_lookup_data(im, contact, go.utils.make_user_location_data(contact))
+        });
+    },
+
+    make_user_location_data: function(contact) {
+        var location_data = {
+            point: {
+                type: "Point",
+                coordinates: [
+                    parseFloat(contact.extra['location:lon']),
+                    parseFloat(contact.extra['location:lat'])
+                ]
+            }
+        };
+        return location_data;
+    },
+
+    make_lookup_data: function(im, contact, user_location) {
+        var lookup_data = {
+            search: go.utils.make_poi_search_params(im),
+            response: {
+                type: "USSD",
+                to_addr: contact.msisdn,
+                template: im.config.template  // used for SMS only
+            },
+            location: user_location
+        };
+        return lookup_data;
+    },
+
+    make_poi_search_params: function(im) {
+        var poi_type_wanted = "all";  // hardcoded as no more info currently available
+        var search_data = {};
+
+        if (poi_type_wanted === "all") {
+            im.config.poi_types.forEach(function(poi_type) {
+                search_data[poi_type] = "true";
+            });
+        } else {
+            search_data[poi_type_wanted] = "true";
+        }
+        return search_data;
     },
 
     "commas": "commas"
@@ -679,9 +723,24 @@ go.app = function() {
         // state_locate_me
         self.states.add('state_locate_me', function(name) {
             return new LocationState(name, {
+                question:
+                    $("To find your closest SService we need to know " +
+                      "what suburb or area u are in. Please be " +
+                      "specific. e.g. Inanda Sandton"),
+                refine_question:
+                    $("Please select your location:"),
+                error_question:
+                    $("Sorry there are no results for your location. " +
+                      "Please re-enter your location again carefully " +
+                      "and make sure you use the correct spelling."),
+                next: 'state_locate_SService',
+                next_text: 'More',
+                previous_text: 'Back',
+
                 map_provider: new OpenStreetMap({
                     bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                     address_limit: 4,
+
                     extract_address_data: function(result) {
                         var formatted_address;
                         if (!result.address) {
@@ -708,6 +767,7 @@ go.app = function() {
                             lon: result.lon
                         };
                     },
+
                     extract_address_label: function(result) {
                         if (!result.address) {
                             return result.display_name;
@@ -728,20 +788,7 @@ go.app = function() {
                             return addr_from_details.join(', ');
                         }
                     }
-                }),
-                question:
-                    $("To find your closest SService we need to know " +
-                      "what suburb or area u are in. Please be " +
-                      "specific. e.g. Inanda Sandton"),
-                refine_question:
-                    $("Please select your location:"),
-                error_question:
-                    $("Sorry there are no results for your location. " +
-                      "Please re-enter your location again carefully " +
-                      "and make sure you use the correct spelling."),
-                next: 'state_locate_SService',
-                next_text: 'More',
-                previous_text: 'Back'
+                })
             });
         });
 
@@ -756,7 +803,7 @@ go.app = function() {
                 .then(function() {
                     // send the post request
                     return go.utils
-                        .manual_locate(self.contact)
+                        .locate_poi(self.im, self.contact)
                         .then(function() {
                             return self.states.create(
                                 'state_locate_stall');

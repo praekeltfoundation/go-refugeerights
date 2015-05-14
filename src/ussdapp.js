@@ -375,9 +375,24 @@ go.app = function() {
         // state_locate_me
         self.states.add('state_locate_me', function(name) {
             return new LocationState(name, {
+                question:
+                    $("To find your closest SService we need to know " +
+                      "what suburb or area u are in. Please be " +
+                      "specific. e.g. Inanda Sandton"),
+                refine_question:
+                    $("Please select your location:"),
+                error_question:
+                    $("Sorry there are no results for your location. " +
+                      "Please re-enter your location again carefully " +
+                      "and make sure you use the correct spelling."),
+                next: 'state_locate_SService',
+                next_text: 'More',
+                previous_text: 'Back',
+
                 map_provider: new OpenStreetMap({
                     bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                     address_limit: 4,
+
                     extract_address_data: function(result) {
                         var formatted_address;
                         if (!result.address) {
@@ -404,6 +419,7 @@ go.app = function() {
                             lon: result.lon
                         };
                     },
+
                     extract_address_label: function(result) {
                         if (!result.address) {
                             return result.display_name;
@@ -424,20 +440,7 @@ go.app = function() {
                             return addr_from_details.join(', ');
                         }
                     }
-                }),
-                question:
-                    $("To find your closest SService we need to know " +
-                      "what suburb or area u are in. Please be " +
-                      "specific. e.g. Inanda Sandton"),
-                refine_question:
-                    $("Please select your location:"),
-                error_question:
-                    $("Sorry there are no results for your location. " +
-                      "Please re-enter your location again carefully " +
-                      "and make sure you use the correct spelling."),
-                next: 'state_locate_SService',
-                next_text: 'More',
-                previous_text: 'Back'
+                })
             });
         });
 
@@ -452,7 +455,7 @@ go.app = function() {
                 .then(function() {
                     // send the post request
                     return go.utils
-                        .manual_locate(self.contact)
+                        .locate_poi(self.im, self.contact)
                         .then(function() {
                             return self.states.create(
                                 'state_locate_stall');

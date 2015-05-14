@@ -30,6 +30,9 @@ describe("refugeerights app", function() {
                         api_key: "test_key",
                         url: "http://fixture/api/v1/"
                     },
+                    location_api_url: "http://location_fixture/poifinder/",
+                    poi_types: ['lawyer', 'police'],
+                    template: "Nearby services: {{ results }}.",  // SMS template
                     endpoints: {
                         "sms": {"delivery_class": "sms"}
                     }
