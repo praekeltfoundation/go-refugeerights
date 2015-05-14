@@ -399,8 +399,6 @@ go.app = function() {
                         if (!result.address) {
                             formatted_address = result.display_name;
                         } else {
-                            // var city = result.address.city ||
-                            //     result.address.town || result.address.village;
                             result.address.city = result.address.city ||
                                 result.address.town || result.address.village;
 
@@ -443,8 +441,6 @@ go.app = function() {
                                                         .shorten_province(result.address[detail]);
                                     }
                                     addr_from_details.push(result.address[detail]);
-                                // } else {
-                                //     addr_from_details.push('n/a');
                                 }
                             });
 
@@ -516,6 +512,7 @@ go.app = function() {
             .then(function(poi_results) {
                 if (poi_results.length === 0) {
                     // stall again if results are not available
+                    // TODO handle search complete but no results found
                     return self.states.create('state_locate_stall_again');
                 } else {
                     var opts = { poi_results: poi_results };
