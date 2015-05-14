@@ -139,8 +139,8 @@ describe("refugeerights app", function() {
                         }
                     },{
                         display_name:"Quad St 3, Sub 3",
-                        lon: '3.3',
-                        lat: '3.33',
+                        lon: '3.1415',
+                        lat: '2.7182',
                         address: {
                             road: "Quad St 3",
                             suburb: "Suburb number 3",
@@ -1378,6 +1378,98 @@ describe("refugeerights app", function() {
                             state: 'state_locate_me',
                             reply:
                                 "To find your closest SService we need to know what suburb or area u are in. Please be specific. e.g. Inanda Sandton",
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user enters data that returns multiple location results", function() {
+                it("should display a list of address options", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                        )
+                        .check.interaction({
+                            state: 'state_locate_me',
+                            reply: [
+                                "Please select your location:",
+                                "1. Suburb number 1, City number 1",
+                                "2. Suburb number 2, Town number 2",
+                                "3. Suburb number 3, City number 3",
+                                "n. More",
+                                "p. Back"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should go the next page if 'n' is chosen", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , 'n'  // state_locate_me
+                        )
+                        .check.interaction({
+                            state: 'state_locate_me',
+                            reply: [
+                                "Please select your location:",
+                                "1. Suburb number 4",
+                                "n. More",
+                                "p. Back"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should save data to contact upon choice", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , '3'  // state_locate_me
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                                msisdn: '+064001'
+                                            });
+                            assert.equal(contact.extra[
+                                'location:formatted_address'],
+                                'Suburb number 3, City number 3');
+                            assert.equal(contact.extra[
+                                'location:lon'], '3.1415');
+                            assert.equal(contact.extra[
+                                'location:lat'], '2.7182');
+                        })
+                        .run();
+                });
+
+                it("should stall them", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , '3'  // state_locate_me
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_initial',
+                            reply: [
+                                "The system is looking up services near you. This usually takes less than a minute.",
+                                "1. View services"
+                            ].join('\n')
                         })
                         .run();
                 });
