@@ -121,6 +121,7 @@ describe("refugeerights app", function() {
                             suburb: "Suburb number 1",
                             city: "City number 1",
                             town: "Town 1",
+                            state: "Western Cape",
                             postcode: "0001",
                             country: "RSA",
                             country_code: "za"
@@ -133,6 +134,7 @@ describe("refugeerights app", function() {
                             road: "Quad St 2",
                             suburb: "Suburb number 2",
                             town: "Town number 2",
+                            state: "Gauteng",
                             postcode: "0002",
                             country: "RSA",
                             country_code: "za"
@@ -145,17 +147,19 @@ describe("refugeerights app", function() {
                             road: "Quad St 3",
                             suburb: "Suburb number 3",
                             city: "City number 3",
+                            state: "Free State",
                             postcode: "0003",
                             country: "RSA",
                             country_code: "za"
                         }
                     },{
                         display_name:"Quad St 4, Sub 4",
-                        lon: '4.4',
-                        lat: '4.44',
+                        lon: '3.1415',
+                        lat: '2.7182',
                         address: {
                             road: "Quad St 4",
                             suburb: "Suburb number 4",
+                            state: "KwaZulu-Natal",
                             postcode: "0004",
                             country: "RSA",
                             country_code: "za"
@@ -1397,9 +1401,9 @@ describe("refugeerights app", function() {
                             state: 'state_locate_me',
                             reply: [
                                 "Please select your location:",
-                                "1. Suburb number 1, City number 1",
-                                "2. Suburb number 2, Town number 2",
-                                "3. Suburb number 3, City number 3",
+                                "1. Suburb number 1, City number 1, WC",
+                                "2. Suburb number 2, Town number 2, GP",
+                                "3. Suburb number 3, City number 3, FS",
                                 "n. More",
                                 "p. Back"
                             ].join('\n')
@@ -1421,7 +1425,7 @@ describe("refugeerights app", function() {
                             state: 'state_locate_me',
                             reply: [
                                 "Please select your location:",
-                                "1. Suburb number 4",
+                                "1. Suburb number 4, KZN",
                                 "n. More",
                                 "p. Back"
                             ].join('\n')
@@ -1443,13 +1447,39 @@ describe("refugeerights app", function() {
                             var contact = _.find(api.contacts.store, {
                                                 msisdn: '+064001'
                                             });
-                            assert.equal(contact.extra[
-                                'location:formatted_address'],
-                                'Suburb number 3, City number 3');
-                            assert.equal(contact.extra[
-                                'location:lon'], '3.1415');
-                            assert.equal(contact.extra[
-                                'location:lat'], '2.7182');
+                            assert.equal(contact.extra['location:formatted_address'],
+                                'Suburb number 3, City number 3, FS');
+                            assert.equal(contact.extra['location:lon'], '3.1415');
+                            assert.equal(contact.extra['location:lat'], '2.7182');
+                            assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
+                            assert.equal(contact.extra['location:city'], 'City number 3');
+                            assert.equal(contact.extra['location:province'], 'FS');
+                        })
+                        .run();
+                });
+
+                it("should save data to contact upon choice if info missing", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , 'n'  // state_locate_me
+                            , '1'
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                                msisdn: '+064001'
+                                            });
+                            assert.equal(contact.extra['location:formatted_address'],
+                                'Suburb number 4, n/a, KZN');
+                            assert.equal(contact.extra['location:lon'], '3.1415');
+                            assert.equal(contact.extra['location:lat'], '2.7182');
+                            assert.equal(contact.extra['location:suburb'], 'Suburb number 4');
+                            assert.equal(contact.extra['location:city'], 'n/a');
+                            assert.equal(contact.extra['location:province'], 'KZN');
                         })
                         .run();
                 });

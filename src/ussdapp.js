@@ -395,19 +395,22 @@ go.app = function() {
 
                     extract_address_data: function(result) {
                         var formatted_address;
+                        var addr_from_details = [];
                         if (!result.address) {
                             formatted_address = result.display_name;
                         } else {
-                            var city_town_village = result.address.city ||
+                            // var city = result.address.city ||
+                            //     result.address.town || result.address.village;
+                            result.address.city = result.address.city ||
                                 result.address.town || result.address.village;
-                            result.address.city_town_village = city_town_village;
 
-                            var addr_details = ['suburb', 'city_town_village'];
-                            var addr_from_details = [];
+                            var addr_details = ['suburb', 'city', 'state'];
 
                             addr_details.forEach(function(detail) {
                                 if (result.address[detail] !== undefined) {
                                     addr_from_details.push(result.address[detail]);
+                                } else {
+                                    addr_from_details.push('n/a');
                                 }
                             });
 
@@ -416,7 +419,10 @@ go.app = function() {
                         return {
                             formatted_address: formatted_address,
                             lat: result.lat,
-                            lon: result.lon
+                            lon: result.lon,
+                            suburb: addr_from_details[0],
+                            city: addr_from_details[1],
+                            province: addr_from_details[2]
                         };
                     },
 
@@ -424,16 +430,21 @@ go.app = function() {
                         if (!result.address) {
                             return result.display_name;
                         } else {
-                            var city_town_village = result.address.city ||
+                            result.address.city = result.address.city ||
                                 result.address.town || result.address.village;
-                            result.address.city_town_village = city_town_village;
 
-                            var addr_details = ['suburb', 'city_town_village'];
+                            var addr_details = ['suburb', 'city', 'state'];
                             var addr_from_details = [];
 
                             addr_details.forEach(function(detail) {
                                 if (result.address[detail] !== undefined) {
+                                    if (detail === 'state') {
+                                        result.address[detail] = go.utils
+                                                        .shorten_province(result.address[detail]);
+                                    }
                                     addr_from_details.push(result.address[detail]);
+                                // } else {
+                                //     addr_from_details.push('n/a');
                                 }
                             });
 

@@ -360,6 +360,21 @@ go.utils = {
         });
     },
 
+    shorten_province: function(province) {
+        var province_shortening = {
+            'Gauteng': 'GP',
+            'Mpumalanga': 'MP',
+            'Limpopo': 'LP',
+            'North West': 'NW',
+            'Eastern Cape': 'EC',
+            'Western Cape': 'WC',
+            'Northern Cape': 'NC',
+            'KwaZulu-Natal': 'KZN',
+            'Free State': 'FS'
+        };
+        return province_shortening[province];
+    },
+
     "commas": "commas"
 };
 
