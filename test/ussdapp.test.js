@@ -822,7 +822,7 @@ describe("refugeerights app", function() {
 
         // TEST REGISTRATION
 
-        describe("Regisration testing", function() {
+        describe("Registration testing", function() {
 
             describe("starting session", function() {
                 it("should ask for their language", function() {
@@ -2394,7 +2394,7 @@ describe("refugeerights app", function() {
                     .run();
             });
 
-                it("migrant menu - 146", function() {
+                it("071 - 146", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(
@@ -2409,7 +2409,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("migrant menu - 147", function() {
+                it("071 - 147", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(
@@ -2424,7 +2424,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("migrant menu - 148", function() {
+                it("071 - 148", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(
@@ -2439,7 +2439,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("migrant menu - 149", function() {
+                it("071 - 149", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(
@@ -2453,6 +2453,81 @@ describe("refugeerights app", function() {
                         })
                         .run();
                 });
+
+            it("migrant menu - 072", function() {
+                return tester
+                    .setup.user.addr('064002')
+                    .inputs(
+                        {session_event: 'new'}  // dial in first time
+                        , '7'  // state_migrant_main (next)
+                        , '7'  // state_migrant_main
+                    )
+                    .check.interaction({
+                        state: 'state_072'
+                    })
+                    .run();
+            });
+
+                it("072 - 165", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '1'  // state_072
+                        )
+                        .check.interaction({
+                            state: 'state_165'
+                        })
+                        .run();
+                });
+
+                it("072 - 166", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '2'  // state_072
+                        )
+                        .check.interaction({
+                            state: 'state_166'
+                        })
+                        .run();
+                });
+
+                it("072 - 167", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '3'  // state_072
+                        )
+                        .check.interaction({
+                            state: 'state_167'
+                        })
+                        .run();
+                });
+
+                it("072 - 168", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '4'  // state_072
+                        )
+                        .check.interaction({
+                            state: 'state_168'
+                        })
+                        .run();
+                });
+
         });
 
         // TEST RETURNING USER METRICS
@@ -2624,6 +2699,12 @@ describe("refugeerights app", function() {
                 });
             });
         });
+
+        // TEST USER SETTINGS CHANGING
+        describe("User settings changes testing", function() {
+
+        });
+
 
     });
 });
