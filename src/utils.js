@@ -78,6 +78,14 @@ go.utils = {
         }
     },
 
+    update_language: function(im, contact, lang) {
+        return go.utils
+            .save_language(im, contact, lang)
+            .then(function() {
+                return go.utils.subscription_update_language(im, contact);
+            });
+    },
+
     register_user: function(contact, im, status) {
         contact.extra.status = status;
         var country = contact.extra.country;
@@ -174,6 +182,11 @@ go.utils = {
                     ]);
                 }
         });
+    },
+
+    subscription_update_language: function(contact, im) {
+        // TODO patch subscription language
+        return Q();
     },
 
     subscription_unsubscribe_all: function(contact, im) {
