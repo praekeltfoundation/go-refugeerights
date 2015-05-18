@@ -573,8 +573,7 @@ describe("refugeerights app", function() {
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language (french)
                                 , '5'  // state_country (burundi)
-                                , '1'  // state_status (who is refugee)
-                                , '1'  // state_who_refugee (yes - refugee)
+                                , '3'  // state_status (refugee)
                                 , {session_event: 'close'}  // may or may not work
                                 , {session_event: 'new'}  // redial
                                 , '1'  // state_timed_out (continue)
@@ -592,8 +591,7 @@ describe("refugeerights app", function() {
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language (french)
                                 , '5'  // state_country (burundi)
-                                , '1'  // state_status (who is refugee)
-                                , '1'  // state_who_refugee (yes - refugee)
+                                , '3'  // state_status (refugee)
                                 , {session_event: 'close'}  // may or may not work
                                 , {session_event: 'new'}  // redial
                                 , '1'  // state_timed_out (continue)
@@ -640,8 +638,7 @@ describe("refugeerights app", function() {
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language (french)
                                 , '5'  // state_country (burundi)
-                                , '1'  // state_status (who is refugee)
-                                , '1'  // state_who_refugee (yes - refugee)
+                                , '3'  // state_status (refugee)
                                 , {session_event: 'close'}  // may or may not work
                                 , {session_event: 'new'}  // redial
                                 , '2'  // state_timed_out (restart)
@@ -659,8 +656,7 @@ describe("refugeerights app", function() {
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language (french)
                                 , '5'  // state_country (burundi)
-                                , '1'  // state_status (who is refugee)
-                                , '1'  // state_who_refugee (yes - refugee)
+                                , '3'  // state_status (refugee)
                                 , {session_event: 'close'}  // may or may not work
                                 , {session_event: 'new'}  // redial
                                 , '2'  // state_timed_out (restart)
@@ -1081,7 +1077,7 @@ describe("refugeerights app", function() {
                             .check.interaction({
                                 state: 'state_who_refugee',
                                 reply: [
-                                    "If you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group. Or; if your life, safety or freedom in your home country are at risk because of violence, war & civil unrest. Or; if you are married to or depend upon a person who fled their country in fear of their life for the reasons listed. You are entitled to refugee status if you are married to a recognised refugee, even if your own claim was rejected.",
+                                    "If you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group. Or; if your",
                                     "1. ->",
                                     "2. OK"
                                 ].join('\n')
@@ -1103,7 +1099,7 @@ describe("refugeerights app", function() {
                             .check.interaction({
                                 state: 'state_who_migrant',
                                 reply: [
-                                    "If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa.Remember: a migrant can become a refugee should one of the reasons for refugee status takes place in their country of origin.",
+                                    "If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa.Remember: a migrant",
                                     '1. ->',
                                     '2. OK'
                                 ].join('\n')
