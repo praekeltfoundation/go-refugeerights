@@ -8,6 +8,9 @@ go.app = function() {
     var PaginatedChoiceState = vumigo.states.PaginatedChoiceState;
     var PaginatedState = vumigo.states.PaginatedState;
     var EndState = vumigo.states.EndState;
+    var location = require('go-jsbox-location');
+    var LocationState = location.LocationState;
+    var OpenStreetMap = location.providers.openstreetmap.OpenStreetMap;
 
 
     var GoRR = App.extend(function(self) {
@@ -146,7 +149,7 @@ go.app = function() {
                 choices: [
                     new Choice('somalia', $('Somalia')),
                     new Choice('ethiopia', $('Ethiopia')),
-                    new Choice('eritria', $('Eritrea')),
+                    new Choice('eritrea', $('Eritrea')),
                     new Choice('drc', $('Democratic Republic of Congo')),
                     new Choice('burundi', $('Burundi')),
                     new Choice('kenya', $('Kenya')),
@@ -365,6 +368,193 @@ go.app = function() {
                 }
             });
         });
+
+
+    // LOCATION FINDING STATES
+
+        // state_locate_me
+        self.states.add('state_locate_me', function(name) {
+            return new LocationState(name, {
+                question:
+                    $("To find your closest SService we need to know " +
+                      "what suburb or area u are in. Please be " +
+                      "specific. e.g. Inanda Sandton"),
+                refine_question:
+                    $("Please select your location:"),
+                error_question:
+                    $("Sorry there are no results for your location. " +
+                      "Please re-enter your location again carefully " +
+                      "and make sure you use the correct spelling."),
+                next: 'state_locate_SService',
+                next_text: 'More',
+                previous_text: 'Back',
+
+                map_provider: new OpenStreetMap({
+                    bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
+                    address_limit: 4,
+
+                    extract_address_data: function(result) {
+                        var formatted_address;
+                        var addr_from_details = [];
+                        if (!result.address) {
+                            formatted_address = result.display_name;
+                        } else {
+                            result.address.city = result.address.city ||
+                                result.address.town || result.address.village;
+
+                            var addr_details = ['suburb', 'city', 'state'];
+
+                            addr_details.forEach(function(detail) {
+                                if (result.address[detail] !== undefined) {
+                                    addr_from_details.push(result.address[detail]);
+                                } else {
+                                    addr_from_details.push('n/a');
+                                }
+                            });
+
+                            formatted_address = addr_from_details.join(', ');
+                        }
+                        return {
+                            formatted_address: formatted_address,
+                            lat: result.lat,
+                            lon: result.lon,
+                            suburb: addr_from_details[0],
+                            city: addr_from_details[1],
+                            province: addr_from_details[2]
+                        };
+                    },
+
+                    extract_address_label: function(result) {
+                        if (!result.address) {
+                            return result.display_name;
+                        } else {
+                            result.address.city = result.address.city ||
+                                result.address.town || result.address.village;
+
+                            var addr_details = ['suburb', 'city', 'state'];
+                            var addr_from_details = [];
+
+                            addr_details.forEach(function(detail) {
+                                if (result.address[detail] !== undefined) {
+                                    if (detail === 'state') {
+                                        result.address[detail] = go.utils
+                                                        .shorten_province(result.address[detail]);
+                                    }
+                                    addr_from_details.push(result.address[detail]);
+                                }
+                            });
+
+                            return addr_from_details.join(', ');
+                        }
+                    }
+                })
+            });
+        });
+
+        // state_locate_SService
+        self.states.add('state_locate_SService', function(name) {
+            // reload the contact
+            return self.im.contacts
+                .for_user()
+                .then(function(user_contact) {
+                    self.contact = user_contact;
+                })
+                .then(function() {
+                    // send the post request
+                    return go.utils
+                        .locate_poi(self.im, self.contact)
+                        .then(function() {
+                            return self.states.create(
+                                'state_locate_stall_initial');
+                        });
+                });
+        });
+
+        // state_locate_stall_initial
+        self.add('state_locate_stall_initial', function(name) {
+            return new ChoiceState(name, {
+                question: $("The system is looking up services near you. This usually takes less than a minute."),
+                choices: [
+                    new Choice('state_locate_get_results', $("View services"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // state_locate_stall_again
+        self.add('state_locate_stall_again', function(name) {
+            return new ChoiceState(name, {
+                question: $("The system was still busy finding your services. Please try again now or choose Exit and dial back later."),
+                choices: [
+                    new Choice('state_locate_get_results', $("View services")),
+                    new Choice('state_locate_exit', $("Exit"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // state_locate_exit
+        self.add('state_locate_exit', function(name) {
+            return new EndState(name, {
+                text: $('Please dial back in a few minutes to see your services results'),
+                next: 'state_locate_stall_again'
+            });
+        });
+
+
+        // state_locate_get_results
+        self.add('state_locate_get_results', function(name) {
+            return go.utils.get_poi_results(self.im, self.contact)
+            .then(function(poi_results) {
+                if (poi_results.length === 0) {
+                    // stall again if results are not available
+                    // TODO handle search complete but no results found
+                    return self.states.create('state_locate_stall_again');
+                } else {
+                    var opts = { poi_results: poi_results };
+                    return self.states.create('state_locate_show_results', opts);
+                }
+            });
+        });
+
+        // state_locate_show_results
+        self.add('state_locate_show_results', function(name, opts) {
+            var choices = [];
+            opts.poi_results.forEach(function(poi_result) {
+                choices.push(new Choice('state_locate_details', poi_result));
+            });
+
+            return new ChoiceState(name, {
+                question: $('Select a service for more info'),
+                choices: choices,
+                next: function(choice) {
+                    // TODO create state that shows the selected service's details after Api has
+                    // been implemented
+                    return choice.value;
+                }
+            });
+        });
+
+
+    // REFUGEE MENU STATES
+
+        // 024
+        self.add('state_024', function(name) {
+            return new ChoiceState(name, {
+                question: $('Select an option'),
+                choices: [
+                    new Choice('state_locate_me', $("Find nearest SService"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
 
 
     // MIGRANT MENU STATES
@@ -1404,6 +1594,108 @@ go.app = function() {
                     more: $('More'),
                     exit: $('Exit'),
                     next: 'state_main_menu'
+                });
+            });
+
+        // 072
+        self.add('state_072', function(name) {
+            return new ChoiceState(name, {
+                question: $('Select setting to change:'),
+                choices: [
+                    new Choice('state_165', $("Language")),
+                    new Choice('state_166', $("Country")),
+                    new Choice('state_167', $("Status (refugee / migrant)")),
+                    new Choice('state_168', $("Back to Main Menu"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+            // 165
+            self.add('state_165', function(name) {
+                return new ChoiceState(name, {
+                    question: $('Please choose your language:'),
+                    choices: [
+                        new Choice('en', $("English")),
+                        new Choice('fr', $("French")),
+                        new Choice('am', $("Amharic")),
+                        new Choice('sw', $("Swahili")),
+                        new Choice('so', $("Somali")),
+                    ],
+                    next: function(choice) {
+                        return go.utils
+                            .update_language(self.im, self.contact, choice.value)
+                            .then(function() {
+                                return 'state_072';
+                            });
+                    }
+                });
+            });
+
+            // 166
+            self.add('state_166', function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $('Select your country of origin:'),
+                    characters_per_page: 160,
+                    options_per_page: null,
+                    more: $('Next'),
+                    back: $('Back'),
+                    choices: [
+                        new Choice('somalia', $('Somalia')),
+                        new Choice('ethiopia', $('Ethiopia')),
+                        new Choice('eritrea', $('Eritrea')),
+                        new Choice('drc', $('Democratic Republic of Congo')),
+                        new Choice('burundi', $('Burundi')),
+                        new Choice('kenya', $('Kenya')),
+                        new Choice('rwanda', $('Rwanda')),
+                        new Choice('sudan', $('Sudan/South Sudan')),
+                        new Choice('zimbabwe', $('Zimbabwe')),
+                        new Choice('uganda', $('Uganda')),
+                        new Choice('egypt', $('Egypt')),
+                        new Choice('mozambique', $('Mozambique')),
+                        new Choice('syria', $('Syria')),
+                        new Choice('angola', $('Angola')),
+                    ],
+                    next: function(choice) {
+                        return go.utils
+                            .update_country(self.im, self.contact, choice.value)
+                            .then(function() {
+                                return 'state_072';
+                            });
+                    }
+                });
+            });
+
+            // 167
+            self.add('state_167', function(name) {
+                return new ChoiceState(name, {
+                    question: $('Are you a refugee or migrant?'),
+                    choices: [
+                        new Choice('refugee', $('I am a refugee')),
+                        new Choice('migrant', $('I am a migrant'))
+                    ],
+                    next: function(choice) {
+                        return go.utils
+                            .update_status(self.im, self.contact, choice.value)
+                            .then(function() {
+                                return 'state_072';
+                            });
+                    }
+                });
+            });
+
+            // 168
+            self.add('state_168', function(name) {
+                return new ChoiceState(name, {
+                    question: $("Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za"),
+                    choices: [
+                        new Choice('state_main_menu', $("Continue"))
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
                 });
             });
 

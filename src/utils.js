@@ -2,12 +2,14 @@ var Q = require('q');
 var moment = require('moment');
 var vumigo = require('vumigo_v02');
 var HttpApi = vumigo.http.api.HttpApi;
+var JsonApi = vumigo.http.api.JsonApi;
 
 // Shared utils lib
 go.utils = {
 
     timed_out: function(im) {
-        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main'];
+        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main',
+                            'state_locate_exit'];
         return im.msg.session_event === 'new'
             && im.user.state.name
             && no_redirects.indexOf(im.user.state.name) === -1;
@@ -76,6 +78,38 @@ go.utils = {
         } else {
             return Q();
         }
+    },
+
+    update_language: function(im, contact, lang) {
+        return go.utils
+            .save_language(im, contact, lang)
+            .then(function() {
+                return Q.all([
+                    go.utils.subscription_update_language(im, contact),
+                    im.metrics.fire.inc(['total', 'change_language', 'last'].join('.')),
+                    im.metrics.fire.sum(['total', 'change_language', 'sum'].join('.'), 1)
+                ]);
+            });
+    },
+
+    update_country: function(im, contact, country) {
+        contact.extra.country = country;
+        return Q.all([
+            im.contacts.save(contact),
+            im.metrics.fire.inc(['total', 'change_country', 'last'].join('.')),
+            im.metrics.fire.sum(['total', 'change_country', 'sum'].join('.'), 1)
+        ]);
+    },
+
+    update_status: function(im, contact, status) {
+        contact.extra.status = status;
+        return Q.all([
+            im.contacts.save(contact),
+            im.metrics.fire.inc(['total', 'change_status', 'last'].join('.')),
+            im.metrics.fire.sum(['total', 'change_status', 'sum'].join('.'), 1)
+            // TODO if the subscriptions contain the users' status, the subscription
+            // will also need updating here.
+        ]);
     },
 
     register_user: function(contact, im, status) {
@@ -174,6 +208,11 @@ go.utils = {
                     ]);
                 }
         });
+    },
+
+    subscription_update_language: function(contact, im) {
+        // TODO patch subscription language
+        return Q();
     },
 
     subscription_unsubscribe_all: function(contact, im) {
@@ -281,6 +320,89 @@ go.utils = {
             im.metrics.fire.inc(["total", from_state, to_state, "last"].join('.')),
             im.metrics.fire.sum(["total", from_state, to_state, "sum"].join('.'), 1)
         ]);
+    },
+
+    locate_poi: function(im, contact) {
+        var req_lookup_url = im.config.location_api_url + 'requestlookup/';
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.api_key]
+            }
+        });
+        return http.post(req_lookup_url, {
+            data: go.utils.make_lookup_data(im, contact, go.utils.make_user_location_data(contact))
+        })
+        .then(function(response) {
+            contact.extra.poi_url = response.data.url;
+            return im.contacts.save(contact);
+        });
+    },
+
+    make_user_location_data: function(contact) {
+        var location_data = {
+            point: {
+                type: "Point",
+                coordinates: [
+                    parseFloat(contact.extra['location:lon']),
+                    parseFloat(contact.extra['location:lat'])
+                ]
+            }
+        };
+        return location_data;
+    },
+
+    make_lookup_data: function(im, contact, user_location) {
+        var lookup_data = {
+            search: go.utils.make_poi_search_params(im),
+            response: {
+                type: "USSD",
+                to_addr: contact.msisdn,
+                template: im.config.template  // used for SMS only
+            },
+            location: user_location
+        };
+        return lookup_data;
+    },
+
+    make_poi_search_params: function(im) {
+        var poi_type_wanted = "all";  // hardcoded as no more info currently available
+        var search_data = {};
+
+        if (poi_type_wanted === "all") {
+            im.config.poi_types.forEach(function(poi_type) {
+                search_data[poi_type] = "true";
+            });
+        } else {
+            search_data[poi_type_wanted] = "true";
+        }
+        return search_data;
+    },
+
+    get_poi_results: function(im, contact) {
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.api_key]
+            }
+        });
+        return http.get(contact.extra.poi_url)
+        .then(function(response) {
+            return response.data.response.results;
+        });
+    },
+
+    shorten_province: function(province) {
+        var province_shortening = {
+            'Gauteng': 'GP',
+            'Mpumalanga': 'MP',
+            'Limpopo': 'LP',
+            'North West': 'NW',
+            'Eastern Cape': 'EC',
+            'Western Cape': 'WC',
+            'Northern Cape': 'NC',
+            'KwaZulu-Natal': 'KZN',
+            'Free State': 'FS'
+        };
+        return province_shortening[province];
     },
 
     "commas": "commas"

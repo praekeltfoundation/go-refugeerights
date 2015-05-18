@@ -3,17 +3,20 @@ var fixtures = require('./fixtures');
 var assert = require('assert');
 var _ = require('lodash');
 var AppTester = vumigo.AppTester;
+var location = require('go-jsbox-location');
+var openstreetmap = location.providers.openstreetmap;
 
 
 describe("refugeerights app", function() {
     describe("for ussd use", function() {
         var app;
         var tester;
+        var locations;
 
         beforeEach(function() {
             app = new go.app.GoRR();
-
             tester = new AppTester(app);
+            locations = [];
 
             tester
                 .setup.char_limit(160)
@@ -27,6 +30,9 @@ describe("refugeerights app", function() {
                         api_key: "test_key",
                         url: "http://fixture/api/v1/"
                     },
+                    location_api_url: "http://location_fixture/poifinder/",
+                    poi_types: ['lawyer', 'police'],
+                    template: "Nearby services: {{ results }}.",  // SMS template
                     endpoints: {
                         "sms": {"delivery_class": "sms"}
                     }
@@ -35,6 +41,9 @@ describe("refugeerights app", function() {
                     fixtures().forEach(function(d) {
                         d.repeatable = true;
                         api.http.fixtures.add(d);
+                    });
+                    locations.forEach(function(location) {
+                        api.http.fixtures.add(openstreetmap.fixture(location));
                     });
                 })
                 .setup(function(api) {
@@ -66,6 +75,22 @@ describe("refugeerights app", function() {
                     });
                 })
                 .setup(function(api) {
+                    // registered refugee 2
+                    api.contacts.add({
+                        msisdn: '+064003',
+                        extra: {
+                            language: 'french',
+                            lang: 'fr',
+                            country: 'drc',
+                            status: 'refugee',
+                            last_seen: '2015-03-03 12:00:00.000',
+                            last_returning_metric_fire: '2015-03-03 12:00:00.000'  // >7d ago
+                        },
+                        key: "contact_key",
+                        user_account: "contact_user_account"
+                    });
+                })
+                .setup(function(api) {
                     // registered migrant 1
                     api.contacts.add({
                         msisdn: '+064002',
@@ -81,6 +106,80 @@ describe("refugeerights app", function() {
                         user_account: "contact_user_account"
                     });
                 });
+
+            locations.push({
+                query: "Quad Street",
+                bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
+                address_limit: 4,
+                response_data: [
+                    {
+                        display_name:"Quad St 1, Sub 1",
+                        lon: '1.1',
+                        lat: '1.11',
+                        address: {
+                            road: "Quad St 1",
+                            suburb: "Suburb number 1",
+                            city: "City number 1",
+                            town: "Town 1",
+                            state: "Western Cape",
+                            postcode: "0001",
+                            country: "RSA",
+                            country_code: "za"
+                        }
+                    },{
+                        display_name:"Quad St 2, Sub 2",
+                        lon: '2.2',
+                        lat: '2.22',
+                        address: {
+                            road: "Quad St 2",
+                            suburb: "Suburb number 2",
+                            town: "Town number 2",
+                            state: "Gauteng",
+                            postcode: "0002",
+                            country: "RSA",
+                            country_code: "za"
+                        }
+                    },{
+                        display_name:"Quad St 3, Sub 3",
+                        lon: '3.1415',
+                        lat: '2.7182',
+                        address: {
+                            road: "Quad St 3",
+                            suburb: "Suburb number 3",
+                            city: "City number 3",
+                            state: "Free State",
+                            postcode: "0003",
+                            country: "RSA",
+                            country_code: "za"
+                        }
+                    },{
+                        display_name:"Quad St 4, Sub 4",
+                        lon: '3.1415',
+                        lat: '2.7182',
+                        address: {
+                            road: "Quad St 4",
+                            suburb: "Suburb number 4",
+                            state: "KwaZulu-Natal",
+                            postcode: "0004",
+                            country: "RSA",
+                            country_code: "za"
+                        }
+                    }
+                ]
+            });
+
+            locations.push({
+                query: "Friend Street",
+                bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
+                address_limit: 4,
+                response_data: [
+                    {
+                        display_name: "Friend Street, Suburb",
+                        lon: '3.1415',
+                        lat: '2.7182'
+                    }
+                ]
+            });
         });
 
         // TEST PAGINATEDCHOICESTATE PAGING
@@ -822,7 +921,7 @@ describe("refugeerights app", function() {
 
         // TEST REGISTRATION
 
-        describe("Regisration testing", function() {
+        describe("Registration testing", function() {
 
             describe("starting session", function() {
                 it("should ask for their language", function() {
@@ -1262,6 +1361,253 @@ describe("refugeerights app", function() {
                                 '6. Healthcare',
                                 '7. Next'
                             ].join('\n')
+                        })
+                        .run();
+                });
+            });
+        });
+
+        // TEST LOCATION FINDING
+        describe("Location finder testing", function() {
+            describe("when a user initialises location finding", function() {
+                it("should ask them to enter their suburb", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                        )
+                        .check.interaction({
+                            state: 'state_locate_me',
+                            reply:
+                                "To find your closest SService we need to know what suburb or area u are in. Please be specific. e.g. Inanda Sandton",
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user enters data that returns multiple location results", function() {
+                it("should display a list of address options", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                        )
+                        .check.interaction({
+                            state: 'state_locate_me',
+                            reply: [
+                                "Please select your location:",
+                                "1. Suburb number 1, City number 1, WC",
+                                "2. Suburb number 2, Town number 2, GP",
+                                "3. Suburb number 3, City number 3, FS",
+                                "n. More",
+                                "p. Back"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should go the next page if 'n' is chosen", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , 'n'  // state_locate_me
+                        )
+                        .check.interaction({
+                            state: 'state_locate_me',
+                            reply: [
+                                "Please select your location:",
+                                "1. Suburb number 4, KZN",
+                                "n. More",
+                                "p. Back"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should save data to contact upon choice", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , '3'  // state_locate_me
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                                msisdn: '+064001'
+                                            });
+                            assert.equal(contact.extra['location:formatted_address'],
+                                'Suburb number 3, City number 3, FS');
+                            assert.equal(contact.extra['location:lon'], '3.1415');
+                            assert.equal(contact.extra['location:lat'], '2.7182');
+                            assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
+                            assert.equal(contact.extra['location:city'], 'City number 3');
+                            assert.equal(contact.extra['location:province'], 'FS');
+                        })
+                        .run();
+                });
+
+                it("should save data to contact upon choice if info missing", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , 'n'  // state_locate_me
+                            , '1'
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                                msisdn: '+064001'
+                                            });
+                            assert.equal(contact.extra['location:formatted_address'],
+                                'Suburb number 4, n/a, KZN');
+                            assert.equal(contact.extra['location:lon'], '3.1415');
+                            assert.equal(contact.extra['location:lat'], '2.7182');
+                            assert.equal(contact.extra['location:suburb'], 'Suburb number 4');
+                            assert.equal(contact.extra['location:city'], 'n/a');
+                            assert.equal(contact.extra['location:province'], 'KZN');
+                        })
+                        .run();
+                });
+
+                it("should stall them", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , '3'  // state_locate_me
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_initial',
+                            reply: [
+                                "The system is looking up services near you. This usually takes less than a minute.",
+                                "1. View services"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user enters data that returns 1 location result", function() {
+                it("should stall them", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_initial',
+                            reply: [
+                                "The system is looking up services near you. This usually takes less than a minute.",
+                                "1. View services"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the nearest SService locations have been found", function() {
+                it("should let them select the options for more info", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                        )
+                        .check.interaction({
+                            state: 'state_locate_show_results',
+                            reply: [
+                                "Select a service for more info",
+                                "1. Mowbray Police station",
+                                "2. Turkmenistan Police station"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user tries to view service locations too quickly", function() {
+                it("should stall them again", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_again',
+                            reply: [
+                                "The system was still busy finding your services. Please try again now or choose Exit and dial back later.",
+                                "1. View services",
+                                "2. Exit"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user decides to exit rather than retry", function() {
+                it("should exit, remind to redial later", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                            , '2'  // state_locate_stall_again
+                        )
+                        .check.interaction({
+                            state: 'state_locate_exit',
+                            reply: 'Please dial back in a few minutes to see your services results'
+                        })
+                        .check.reply.ends_session()
+                        .run();
+                });
+            });
+
+            describe("when the user dials back to retry location finding", function() {
+                it("should show them stalling state", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                            , '2'  // state_locate_stall_again
+                            , {session_event: 'new'}
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_again'
                         })
                         .run();
                 });
@@ -2394,7 +2740,7 @@ describe("refugeerights app", function() {
                     .run();
             });
 
-                it("migrant menu - 146", function() {
+                it("071 - 146", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(
@@ -2409,7 +2755,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("migrant menu - 147", function() {
+                it("071 - 147", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(
@@ -2424,7 +2770,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("migrant menu - 148", function() {
+                it("071 - 148", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(
@@ -2439,7 +2785,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("migrant menu - 149", function() {
+                it("071 - 149", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(
@@ -2453,6 +2799,81 @@ describe("refugeerights app", function() {
                         })
                         .run();
                 });
+
+            it("migrant menu - 072", function() {
+                return tester
+                    .setup.user.addr('064002')
+                    .inputs(
+                        {session_event: 'new'}  // dial in first time
+                        , '7'  // state_migrant_main (next)
+                        , '7'  // state_migrant_main
+                    )
+                    .check.interaction({
+                        state: 'state_072'
+                    })
+                    .run();
+            });
+
+                it("072 - 165", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '1'  // state_072
+                        )
+                        .check.interaction({
+                            state: 'state_165'
+                        })
+                        .run();
+                });
+
+                it("072 - 166", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '2'  // state_072
+                        )
+                        .check.interaction({
+                            state: 'state_166'
+                        })
+                        .run();
+                });
+
+                it("072 - 167", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '3'  // state_072
+                        )
+                        .check.interaction({
+                            state: 'state_167'
+                        })
+                        .run();
+                });
+
+                it("072 - 168", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '4'  // state_072
+                        )
+                        .check.interaction({
+                            state: 'state_168'
+                        })
+                        .run();
+                });
+
         });
 
         // TEST RETURNING USER METRICS
@@ -2624,6 +3045,217 @@ describe("refugeerights app", function() {
                 });
             });
         });
+
+        // TEST USER SETTINGS CHANGING
+
+        describe("User settings changes testing", function() {
+            describe("when the user changes their language", function() {
+                it("should navigate back to settings change menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '1'  // state_072 (change language)
+                            , '1'  // state_165 (english)
+                        )
+                        .check.interaction({
+                            state: 'state_072'
+                        })
+                        .run();
+                });
+
+                it("should change their language", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '1'  // state_072 (change language)
+                            , '1'  // state_165 (english)
+                        )
+                        // check user extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064002'
+                            });
+                            assert.equal(contact.extra.language, 'english');
+                            assert.equal(contact.extra.lang, 'en');
+                        })
+                        // check user language is set
+                        .check.user.properties({lang: 'en'})
+                        .run();
+                });
+
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '1'  // state_072 (change language)
+                            , '1'  // state_165 (english)
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.change_language.last'].values, [1]);
+                            assert.deepEqual(metrics['total.change_language.sum'].values, [1]);
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user changes their country", function() {
+                it("should navigate back to settings change menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '2'  // state_072 (change country)
+                            , '3'  // state_166 (eritrea)
+                        )
+                        .check.interaction({
+                            state: 'state_072'
+                        })
+                        .run();
+                });
+
+                it("should change their country", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '2'  // state_072 (change country)
+                            , '3'  // state_166 (eritrea)
+                        )
+                        // check user extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064002'
+                            });
+                            assert.equal(contact.extra.country, 'eritrea');
+                        })
+                        .run();
+                });
+
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '2'  // state_072 (change country)
+                            , '3'  // state_166 (eritrea)
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.change_country.last'].values, [1]);
+                            assert.deepEqual(metrics['total.change_country.sum'].values, [1]);
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user changes their status", function() {
+                it("should navigate back to settings change menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '3'  // state_072 (change status)
+                            , '1'  // state_167 (refugee)
+                        )
+                        .check.interaction({
+                            state: 'state_072'
+                        })
+                        .run();
+                });
+
+                it("should change their status", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '3'  // state_072 (change status)
+                            , '1'  // state_167 (refugee)
+                        )
+                        // check user extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064002'
+                            });
+                            assert.equal(contact.extra.status, 'refugee');
+                        })
+                        .run();
+                });
+
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '3'  // state_072 (change status)
+                            , '1'  // state_167 (refugee)
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.change_status.last'].values, [1]);
+                            assert.deepEqual(metrics['total.change_status.sum'].values, [1]);
+                        })
+                        .run();
+                });
+
+                it("should show the settings updates screen when they exit the menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '3'  // state_072 (change status)
+                            , '1'  // state_167 (refugee)
+                            , '4'  // state_972 (exit)
+                        )
+                        .check.interaction({
+                            state: 'state_168'
+                        })
+                        .run();
+                });
+
+                it("should show the main menu corresponding with the new status", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '7'  // state_migrant_main
+                            , '3'  // state_072 (change status)
+                            , '1'  // state_167 (refugee)
+                            , '4'  // state_072 (exit)
+                            , '1'  // state_168 (continue)
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_main'
+                        })
+                        .run();
+                });
+            });
+        });
+
 
     });
 });
