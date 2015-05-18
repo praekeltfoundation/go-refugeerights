@@ -87,6 +87,38 @@ go.utils = {
         }
     },
 
+    update_language: function(im, contact, lang) {
+        return go.utils
+            .save_language(im, contact, lang)
+            .then(function() {
+                return Q.all([
+                    go.utils.subscription_update_language(im, contact),
+                    im.metrics.fire.inc(['total', 'change_language', 'last'].join('.')),
+                    im.metrics.fire.sum(['total', 'change_language', 'sum'].join('.'), 1)
+                ]);
+            });
+    },
+
+    update_country: function(im, contact, country) {
+        contact.extra.country = country;
+        return Q.all([
+            im.contacts.save(contact),
+            im.metrics.fire.inc(['total', 'change_country', 'last'].join('.')),
+            im.metrics.fire.sum(['total', 'change_country', 'sum'].join('.'), 1)
+        ]);
+    },
+
+    update_status: function(im, contact, status) {
+        contact.extra.status = status;
+        return Q.all([
+            im.contacts.save(contact),
+            im.metrics.fire.inc(['total', 'change_status', 'last'].join('.')),
+            im.metrics.fire.sum(['total', 'change_status', 'sum'].join('.'), 1)
+            // TODO if the subscriptions contain the users' status, the subscription
+            // will also need updating here.
+        ]);
+    },
+
     register_user: function(contact, im, status) {
         contact.extra.status = status;
         var country = contact.extra.country;
@@ -183,6 +215,11 @@ go.utils = {
                     ]);
                 }
         });
+    },
+
+    subscription_update_language: function(contact, im) {
+        // TODO patch subscription language
+        return Q();
     },
 
     subscription_unsubscribe_all: function(contact, im) {
@@ -529,7 +566,7 @@ go.app = function() {
                 choices: [
                     new Choice('somalia', $('Somalia')),
                     new Choice('ethiopia', $('Ethiopia')),
-                    new Choice('eritria', $('Eritrea')),
+                    new Choice('eritrea', $('Eritrea')),
                     new Choice('drc', $('Democratic Republic of Congo')),
                     new Choice('burundi', $('Burundi')),
                     new Choice('kenya', $('Kenya')),
@@ -1977,6 +2014,108 @@ go.app = function() {
                     more: $('More'),
                     exit: $('Exit'),
                     next: 'state_main_menu'
+                });
+            });
+
+        // 072
+        self.add('state_072', function(name) {
+            return new ChoiceState(name, {
+                question: $('Select setting to change:'),
+                choices: [
+                    new Choice('state_165', $("Language")),
+                    new Choice('state_166', $("Country")),
+                    new Choice('state_167', $("Status (refugee / migrant)")),
+                    new Choice('state_168', $("Back to Main Menu"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+            // 165
+            self.add('state_165', function(name) {
+                return new ChoiceState(name, {
+                    question: $('Please choose your language:'),
+                    choices: [
+                        new Choice('en', $("English")),
+                        new Choice('fr', $("French")),
+                        new Choice('am', $("Amharic")),
+                        new Choice('sw', $("Swahili")),
+                        new Choice('so', $("Somali")),
+                    ],
+                    next: function(choice) {
+                        return go.utils
+                            .update_language(self.im, self.contact, choice.value)
+                            .then(function() {
+                                return 'state_072';
+                            });
+                    }
+                });
+            });
+
+            // 166
+            self.add('state_166', function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $('Select your country of origin:'),
+                    characters_per_page: 160,
+                    options_per_page: null,
+                    more: $('Next'),
+                    back: $('Back'),
+                    choices: [
+                        new Choice('somalia', $('Somalia')),
+                        new Choice('ethiopia', $('Ethiopia')),
+                        new Choice('eritrea', $('Eritrea')),
+                        new Choice('drc', $('Democratic Republic of Congo')),
+                        new Choice('burundi', $('Burundi')),
+                        new Choice('kenya', $('Kenya')),
+                        new Choice('rwanda', $('Rwanda')),
+                        new Choice('sudan', $('Sudan/South Sudan')),
+                        new Choice('zimbabwe', $('Zimbabwe')),
+                        new Choice('uganda', $('Uganda')),
+                        new Choice('egypt', $('Egypt')),
+                        new Choice('mozambique', $('Mozambique')),
+                        new Choice('syria', $('Syria')),
+                        new Choice('angola', $('Angola')),
+                    ],
+                    next: function(choice) {
+                        return go.utils
+                            .update_country(self.im, self.contact, choice.value)
+                            .then(function() {
+                                return 'state_072';
+                            });
+                    }
+                });
+            });
+
+            // 167
+            self.add('state_167', function(name) {
+                return new ChoiceState(name, {
+                    question: $('Are you a refugee or migrant?'),
+                    choices: [
+                        new Choice('refugee', $('I am a refugee')),
+                        new Choice('migrant', $('I am a migrant'))
+                    ],
+                    next: function(choice) {
+                        return go.utils
+                            .update_status(self.im, self.contact, choice.value)
+                            .then(function() {
+                                return 'state_072';
+                            });
+                    }
+                });
+            });
+
+            // 168
+            self.add('state_168', function(name) {
+                return new ChoiceState(name, {
+                    question: $("Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za"),
+                    choices: [
+                        new Choice('state_main_menu', $("Continue"))
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
                 });
             });
 

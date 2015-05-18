@@ -868,6 +868,44 @@
             }
         },
 
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Profile management: Language changes",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.change_language.last",
+                "aggregator": "last"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Profile management: Country changes",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.change_country.last",
+                "aggregator": "last"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Profile management: Status changes",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.change_status.last",
+                "aggregator": "last"
+            }
+        },
+
 
 
 
