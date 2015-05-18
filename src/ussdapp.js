@@ -179,23 +179,29 @@ go.app = function() {
             return new ChoiceState(name, {
                 question: $('Are you a refugee or migrant?'),
                 choices: [
-                    new Choice('who_is_refugee', $('Who is a refugee?')),
-                    new Choice('who_is_migrant', $('Who is a migrant?')),
-                    new Choice('neither', $('I am neither'))
+                    new Choice('state_who_refugee', $('Who is a refugee?')),
+                    new Choice('state_who_migrant', $('Who is a migrant?')),
+                    new Choice('state_refugee_rights_info', $('I am a refugee')),
+                    new Choice('state_migrant_rights_info', $('I am a migrant')),
+                    new Choice('state_neither', $('I am neither'))
                 ],
                 next: function(choice) {
-                    if (choice.value === 'who_is_refugee') {
-                        return 'state_who_refugee';
-                    } else if (choice.value === 'who_is_migrant') {
-                        return 'state_who_migrant';
-                    } else if (choice.value === 'neither') {
+                    if (choice.value === 'state_who_refugee' || choice.value === 'state_who_migrant') {
+                        return choice.value;
+                    } else if (choice.value === 'state_neither') {
                         self.contact.extra.status = 'neither';
-                        return Q.all([
-                            self.im.contacts.save(self.contact)
-                        ])
-                        .then(function() {
-                            return 'state_neither';
-                        });
+                        return self.im.contacts
+                            .save(self.contact)
+                            .then(function() {
+                                return choice.value;
+                            });
+                    } else {
+                        var status = (choice.value === 'state_refugee_rights_info') ? 'refugee' : 'migrant';
+                        return go.utils
+                            .register_user(self.contact, self.im, status)
+                            .then(function() {
+                                return choice.value;
+                            });
                     }
                 }
             });
@@ -211,45 +217,25 @@ go.app = function() {
 
         // 004
         self.add('state_who_refugee', function(name) {
-            return new ChoiceState(name, {
-                question: $('CONTENT 004'),
-                choices: [
-                    new Choice('refugee', $('Yes, I am a refugee')),
-                    new Choice('back', $('No, back to menu'))
-                ],
-                next: function(choice) {
-                    if (choice.value === 'back') {
-                        return 'state_status';
-                    } else {
-                        return go.utils
-                            .register_user(self.contact, self.im, choice.value)
-                            .then(function() {
-                                return 'state_refugee_rights_info';
-                            });
-                    }
-                }
+            return new PaginatedState(name, {
+                text: $("If you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group. Or; if your life, safety or freedom in your home country are at risk because of violence, war & civil unrest. Or; if you are married to or depend upon a person who fled their country in fear of their life for the reasons listed. You are entitled to refugee status if you are married to a recognised refugee, even if your own claim was rejected."),
+                characters_per_page: 160,
+                back: $('<-'),
+                more: $('->'),
+                exit: $('OK'),
+                next: 'state_status'
             });
         });
 
         // 005
         self.add('state_who_migrant', function(name) {
-            return new ChoiceState(name, {
-                question: $('CONTENT 005'),
-                choices: [
-                    new Choice('migrant', $('Yes, I am a migrant')),
-                    new Choice('back', $('No, back to menu'))
-                ],
-                next: function(choice) {
-                    if (choice.value === 'back') {
-                        return 'state_status';
-                    } else {
-                        return go.utils
-                            .register_user(self.contact, self.im, choice.value)
-                            .then(function() {
-                                return 'state_migrant_rights_info';
-                            });
-                    }
-                }
+            return new PaginatedState(name, {
+                text: $("If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa.Remember: a migrant can become a refugee should one of the reasons for refugee status takes place in their country of origin."),
+                characters_per_page: 160,
+                back: $('<-'),
+                more: $('->'),
+                exit: $('OK'),
+                next: 'state_status'
             });
         });
 
