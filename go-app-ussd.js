@@ -89,8 +89,32 @@ go.utils = {
         return go.utils
             .save_language(im, contact, lang)
             .then(function() {
-                return go.utils.subscription_update_language(im, contact);
+                return Q.all([
+                    go.utils.subscription_update_language(im, contact),
+                    im.metrics.fire.inc(['total', 'change_language', 'last'].join('.')),
+                    im.metrics.fire.sum(['total', 'change_language', 'sum'].join('.'), 1)
+                ]);
             });
+    },
+
+    update_country: function(im, contact, country) {
+        contact.extra.country = country;
+        return Q.all([
+            im.contacts.save(contact),
+            im.metrics.fire.inc(['total', 'change_country', 'last'].join('.')),
+            im.metrics.fire.sum(['total', 'change_country', 'sum'].join('.'), 1)
+        ]);
+    },
+
+    update_status: function(im, contact, status) {
+        contact.extra.status = status;
+        return Q.all([
+            im.contacts.save(contact),
+            im.metrics.fire.inc(['total', 'change_status', 'last'].join('.')),
+            im.metrics.fire.sum(['total', 'change_status', 'sum'].join('.'), 1)
+            // TODO if the subscriptions contain the users' status, the subscription
+            // will also need updating here.
+        ]);
     },
 
     register_user: function(contact, im, status) {
@@ -454,7 +478,7 @@ go.app = function() {
                 choices: [
                     new Choice('somalia', $('Somalia')),
                     new Choice('ethiopia', $('Ethiopia')),
-                    new Choice('eritria', $('Eritrea')),
+                    new Choice('eritrea', $('Eritrea')),
                     new Choice('drc', $('Democratic Republic of Congo')),
                     new Choice('burundi', $('Burundi')),
                     new Choice('kenya', $('Kenya')),
@@ -1763,7 +1787,7 @@ go.app = function() {
                     choices: [
                         new Choice('somalia', $('Somalia')),
                         new Choice('ethiopia', $('Ethiopia')),
-                        new Choice('eritria', $('Eritrea')),
+                        new Choice('eritrea', $('Eritrea')),
                         new Choice('drc', $('Democratic Republic of Congo')),
                         new Choice('burundi', $('Burundi')),
                         new Choice('kenya', $('Kenya')),
@@ -1777,13 +1801,11 @@ go.app = function() {
                         new Choice('angola', $('Angola')),
                     ],
                     next: function(choice) {
-                        self.contact.extra.country = choice.value;
-                        return Q.all([
-                            self.im.contacts.save(self.contact)
-                        ])
-                        .then(function() {
-                            return 'state_072';
-                        });
+                        return go.utils
+                            .update_country(self.im, self.contact, choice.value)
+                            .then(function() {
+                                return 'state_072';
+                            });
                     }
                 });
             });
@@ -1797,11 +1819,8 @@ go.app = function() {
                         new Choice('migrant', $('I am a migrant'))
                     ],
                     next: function(choice) {
-                        self.contact.extra.status = choice.value;
-                        // TODO if the subscriptions contain the users' status, the subscription
-                        // will also need updating here.
-                        return self.im.contacts
-                            .save(self.contact)
+                        return go.utils
+                            .update_status(self.im, self.contact, choice.value)
                             .then(function() {
                                 return 'state_072';
                             });
