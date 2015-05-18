@@ -1484,7 +1484,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("should stall them", function() {
+                it("should stall them after they choose their location", function() {
                     return tester
                         .setup.user.addr('064001')
                         .inputs(
@@ -1500,6 +1500,24 @@ describe("refugeerights app", function() {
                                 "The system is looking up services near you. This usually takes less than a minute.",
                                 "1. View services"
                             ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should fire metrics after their location is submitted", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Quad Street'  // state_locate_me
+                            , '3'  // state_locate_me
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.location_queries.last'].values, [1]);
+                            assert.deepEqual(metrics['total.location_queries.sum'].values, [1]);
                         })
                         .run();
                 });

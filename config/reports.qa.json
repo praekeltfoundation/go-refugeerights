@@ -868,7 +868,71 @@
             }
         },
 
+        "new_row",
 
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Location Queries Submitted (Last 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.location_queries.last",
+                "aggregator": "last"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Location Queries Submitted (Last 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 6,
+            "metrics": [
+                {
+                    "name": "Total Location Queries",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.location_queries.last",
+                        "aggregator": "last"
+                    }
+                }
+            ]
+        },
+
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "365d",
+            "name": "Location Queries Submitted (Sum 7d)",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.location_queries.sum",
+                "aggregator": "sum"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.graph.GraphWidget",
+            "name": "Location Queries Submitted (Sum 16w)",
+            "time_range": "112d",
+            "bucket_size": "7d",
+            "width": 6,
+            "metrics": [
+                {
+                    "name": "Total Location Queries",
+                    "target": {
+                        "metric_type": "account",
+                        "store": "refugeerights_qa",
+                        "name": "total.location_queries.sum",
+                        "aggregator": "sum"
+                    }
+                }
+            ]
+        },
 
 
 
