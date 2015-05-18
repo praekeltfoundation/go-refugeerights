@@ -9,12 +9,14 @@ var Q = require('q');
 var moment = require('moment');
 var vumigo = require('vumigo_v02');
 var HttpApi = vumigo.http.api.HttpApi;
+var JsonApi = vumigo.http.api.JsonApi;
 
 // Shared utils lib
 go.utils = {
 
     timed_out: function(im) {
-        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main'];
+        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main',
+                            'state_locate_exit'];
         return im.msg.session_event === 'new'
             && im.user.state.name
             && no_redirects.indexOf(im.user.state.name) === -1;
@@ -327,6 +329,89 @@ go.utils = {
         ]);
     },
 
+    locate_poi: function(im, contact) {
+        var req_lookup_url = im.config.location_api_url + 'requestlookup/';
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.api_key]
+            }
+        });
+        return http.post(req_lookup_url, {
+            data: go.utils.make_lookup_data(im, contact, go.utils.make_user_location_data(contact))
+        })
+        .then(function(response) {
+            contact.extra.poi_url = response.data.url;
+            return im.contacts.save(contact);
+        });
+    },
+
+    make_user_location_data: function(contact) {
+        var location_data = {
+            point: {
+                type: "Point",
+                coordinates: [
+                    parseFloat(contact.extra['location:lon']),
+                    parseFloat(contact.extra['location:lat'])
+                ]
+            }
+        };
+        return location_data;
+    },
+
+    make_lookup_data: function(im, contact, user_location) {
+        var lookup_data = {
+            search: go.utils.make_poi_search_params(im),
+            response: {
+                type: "USSD",
+                to_addr: contact.msisdn,
+                template: im.config.template  // used for SMS only
+            },
+            location: user_location
+        };
+        return lookup_data;
+    },
+
+    make_poi_search_params: function(im) {
+        var poi_type_wanted = "all";  // hardcoded as no more info currently available
+        var search_data = {};
+
+        if (poi_type_wanted === "all") {
+            im.config.poi_types.forEach(function(poi_type) {
+                search_data[poi_type] = "true";
+            });
+        } else {
+            search_data[poi_type_wanted] = "true";
+        }
+        return search_data;
+    },
+
+    get_poi_results: function(im, contact) {
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.api_key]
+            }
+        });
+        return http.get(contact.extra.poi_url)
+        .then(function(response) {
+            return response.data.response.results;
+        });
+    },
+
+    shorten_province: function(province) {
+        var province_shortening = {
+            'Gauteng': 'GP',
+            'Mpumalanga': 'MP',
+            'Limpopo': 'LP',
+            'North West': 'NW',
+            'Eastern Cape': 'EC',
+            'Western Cape': 'WC',
+            'Northern Cape': 'NC',
+            'KwaZulu-Natal': 'KZN',
+            'Free State': 'FS'
+        };
+        return province_shortening[province];
+    },
+
     "commas": "commas"
 };
 
@@ -340,6 +425,9 @@ go.app = function() {
     var PaginatedChoiceState = vumigo.states.PaginatedChoiceState;
     var PaginatedState = vumigo.states.PaginatedState;
     var EndState = vumigo.states.EndState;
+    var location = require('go-jsbox-location');
+    var LocationState = location.LocationState;
+    var OpenStreetMap = location.providers.openstreetmap.OpenStreetMap;
 
 
     var GoRR = App.extend(function(self) {
@@ -697,6 +785,196 @@ go.app = function() {
                 }
             });
         });
+
+
+    // LOCATION FINDING STATES
+
+        // state_locate_me
+        self.states.add('state_locate_me', function(name) {
+            return new LocationState(name, {
+                question:
+                    $("To find your closest SService we need to know " +
+                      "what suburb or area u are in. Please be " +
+                      "specific. e.g. Inanda Sandton"),
+                refine_question:
+                    $("Please select your location:"),
+                error_question:
+                    $("Sorry there are no results for your location. " +
+                      "Please re-enter your location again carefully " +
+                      "and make sure you use the correct spelling."),
+                next: 'state_locate_SService',
+                next_text: 'More',
+                previous_text: 'Back',
+
+                map_provider: new OpenStreetMap({
+                    bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
+                    address_limit: 4,
+
+                    extract_address_data: function(result) {
+                        var formatted_address;
+                        var addr_from_details = [];
+                        if (!result.address) {
+                            formatted_address = result.display_name;
+                        } else {
+                            // var city = result.address.city ||
+                            //     result.address.town || result.address.village;
+                            result.address.city = result.address.city ||
+                                result.address.town || result.address.village;
+
+                            var addr_details = ['suburb', 'city', 'state'];
+
+                            addr_details.forEach(function(detail) {
+                                if (result.address[detail] !== undefined) {
+                                    addr_from_details.push(result.address[detail]);
+                                } else {
+                                    addr_from_details.push('n/a');
+                                }
+                            });
+
+                            formatted_address = addr_from_details.join(', ');
+                        }
+                        return {
+                            formatted_address: formatted_address,
+                            lat: result.lat,
+                            lon: result.lon,
+                            suburb: addr_from_details[0],
+                            city: addr_from_details[1],
+                            province: addr_from_details[2]
+                        };
+                    },
+
+                    extract_address_label: function(result) {
+                        if (!result.address) {
+                            return result.display_name;
+                        } else {
+                            result.address.city = result.address.city ||
+                                result.address.town || result.address.village;
+
+                            var addr_details = ['suburb', 'city', 'state'];
+                            var addr_from_details = [];
+
+                            addr_details.forEach(function(detail) {
+                                if (result.address[detail] !== undefined) {
+                                    if (detail === 'state') {
+                                        result.address[detail] = go.utils
+                                                        .shorten_province(result.address[detail]);
+                                    }
+                                    addr_from_details.push(result.address[detail]);
+                                // } else {
+                                //     addr_from_details.push('n/a');
+                                }
+                            });
+
+                            return addr_from_details.join(', ');
+                        }
+                    }
+                })
+            });
+        });
+
+        // state_locate_SService
+        self.states.add('state_locate_SService', function(name) {
+            // reload the contact
+            return self.im.contacts
+                .for_user()
+                .then(function(user_contact) {
+                    self.contact = user_contact;
+                })
+                .then(function() {
+                    // send the post request
+                    return go.utils
+                        .locate_poi(self.im, self.contact)
+                        .then(function() {
+                            return self.states.create(
+                                'state_locate_stall_initial');
+                        });
+                });
+        });
+
+        // state_locate_stall_initial
+        self.add('state_locate_stall_initial', function(name) {
+            return new ChoiceState(name, {
+                question: $("The system is looking up services near you. This usually takes less than a minute."),
+                choices: [
+                    new Choice('state_locate_get_results', $("View services"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // state_locate_stall_again
+        self.add('state_locate_stall_again', function(name) {
+            return new ChoiceState(name, {
+                question: $("The system was still busy finding your services. Please try again now or choose Exit and dial back later."),
+                choices: [
+                    new Choice('state_locate_get_results', $("View services")),
+                    new Choice('state_locate_exit', $("Exit"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // state_locate_exit
+        self.add('state_locate_exit', function(name) {
+            return new EndState(name, {
+                text: $('Please dial back in a few minutes to see your services results'),
+                next: 'state_locate_stall_again'
+            });
+        });
+
+
+        // state_locate_get_results
+        self.add('state_locate_get_results', function(name) {
+            return go.utils.get_poi_results(self.im, self.contact)
+            .then(function(poi_results) {
+                if (poi_results.length === 0) {
+                    // stall again if results are not available
+                    return self.states.create('state_locate_stall_again');
+                } else {
+                    var opts = { poi_results: poi_results };
+                    return self.states.create('state_locate_show_results', opts);
+                }
+            });
+        });
+
+        // state_locate_show_results
+        self.add('state_locate_show_results', function(name, opts) {
+            var choices = [];
+            opts.poi_results.forEach(function(poi_result) {
+                choices.push(new Choice('state_locate_details', poi_result));
+            });
+
+            return new ChoiceState(name, {
+                question: $('Select a service for more info'),
+                choices: choices,
+                next: function(choice) {
+                    // TODO create state that shows the selected service's details after Api has
+                    // been implemented
+                    return choice.value;
+                }
+            });
+        });
+
+
+    // REFUGEE MENU STATES
+
+        // 024
+        self.add('state_024', function(name) {
+            return new ChoiceState(name, {
+                question: $('Select an option'),
+                choices: [
+                    new Choice('state_locate_me', $("Find nearest SService"))
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
 
 
     // MIGRANT MENU STATES
