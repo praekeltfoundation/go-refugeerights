@@ -550,8 +550,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
+                            , '3'  // state_status (refugee)
                             , {session_event: 'close'}  // may or may not work
                             , {session_event: 'new'}  // redial
                         )
@@ -882,8 +881,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '2'  // state_status (who is migrant)
-                            , '1'  // state_who_migrant (yes - migrant)
+                            , '4'  // state_status (migrant)
                             , '2'  // state_migrant_rights_info (exit)
                             , {session_event: 'close'}  // may or may not work
                         )
@@ -903,8 +901,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '2'  // state_status (who is migrant)
-                            , '1'  // state_who_migrant (yes - migrant)
+                            , '4'  // state_status (migrant)
                             , '2'  // state_migrant_rights_info (exit)
                             , {session_event: 'close'}  // may or may not work
                         )
@@ -1040,7 +1037,9 @@ describe("refugeerights app", function() {
                                 'Are you a refugee or migrant?',
                                 '1. Who is a refugee?',
                                 '2. Who is a migrant?',
-                                '3. I am neither'
+                                '3. I am a refugee',
+                                '4. I am a migrant',
+                                '5. I am neither'
                             ].join('\n')
                         })
                         .run();
@@ -1082,9 +1081,9 @@ describe("refugeerights app", function() {
                             .check.interaction({
                                 state: 'state_who_refugee',
                                 reply: [
-                                    'CONTENT 004',
-                                    '1. Yes, I am a refugee',
-                                    '2. No, back to menu'
+                                    "If you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group. Or; if your life, safety or freedom in your home country are at risk because of violence, war & civil unrest. Or; if you are married to or depend upon a person who fled their country in fear of their life for the reasons listed. You are entitled to refugee status if you are married to a recognised refugee, even if your own claim was rejected.",
+                                    "1. ->",
+                                    "2. OK"
                                 ].join('\n')
                             })
                             .run();
@@ -1104,9 +1103,9 @@ describe("refugeerights app", function() {
                             .check.interaction({
                                 state: 'state_who_migrant',
                                 reply: [
-                                    'CONTENT 005',
-                                    '1. Yes, I am a migrant',
-                                    '2. No, back to menu'
+                                    "If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa.Remember: a migrant can become a refugee should one of the reasons for refugee status takes place in their country of origin.",
+                                    '1. ->',
+                                    '2. OK'
                                 ].join('\n')
                             })
                             .run();
@@ -1122,7 +1121,7 @@ describe("refugeerights app", function() {
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language (french)
                                 , '5'  // state_country (burundi)
-                                , '3'  // state_status (neither)
+                                , '5'  // state_status (neither)
                             )
                             .check.interaction({
                                 state: 'state_neither',
@@ -1164,8 +1163,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
+                            , '3'  // state_status (refugee)
                         )
                         .check.interaction({
                             state: 'state_refugee_rights_info',
@@ -1185,8 +1183,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
+                            , '3'  // state_status (refugee)
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
@@ -1216,8 +1213,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
+                            , '3'  // state_status (refugee)
                         )
                         .check(function(api) {
                             var contact = _.find(api.contacts.store, {
@@ -1240,8 +1236,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
+                            , '3'  // state_status (refugee)
                             , '2'  // state_refugee_rights_info (exit)
                         )
                         .check.interaction({
@@ -1269,8 +1264,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '2'  // state_status (who is migrant)
-                            , '1'  // state_who_migrant (yes - migrant)
+                            , '4'  // state_status (migrant)
                         )
                         .check.interaction({
                             state: 'state_migrant_rights_info',
@@ -1290,8 +1284,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '2'  // state_status (who is migrant)
-                            , '1'  // state_who_migrant (yes - migrant)
+                            , '4'  // state_status (migrant)
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;
@@ -1321,8 +1314,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '2'  // state_status (who is migrant)
-                            , '1'  // state_who_migrant (yes - migrant)
+                            , '4'  // state_status (migrant)
                         )
                         .check(function(api) {
                             var contact = _.find(api.contacts.store, {
@@ -1345,8 +1337,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '2'  // state_status (who is migrant)
-                            , '1'  // state_who_migrant (yes - migrant)
+                            , '4'  // state_status (migrant)
                             , '2'  // state_migrant_rights_info (exit)
                         )
                         .check.interaction({
@@ -2984,8 +2975,7 @@ describe("refugeerights app", function() {
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language (french)
                             , '5'  // state_country (burundi)
-                            , '1'  // state_status (who is refugee)
-                            , '1'  // state_who_refugee (yes - refugee)
+                            , '3'  // state_status (refugee)
                             , '3'  // state_refugee_rights_info (exit)
                             , {session_event: 'close'}
                             , {session_event: 'new'}  // redial
