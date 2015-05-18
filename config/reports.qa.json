@@ -985,8 +985,45 @@
                     }
                 }
             ]
-        }
+        },
 
+        "new_row",
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Attempted optouts",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.optouts",
+                "aggregator": "last"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Successful unsubscribes",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.subscription_unsubscribe_success.last",
+                "aggregator": "last"
+            }
+        },
+
+        {
+            "type": "diamondash.widgets.lvalue.LValueWidget",
+            "time_range": "7d",
+            "name": "Failed unsubscribes",
+            "target": {
+                "metric_type": "account",
+                "store": "refugeerights_qa",
+                "name": "total.subscription_unsubscribe_fail.last",
+                "aggregator": "last"
+            }
+        }
 
     ]
 }
