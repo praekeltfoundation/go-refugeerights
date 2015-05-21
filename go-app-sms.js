@@ -212,10 +212,44 @@ go.utils = {
         });
     },
 
-    subscription_update_language: function(contact, im) {
-        // TODO patch subscription language
-        return Q();
+    subscription_update_language: function(im, contact) {
+        var params = {
+            to_addr: contact.msisdn
+        };
+        return go.utils
+        .control_api_call("get", params, null, 'subscription/', im)
+        .then(function(json_result) {
+            // change all subscription languages
+            var update = JSON.parse(json_result.data);
+            var clean = true;  // clean tracks if api call is unnecessary
+            for (i=0; i<update.objects.length; i++) {
+                if (update.objects[i].lang !== contact.extra.lang) {
+                    update.objects[i].lang = contact.extra.lang;
+                    clean = false;
+                }
+            }
+            if (!clean) {
+                return go.utils
+                .control_api_call("patch", {}, update, 'subscription/', im)
+                .then(function(result) {
+                    if (result.code >= 200 && result.code < 300) {
+                        return Q.all([
+                            im.metrics.fire.inc(["total", "subscription_lang_update_success", "last"].join('.')),
+                            im.metrics.fire.sum(["total", "subscription_lang_update_success", "sum"].join('.'), 1)
+                        ]);
+                    } else {
+                        return Q.all([
+                            im.metrics.fire.inc(["total", "subscription_lang_update_fail", "last"].join('.')),
+                            im.metrics.fire.sum(["total", "subscription_lang_update_fail", "sum"].join('.'), 1)
+                        ]);
+                    }
+                });
+            } else {
+                return Q();
+            }
+        });
     },
+
 
     subscription_unsubscribe_all: function(contact, im) {
         var params = {
@@ -487,7 +521,7 @@ go.app = function() {
     // OPTOUT STATES
         self.states.add('state_opt_out_enter', function(name) {
             return go.utils
-                .opt_out(self.im, self.contact)  // TODO
+                .opt_out(self.im, self.contact)
                 .then(function() {
                     return self.states.create('state_opt_out');
                 });
@@ -504,7 +538,7 @@ go.app = function() {
     // OPTIN STATES
         self.states.add('state_opt_in_enter', function(name) {
             return go.utils
-                .opt_in(self.im, self.contact)  // TODO
+                .opt_in(self.im, self.contact)
                 .then(function() {
                     return self.states.create('state_opt_in');
                 });
