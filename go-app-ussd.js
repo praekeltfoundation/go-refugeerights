@@ -2061,15 +2061,11 @@ go.app = function() {
                         new Choice('so', $("Somali")),
                     ],
                     next: function(choice) {
-                        if (self.contact.extra.lang === choice.value) {
-                            return 'state_072';
-                        } else {
-                            return go.utils
-                                .update_language(self.im, self.contact, choice.value)
-                                .then(function() {
-                                    return 'state_072';
-                                });
-                        }
+                        return go.utils
+                            .update_language(self.im, self.contact, choice.value)
+                            .then(function() {
+                                return 'state_072';
+                            });
                     }
                 });
             });
