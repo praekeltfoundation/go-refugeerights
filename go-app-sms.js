@@ -114,8 +114,6 @@ go.utils = {
             im.contacts.save(contact),
             im.metrics.fire.inc(['total', 'change_status', 'last'].join('.')),
             im.metrics.fire.sum(['total', 'change_status', 'sum'].join('.'), 1)
-            // TODO if the subscriptions contain the users' status, the subscription
-            // will also need updating here.
         ]);
     },
 

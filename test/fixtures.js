@@ -27,36 +27,34 @@ return [
                 "data": {
                     "objects": [
                         {
+                            "url": "http://127.0.0.1:8000/subscription/subscription/1/",
                             "active": true,
                             "completed": false,
                             "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
                             "created_at": "2014-08-05T11:22:34.838969",
                             "id": 1,
                             "lang": "en",
-                            "message_set": "/api/v1/message_set/1/",
+                            "messageset_id": 1,
                             "next_sequence_number": 1,
                             "process_status": 0,
-                            "resource_uri": "/api/v1/subscription/1/",
-                            "schedule": "/api/v1/periodic_task/1/",
+                            "schedule": 1,
                             "to_addr": "+064001",
                             "updated_at": "2014-08-05T11:22:34.838996",
-                            "user_account": "1aa0dea2f82945a48cc258c61d756f16"
                         },
                         {
+                            "url": "http://127.0.0.1:8000/subscription/subscription/2/",
                             "active": true,
                             "completed": false,
                             "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
                             "created_at": "2014-08-05T11:31:50.908974",
                             "id": 2,
                             "lang": "af",
-                            "message_set": "/api/v1/message_set/1/",
+                            "messageset_id": 1,
                             "next_sequence_number": 1,
                             "process_status": 0,
-                            "resource_uri": "/api/v1/subscription/2/",
-                            "schedule": "/api/v1/periodic_task/1/",
+                            "schedule": 1,
                             "to_addr": "+064001",
                             "updated_at": "2014-08-05T11:31:50.909025",
-                            "user_account": "1aa0dea2f82945a48cc258c61d756f16"
                         }
                     ]
                 }
@@ -74,36 +72,34 @@ return [
                 "data": {
                     "objects": [
                         {
+                            "url": "http://127.0.0.1:8000/subscription/subscription/1/",
                             "active": false,
                             "completed": false,
                             "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
                             "created_at": "2014-08-05T11:22:34.838969",
                             "id": 1,
                             "lang": "en",
-                            "message_set": "/api/v1/message_set/1/",
+                            "messageset_id": 1,
                             "next_sequence_number": 1,
                             "process_status": 0,
-                            "resource_uri": "/api/v1/subscription/1/",
-                            "schedule": "/api/v1/periodic_task/1/",
+                            "schedule": 1,
                             "to_addr": "+064001",
                             "updated_at": "2014-08-05T11:22:34.838996",
-                            "user_account": "1aa0dea2f82945a48cc258c61d756f16"
                         },
                         {
+                            "url": "http://127.0.0.1:8000/subscription/subscription/2/",
                             "active": false,
                             "completed": false,
                             "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
                             "created_at": "2014-08-05T11:31:50.908974",
                             "id": 2,
                             "lang": "af",
-                            "message_set": "/api/v1/message_set/1/",
+                            "messageset_id": 1,
                             "next_sequence_number": 1,
                             "process_status": 0,
-                            "resource_uri": "/api/v1/subscription/2/",
-                            "schedule": "/api/v1/periodic_task/1/",
+                            "schedule": 1,
                             "to_addr": "+064001",
                             "updated_at": "2014-08-05T11:31:50.909025",
-                            "user_account": "1aa0dea2f82945a48cc258c61d756f16"
                         }
                     ]
                 }
@@ -125,7 +121,7 @@ return [
                     'Authorization': ['ApiKey test_user:test_key'],
                     'Content-Type': ['application/json']
                 },
-                "url": 'http://fixture/api/v1/subscription/',
+                "url": 'http://127.0.0.1:8000/subscription/subscription/',
                 "data": {
                     "contact_key": "contact_key",
                     "to_addr": "+082111",
