@@ -128,12 +128,10 @@ return [
                 "url": 'http://fixture/api/v1/subscription/',
                 "data": {
                     "contact_key": "contact_key",
-                    "lang": "fr",
-                    "message_set": "/api/v1/message_set/1/",
-                    "next_sequence_number": 1,
-                    "schedule": "/api/v1/periodic_task/1/",
                     "to_addr": "+082111",
-                    "user_account": "contact_user_account"
+                    "lang": "fr",
+                    "messageset_id": 1,
+                    "schedule": 1,
                 }
             },
             "response": {

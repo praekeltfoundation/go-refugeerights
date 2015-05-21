@@ -189,15 +189,12 @@ go.utils = {
     },
 
     subscription_subscribe: function(contact, im) {
-        // TODO update payload to new message subscription protocol
         var payload = {
             contact_key: contact.key,
-            lang: contact.extra.lang,
-            message_set: "/api/v1/message_set/" + '1' + "/",
-            next_sequence_number: 1,
-            schedule: "/api/v1/periodic_task/" + '1' + "/",
             to_addr: contact.msisdn,
-            user_account: contact.user_account
+            lang: contact.extra.lang,
+            messageset_id: 1,
+            schedule: 1
         };
 
         return go.utils
