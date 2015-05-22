@@ -395,7 +395,9 @@ go.utils = {
             response: {
                 type: "USSD",
                 to_addr: contact.msisdn,
-                template: im.config.template  // used for SMS only
+                template: im.config.template,  // used for SMS only
+                results: "",
+                results_detailed: '[]'
             },
             location: user_location
         };
@@ -422,10 +424,11 @@ go.utils = {
                 'Authorization': ['Token ' + im.config.api_key]
             }
         });
-        return http.get(contact.extra.poi_url)
-        .then(function(response) {
-            return response.data.response.results;
-        });
+        return http
+            .get(contact.extra.poi_url)
+            .then(function(response) {
+                return JSON.parse(response.data.response.results_detailed);
+            });
     },
 
     shorten_province: function(province) {
