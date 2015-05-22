@@ -5,7 +5,7 @@
     "control": {
         "username": "test_user",
         "api_key": "test_key",
-        "url": "http://rr.qa.praekelt.com/subscription/api/v1/"
+        "url": "http://rr.praekeltfoundation.org/subscription/"
     },
     "endpoints": {
         "sms": {

@@ -71,7 +71,7 @@ go.app = function() {
     // OPTOUT STATES
         self.states.add('state_opt_out_enter', function(name) {
             return go.utils
-                .opt_out(self.im, self.contact)  // TODO
+                .opt_out(self.im, self.contact)
                 .then(function() {
                     return self.states.create('state_opt_out');
                 });
@@ -88,7 +88,7 @@ go.app = function() {
     // OPTIN STATES
         self.states.add('state_opt_in_enter', function(name) {
             return go.utils
-                .opt_in(self.im, self.contact)  // TODO
+                .opt_in(self.im, self.contact)
                 .then(function() {
                     return self.states.create('state_opt_in');
                 });

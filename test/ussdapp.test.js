@@ -28,7 +28,7 @@ describe("refugeerights app", function() {
                     control: {
                         username: "test_user",
                         api_key: "test_key",
-                        url: "http://fixture/api/v1/"
+                        url: "http://127.0.0.1:8000/subscription/"
                     },
                     location_api_url: "http://location_fixture/poifinder/",
                     poi_types: ['lawyer', 'police'],
