@@ -1,7 +1,6 @@
 var Q = require('q');
 var moment = require('moment');
 var vumigo = require('vumigo_v02');
-// var HttpApi = vumigo.http.api.HttpApi;
 var JsonApi = vumigo.http.api.JsonApi;
 
 // Shared utils lib
@@ -152,15 +151,9 @@ go.utils = {
     control_api_call: function (method, params, payload, endpoint, im) {
         var http = new JsonApi(im, {
             headers: {
-                // 'Content-Type': ['application/json'],
                 'Authorization': ['Token ' + im.config.api_key]
             }
         });
-        // var http = new HttpApi(im, {
-        //     headers: {
-        //         'Authorization': ['ApiKey ' + im.config.control.username + ':' + im.config.control.api_key]
-        //     }
-        // });
         switch (method) {
             case "post":
                 return http.post(im.config.control.url + endpoint, {
