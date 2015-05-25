@@ -151,7 +151,7 @@ go.utils = {
     control_api_call: function (method, params, payload, endpoint, im) {
         var http = new JsonApi(im, {
             headers: {
-                'Authorization': ['Token ' + im.config.api_key]
+                'Authorization': ['Token ' + im.config.control.api_key]
             }
         });
         switch (method) {
@@ -353,7 +353,7 @@ go.utils = {
         var req_lookup_url = im.config.location_api_url + 'requestlookup/';
         var http = new JsonApi(im, {
             headers: {
-                'Authorization': ['Token ' + im.config.api_key]
+                'Authorization': ['Token ' + im.config.control.api_key]
             }
         });
         return http.post(req_lookup_url, {
@@ -412,7 +412,7 @@ go.utils = {
     get_poi_results: function(im, contact) {
         var http = new JsonApi(im, {
             headers: {
-                'Authorization': ['Token ' + im.config.api_key]
+                'Authorization': ['Token ' + im.config.control.api_key]
             }
         });
         return http.get(contact.extra.poi_url)
