@@ -204,8 +204,8 @@ return [
                         "type": "USSD",
                         "to_addr": "+064001",
                         "template": "Nearby services: {{ results }}.",
-                        "results": "Mowbray Police station (012 001 0002) AND Turkmenistan Police station (011 001 0002)",
-                        "results_detailed": '[[1, "Mowbray Police (012 001 0002)"], [2, "Turkmenistan Police (011 001 0002)"]]'
+                        "results": "Mowbray Police station (012 001 0002) AND Turkmenistan Police station",
+                        "results_detailed": '[[1, "Mowbray Police (012 001 0002)"], [2, "Turkmenistan Police"]]'
                     },
                     "location": {
                         "id": 1,

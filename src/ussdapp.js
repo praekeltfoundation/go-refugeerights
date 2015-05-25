@@ -509,14 +509,8 @@ go.app = function() {
 
         // state_locate_show_results
         self.add('state_locate_show_results', function(name, opts) {
-            var choices = [];
-            var index = 0;
             var poi_results = opts.poi_results;
-            poi_results.forEach(function(poi_result) {
-                poi_name = poi_result[1].slice(0, poi_result[1].indexOf('(')).trim();
-                choices.push(new Choice(index.toString(), poi_name));
-                index++;
-            });
+            var choices = go.utils.extract_choices_from_results(poi_results);
 
             return new ChoiceState(name, {
                 question: $('Select a service for more info'),

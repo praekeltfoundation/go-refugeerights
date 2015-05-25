@@ -1555,7 +1555,7 @@ describe("refugeerights app", function() {
             });
 
             describe("when the user selects to see more info about a location", function() {
-                it("should show them more info", function() {
+                it("should show them more info (with details)", function() {
                     return tester
                         .setup.user.addr('064001')
                         .inputs(
@@ -1570,6 +1570,27 @@ describe("refugeerights app", function() {
                             state: 'state_locate_details',
                             reply: [
                                 "Mowbray Police (012 001 0002)",
+                                "1. Exit"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should show them more info (without details)", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                            , '2'  // state_locate_show_results
+                        )
+                        .check.interaction({
+                            state: 'state_locate_details',
+                            reply: [
+                                "Turkmenistan Police",
                                 "1. Exit"
                             ].join('\n')
                         })

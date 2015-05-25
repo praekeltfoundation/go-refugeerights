@@ -2,6 +2,7 @@ var Q = require('q');
 var moment = require('moment');
 var vumigo = require('vumigo_v02');
 var JsonApi = vumigo.http.api.JsonApi;
+var Choice = vumigo.states.Choice;
 
 // Shared utils lib
 go.utils = {
@@ -422,6 +423,27 @@ go.utils = {
             .then(function(response) {
                 return JSON.parse(response.data.response.results_detailed);
             });
+    },
+
+    location_contains_details: function(poi_result_text) {
+        return poi_result_text.indexOf('(') !== -1;
+    },
+
+    extract_poi_name: function(poi_result_text) {
+        return go.utils.location_contains_details(poi_result_text)
+                ? poi_result_text.slice(0, poi_result_text.indexOf('(')).trim()
+                : poi_result_text;
+    },
+
+    extract_choices_from_results: function(poi_results) {
+        var choices = [];
+        var index = 0;
+        poi_results.forEach(function(poi_result) {
+            var poi_name = go.utils.extract_poi_name(poi_result[1]);
+            choices.push(new Choice(index.toString(), poi_name));
+            index++;
+        });
+        return choices;
     },
 
     shorten_province: function(province) {
