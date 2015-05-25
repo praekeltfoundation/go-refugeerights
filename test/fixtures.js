@@ -10,8 +10,7 @@ return [
                     'to_addr': '+064001'
                 },
                 'headers': {
-                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
-                    'Content-Type': ['application/json']
+                    'Authorization': ['Token test_key']
                 },
                 'url': 'http://127.0.0.1:8000/subscription/subscription/',
             },
@@ -65,8 +64,7 @@ return [
             'request': {
                 'method': 'PATCH',
                 'headers': {
-                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
-                    'Content-Type': ['application/json']
+                    'Authorization': ['Token test_key']
                 },
                 'url': 'http://127.0.0.1:8000/subscription/subscription/',
                 "data": {
@@ -117,10 +115,7 @@ return [
         {
             "request": {
                 "method": "POST",
-                'headers': {
-                    'Authorization': ['ApiKey test_user:test_key'],
-                    'Content-Type': ['application/json']
-                },
+                'headers': ['Token test_key'],
                 "url": 'http://127.0.0.1:8000/subscription/subscription/',
                 "data": {
                     "contact_key": "contact_key",
@@ -308,8 +303,7 @@ return [
                     'to_addr': '+064002'
                 },
                 'headers': {
-                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
-                    'Content-Type': ['application/json']
+                    'Authorization': ['Token test_key']
                 },
                 'url': 'http://127.0.0.1:8000/subscription/subscription/',
             },
@@ -363,8 +357,7 @@ return [
             'request': {
                 'method': 'PATCH',
                 'headers': {
-                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
-                    'Content-Type': ['application/json']
+                    'Authorization': ['Token test_key']
                 },
                 'url': 'http://127.0.0.1:8000/subscription/subscription/',
                 "data": {
