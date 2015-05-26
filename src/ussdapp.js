@@ -3297,6 +3297,3071 @@ go.app = function() {
             // >> state_261
             // >> state_262
 
+    // USEFUL CONTACT STATES
+
+        self.add("state_031", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_360", $("National & Emergency Helplines")),
+                    new Choice("state_361", $("National Offices")),
+                    new Choice("state_362", $("International Organisations")),
+                    new Choice("state_363", $("National NGOs")),
+                    new Choice("state_045", $("Gauteng")),
+                    new Choice("state_046", $("Western Cape")),
+                    new Choice("state_047", $("KwaZulu-Natal")),
+                    new Choice("state_048", $("Eastern Cape")),
+                    new Choice("state_049", $("Limpopo")),
+                    new Choice("state_050", $("Mpumalanga")),
+                    new Choice("state_051", $("Northern Cape")),
+                    new Choice("state_052", $("North West")),
+                    new Choice("state_053", $("Free State")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+            self.add("state_360", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Women Abuse Helpline: 0800-150-150 Childline: 0800-055-555 AIDS Helpline: 0800-012-322 AIDS Hotline: 0800-110-605 National Network on Violence Against Women: 012-348-1234 or 011-838-0411 Be Court Wise: 083-229-9440 UNHCR: 012-338-5302 DHA Assistance Hotline: 0800-60-11-90 DHA Counter-Corruption Line: 0800-701-701 LoveLife: 0800-121-900 LifeLine Counselling Service: 0861-322-322 CCMA: 0861-16-16-16"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+            self.add("state_361", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_600", $("Dept. of Home Affairs")),
+                        new Choice("state_601", $("Refugee Appeal Board of SA")),
+                        new Choice("state_602", $("Standing Committee on Refugee Affairs")),
+                        new Choice("state_603", $("Dept. of Social Development")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_600", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Refugee affairs, admissions into SA, residency services, status of foreigners, issuing permits. 2nd Floor Executive Block, cnr Maggs & Petroleum Street, Waltloo, Pretoria. Tel: 012-810-8099. Cape Town Tel: 021-465- 3456"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_601", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("The Refugee Appeal Board considers appeals made against the decisions of the Refugee Status Determination Officers. 16th Floor Sanlam Middestad Building, 252 cnr Thabo Sehume & Pretorius Street, Pretoria. Tel: 012-320-1191"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_602", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Reviews unfounded decisions on asylum claims & reviews the work of status determination officers. 16th Floor Sanlam Middestad Building, 252 cnr Thabo Sehume & Pretorius Street, Pretoria. Tel: 012-320-0961"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_603", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Responsible for social assistance & the care of vulnerable persons such as unaccompanied children. 134 Pretorius Street, HSRC Building, Pretoria. Tel: 012-312-7500/7653"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+            self.add("state_362", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_604", $("UNHCR")),
+                        new Choice("state_605", $("UNICEF")),
+                        new Choice("state_606", $("Amnesty International SA")),
+                        new Choice("state_607", $("IOM")),
+                        new Choice("state_608", $("SARCS")),
+                        new Choice("state_609", $("ICRC")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_604", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Assists the SA government to provide through implementing partners protection to refugees & asylum seekers & finds durable solutions. 8th Floor, Metro Park Building, 351 Francis Baard & Sisulu Streets, Pretoria. Tel: 012-354-8303"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_605", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Assists with support for the protection & welfare of children. 6th Floor, Metropark Building, 351 Francis Baard & Sisulu Streets, Pretoria. Tel: 012-354-8200/1"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_606", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Promote & advocates on human rights. No 3 Glenhove Road, Ground Floor, Rosebank. Tel: 011-283-6000"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_607", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Assists with voluntary repatriation & transportation. 826 Government Avenue, Arcadia, Pretoria. Tel: 012-342-2789"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_608", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Gives humanitarian assistance to people affected by conflict & armed violence. Promotes the laws that protect victims of war. 221 Block B, Ground Floor, 1166 Francis Baard Street, Hatfield, Pretoria. Tel: 012-431-8610/12"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_609", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Assists with family tracing. 790/794 Church Street, Arcadia, Pretoria. Tel: 012-430-7335"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+            self.add("state_363", function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $("Select an option:"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    options_per_page: null,
+                    choices: [
+                        new Choice("state_610", $("Law Society of SA")),
+                        new Choice("state_611", $("Legal Aid SA")),
+                        new Choice("state_612", $("FAMSA")),
+                        new Choice("state_613", $("SA Human Rights Commission")),
+                        new Choice("state_614", $("The Public Protector")),
+                        new Choice("state_615", $("Commission on Gender Equality")),
+                        new Choice("state_616", $("CCMA")),
+                        new Choice("state_617", $("Independent Police Investigative Directorate")),
+                        new Choice("state_618", $("Gauteng Rental Housing Tribunal")),
+                        new Choice("state_619", $("SAQA")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_610", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Assists with the identification of attorneys who specialise in immigration & refugee law in your area. 304 Brooks Street, Menlo Park, Pretoria. Tel: 012-366-8800"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_611", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("The LAB provides free legal services to people who can’t afford private legal assistance in SA. Check your region for a LAB office. 29 De Beer Street, Braamfontein, Johannesburg. Tel: 011-877-2000"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_612", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Family & marital counselling. 15 Pascoe Avenue, Kempton Park. Tel: 011-975-7107/1061"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_613", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Addresses human rights violations & seeks to resolve such violations through monitoring, advocacy, education & training. 33 Hoofd Street Braampark Forum 3, Braamfontein, Johannesburg. Tel: 011-877-3750/3600"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_614", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Receives & investigates complaints from the public against government agencies or officials. Hillcrest Office Park, 175 Lunnon Street, Hillcrest, Pretoria. Tel: 012-366-7000 Toll-free: 0800-112-040"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_615", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Promotes gender equality & makes recommendations on any laws & policy which affects gender equality. 2 Kotze Street, Old Women's Jail, East Wing Constitution Hill, Braamfontein, Johannesburg. Tel: 011-403-7182"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_616", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Advises on labour rights & codes of good practice in terms of the Labour Relations Act. Mediates in labour related disputes. CCMA National Office, 28 Harrison Street, Johannesburg. Tel: 011-377-6650/6600 Hotline: 011-834-7351. CCMA House, 127 cnr Fox & Eloff Streets (next to Ghandi Square).  Tel: 011-220-5000"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_617", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Investigates rights violations by the police. City Forum Building, 114 Madiba street, Pretoria. Tel: 012-399-0000"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_618", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Deals with all types of illegal or unfair practices relating to the landlord/tenant relationship. Room 215, Sanlam Plaza East, Pretoria. Tel: 012-358-4403/ 358-4291 Tollfree: 0860-4288-364"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_619", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Provides information regarding the evaluation of foreign qualifications. SAQA House, 1067 Arcadia Street, Hatfield, Pretoria. Tel: 012-431-5000 Helpdesk: 086-010-3188"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+            self.add("state_045", function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $("Select an option:"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    options_per_page: null,
+                    choices: [
+                        new Choice("state_364", $("JHB: Governmental Service Providers")),
+                        new Choice("state_365", $("JHB: Legal Services")),
+                        new Choice("state_366", $("JHB: Basic Needs Service Providers")),
+                        new Choice("state_367", $("JHB: Counselling Services")),
+                        new Choice("state_368", $("JHB: Shelters")),
+                        new Choice("state_369", $("JHB: Soup Kitchens")),
+                        new Choice("state_370", $("JHB: Public Health Centres")),
+                        new Choice("state_371", $("PTA: Governmental Service Providers")),
+                        new Choice("state_372", $("PTA: Legal Service Providers")),
+                        new Choice("state_373", $("PTA: Basic Needs Service Providers")),
+                        new Choice("state_374", $("PTA: Counselling Services")),
+                        new Choice("state_375", $("PTA: Shelters")),
+                        new Choice("state_376", $("PTA: Soup Kitchens")),
+                        new Choice("state_377", $("PTA: Public Health Centres")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_364", function(name) {
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        options_per_page: null,
+                        choices: [
+                            new Choice("state_620", $("Dept. of Home Affairs")),
+                            new Choice("state_621", $("Dept. of Home Affairs: OR Tambo Airport")),
+                            new Choice("state_622", $("Dept. of Home Affairs: Lindela Repatriation Centre")),
+                            new Choice("state_623", $("Dept. of Social Development")),
+                            new Choice("state_624", $("JHB Family Court/Regional Civil Court")),
+                            new Choice("state_625", $("JHB Magistrate’s Court: Civil Section")),
+                            new Choice("state_626", $("City of Joburg Migrant Help Desk")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_620", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("New Government Building, cnr Harrison & Plein Street. Tel: 011-639-4000"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_621", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("OR Tambo Airport Road, Kempton Park. Tel: 011-941-6200"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_622", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("10 Tom Muller Road, Krugersdorp West. Tel: 011-662-0500"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_623", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Thusanong Building, 69 Commissioner Street. Tel: 011-355-7687/7977/7878"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_624", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Decides on family law matters, assists in instituting divorce proceedings. 15 Market Street. Tel: 011-241-6831"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_625", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Cnr Fox & Ntemi Piliso Streets, Marshalltown. Tel: 011-491-5097"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_626", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Assists migrants with accessing government services in Johannesburg & general advice to migrants. CJ Cronje Building, 80 Loveday Str, JHB. Tel: 011-376-8684. Region C Office: 100 Christiaan De Wet Rd, Florida Park, Tel: 011-761-0270/7"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_365", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_627", $("Wits Law Clinic")),
+                            new Choice("state_628", $("LHR")),
+                            new Choice("state_629", $("Legal Resources Centre")),
+                            new Choice("state_630", $("ProBono.org")),
+                            new Choice("state_631", $("LAB Justice Centres")),
+                            new Choice("state_632", $("Black Sash")),
+                            new Choice("state_633", $("Tshwaranang Legal Advocacy Centre")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_627", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides legal assistance with asylum applications, appeals & reviews rejected applications & other general legal advice. 1 Jan Smuts Ave, Braamfontein.Tel: 011-717-8562"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_628", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides legal help with unlawful arrest, detention & deportation. Helps with asylum applications, appeals & reviews rejected applications. 4th Floor Heerengracht Building, 87 De Korte Street (cnr Melle), Braamfontein Tel: 011-339-1960"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_629", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Assists with class action legal cases with an impact on big groups. Bram Fischer Towers, 15th & 16th Floor, 20 Albert Street, Marshalltown. Tel: 011 836-9831"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_630", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("A legal clearing house who puts immigrants in touch with private lawyers who may help for free. 1st Floor West Wing, Women’s Jail, Constitution Hill, 1 Kotze Street, Braamfontein. Tel: 011-339-6080"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_631", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides free legal aid to people who cannot afford private legal assistance. JHB: Sedura Building, 41 Fox Street. Tel: 011-870-1480. ALEXANDRA: 650 Louis Botha Avenue, Kew. Tel: 011-786-3603 BENONI: Bedford Court, 23 Tom Jones Str. Tel: 011-491-1082. GERMISTON: 9th Floor, Standard Bank Towers, President Str. Tel: 011-872-1527 KRUGERSDORP: 3rd Floor, ABSA Building, cnr Krugersdorp & Human Str. Tel: 011-660-2335. SOWETO: Office 403 & 411, Maponya Mall, Klipspruit Tel: 011-988-9011 VEREENIGING: 8 Jasmine Mansions, cnr Leslie & Senator Marks Ave. Tel: 016-421-3527"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_632", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides paralegal assistance to help secure grants & ensures administrative justice for information, education & training. 1st Floor Khotso House, 25 Anderson Street, Marshalltown. Tel: 011-834-8361/5"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_633", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Legal counselling/ advice on domestic violence, sexual offenses, maintenance, custody access. 8th Floor Braamfontein Centre, 23 Jorrisen Street, Braamfontein. Tel: 011-403-4267 or 011-403-8230"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_366", function(name) {
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        options_per_page: null,
+                        choices: [
+                            new Choice("state_634", $("Jesuit Refugee Services")),
+                            new Choice("state_635", $("SARCS")),
+                            new Choice("state_636", $("CBRMC")),
+                            new Choice("state_637", $("Refugee Ministries Centre")),
+                            new Choice("state_638", $("Refugee Children’s Project")),
+                            new Choice("state_639", $("Central Methodist Church")),
+                            new Choice("state_640", $("Papillon Development Centre")),
+                            new Choice("state_641", $("Christians for Peace in Africa")),
+                            new Choice("state_642", $("African Migrants Solidarity")),
+                            new Choice("state_643", $("SAWIMA")),
+                            new Choice("state_644", $("ZANZAT")),
+                            new Choice("state_645", $("Somali Association of SA")),
+                            new Choice("state_646", $("Somali Community Board")),
+                            new Choice("state_647", $("African Diaspora Forum")),
+                            new Choice("state_648", $("ZIPOVA")),
+                            new Choice("state_649", $("Ivorian Community in SA")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_634", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Referrals to hospitals and clinics, counselling to refugees infected with HIV/AIDS. Small business assistance. Educational assistance. 493 Marshall Street, Belgravia, JHB Central. Tel: 011-333-0980"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_635", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Humanitarian assistance, family tracing, facilitating the sending & receiving of messages from families across conflict zones. 4th Floor Heerengracht Building, 87 De Korte Street, Braamfontein. Tel: 011-339-1992"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_636", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Helps with access to primary & secondary education, gives orientation to immigrants arriving in SA, referrals to NGOs on other issues. No.8 Terrace Road, Bertrams, Johannesburg. Tel: 072-222-8755"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_637", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Helps asylum applications in JHB & PTA for vulnerable groups. Gives interpretation services & monitoring at RROs incl. Lindela. 34 Cooper Street, Cyrildene, Bruma. Tel: 011-622-8771/ 615-5608"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_638", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Supports refugee children. Helps with access to schools, applications for fee exemptions, debt cancellation for unpaid school fees. Assists with providing uniforms & stationery, provides skills training to women & teenagers. Assists with psycho-social support. 111 Kerk St (cnr Mooi), 5th Floor Meubelsentrum Building. Tel: 011-487-0020"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_639", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Emergency accommodation for new arrivals. Medical assistance for immigrants. Counselling to refugees infected & affected by HIV/AIDS. Cnr Pritchard & Small Streets. Tel: 011-333-7672"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_640", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Fee-based English classes & computer training. Open to migrants who have documentation. Distributor of clothing to orphans & the poor. Cnr Mabel & Lily Streets, Rosettenville. Tel: 011-435-9799"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_641", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("School matters for asylum seekers & refugees, counselling, second hand clothing distribution & other humanitarian assistance. 23 Melle Street, 12th Floor Management House, Braamfontein. Tel: 072-262-5302 or 011-047-1841."),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_642", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("20 Albert Street cnr Eloff Street, Braam Fischer Towers, 8th Floor, Marshalltown. Tel: 072-117-3853 or 076-286-1511"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_643", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("513 Heerengracht Building, 87 De Korte Street, Braamfontein. Tel: 011-339-3900, 079-873-9021 or 084-097-7891"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_644", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Services humanitarian assistance, business skills training, bursaries. Focussed on Muslims. 39 Mint Road, Fordsburg. Tel: 011-834-6046"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_645", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Information sharing, rights education, welfare coordination, rights protection. 97 7th Avenue (cnr of Church Street), Mayfair. Tel: 011-839-0939"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_646", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Humanitarian assistance, welfare, assistance in accessing documentation, integration assistance. 144 Central Avenue, Mayfair. Tel/Fax: 011-837-2910"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_647", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("24 Rocky Street, Rocky Alley Office 17, Yeoville. Tel: 011-487-0269"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_648", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Welfare assistance, paralegal assistance, counselling referrals. 114 Rissik Street, 1st Floor Methodist House, Braamfontein Tel: 072-517-6066"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_649", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("8 Frances Street, Yeoville, Johannesburg. Tel: 011-487-0885 or 083-514-7367"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_367", function(name) {
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        options_per_page: null,
+                        choices: [
+                            new Choice("state_650", $("Centre for the Study of Violence & Reconciliation")),
+                            new Choice("state_651", $("Islamic Careline")),
+                            new Choice("state_652", $("Islamic Relief SA")),
+                            new Choice("state_653", $("JHB Child Welfare")),
+                            new Choice("state_654", $("Lifeline")),
+                            new Choice("state_655", $("POWA")),
+                            new Choice("state_656", $("Sonke Gender Justice Network")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_650", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Counselling to survivors of violence & torture. Facilitates support groups & training workshops on complex trauma & trauma management. 4th Floor, Braamfontein Centre, 23 Jorrisen Street, Braamfontein. Tel: 011-403-5102"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_651", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Counselling for abused women & children, marital counselling, trauma debriefing, play therapy, HIV/AIDS counselling. 32 Dolly Rathebe Road, Fordsburg. Tel: 011-373-8080/383-6085/6"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_652", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Supports orphans, HIV/AIDS counselling & relief, advocacy for refugees & migrants. 57 Mint Road, 1st Floor, Fordsburg. Tel: 011-836-1054 or 0800-111-898"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_653", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Counselling & therapy for abused children under the age of twelve years. 1st Floor, Edura House, 41 Fox Str. Tel: 011-298-8500"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_654", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Rape counselling for survivors & family, domestic violence counselling & trauma counselling. Face to face counselling by appointment only. 2 The Avenue, Corner Henrietta Street, Norwood. 24hr Crisis Line: 011-728-1347"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_655", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Counselling for women, legal advice & court preparation, shelters for abused women. Tel: 011-642-4345/6. 24hr Crisis Line: 083-765-1235"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_656", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Addresses gender, HIV & health vulnerabilities through advocacy & training. 62 Judas Str, Stevens Building, Braamfontein. Tel: 011-339-3589"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_368", function(name) {
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        options_per_page: null,
+                        choices: [
+                            new Choice("state_657", $("Strabane Mercy Centre")),
+                            new Choice("state_658", $("Usindiso Sanctuary")),
+                            new Choice("state_659", $("Ekhaya Overnight Shelter")),
+                            new Choice("state_660", $("Jabulani Khakibos Kids Centre")),
+                            new Choice("state_661", $("Bethany Shelter")),
+                            new Choice("state_662", $("Twilight Boys")),
+                            new Choice("state_663", $("The House")),
+                            new Choice("state_664", $("Freda Hartley Shelter for Women")),
+                            new Choice("state_665", $("Place of Refuge")),
+                            new Choice("state_666", $("Bienvenue Shelter")),
+                            new Choice("state_667", $("Rosebank Mercy Centre")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_657", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Only men & women over 30 years of age. Fee: R5 per day. 98 Kerk Street, Johannesburg CBD. Tel: 011-336-2423/484-1590/1"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_658", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("For abused women - especially those with children. Capacity for 85 women. Fee: Free 80 Albert Str, Marshalltown. Tel: 011-334-1143"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_659", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Men & women but no children. R15.00 per night. Claim & Smith Streets, Next to Europa House & Madula Mall, Hillbrow. Tel: 011-042-7084"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_660", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("For boys who have been on the streets. 1 High Street, Berea. Tel: 011-642-7736 or 084-620-1465"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_661", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("For abused women. No fee. Cnr Millbourne Road & Viljoen Street, Bertrams. Tel: 011-614-3245"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_662", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Shelter for boys. Tel: 011-484-1590/783-1011 Social worker Emily: 072-864-4963"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_663", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("For girls between 12 & 18 years only. Three month limit dependent on circumstances. 60 Olivia Road 28, Berea, Tel: 074-587-7060"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_664", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Only for women & their children. No fee. 97 Regent Street, Yeoville. Tel: 011-648-6005"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_665", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("For men & women. Cnr Johannesburg Road & 11th Street, La Rochelle. Tel: 011-435-2790 or 011-435-9708"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_666", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("For newly arrived refugee women & children. 3 month limit. Referrals only. 36 Terrace Rd, Bertrams. Tel: 011-624-2915 082-509-2912"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_667", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Single Men. Fee: R5 per night. 17 Sturdee Avenue, Rosebank. Tel: 011-447-4399"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_369", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Irene Church: Cnr Belt & End Str, Doornfontein. Cathedral of Christ the King: Saratoga Ave, Joubert Park. Trinity Congregational Church: Cnr Muller & Bedford Str, Yeoville."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_370", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Coronationville Hospital: Cnr Fuel & Oudtshoorn Str, Coronationville. Tel: 011-470-9000. Helen Joseph Hospital: Perth Rd, Auckland Park. Tel: 011-489-1011. Hillbrow Community Health Centre: Corner Smit & Klein Str, Hillbrow. Tel: 011-720-1125. Johannesburg General Hospital Jubilee Road, Parktown. Tel: 011-488-4911. Yeoville Clinic Family planning, STD testing, HIV counselling, emergency pill, social worker on Thursdays. Cnr Kenmere & Hopkins Str, Yeoville. 011-648-7979."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_371", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_668", $("Dept. of Home Affairs RRO: Marabastad")),
+                            new Choice("state_669", $("Tshwane Interim RRO: PTA Showgrounds")),
+                            new Choice("state_670", $("Dept. of Home Affairs")),
+                            new Choice("state_671", $("PTA Sexual Offences Court")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_668", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Accepts asylum applications from SADC nationals. Cnr E’skia Mphahlele & Struben Street, Pretoria West. Tel: 012-327-3515"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_669", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Receives asylum applications in the Pretoria area. 203 Soutter Street. Tel: 012-306-0800/306-0806"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_670", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("3rd Floor, Sentrakor Building, Pretorius Street. Tel: 012-324-1860/74"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_671", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Cnr Francis Baard & Sophie de Bruyn Street. Tel: 012-319-4000"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_372", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_672", $("LHR")),
+                            new Choice("state_673", $("LAB Justice Centres")),
+                            new Choice("state_674", $("Zimbabwe Exiles Forum")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_672", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides legal assistance with unlawful arrest, detention, deportation & repatriation. Helps with asylum applications, appeals & reviews rejected applications. Advice on family reunification, relocation & resettlement. Kutlwanong Democracy Centre, 357 Visagie Street. Tel: 012-320-2943/4/5"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_673", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides free legal services to people who can’t afford private legal assistance. PTA: Cnr Church & Paul Kruger Str, 2nd Floor FNB Building. Tel: 012-401-920. GA-RANKUWA: Shop 23, Ga-Rankuwa City Centre. Tel: 012-700-0595"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_674", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Access to documentation, legal advice, human rights violation monitoring. Kutlwanong Democracy Centre, 357 Visagie Street. Tel: 012-322-6969 or 072-639-3796"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_373", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_675", $("Refugee Aid Organisation")),
+                            new Choice("state_676", $("Jesuit Refugee Services")),
+                            new Choice("state_677", $("Xaveri Movement")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_675", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Humanitarian assistance for unaccompanied & separated children. Make an appointment. Cnr Sisulu & Jeff Masemola. 012-320-3773/771-7727"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_676", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Health services, vocational skills training, referral letters to hospitals, HIV/AIDS counselling, micro loans & primary education grants. 485 Madiba Street, Arcadia. Tel: 012-323-3116"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_677", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Emergency short term accommodation, food parcels, creche (R250 per month), after-school activities. 140 Visagie Str. Tel: 012-326-5311"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_374", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_678", $("FAMSA")),
+                            new Choice("state_679", $("Lifeline")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_678", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Family & individual counselling. Fees apply. Make an appointment. 234 Lange Street, Brooklyn. Tel: 012-460-0733"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_679", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Rape counselling for survivors & family, domestic violence counselling. Face to face counselling by appointment only. 71 Watermeyer Street, Val de Grace. Tel: 012-804-1853/5916/2434 24hr Crisis Line: 012-340-2061"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_375", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_680", $("Pam se Huis")),
+                            new Choice("state_681", $("Itumeleng")),
+                            new Choice("state_682", $("Mercy House")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_680", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Only old-aged persons & persons living with disability. Fee: R900 per month. 885 January Masilela Street, Hermanstad. Tel: 012-379-7338"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_681", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Only boys between the ages of 6–18 years. Street children only. Maximum capacity: 18 boys. 53 Plein Str, Sunnyside. Tel: 012-343-1373"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_682", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Only accepts referrals from a social worker. For abused women & children. 407 Flower Str, Capital Park, Gezina.Tel: 012-329-5528/6682"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_376", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Catholic Church: Cnr Celliers & Jorissen Str. Gauteng Council of Churches: Monthly food parcels. Newcomers must register with the Council. Show proof of asylum / refugee documents & proof of residency in Pretoria. St Alban’s Church, Francis Baard Str. Tel: 012-323-5188. Roman Catholic Cathedral: Cnr Bosman & Nana Sita Str. Salvation Army: WF Nkomo Str, Pretoria West."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_377", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Pretoria Academic Hospital: Cnr Voortrekker Road & Dr. Savage Str, Gezina. Tel: 012-354-1000. Pretoria West Hospital: Syweirde Str, Pretoria West. Tel: 012-648-7979"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+            self.add("state_046", function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $("Select an option:"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    options_per_page: null,
+                    choices: [
+                        new Choice("state_378", $("Governmental Service Providers")),
+                        new Choice("state_379", $("International Organisations")),
+                        new Choice("state_380", $("Statutory Bodies")),
+                        new Choice("state_381", $("Legal Services")),
+                        new Choice("state_382", $("Basic Needs & Shelters")),
+                        new Choice("state_383", $("Education & Skills Training")),
+                        new Choice("state_384", $("Counselling Services")),
+                        new Choice("state_385", $("Public Health Centres")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_378", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_683", $("Dept. of Home Affairs RRO")),
+                            new Choice("state_684", $("Dept. of Home Affairs")),
+                            new Choice("state_685", $("Dept. of Home Affairs: CT Airport")),
+                            new Choice("state_686", $("Dept. of Social Development")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_683", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Receives asylum applications in the Cape region. 142 Voortrekker Road, Maitland, Cape Town. Tel: 021-514-8414"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_684", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Faircape Building, 56 Barrack Street, Cape Town. Tel: 021-468-4500 or 5th Floor, Customs House, Foreshore, Cape Town. Tel: 021-468-4500"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_685", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Tel: 021-380-5130"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_686", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides assistance & social grants to vulnerable people. Union House, 14 Queen Victoria Str, CT. Tel: 021-483-5045 or 021 483-3083\3125"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_379", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_687", $("IOM")),
+                            new Choice("state_688", $("UNHCR")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_687", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Assists with voluntary return & transportation, migration, health, counter-trafficking & migration information. 80 Strand Street, 2nd Floor, Cape Town. Tel: 021-425-4038"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_688", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("9-11 Greenmarket Square, 2nd Floor Protea Assurance Building, Cape Town. Tel: 021-483-9860/2783/9859/9858"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_380", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_689", $("SA Human Rights Commission")),
+                            new Choice("state_690", $("Commission for Gender Equality")),
+                            new Choice("state_691", $("Independent Police Investigative Directorate")),
+                            new Choice("state_692", $("CCMA")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_689", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("7th Floor ABSA Building, 132 Adderley Street, Cape Town. Tel: 021-426-2277"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_690", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("5th Floor ABSA Building, 132 Adderley Street, Cape Town. Tel: 021-426-4080/3"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_691", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Investigates rights violations by the police. Cnr Mazzur & Petrusa Road, Fintrust Building, Bellville. Tel: 021-941-4800"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_692", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Assists in the event of unfair labour practices. 78 Darling Street, Cape Town. Tel: 021-469-0111"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_381", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_693", $("UCT Law Clinic")),
+                            new Choice("state_694", $("Legal Resources Centre")),
+                            new Choice("state_695", $("Black Sash")),
+                            new Choice("state_696", $("PASSOP")),
+                            new Choice("state_697", $("LAB Justice Centres")),
+                            new Choice("state_698", $("LHR")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_693", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Legal advice to refugees & asylum seekers. Assistance with appeal hearings. Conducts interviews on behalf of UNHCR in Cape Town. Kramer Law School Building, 1 Stanley Road, Middle Campus, University of Cape Town. Tel: 021-650-5652/2678/5581"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_694", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Legal assistance to refugees & asylum seekers in class actions or broad public interest matters. Greenmarket Place, 54 Shortmarket Street, Cape Town. Tel: 021-423-8285"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_695", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Black Sash works in three areas in the social protection arena, with an emphasis on women & children. 3rd Floor, Matador Centre, 62 Strand Street, Cape Town. Tel: 021-425-3417"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_696", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Paralegal help with education, employment & health care. Networking assistance. 37 Cnr Main Rd & Church Str, Wynberg, CT. Tel: 021-762-7322"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_697", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Free legal assistance for people who can’t afford private legal assistance. ATHLONE: Melofin Centre, Old Klipfontein Rd. Tel: 021-697-5252. CALEDON: 19 Donkin Str, Caledon. Tel: 028-212-1815 CT: 60 St Georges Mall, Reserve Bank Building 021-426-4074. GEORGE: Tommy Joubert Building, cnr Cradock & Courtenay Str. 044-802-8600. STELLENBOSCH: Eikestad Mall, 2nd Floor, Room 201. Tel: 021-882-9221. VREDENDAL: 9 Dorp Street. Tel: 027-201-1030. WORCESTER: 1st Floor, Nedbank Building, cnr High & Stockenstrom Str. Tel: 023-348-4040"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_698", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Legal assistance on farm workers issues. Will facilitate migrants’ issues by assisting in contacting LHR in Pretoria or Johannesburg. 4th floor Poyntons Building, 24 Burg Street, Tel: 021-424-4762."),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_382", function(name) {
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        options_per_page: null,
+                        choices: [
+                            new Choice("state_699", $("Cape Town Refugee Centre")),
+                            new Choice("state_700", $("Catholic Welfare & Development")),
+                            new Choice("state_701", $("Scalabrini Centre of Cape Town")),
+                            new Choice("state_702", $("African Disabled Refugee Organisation")),
+                            new Choice("state_703", $("Islamic Relief SA")),
+                            new Choice("state_704", $("Africa Unite")),
+                            new Choice("state_705", $("The Ark City of Refuge")),
+                            new Choice("state_706", $("Salvation Army")),
+                            new Choice("state_707", $("The Haven")),
+                            new Choice("state_708", $("Rosemoore Shelter")),
+                            new Choice("state_709", $("Saartjie Baartman Centre")),
+                            new Choice("state_710", $("SARCS")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_699", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Food & accommodation, medical help incl. pregnant women & women with infants, help with accessing schools & unaccompanied minors. 1st Floor Wynberg Centre, 123 Main Road, Wynberg. Tel: 021-762-9670"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_700", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Bonne Esperance Shelter for Women & Children: Limited assistance with food, accommodation & clothing, daycare & after-school care for children. Language classes & skills training. Must have referral from Cape Town Refugee Centre. 37a Somerset Road, Cape Town. Tel: 021-425-2095."),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_701", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Daily intake for food and clothing. Safeguards human, refugee & labour rights. Trauma counselling. Fee-based training & life skills. Gives information & referrals for access to education, medical, legal & social assistance. 47 Commercial Street. Tel: 021-465-6433"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_702", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Rights information, skills training, some food & accommodation assistance. 6 Spin Street, Athlone, Cape Town. Tel: 021-691-0145"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_703", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Supports orphans, HIV/AIDS counselling & relief, advocacy for refugees & migrants. 62 Little Road, Athlone, Cape Town. Tel: 021-696-0145"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_704", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Promotes human rights & youth development. 6 Spin Street, Cape Town. Tel: 021-461-6551"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_705", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Only for the homeless & unemployed. Shelter & food for refugees & asylum seekers with valid permits. CT Refugee Centre referral needed. School facilities, creche, computer classes & skills training. 5 Old Faure Road, Cape Town. Tel: 021-843-3927"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_706", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Counselling, shelter & food for abused women & children only. 22 Tarentaal Road, Bridgetown, Cape Town. Tel: 021-638-5511"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_707", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("R10 per night for adults. R 750.00 monthly fee for pensioners. Ambagvallei Street, Hugenoot, Paarl. Tel: 021-862-1812"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_708", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Food & shelter for abused women & children only. Canary street, Rosemoor, George. Tel/Fax: 044-875-1551"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_709", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Focuses on abused women. Shelter & various other projects. Cnr Klipfontein & Aries Road, Mannenberg. Tel: 021-633-5287"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_710", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Tracing services, assistance in re-uniting vulnerable persons, requests for school, university, birth, marriage or death certificates. 21 Broad Road, Wynberg, Cape Town. Tel: 021-797-5360, 011-887-3259 or 079-887-3259"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_383", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_711", $("ARESTA")),
+                            new Choice("state_712", $("Alliance for Refugees in SA")),
+                            new Choice("state_713", $("Excelsior Empowerment Centre")),
+                            new Choice("state_714", $("St. Joseph’s College")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_711", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Skills training, psychosocial support groups, advocacy & lobbying. 3 Beverly Str, Athlone CBD, Cape Town. Tel: 021-696-5764"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_712", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Skills training, income generation projects, information centre, early childhood development, cultural activities. 9th Floor, Thilbault’s House, St George’s Street, Cape Town. Tel: 021-421-0111"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_713", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Skills development, language classes, soccer events. 1st Floor, Shamdoll Centre, 54 Halt Road, Elsies River. Tel/Fax: 021-932-8585"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_714", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Skills training. Bursaries for skills training courses available for refugees & asylum seekers. 21 Belmont Rd, Rondebosch. Tel: 021-685-1257"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_384", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_715", $("The Trauma Centre")),
+                            new Choice("state_716", $("Lifeline/Childline")),
+                            new Choice("state_717", $("Sonke Gender Justice Network")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_715", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Counselling for refugees & asylum seekers who are survivors of torture & trauma. Integration support, information workshops & support groups. Cowley House, 126 Chapel Street, Woodstock. Call to make an appointment. Tel: 021-465-7373"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_716", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("24 hour telephone counselling services.56 Roeland Street, Cape Town. Tel: 021-461-1113 Crisis: 021-461-1111"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_717", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Sexual & reproductive health education for refugees, distribution of condoms, addresses HIV, health vulnerabilities & gender issues. 122 Longmarket Street, 4th Floor Westminster House. Tel: 021-423-7088"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_385", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Groote Schuur Hospital: Main Road, Observatory, Cape Town. Tel: 021-404-9111. Tygerberg Hospital: Fransie van Zyl Avenue, Tygerberg. Tel: 021-938-4911. Red Cross Children's Hospital: Klipfontein Road, Rondebosch. Tel: 021-658-5111"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+            self.add("state_047", function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $("Select an option:"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    options_per_page: null,
+                    choices: [
+                        new Choice("state_386", $("Governmental Service Providers")),
+                        new Choice("state_387", $("International Organisations")),
+                        new Choice("state_388", $("Statutory Bodies")),
+                        new Choice("state_389", $("Legal Services")),
+                        new Choice("state_390", $("Basic Needs Service Providers")),
+                        new Choice("state_391", $("Counselling Services")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_386", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_718", $("Dept. of Home Affairs RRO")),
+                            new Choice("state_719", $("Dept. of Home Affairs")),
+                            new Choice("state_720", $("Dept. of Social Development")),
+                            new Choice("state_721", $("Dept. of Social Development: PMB")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_718", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Receives all asylum applications in the KwaZulu-Natal region. 132 Moore Street, Durban. Tel: 031-362-1205"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_719", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("2nd Floor, United Building, 181 Church Street, Pietermaritzburg. Tel: 039-345-4177"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_720", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Room 139, 1st Floor, Esplanade Government Building, Corner Stanger & Victoria Embankment. Tel: 031-360-5444"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_721", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("208 Hoosen Haffejee Street, Pietermaritzburg. Tel: 033-264-5400"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_387", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("IOM: Assists with voluntary return & transportation, migration health, counter-trafficking & migration information. Commercial City Building, Suite 1606, 40 Dr. A.D Xuma Road. Tel: 031-304-4057"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_388", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_722", $("SA Human Rights Commission")),
+                            new Choice("state_723", $("Commission for Gender Equality")),
+                            new Choice("state_724", $("CCMA")),
+                            new Choice("state_725", $("Independent Complaints Directorate")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_722", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("1st Floor, Victoria Embankment, Durban. Tel: 031-304-7323/4/5"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_723", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Commercial City Building, 12 Floor, 40 Dr. A.D. Xuma Road Durban. Tel: 031-305-2105"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_724", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Embassy Building, 1st Floor Registrations & 7th Floor Hearings, 199 Smith Street, Durban. Tel: 031-362 2300/368-7387"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_725", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("The Marine Building 3rd Floor, 22 Dorothy Nyembe Street, Durban. Tel: 031-310-1300"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_389", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_726", $("LHR")),
+                            new Choice("state_727", $("Legal Resources Centre")),
+                            new Choice("state_728", $("ProBono.org")),
+                            new Choice("state_729", $("Black Sash")),
+                            new Choice("state_730", $("LAB Justice Centres")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_726", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Legal help with unlawful arrest, detention, deportation, reunification, resettlement & repatriation. Representation at appeals & reviews. Diakonia Centre, 20 Diakonia Avenue, Durban. Tel: 031-301-0531"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_727", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Takes up legal cases that will benefit a group of people. Diakonia Centre, 20 Diakonia Avenue, Durban. Tel: 031-301-7572"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_728", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("A legal clearing house that puts immigrants in touch with private lawyers who may take on the matter for free. 7th Floor, Salisbury Centre, Tower A, Suite 701-704, 347-351 Dr. Pixley Kaseme, West Street, Durban. Tel: 031-301-6178"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_729", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides paralegal assistance to help secure grants. Ensures administrative justice for information, education & training. Diakonia Centre, 20 Diakonia Avenue, Durban. Tel: 031-301-9215"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_730", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides free legal services to people who can’t afford private legal assistance. DURBAN: Salisbury House, 4th Floor, 332 Smith Street. Tel: 031-304 -3290 EMPANGENI: Mazule House, 7 Maxwell Street. Tel: 035-792-4949. LADYSMITH: 371 Murchison. Tel: 036-638-2500. PINETOWN: Upper Ground Floor, 28 Umdoni Centre, Crompton Str. Tel: 031-719-2700. PIETERMARITZBURG: 183 Church Street. Tel: 033-394-2190. PORT SHEPSTONE: Shepstone Mall, Aiken Str. Tel: 039-688-9600. UMLAZI: V1333, Ithala Industrial Park, Corner Road 1902 & Mangosuthu Highway. Tel: 031-918-8100. VERULAM: Suite 1, Ayesha Razak Centre, 23 Groom Street. Tel: 032-533-1020/2654. VRYHEID: Ground Floor Suite, ABSA Building, 199A Church Street. Tel: 034-989-8300"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_390", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_731", $("Refugee Pastoral Care")),
+                            new Choice("state_732", $("Refugee Social Services")),
+                            new Choice("state_733", $("KZN Refugee Council")),
+                            new Choice("state_734", $("SARCS")),
+                            new Choice("state_735", $("Union for Refugee Women")),
+                            new Choice("state_736", $("Islamic Relief SA")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_731", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Food, clothing & shelter for new arrivals. Fee: R18 per night. Aid to unaccompanied minors & help with burials of deceased refugees. Emmanuel Cathedral, Cathedral Road. Tel: 031-307-1074"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_732", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Mondays 08:30: orientation for newcomers to the centre. Bring your asylum documentation with you. Room N242, Diakonia Centre, 20 Diakonia Avenue, Durban. Tel: 031-310-3574"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_733", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Networking & advocacy with refugee organisations. Skills empowerment. 4th Floor, Industry Building House, Suite 424, 59 Diakonia Avenue, Durban. Tel/Fax: 031-304-9456 or 083-683-8297"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_734", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Tracing services, helps with reuniting vulnerable persons with their families. 201 Northway, Durban North. Tel: 031-563-2914"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_735", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Fee-based creche for refugee children. 3rd Floor Lionel House, 26 Pickering Street, Point Road. Tel: 031-332-6265"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_736", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Supports orphans, HIV/AIDS counselling & relief, advocacy for refugees & migrants. 169 Brickfield Road, Overport, Durban. Tel: 031-208-2838"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_391", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Lifeline: 38 Adrian Road, Stamford Hill, Durban. Tel: 031-303-1344 Crisis: 031-312-2323"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+            self.add("state_048", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_392", $("Governmental Service Providers")),
+                        new Choice("state_393", $("Statutory Bodies")),
+                        new Choice("state_394", $("Legal Services")),
+                        new Choice("state_395", $("Basic Needs Service Providers")),
+                        new Choice("state_396", $("Counselling Services")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_392", function(name) {
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        options_per_page: null,
+                        choices: [
+                            new Choice("state_737", $("Dept. of Home Affairs RRO")),
+                            new Choice("state_738", $("Dept. of Home Affairs")),
+                            new Choice("state_739", $("Dept. of Home Affairs: Queenstown")),
+                            new Choice("state_740", $("Dept. of Social Development: PE")),
+                            new Choice("state_741", $("Dept. of Social Development")),
+                            new Choice("state_742", $("SAPS")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_737", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Accepts all applications for asylum in this region.KIC 5 Sidon Street, North End, Port Elizabeth. Tel: 041-403-7412/13"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_738", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Old Etata Building 49, Cnr Owen & Leeds Road, Umtata. Tel: 047-531-1955"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_739", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Hexagon Hotel, cnr Cathcart Way & Zeiler Street, Queenstown. Tel: 045-839-2109"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_740", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Cnr Straun & Matie Streets, Struandale Tel: 041 406 5700"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_741", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Dukumbana Building, Independence Avenue, Bisho. Tel: 040-608-5806"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_742", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Cnr Lennox & Mount Streets, Mount Croix, Port Elizabeth. Tel: 041-394-632"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_393", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("SA Human Rights Commission: 4th Floor, Oxford House, 86-88 Oxford Street, East London. Tel: 043-722-7821"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_394", function(name) {
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        options_per_page: null,
+                        choices: [
+                            new Choice("state_743", $("Nelson Mandela Metropolitan University Law Clinic")),
+                            new Choice("state_744", $("Legal Resources Centre")),
+                            new Choice("state_745", $("Rhodes University Law Clinic")),
+                            new Choice("state_746", $("Rhodes University Law Clinic: Queenstown")),
+                            new Choice("state_747", $("Black Sash")),
+                            new Choice("state_748", $("LAB Justice Centres")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_743", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides free legal assistance to people who can’t afford private legal assistance. Missionvale Campus, 1st Floor, Old Education Building, Missionvale, Port Elizabeth. Tel: 041-504-1273"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_744", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Takes up constitutional cases that would benefit a group of people. 116 High Street, Grahamstown Tel: 046-622-9230"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_745", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides free legal assistance to people who can’t afford private legal assistance. 41 New Street, Grahamstown. Tel: 046-622-9301"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_746", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Free legal assistance focusing on farm worker/rural issues. 24 Ebden Street, Queenstown. Tel: 045-838-5600"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_747", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides paralegal assistance to help secure grants & ensures administrative justice for information, education & training. Dorsham House, cnr Elizabeth & Govan Mbeki Avenue, Port Elizabeth. Tel: 041-487-3288"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_748", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides free criminal & civil legal assistance to people who can’t afford private legal assistance. PE: 1st Uitenhage, North End. Tel: 041-408-2800. ALIWAL NORTH: 58 Somerset Str. Tel: 051-633-2530. BUTTERWORTH: 52 Blyth Street. Tel: 047-491-3271. EAST-LONDON: 5th Floor, Oxford House, 86 Oxford Street. Tel: 043-704-4700. GRAHAMSTOWN: 69 High Street. Tel: 046-622-9350. GRAAFF-REINET: 64 Church Street. Tel: 049-807-2500. KING WILLIAMS TOWN: 2nd Floor, Old Mutual Building, cnr of Cathcart & Maclean Str. Tel: 043-604-6600. MTHATA: 22 Durham Street Tel: 047-501-4600. QUEENSTOWN: 1st & 2nd Floor, Gentile Building, 2-4 Shepstone Rd. Tel: 045-807-3500. UITENHAGE: 32-36 Baird Street, Uitenhage Central. Tel: 041-991-1811"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_395", function(name) {
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        options_per_page: null,
+                        choices: [
+                            new Choice("state_749", $("Nelson Mandela Metropolitan University - Refugee Rights Centre")),
+                            new Choice("state_750", $("Diocesan Development Forum")),
+                            new Choice("state_751", $("Project for Conflict Resolution & Development")),
+                            new Choice("state_752", $("SARCS: PE")),
+                            new Choice("state_753", $("SARCS: East London")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_749", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Provides pro-bono legal services & support to refugees, asylum seekers & migrants. Missionvale Campus, ILA, Faculty of Law, RRC Building, Cuyler Street Central, Missionvale, PE. Tel: 041-540-1310"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_750", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Accommodation advice & support to HIV/AIDS patients. 58 St Patrick’s Road, Port Elizabeth. Tel: 041-582-4087"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_751", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Helps disadvantaged, at-risk communities & organisations to positively deal with conflict & transformation. 63 Heugh Street, Walmer, Port Elizabeth. Tel: 041-581-2414 or 041-581-2417"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_752", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Tracing, helps with reuniting vulnerable persons with their families, requests for school, university, birth, marriage & death certificates. 18 Bain Street, Port Elizabeth. Tel: 041-585-6745"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_753", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Tracing, helps with reuniting vulnerable persons with their families, requests for school, university, birth, marriage & death certificates. 16 St. Marks Road, Southernwood, East London. Tel: 043-722-2400"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                self.add("state_396", function(name) {
+                    return new ChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: [
+                            new Choice("state_754", $("Lifeline")),
+                            new Choice("state_755", $("FAMSA")),
+                            new Choice("state_756", $("PE Mental Health")),
+                        ],
+                        next: function(choice) {
+                            return choice.value;
+                        }
+                    });
+                });
+                    self.add("state_754", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("24-hour telephonic crisis counselling. 1 Nile Road, Perridgevale. Tel: 041-373-8882 Crisis: 041-373-8666"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_755", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Family & marital counselling. 63A High Street, Grahamstown. Tel: 046-622-2580"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+                    self.add("state_756", function(name) {
+                        return new PaginatedState(name, {
+                            text: $("Family counselling. No fee. By appointment. 21 William Street, Cotswold. Port Elizabeth Tel: 041-365-0502"),
+                            characters_per_page: 160,
+                            back: $('Back'),
+                            more: $('More'),
+                            exit: $('Exit'),
+                            next: 'state_main_menu'
+                        });
+                    });
+
+
+
+            self.add("state_049", function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $("Select an option:"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    options_per_page: null,
+                    choices: [
+                        new Choice("state_397", $("Governmental Service Providers")),
+                        new Choice("state_398", $("International organisations")),
+                        new Choice("state_399", $("Statutory Bodies")),
+                        new Choice("state_400", $("Legal Service Providers")),
+                        new Choice("state_401", $("Basic Needs Service Providers")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+
+            self.add("state_397", function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $("Select an option:"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    options_per_page: null,
+                    choices: [
+                        new Choice("state_757", $("Dept. of Home Affairs")),
+                        new Choice("state_758", $("Dept. of Home Affairs: Musina")),
+                        new Choice("state_759", $("Dept. of Home Affairs: Beitbridge")),
+                        new Choice("state_760", $("Dept. of Social Development")),
+                        new Choice("state_760", $("Dept. of Social Development")),
+                        new Choice("state_761", $("SAPS: Musina")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+
+            self.add("state_398", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_763", $("IOM")),
+                        new Choice("state_764", $("UNHCR")),
+                        new Choice("state_765", $("Save the Children UK")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_399", function(name) {
+                return new PaginatedState(name, {
+                    text: $("SA Human Rights Commission: 1st Floor, Office 102, Library Gardens Square, cnr Francis Baard & Glover Street, Polokwane. Tel: 015 291 3500/4"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_400", function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $("Select an option:"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    options_per_page: null,
+                    choices: [
+                        new Choice("state_766", $("LHR")),
+                        new Choice("state_767", $("Musina Legal Advice Office")),
+                        new Choice("state_768", $("University of Venda School of Law Clinic")),
+                        new Choice("state_769", $("University of Limpopo Law Clinic")),
+                        new Choice("state_769", $("University of Limpopo Law Clinic")),
+                        new Choice("state_770", $("Mamadi Advice Centre")),
+                        new Choice("state_771", $("LAB Justice Centres")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+
+            self.add("state_401", function(name) {
+                return new PaginatedChoiceState(name, {
+                    question: $("Select an option:"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    options_per_page: null,
+                    choices: [
+                        new Choice("state_773", $("Children Resource Centre")),
+                        new Choice("state_774", $("Jesuit Refugee Services")),
+                        new Choice("state_775", $("Refugee Children’s Project")),
+                        new Choice("state_776", $("Thohoyandou Children’s Home")),
+                        new Choice("state_777", $("SARCS")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_757", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Library Gardens, cnr Grobler & Schoeman Street, Polokwane. Tel: 015-963-2269"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_758", function(name) {
+                return new PaginatedState(name, {
+                    text: $("N1, Limpopo Lodge, Musina. Tel: 015-534-3232"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_759", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Tel: 015-530-0067"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_760", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Dept. of Health & Social Development Building, 18 College Street, Polokwane. Tel: 015-293-6004/6054/6011"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_761", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Tel: 015-534-7400"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_762", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Tel: 015-534-7626"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_763", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Helps stranded migrants & unaccompanied minors, protection issues, family tracing. 21 Willem Smit Street, Musina. Tel: 015-534-1314"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_764", function(name) {
+                return new PaginatedState(name, {
+                    text: $("UNHCR helps with protection, humanitarian & advocacy services for refugees in Musina.  10 Irwin Street, Musina. Tel: 015-534-2381"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_765", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provides support to over 14 centres in Musina that provide humanitarian aid to migrant children. No direct intake. 10 Harper Road, Ext 8, Nancefield Township, Musina. Tel: 015-534-3305"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_766", function(name) {
+                return new PaginatedState(name, {
+                    text: $("This branch does not see clients at the office. The officers work mainly on arrest & detention monitoring at the relevant centres in Musina. No. 18 Watson Street, Musina. Tel: 072-369-8780 or 079-508-0124"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_767", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Paralegal assistance. 1224 Rollet Kwinda Street, Extension 2 Nancefield. Tel: 015-533-1002"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_768", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provides legal assistance to everyone including migrants. Law School Building, University of Venda, Thohoyandou. Tel: 015-962-8637 / 015-962-8639"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_769", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provides legal assistance to everyone including migrants. Ground Floor 0020, New R- Block, University of Limpopo, Polokwane. Tel: 015-268-3221"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_770", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Offers paralegal advice. Taaibosh Office (ask for the office of the Chief), GaMamadi. Tel: 083-757-1620"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_771", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provides free legal assistance to people who can’t afford private legal assistance. MAKHADO: Noor Gardens, cnr Krogh & Devenish Str. Tel: 015-519-1100. POLOKWANE: Pioneer Building, 52 Landros Mare Str. Tel: 015-291-2429. MODIMOLLE: Shop 8, Nyl Sake Sentrum, Nelson Mandela Street, Modimolle. Tel: 014-717-4977. THOHOYANDOU: Office 29, Law School Building, University of Venda, Thohoyandou. Tel: 015-962-6383. TZANEEN: 2nd Floor, Tzaneen Crossing Mall, cnr of Lydenburg & Skirving Street, Tzaneen. Tel: 015-307-3129"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_772", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Deals with the issues of abuse of farm workers. 105 Schoeman Street, Polokwane. Tel: 015-297-6972"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_773", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Works with unaccompanied migrant children around Musina. Contact: Ms. Ernie Nelusha. Rollet Kwinda, Ext.2 Musina. Tel: 015-534-3413"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_774", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Emergency assistance incl. food & non-food items for refugees. Transport money for travel & assistance with medical emergencies. 01 Industria Street, Makhado. Tel: 015-516-3066"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_775", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Helps migrant children & vulnerable women access services & assists with finding shelter. 13 Wilson Street, Musina. Tel: 072-270-2001"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_776", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provides shelter facilities & looks after all children without parents incl. migrant children around Thohoyandou area. Contact: Mamane (Social Worker). Thohoyandou Block, Thunda Maria Road. Tel: 015-962-1524 Cell: 078-632-4747"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_777", function(name) {
+                return new PaginatedState(name, {
+                    text: $("May be able to provide emergency humanitarian assistance. Call first. 56 Klerk Street, Mokopane. Tel: 015-491-3916"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_050", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_402", $("Governmental Service Providers")),
+                        new Choice("state_403", $("Statutory Bodies")),
+                        new Choice("state_404", $("Legal Service Providers")),
+                        new Choice("state_405", $("Counselling Services")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+
+            self.add("state_402", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_778", $("Dept. of Home Affairs: Nelspruit")),
+                        new Choice("state_779", $("Dept. of Home Affairs: Witbank")),
+                        new Choice("state_780", $("Dept. of Social Development")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_403", function(name) {
+                return new PaginatedState(name, {
+                    text: $("SA Human Rights Commission: Public services on human right protection. Carltex Building, 32 Bell Street, Nelspruit. Tel: 013-752-5870"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_404", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_781", $("LAB Justice Centres")),
+                        new Choice("state_782", $("Bohlabela Advice Centre")),
+                        new Choice("state_783", $("Leandra Advice Centre")),
+                        new Choice("state_784", $("Nkomazi")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_405", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Lifeline: Limited telephone & face-to-face counselling. 8 Hope Street, Nelspruit. Tel: 013-755-2635 Crisis: 013-755-3606"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+            self.add("state_778", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Cnr Henshall & Brander Streets, Nelspuit. Tel: 013-753-3131"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_779", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Justisie Avenue, Witbank. Tel: 013-656-7577"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_780", function(name) {
+                return new PaginatedState(name, {
+                    text: $("7 Government Boulevard, Riverside Park, Ext 2, Nelspruit. Tel: 013-766-3098/3253"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_781", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provides free legal assistance to people who can’t afford private legal assistance. NELSPRUIT: Nedbank Centre, 30 Brown Street. Tel: 013-753-2154. WITBANK: Witbank Vusani House, Aras Street. Tel: 013-656-5290. ERMELO: 14 Joubert Street. Tel: 017-819-7291."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_782", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Paralegal advice services. R40 Main Road, Bushbuck Ridge (behind Ansari shopping complex). Tel: 013-799-1841"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_783", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Paralegal advice services. 1095 Freddy Butana Nkambule Street. Tel: 017-683-1229/ 017-683-1501"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_784", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Paralegal advice services. Stand no 788B Schoeman’s Daal Trust, Shongwe Mission, Nkomazi, Melelane. Tel: 013-781-0660, 072-437-1283 or 072-600-4804"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_051", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_406", $("Governmental Service Providers")),
+                        new Choice("state_407", $("Statutory Bodies")),
+                        new Choice("state_408", $("Legal Service Providers")),
+                        new Choice("state_409", $("Basic Needs Service Providers")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+
+            self.add("state_406", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_785", $("Dept. of Home Affairs: Kimberley")),
+                        new Choice("state_786", $("Dept. of Home Affairs: Upington")),
+                        new Choice("state_787", $("Dept. of Social Development")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_407", function(name) {
+                return new PaginatedState(name, {
+                    text: $("SA Human Rights Commission: 45 Mark & Scott Road, Ancorley Building, Upington. Tel: 054-332-3993/4"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_408", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_788", $("LHR")),
+                        new Choice("state_789", $("LAB Justice Centres")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_409", function(name) {
+                return new PaginatedState(name, {
+                    text: $("SARCS: May be able to provide emergency humanitarian assistance. Call first. 10 Harmon Street, Kimberley. Tel: 053-832-9190"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+            self.add("state_785", function(name) {
+                return new PaginatedState(name, {
+                    text: $("9 New Public Building, Main Road, Kimberley. Tel: 053-839-5400"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_786", function(name) {
+                return new PaginatedState(name, {
+                    text: $("34/38 Mark Street, Upington. Tel: 054-332-3117"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_787", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Mimosa Complex, Barkley Road, Homestead, Kimberley. Tel: 053-807-5600"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_788", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Deals with farm workers. Facilitates contact with LHR migrants rights project. River City Centre, cnr Hill & Scott Str, Upington 054-331-2200"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_789", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provides free legal services to people who can’t afford private legal assistance. COLESBERG: No. 8 Campbell Str. 051-753-2280. KIMBERLEY: 21 Phakamile Mabija 053-832-2348 UPINGTON: 16 Weiderman Str. 054-337-9200 SPRINGBOK: Portion of Old Royal Food, cnr van Riebeeck & Loop Street. Tel: 027-718-2449"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_052", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_410", $("Governmental Service Providers")),
+                        new Choice("state_411", $("Statutory Bodies")),
+                        new Choice("state_412", $("Legal Service Providers")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+
+            self.add("state_410", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_790", $("Dept. of Home Affairs")),
+                        new Choice("state_791", $("Dept. of Social Development")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_411", function(name) {
+                return new PaginatedState(name, {
+                    text: $("SA Human Rights Commission: North West Provincial Office, No. 170 Klopper Street, Rustenburg. Tel: 014-592-0614/1412"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_412", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_792", $("LAB Justice Centres")),
+                        new Choice("state_793", $("Thlabolagang Advice Centre")),
+                        new Choice("state_794", $("Lethabong Legal Advice Centre")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_790", function(name) {
+                return new PaginatedState(name, {
+                    text: $("OR Tambo 50A, Klerksdorp, Mmabatho. Tel: 018-462-6720"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_791", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provident Building, 4th Floor, University Drive, Mmabatho Tel: 018-387-0255/3497/0281/3434"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_792", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Provides free legal services to people who can’t afford private legal assistance. KLERKSDORP: 3rd Floor, Room 333175, West End Building, Siddle St. Tel: 018-464-3022. LICHTENBURG: 25 Bantje Str. Tel: 018-632-7600. MAFIKENG: 3rd Floor, East Gallery, Mega City Complex, Mmabatho. Tel: 018-387-5111. POTCHEFSTROOM: 2nd Floor, Royal Building, James Moroka Str. Tel: 018-293-0045. RUSTENBURG: Office 21, Tlhabane Community Complex, Tlhabane. Tel: 014-565-5704. VRYBURG: 71 Vry Street, Vryburg Mall. Tel: 053-927-0095"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_793", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Paralegal assistance services. 1051 Van der Walt Street, Coligny. Tel: 073-664-9748"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_794", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Gender issues, HIV/AIDS & human rights. Paralegal services as well as referrals to legal organisations where necessary. 4411 Molapisi Street, Vula section, Lethabong. Tel: 012-270-1343 / 2353"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_053", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_413", $("Governmental Service Providers")),
+                        new Choice("state_414", $("Statutory Bodies")),
+                        new Choice("state_415", $("Legal Service Providers")),
+                        new Choice("state_416", $("Basic Needs Service Providers")),
+                        new Choice("state_417", $("Counselling Services")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+
+            self.add("state_413", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_795", $("Dept. of Home Affairs")),
+                        new Choice("state_796", $("Dept. of Social Development")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_414", function(name) {
+                return new PaginatedState(name, {
+                    text: $("SA Human Rights Commission: Creates awareness on human rights. Protects, monitors & promotes observance of human rights. 1st Floor, 50 East Burger Street, Bloemfontein. Tel: 051-447-1130"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+            self.add("state_415", function(name) {
+                return new PaginatedState(name, {
+                    text: $("LAB Justice Centres: Provides free legal services to people who can’t afford private legal assistance. BLOEMFONTEIN: 2nd Floor, St Andrews Centre, 113 St Andrew Str. Tel: 051-447-9915. KROONSTAD: 99 Murray Str. Tel: 056-216-4800. PHUTHADITHJABA: Block E, FDC Building, cnr of Motloung & Setai Str. 058-713-5000 WELKOM: Archiquant Building, 8 Heeren Str. 057-357-2847"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
+            self.add("state_416", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_797", $("Adventist Development & Relief Agency")),
+                        new Choice("state_798", $("SARCS")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+
+            self.add("state_417", function(name) {
+                return new PaginatedState(name, {
+                    text: $("FAMSA: Family counselling; marriage counselling, divorce counselling, trauma counselling, play therapy. 10th Strauss Street, Universitas, Bloemfontein. Tel: 051-525-2395"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+            self.add("state_795", function(name) {
+                return new PaginatedState(name, {
+                    text: $("10988 Moshoeshoe Street, Rocklands, Bloemfontein. Tel: 051-412-7100"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_796", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Old Mutual Building, Maitland Street, Bloemfontein. Tel: 051-400-0302"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_797", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Crisis & transportation help, basic humanitarian needs (food & non-food items). 2 Link Road, Bloemfontein. Tel: 051-430-4069"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_798", function(name) {
+                return new PaginatedState(name, {
+                    text: $("May be able to provide emergency humanitarian assistance. Call first. Van Der Merwe, Roodewal, Bloemfontein. Tel: 051-448-1259"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+
     });
 
     return {
