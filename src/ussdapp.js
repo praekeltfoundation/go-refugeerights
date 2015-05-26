@@ -1,3 +1,5 @@
+// Find and replace this character: ’
+
 go.app = function() {
     var vumigo = require('vumigo_v02');
     var MetricsHelper = require('go-jsbox-metrics-helper');
@@ -324,24 +326,24 @@ go.app = function() {
                 more: $('Next'),
                 back: $('Back'),
                 choices: [
-                    new Choice('state_060', $('New to SA')),
-                    new Choice('state_061', $('The visa application process')),
-                    new Choice('state_062', $('Unaccompanied / separated children')),
-                    new Choice('state_063', $('Support services')),
-                    new Choice('state_064', $('Employment')),
-                    new Choice('state_065', $('Healthcare')),
-                    new Choice('state_066', $('Education')),
-                    new Choice('state_067', $('Banking')),
-                    new Choice('state_068', $('LGBTI rights')),
-                    new Choice('state_069', $('Violence against women & children')),
-                    new Choice('state_070', $('Safety concerns')),
-                    new Choice('state_071', $('Statelessness')),
-                    new Choice('state_072', $('Change settings')),
-                    new Choice('state_073', $('Ts & Cs of this service')),
-                    new Choice('state_074', $('Word definitions')),
-                    new Choice('state_076', $('Tips')),
-                    new Choice('state_077', $('Useful contacts')),
-                    new Choice('state_078', $('About LHR')),
+                    new Choice("state_060", $("New to SA")),
+                    new Choice("state_061", $("The visa application process")),
+                    new Choice("state_062", $("Unaccompanied / separated children")),
+                    new Choice("state_063", $("Support services")),
+                    new Choice("state_064", $("Employment")),
+                    new Choice("state_065", $("Healthcare")),
+                    new Choice("state_066", $("Education")),
+                    new Choice("state_067", $("Banking")),
+                    new Choice("state_068", $("LGBTI rights")),
+                    new Choice("state_069", $("Violence against women & children")),
+                    new Choice("state_070", $("Safety concerns")),
+                    new Choice("state_071", $("Statelessness")),
+                    new Choice("state_072", $("Change settings")),
+                    new Choice("state_039", $("Ts & Cs of this service")),
+                    new Choice("state_036", $("Word definitions")),
+                    new Choice("state_030", $("Tips")),
+                    new Choice("state_031", $("Useful contacts")),
+                    new Choice("state_040", $("About LHR")),
                 ],
                 next: function(choice) {
                     return go.utils
