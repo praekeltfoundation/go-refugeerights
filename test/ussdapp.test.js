@@ -1568,9 +1568,9 @@ describe("refugeerights app", function() {
             });
         });
 
-        // TEST NAVIGATION FROM MIGRANT MAIN MENU
+        // TEST NAVIGATION FROM REFUGEE MAIN MENU
 
-        describe("Migrant menu navigation testing", function() {
+        describe("Refugee menu navigation testing", function() {
 
             describe("When navigating away from the refugee main menu", function() {
                 it("should fire metrics", function() {
@@ -2243,7 +2243,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-            it.skip("refugee menu - 031", function() {
+            it("refugee menu - 031", function() {
                 return tester
                     .setup.user.addr('064001')
                     .inputs(
@@ -2256,6 +2256,72 @@ describe("refugeerights app", function() {
                     })
                     .run();
             });
+
+                it("031 - 360", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_refugee_main (next)
+                            , '6'  // state_refugee_main
+                            , '1'  // state_031
+                        )
+                        .check.interaction({
+                            state: 'state_360'
+                        })
+                        .run();
+                });
+
+                it("031 - 053", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_refugee_main (next)
+                            , '6'  // state_refugee_main
+                            , '7'  // state_031 (next)
+                            , '7'  // state_031
+                        )
+                        .check.interaction({
+                            state: 'state_053'
+                        })
+                        .run();
+                });
+
+                    it("053 - 416", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '7'  // state_refugee_main (next)
+                                , '6'  // state_refugee_main
+                                , '7'  // state_031 (next)
+                                , '7'  // state_031
+                                , '4'  // state_053
+                            )
+                            .check.interaction({
+                                state: 'state_416'
+                            })
+                            .run();
+                    });
+
+                        it("416 - 798", function() {
+                            return tester
+                                .setup.user.addr('064001')
+                                .inputs(
+                                    {session_event: 'new'}  // dial in first time
+                                    , '7'  // state_refugee_main (next)
+                                    , '6'  // state_refugee_main
+                                    , '7'  // state_031 (next)
+                                    , '7'  // state_031
+                                    , '4'  // state_053
+                                    , '2'  // state_416
+                                )
+                                .check.interaction({
+                                    state: 'state_798'
+                                })
+                                .run();
+                        });
 
             it("refugee menu - 032", function() {
                 return tester
@@ -3929,7 +3995,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-            it.skip("migrant menu - 031", function() {
+            it("migrant menu - 031", function() {
                 return tester
                     .setup.user.addr('064002')
                     .inputs(
@@ -3943,6 +4009,8 @@ describe("refugeerights app", function() {
                     })
                     .run();
             });
+
+                // other 031 navigation tested under refugee nav
 
             it("migrant menu - 040", function() {
                 return tester
