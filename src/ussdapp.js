@@ -303,7 +303,7 @@ go.app = function() {
                     new Choice("state_034", $("LGBTI rights")),
                     new Choice("state_035", $("Violence against women & children")),
                     new Choice("state_036", $("Word definitions")),
-                    new Choice("state_038", $("Change settings")),
+                    new Choice("state_072", $("Change settings")),
                     new Choice("state_039", $("Ts & Cs of this service")),
                     new Choice("state_040", $("About LHR")),
                 ],
@@ -340,8 +340,8 @@ go.app = function() {
                     new Choice("state_071", $("Statelessness")),
                     new Choice("state_072", $("Change settings")),
                     new Choice("state_039", $("Ts & Cs of this service")),
-                    new Choice("state_036", $("Word definitions")),
-                    new Choice("state_030", $("Tips")),
+                    new Choice("state_074", $("Word definitions")),
+                    new Choice("state_075", $("Tips")),
                     new Choice("state_031", $("Useful contacts")),
                     new Choice("state_040", $("About LHR")),
                 ],
@@ -2202,18 +2202,6 @@ go.app = function() {
                 });
             });
 
-        // TODO update this with migrant copy
-        self.add("state_038", function(name) {
-            return new PaginatedState(name, {
-                text: $("Your new settings have been saved. Please dial back for it to take effect. Brought to you by Lawyers for Humans Rights www.lhr.org.za"),
-                characters_per_page: 160,
-                back: $('Back'),
-                more: $('More'),
-                exit: $('Exit'),
-                next: 'state_main_menu'
-            });
-        });
-
         self.add("state_039", function(name) {
             return new PaginatedState(name, {
                 text: $("This mobile info system is only a guide. It isn’t the same as complete legal advice. Users should contact a law clinic for complex issues. LHR will not be liable for any loss from actions taken as a result of this service. Your registration & personal details are confidential & safe. It will only be used when you’ve made a follow up request or report to LHR. The registration & the actual mobile application service is free. You will only be charged according to USSD data fees per their usage. LHR reserves the right to terminate usage of this service should there be deemed an abuse of the service."),
@@ -2235,8 +2223,6 @@ go.app = function() {
                 next: 'state_main_menu'
             });
         });
-
-
 
 
     // MIGRANT MENU STATES

@@ -2813,6 +2813,165 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
+            it("migrant menu - 039", function() {
+                return tester
+                    .setup.user.addr('064002')
+                    .inputs(
+                        {session_event: 'new'}  // dial in first time
+                        , '7'  // state_migrant_main (next)
+                        , '8'  // state_migrant_main (next)
+                        , '1'  // state_migrant_main
+                    )
+                    .check.interaction({
+                        state: 'state_039'
+                    })
+                    .run();
+            });
+
+            it("migrant menu - 074", function() {
+                return tester
+                    .setup.user.addr('064002')
+                    .inputs(
+                        {session_event: 'new'}  // dial in first time
+                        , '7'  // state_migrant_main (next)
+                        , '8'  // state_migrant_main (next)
+                        , '2'  // state_migrant_main
+                    )
+                    .check.interaction({
+                        state: 'state_074'
+                    })
+                    .run();
+            });
+
+                it("074 - 801", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '8'  // state_migrant_main (next)
+                            , '2'  // state_migrant_main
+                            , '1'  // state_074
+                        )
+                        .check.interaction({
+                            state: 'state_801'
+                        })
+                        .run();
+                });
+
+                it("074 - 316", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '8'  // state_migrant_main (next)
+                            , '2'  // state_migrant_main
+                            , '11'  // state_074 (next)
+                            , '10'  // state_074 (next)
+                            , '4'  // state_074
+                        )
+                        .check.interaction({
+                            state: 'state_316'
+                        })
+                        .run();
+                });
+
+                it("074 - 805", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '8'  // state_migrant_main (next)
+                            , '2'  // state_migrant_main
+                            , '11'  // state_074 (next)
+                            , '10'  // state_074 (next)
+                            , '6'  // state_074
+                        )
+                        .check.interaction({
+                            state: 'state_805'
+                        })
+                        .run();
+                });
+
+            it("migrant menu - 075", function() {
+                return tester
+                    .setup.user.addr('064002')
+                    .inputs(
+                        {session_event: 'new'}  // dial in first time
+                        , '7'  // state_migrant_main (next)
+                        , '8'  // state_migrant_main (next)
+                        , '3'  // state_migrant_main
+                    )
+                    .check.interaction({
+                        state: 'state_075'
+                    })
+                    .run();
+            });
+
+                it("075 - 317", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '8'  // state_migrant_main (next)
+                            , '3'  // state_migrant_main
+                            , '1'  // state_075
+                        )
+                        .check.interaction({
+                            state: 'state_317'
+                        })
+                        .run();
+                });
+
+                it("075 - 262", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '7'  // state_migrant_main (next)
+                            , '8'  // state_migrant_main (next)
+                            , '3'  // state_migrant_main
+                            , '5'  // state_075
+                        )
+                        .check.interaction({
+                            state: 'state_262'
+                        })
+                        .run();
+                });
+
+            it.skip("migrant menu - 031", function() {
+                return tester
+                    .setup.user.addr('064002')
+                    .inputs(
+                        {session_event: 'new'}  // dial in first time
+                        , '7'  // state_migrant_main (next)
+                        , '8'  // state_migrant_main (next)
+                        , '4'  // state_migrant_main
+                    )
+                    .check.interaction({
+                        state: 'state_031'
+                    })
+                    .run();
+            });
+
+            it("migrant menu - 040", function() {
+                return tester
+                    .setup.user.addr('064002')
+                    .inputs(
+                        {session_event: 'new'}  // dial in first time
+                        , '7'  // state_migrant_main (next)
+                        , '8'  // state_migrant_main (next)
+                        , '5'  // state_migrant_main
+                    )
+                    .check.interaction({
+                        state: 'state_040'
+                    })
+                    .run();
+            });
+
         });
 
         // TEST RETURNING USER METRICS
