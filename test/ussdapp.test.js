@@ -1570,7 +1570,7 @@ describe("refugeerights app", function() {
 
         // TEST NAVIGATION FROM MIGRANT MAIN MENU
 
-        describe.skip("Migrant menu navigation testing", function() {
+        describe.only("Migrant menu navigation testing", function() {
 
             describe("When navigating away from the migrant main menu", function() {
                 it("should fire metrics", function() {
@@ -2664,21 +2664,6 @@ describe("refugeerights app", function() {
                     })
                     .run();
             });
-
-                it("070 - 145", function() {
-                    return tester
-                        .setup.user.addr('064002')
-                        .inputs(
-                            {session_event: 'new'}  // dial in first time
-                            , '7'  // state_migrant_main (next)
-                            , '5'  // state_migrant_main
-                            , '1'  // state_070
-                        )
-                        .check.interaction({
-                            state: 'state_145'
-                        })
-                        .run();
-                });
 
             it("migrant menu - 071", function() {
                 return tester

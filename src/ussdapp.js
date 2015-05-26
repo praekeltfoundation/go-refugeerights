@@ -1301,7 +1301,7 @@ go.app = function() {
             // 134
             self.add('state_134', function(name) {
                 return new PaginatedState(name, {
-                    text: $("Rape or sexual assault victims have the right to a 28-day course of antiretrovirals (ARVs) to prevent HIV. If you choose to get treatment, you must take it within 72 hours of being assaulted. This 28-course of ARV's is for people who were HIV-negative before they were sexually assaulted.  TIP: Contact LoveLife 0800 121 900, Aids Helpline 0800 01 23 22, Aids Hotline 0800 11 06 05 for more info or help."),
+                    text: $("If you've been raped, go to a police station as soon as possible. However, it's your choice if you want to report the case or not. Don't shower, drink liquids or use the toilet before reporting a rape. This will help the police to collect evidence for a strong case. You can change into new clothes before going to the police, but take the clothes you we wearing with you as evidence. Remember: You don't need to report the case to access medical treatment. Rape or sexual assault victims have the right to a 28-day course of antiretrovirals (ARVs) to prevent HIV. If you choose to get treatment, you must take it within 72 hours of being assaulted. This 28-course of ARV's is for people who were HIV-negative before they were sexually assaulted. TIP: Contact LoveLife 0800 121 900, Aids Helpline 0800 01 23 22, Aids Hotline 0800 11 0605 for more info or help."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1377,10 +1377,9 @@ go.app = function() {
                 });
             });
 
-            // 139
             self.add('state_139', function(name) {
                 return new PaginatedState(name, {
-                    text: $("You must pay school fees. If you can't pay, you can ask for exemption. This means you can ask the school to cancel your fees. Ask for an exemption form & complete it. You need to show proof of income & give info on your expenses & responsibilities. Proof of income can be a payslip, an affidavit or letter of support. You must apply for exemption at the start of each term. Remember: keep all your letters & appointments with the school. If you ignore any notices, the school can ask you to pay. Need help filling out the exemption form? Contact a NGO in the contact list & ask for help. School uniforms & learning materials also cost money. Even if you can't afford a uniform, your child must still go to school. Second-hand school uniforms are cheaper. Ask at the school. Your child can also wear normal clothes that resemble the uniform. TIP: You shouldn't pay a registration fee at the school. The public school can't ask your child to leave if you can't pay."),
+                    text: $("You must pay school fees. If you can't pay, you can ask for exemption. This means you can ask the school to cancel/reduce your fees. Ask for an exemption form & complete it. You need to show proof of income & give info on your expenses & responsibilities. Proof of income can be a payslip, an affidavit or letter of support. You must apply for exemption at the start of each term. Remember: keep all your letters & appointments with the school. If you ignore any notices, the school can ask you to pay. Need help filling out the exemption form? Contact a NGO in the contact list & ask for help. School uniforms & learning materials also cost money. Even if you can't afford a uniform, your child must still go to school. Second-hand school uniforms are cheaper. Ask at the school. Your child can also wear normal clothes that resemble the uniform. TIP: You shouldn't pay a registration fee at the school. The public school can't ask your child to leave if you can't pay."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1492,32 +1491,17 @@ go.app = function() {
                 });
             });
 
-
         // 070
-        self.add('state_070', function(name) {
-            return new ChoiceState(name, {
-                question: $('Select an option'),
-                choices: [
-                    new Choice('state_145', $("What is xenophobia?"))
-                ],
-                next: function(choice) {
-                    return choice.value;
-                }
+        self.add("state_070", function(name) {
+            return new PaginatedState(name, {
+                text: $("Xenophobia is an irrational hatred towards foreigners or an unreasonable fear or hatred of the unfamiliar persons.If you are a victim of xenophobic attacks, you must report it to the police. Go to the police station closest to your home. You must explain in detail what happened. The police will open a case. You will get a case number. Keep it safe! If you've lost your document, get an affidavit from the police that explains your situation. Go to the DHA for a new permit. If you've lost your passport, you must go to your country's embassy & then to the DHA to get a new visa."),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                exit: $('Exit'),
+                next: 'state_main_menu'
             });
         });
-
-            // 145
-            self.add('state_145', function(name) {
-                return new PaginatedState(name, {
-                    text: $("Xenophobia is an irrational hatred towards foreigners or an unreasonable fear or hatred of the unfamiliar persons.If you are a victim of xenophobic attacks, you must report it to the police. Go to the police station closest to your home. You must explain in detail what happened. The police will open a case. You will get a case number. Keep it safe! If you've lost your document, get an affidavit from the police that explains your situation. Go to the DHA for a new permit. If you've lost your passport, you must go to your country's embassy & then to the DHA to get a new visa."),
-                    characters_per_page: 160,
-                    back: $('Back'),
-                    more: $('More'),
-                    exit: $('Exit'),
-                    next: 'state_main_menu'
-                });
-            });
-
 
         // 071
         self.add('state_071', function(name) {
