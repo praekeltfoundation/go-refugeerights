@@ -2203,6 +2203,8 @@ go.app = function() {
                 });
             });
 
+        // >> state_072
+
         self.add("state_039", function(name) {
             return new PaginatedState(name, {
                 text: $("This mobile info system is only a guide. It isn’t the same as complete legal advice. Users should contact a law clinic for complex issues. LHR will not be liable for any loss from actions taken as a result of this service. Your registration & personal details are confidential & safe. It will only be used when you’ve made a follow up request or report to LHR. The registration & the actual mobile application service is free. You will only be charged according to USSD data fees per their usage. LHR reserves the right to terminate usage of this service should there be deemed an abuse of the service."),
