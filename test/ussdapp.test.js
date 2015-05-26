@@ -1570,7 +1570,7 @@ describe("refugeerights app", function() {
 
         // TEST NAVIGATION FROM MIGRANT MAIN MENU
 
-        describe.only("Migrant menu navigation testing", function() {
+        describe("Migrant menu navigation testing", function() {
 
             describe("When navigating away from the migrant main menu", function() {
                 it("should fire metrics", function() {

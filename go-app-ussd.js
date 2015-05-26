@@ -976,18 +976,1714 @@ go.app = function() {
 
     // REFUGEE MENU STATES
 
-        // 024
-        self.add('state_024', function(name) {
+        self.add("state_020", function(name) {
             return new ChoiceState(name, {
-                question: $('Select an option'),
+                question: $("Select an option:"),
                 choices: [
-                    new Choice('state_locate_me', $("Find nearest SService"))
+                    new Choice("state_201", $("Difference between a refugee & asylum seeker")),
+                    new Choice("state_202", $("Who is excluded from refugee status?")),
+                    new Choice("state_203", $("How do you lose refugee status?")),
                 ],
                 next: function(choice) {
                     return choice.value;
                 }
             });
         });
+            self.add("state_201", function(name) {
+                return new PaginatedState(name, {
+                    text: $("An asylum seeker awaits a decision on his/her asylum application. A refugee’s application has been approved & given refugee status."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_202", function(name) {
+                return new PaginatedState(name, {
+                    text: $("If you committed a war crime, a crime against humanity & peace or a serious non-political crime outside SA. Or; if you have refugee status in another country."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_203", function(name) {
+                return new PaginatedState(name, {
+                    text: $("If you get protection or nationality in your country of origin or in a new country; or return to settle in the country you fled. If you no longer feel threatened & take on protection of your country of origin because circumstances have changed. New circumstances means there isn’t a risk of persecution. The solutions in your country must be effective & long-lasting."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        self.add("state_021", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_211", $("Who is an asylum seeker?")),
+                    new Choice("state_212", $("Your rights")),
+                    new Choice("state_213", $("When to apply")),
+                    new Choice("state_214", $("Where to apply")),
+                    new Choice("state_215", $("Tips for the RRO")),
+                    new Choice("state_216", $("Your duties")),
+                    new Choice("state_217", $("The application process")),
+                    new Choice("state_172", $("Help with interpreting")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_211", function(name) {
+                return new PaginatedState(name, {
+                    text: $("If you applied for protection as a refugee, but are still waiting for a final answer on your formal refugee status. Or; if you submitted an asylum application with the Dept. of Home Affairs (DHA), but are still waiting for a decision on your asylum claim."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_212", function(name) {
+                return new PaginatedState(name, {
+                    text: $("It’s your right to have your asylum application processed and decided upon in a fair and transparent way. It’s your right not to be deported to your country of origin while your application is awaiting a decision. It’s your right not to be prosecuted for unlawful entry or your presence in SA while your application is awaiting a decision."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_213", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Apply for asylum as soon as possible after your entry into SA, by visiting a Refugee Reception Office (RRO). If you bump into a police or immigration officer before you’ve applied for asylum, you must say you are going to apply. If a police or immigration officer arrests or detains you, contact the LHR for legal help. TIP: The asylum process is hard. You may queue for weeks before you get help. You won’t get proof that you’ve been queueing. TIP: Until you receive a Section 22 permit, the police or immigration can arrest you. Contact LHR for legal help if you are arrested."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_214", function(name) {
+                return new PaginatedState(name, {
+                    text: $("There are Refugee Reception Offices (RRO) in Cape Town, Durban, Musina and Pretoria. Click ‘Next’ to find the nearest office. Cape Town (Nyanga):142 Voortrekker Road,Maitland 021-514-8414 Fax:021-514-8403 No new applications, only renewals of existing asylum seekers. Durban: 132 Moore Street. 031-362-1205 Fax: 031-362-1220. Musina: 8 Harold Street (next to the post office) 015-534-5300 Fax: 015-534-5332. Pretoria: Marabastad, corner E’skia Mphahlele & Struben Street, Pretoria West. 012-327-3515 Fax: 012-327-5782. Pretoria (TIRRO): 203 Soutter Street, Pretoria Showgrounds. 012-306-0800 or 012-306-0806 Fax: 086-579-7823"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_215", function(name) {
+                return new PaginatedState(name, {
+                    text: $("The RRO sees a fixed number of people per day. Go early to make sure you get a place. Some people start queueing at 3am. Take warm clothes, food, water or money to buy food with you. Look out for notices posted at the RRO that may contain important information. Ask for advice from refugees who have gone through the process. Ask about the different queues for new arrivals, renewals & ID documents. If you have a community representative, ask if they have useful information for you from the refugee office. It is important to follow the process. Don’t ask for special treatment - it may damage your case. Remember to keep your appointments. This will reduce your waiting time - and everybody else’s. There are 5 refugee reception offices in SA. Go to the office closest to you on the day allocated to your nationality. SADC: Mon & Tue. East Africa: Wed & Sat. West Africa: Thurs. Asia & other countries: Fri. Hours: 7am - 5pm weekdays, 8am - 1pm Saturdays."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_216", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Asylum seekers & refugees are protected by SA’s Constitution when they obey the law & accept the asylum seeker’s duties. It’s your duty to go to the RRO when you arrive in SA and truthfully explain why you want asylum. It’s your duty to obey the law. If you commit a crime in SA you will be prosecuted like any other South African. Peace is your right and duty. If you assist in armed attacks against your country, you may lose your refugee status & go to jail."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_217", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_170", $("Eligibility form")),
+                        new Choice("state_171", $("Section 22 permit")),
+                        new Choice("state_172", $("Interview")),
+                        new Choice("state_173", $("Successful applications")),
+                        new Choice("state_174", $("Unsuccessful applications")),
+                        new Choice("state_175", $("Appeal: rejected applications")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+            // >> state_172
+                self.add("state_170", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Fill out the Eligibility form. Answer honestly. You will be interviewed later so your answers must be the same. Bring with you all documents that show who you are & where you come from. Copies will be taken so you keep the originals. After fingerprints are taken, a case number & file number will be given. Write down these important numbers. Man & wife must both be interviewed if applying together. Name your wife or children in another country to add them to your file. English not good? Take an interpreter with you. If you cannot, one will be arranged for another day & you’ll come back on that day. You may have to pay an interpreter. Don’t pay anyone else – no officials, no security guards. The process is free. Fight corruption. TIP: If a DHA official asks for a bribe, get his/her name. Note down the official’s physical features, the day & time it happened. TIP: There is no need to pay fees. Call the DHA’s toll-free hotline to report corruption. You will stay anonymous. 0800-601-190"),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_171", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("You will get a Section 22 permit (Asylum-seeker’s permit) when you apply. It is proof you have applied. You are not yet a refugee. Your permit lets you work or study in SA. Sign it. Check the permit conditions or ask. Know if it’s valid for 1 month or 3. Make a copy of the permit. Always carry it with you. Keep renewing it before it expires. A decision can take months or years.TIP: If you don’t renew your Section 22 permit before it expires, you could be arrested & detained or pay a fine."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_172", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("This important interview may happen on the day you get your Section 22 permit. Expect questions about yourself & your country. You may bring a legal representative or interpreter and be asked about the places, languages, leaders, history of your country. Your representative can only observe the interview. You can also bring witnesses, affidavits or other evidence to help you. You will get a decision on the day or later. Ask the interviewer when. If later, get your permit stamped before you leave."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_173", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("If your application is approved, you’ll get a Section 24 permit (Refugee Status permit). Now you’re officially a refugee in SA! Your permit is valid for 2 years or sometimes 4 years. You must renew it 3 months before it expires. Go to the relevant RRO for a renewal. Refugees can apply for a refugee Identity Document (a maroon ‘ID’ or smart card) & travel documents. It may take time. Only apply for travel documents if you have a refugee identity document (ID). You must be interviewed by a UNHCR representative. If you don’t have a refugee ID but must travel out of SA for an emergency, contact a legal counselor or UNHCR Pretoria. TIP: Remember, if you use a travel document to travel back to your country, you could lose your refugee status in SA."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_174", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("A rejected application by a RRO officer means they don’t recognise you as a refugee. You can appeal this decision at the RAB. Hand in a notice of appeal within 30 days. The reason for your rejection will affect your appeal. If you don’t want to appeal, you must document your stay in another way, or leave the country. If your application was found to be fraudulent or abusive, the Standing Committee of Refugee Affairs will automatically review it. You may give the committee a written statement on why you disagree with the decision - but you cannot appear in person. Within 14 days, submit your statement to the RRO that issued the rejection letter. Ask a LHR legal counsellor for help."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_175", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("The Refugee Appeal Board offers asylum seekers with rejected applications a second chance to prove their claims. Within 30 days, submit an appeal request to the RRO that issued the rejection letter. Say why you disagree with the decision. The RRO will hand the case over to the Refugee Appeal Board. (You can ask LHR for help in requesting an appeal.) To get an appeal hearing date, you will be called in to the RRO to present your case & your reasons for applying for asylum. You must appear in person at the RRO to get the appeal hearing date. It cannot be given over the phone. You must get legal assistance to prepare for your appeal. Some NGOs give free legal help. See ‘Useful Contacts’ for more info. You may get a decision within 90 days of the hearing. It can take longer. Renew your asylum seeker permit while you wait."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+
+        self.add("state_022", function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice("state_176", $("Accompanied children")),
+                    new Choice("state_177", $("Unaccompanied / separated children")),
+                    new Choice("state_178", $("Documentation process: unaccompanied children")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_176", function(name) {
+                return new PaginatedState(name, {
+                    text: $("If a child enters SA in the care of a relative who is not a parent or grandparent, the caregiver must go to the Children’s Court. At the court, the caregiver must apply to be the child’s legal guardian - and can then apply for a foster care grant from the DHA. If accompanied by a parent, grandparent or legal guardian, a child’s asylum application is included in the adult’s documents. Refugee status is given to children or dependants when the head of the family or household’s application is approved. In countries where children are persecuted, a child’s case for asylum can be stronger than the parents’ claims. If the child’s case is stronger, then he/she should submit an independent application for asylum. A legal representative, parent or legal guardian must always go with a child asylum seeker to his/her interviews."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_177", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A child asylum seeker is unaccompanied when there isn’t a person present whose main responsibility is to take care of the child. Children who were separated from their parents before or during the flight from their country are also ‘unaccompanied’ children."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_178", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Children without a parent or guardian must be referred to the Dept. of Social Development. A social worker will be assigned to the child. The social worker will go to the Children’s Court. The court will confirm if the child is in need of care. The social worker will verify the child’s placement in a temporary place of safety. A report must be compiled. If the child is an asylum seeker, the social worker must work with the DHA to help the child with his/her asylum application at a RRO. The social worker must also investigate the possibility of reuniting the child with their family in their home country. Safety is important. If the unaccompanied child doesn’t have an asylum claim, a legal counsellor like LHR must be contacted. The Dept. of Social Development must ensure unaccompanied refugee & asylum children receive protection, shelter, nutrition & social services. This is important: children must be documented as soon as possible, or they risk becoming stateless."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        self.add("state_023", function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice("state_179", $("Renewal of permits")),
+                    new Choice("state_180", $("Fines")),
+                    new Choice("state_181", $("Lost permits")),
+                    new Choice("state_182", $("Permanent residence permits")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_179", function(name) {
+                return new PaginatedState(name, {
+                    text: $("This is important: you must apply to renew your Section 22 asylum permit at a RRO office before it expires. Some RRO offices have a separate queue for renewals. A DHA official may collect all renewal permits & ask you to wait until several hours. Section 24 permits are valid for  2 - 4 years. Apply for renewal 3 months before your permit expires at a RRO. The Standing Committee of Refugee Affairs (SCRA) may review your refugee status in SA based on the situation in your home country. TIP: Always ask if there is a separate renewal queue for permits. Take all original documents with you when renewing your permit."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_180", function(name) {
+                return new PaginatedState(name, {
+                    text: $("You will be fined if you do not renew your permit before it expires. To have your permit renewed, you must pay the fine. Payment of the fine means you are guilty of not renewing your permit on time. This could lead to a criminal record. If, under exceptional circumstances, you have a good reason why you could not renew your permit, ask a lawyer for help. A RRO officer will give you the fine & tell you where to pay it. It cannot be more than R1000. If it is, contact a lawyer. Renew your permit at the RRO where you applied for asylum. Or ask a legal advisor to help you with the renewal at another RRO. TIP: You have the right to query a fine that you think was wrongly given. Speak to a lawyer if you are concerned. TIP: Permits are not renewed automatically. Renew your permit before it expires or you may be arrested."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_181", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Lost permit? Get a statement or affidavit at the police station. Submit the statement with a copy of your permit (if you can) at the RRO. TIP: Lost permits are hard to replace. Make certified copies & give to family or keep it safe. Remember your permit’s file & case number."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_182", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Recognised refugees may apply for  permanent residence. You must have lived in SA for 5 years in a row as a recognised refugee. Consult the Immigration Act of 2002 for more info on the requirements for a permanent residence application. It is important to get a certificate from the Standing Committee for Refugee Affairs (SCRA) saying you will remain a refugee indefinitely. To apply for a permanent residence permit, complete an application form at the SCRA. You can ask a legal counsellor like the LHR for help. Submit the SCRA certificate & the documents required by the Immigration Act, to a regional DHA office (not RRO). See ‘Useful Contacts’. TIP: Refugees don’t have to pay to submit a permanent residence application. TIP: You need a security clearance certificate from SA police - but not from your country of origin. TIP: You must get an affidavit from the police stating whether or not you have a criminal record in your country of origin."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        self.add("state_024", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_locate_me", $("Find Support Service near me")),
+                    new Choice("state_189", $("Free legal advice")),
+                    new Choice("state_190", $("The legal profession")),
+                    new Choice("state_191", $("Arrest & detention")),
+                    new Choice("state_192", $("What to do if arrested")),
+                    new Choice("state_109", $("Conditions of arrest & detention")),
+                    new Choice("state_110", $("Deportation Centre")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            // >> state_locate_me
+            self.add("state_189", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Some university law clinics & human rights organisations offer free legal advice to asylum seekers & refugees. The UNHCR has legal counsellors specialising in refugee law in 5 SA cities. See ‘Useful Contacts’ for more info. Legal counsellors can advise on your asylum application, or help you with an appeal if your asylum application has been rejected. Counsellors can only give you legal advice. They don’t provide accommodation or food. See Social Services for more info."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_190", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A private practice attorney can also help you with your asylum application, appeal or SCRA review. Ordinarily you need to pay for legal services. Or, contact LHR - they may be able to help or refer you to the right organisation. The Law Society of South Africa has a list of attorneys with experience in refugee law. See ‘Useful Contacts’ for more info.TIP: Always ask about a lawyer’s fees before you accept their services. TIP: Always make sure your lawyer has the right qualifications. If you’re unsure contact the Law Society of SA on 012-366-8800."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_191", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Valid permit holders are safe from arrest or detention - unless you break the law. There are some exceptional circumstances. Police or immigration officials may request proof of your lawful stay in the country. Failing this, you may be arrested or detained. If you are arrested, you must prove that you are allowed to be in SA. You must have a valid Section 22 or 24 permit. Valid permit holders are sometimes arrested on suspicion of carrying false documents. If arrested, contact LHR. Those who must still apply for asylum may run the risk of being arrested. Tell them about your intention to apply, or contact LHR for help. If arrested, you will go to a police station and remain until the DHA verifies your identity. They must do so within 48 hours. Never bribe a police or immigration officer to avoid being arrested or get out of jail. This is against the law! TIP: Always carry your valid permit or certified copy with you. This is proof that you are allowed to stay in SA. Renew your permit on time!"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_192", function(name) {
+                return new PaginatedState(name, {
+                    text: $("There are legal ways out of your arrest. It may take time. Ask to speak to a lawyer. It is your right. If arrested but you have a valid Section 22 or 24 permit, ask someone to get copies of your permit to the DHA. Sometimes the RRO must first confirm your permit before you can be released. The DHA may detain you while verifying your permit. You cannot be sent back to your country before a decision on your asylum application or appeal has been made. If you didn’t apply for asylum before your arrest, tell the officer you will still apply. Give reasons why you have not yet. If you break the law, your asylum application may be turned down & you may be sent home - before or after serving a sentence. Remember: You have the right to get legal representation if you are arrested. TIP: If you go to a magistrate’s court, you can ask for ‘legal aid’. You will be able to speak to a lawyer for free."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            // >> state_109
+            // >> state_110
+
+        self.add("state_025", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_230", $("Your employment rights")),
+                    new Choice("state_112", $("Setting up your own business")),
+                    new Choice("state_113", $("Provincial laws")),
+                    new Choice("state_079", $("By-laws")),
+                    new Choice("state_350", $("Working for a salary")),
+                    new Choice("state_123", $("Unfair discrimination")),
+                    new Choice("state_124", $("UIF & Compensation Fund")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_230", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Every refugee or asylum seeker with a valid permit has the right to work in SA. You can be employed or run your own business. Refugees & asylum seekers can also be formally employed. You don’t need an extra work visa."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            // >> state_112
+            // >> state_113
+            self.add("state_350", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_231", $("Your permit")),
+                        new Choice("state_232", $("Security or car guard")),
+                        new Choice("state_233", $("Nurse")),
+                        new Choice("state_234", $("Medicine")),
+                        new Choice("state_235", $("Teacher")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_231", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Asylum seekers and refugees can work with their permits and don’t need an extra work visa."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_232", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Security & car guards must register at PSIRA. SA nationals, permanent residents & refugees with immunity can work as guards."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_233", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("The South African Nursing Council (SANC) processes applications for nurses with qualifications from foreign countries. Refugees with foreign qualifications must register with SANC. You need to submit a set of required documents. Required documents: application letter, CV, letter of support to seek employment in South Africa from Dept. of Health FWMP. And; English Language Proficiency certificate (only if your nursing education wasn’t in English) with an average IELTS score of 6. And; SAQA evaluation certificates of Foreign Educational Certificate & professional certificates & your certified refugee permit. If you are already registered in your home country, you must get a SANC affidavit. Your qualification & experience will be evaluated. If you meet the minimum SANC requirements, you must write a SANC entry examination based on your area of competence. If your application is successful, you must submit an application registration form & pay a registration fee."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_234", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("If you are a qualified medical doctor with refugee status you can apply to register as a doctor in SA. The Department of Health (DOH) employs foreign doctors with the right qualifications & experience in government hospitals. To register, contact the Department of Health’s Foreign Workforce Management Programme (FWMP) on 012 312 0467. To register, you need a job offer from a government hospital or health department. Apply for a formal endorsement from FWMP. When you have a job offer & endorsement, apply to register with the Health Professions Council of SA (HPCSA) 012-338-9350."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_235", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("If you are a public school teacher you need to check your international teaching qualification with the SA Qualifications Authority (SAQA). The SAQA evaluation doesn’t guarantee a job. Also register with SA Council for Educators (SACE). Go to www.sace.org.za for more info."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+            // >> state_123
+            // >> state_124
+
+        self.add("state_026", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_236", $("Your rights")),
+                    new Choice("state_237", $("Health care costs")),
+                    new Choice("state_238", $("Clinics & hospitals")),
+                    new Choice("state_128", $("Trauma assistance")),
+                    new Choice("state_129", $("HIV/Aids")),
+                    new Choice("state_130", $("More about HIV/AIDS")),
+                    new Choice("state_134", $("Help & treatment for sexual abuse")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_236", function(name) {
+                return new PaginatedState(name, {
+                    text: $("You have the right to basic health & reproductive health care services in SA. You cannot be refused emergency medical treatment. Hospital workers don’t always know the rights of refugees & asylum seekers with valid permits. You can contact Lawyers for Human Rights when you’ve a problem accessing public health services."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_237", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Refugees & asylum seekers pay the same fees as SA nationals. Take your documents with to prove you’re an asylum seeker or refugee. Your fee is determined by a means test. The means test will determine how much your fees will be subsidised. There are 3 income groups: H1, H2 and H3. If you don’t have the right documents, you will be placed in the H3 group. H1: you earn less than R36 000 a year. H2: you earn less than R72 000 a year. H3: you earn more than R72 000 a year. Take the following with to hospital: ID, appointment card, payslip or proof of salary & proof of address. TIP: Feeling ill? Go to a clinic close to your house first. You will get a letter for a hospital if they can’t help you. TIP: If there’s an emergency, go straight to hospital."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_238", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Clinics provide care for adults & children. Most of the time you will not have to pay to see the doctor or get treatment. Go to the clinic closest to your home. Make an appointment first. If there’s an emergency, just go. Wait for a doctor. Take your valid Section 22 or 24 permit with you. If you haven’t received it yet, ask an NGO for a letter. See ‘Useful Contacts’. After you’ve seen the doctor, the clinic will give you medicine if you need it. You don’t have to pay for the medicine. If you want to go to the hospital, you need a letter from the clinic first. If there’s an emergency, go straight to the hospital. Can’t pay the public hospital fees? Get an affidavit from the police that states why you can’t pay. You can also contact a NGO in the contact list if you can’t pay your fees. They may ask the hospital to drop the fees. This is important: if you go to a private doctor or private hospital you will have to pay all the fees yourself."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            // >> state_128
+            // >> state_129
+            // >> state_130
+            // >> state_134
+
+        self.add("state_027", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_239", $("Your rights")),
+                    new Choice("state_240", $("School education")),
+                    new Choice("state_351", $("More about schools")),
+                    new Choice("state_140", $("Special needs children")),
+                    new Choice("state_243", $("University education")),
+                    new Choice("state_244", $("Registration tips")),
+                    new Choice("state_245", $("Adult education")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_239", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Everyone has the right to basic education in SA, including basic adult education."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_240", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A creche is a preschool day-care centre for children from 1-6 years old. You have to pay a school fee. Can’t pay? Try to negotiate with the creche or offer to work in exchange for a cheaper fee. All children in SA must go to school, including refugees & asylum seekers. It’s the law. Primary school is for children from 7-13 years old. Secondary school is for children from 13 to 19 years old. Secondary schools can be academic or technical. TIP: Age groups in schools are flexible. A child may be older than their school friends due to unplanned situations. TIP: In most SA government schools a student cannot be more than 2 years older than their grade’s age group."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_351", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_241", $("Placement in schools")),
+                        new Choice("state_242", $("Registration tips")),
+                        new Choice("state_139", $("Fees")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_241", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Asylum & refugee children have a right to primary education. They are entitled to access the same schooling as SA children. Register for primary school at the school closest to your house. English not good? Take a friend who can help with you. Schools get full quickly. You need to apply early. Try to apply from July for entry into the school for the following year. If the school closest to your house is full, the school must show you to another school that can help you. If you struggle to register, go back to the school close to your house. They must refer you to the Dept. of Education for help. If the school refuses admission, ask for a letter on the school letterhead signed by the principal. Take it to the Dept. of Education. Still can’t find a school for your child? Contact a social service provider for education or LHR. Go to the contact list for more info."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_242", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("The parent or legal guardian must register the child. Give your family’s contact details: physical & postal address & telephone numbers. Provide the school with certified copies of the child and/or parent’s permit & the child’s inoculation certificate. If you don’t have an inoculation certificate you must get one within 3 months from the local municipal clinic."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                // >> state_139
+            // >> state_140
+            self.add("state_243", function(name) {
+                return new PaginatedState(name, {
+                    text: $("You can study at a university to further your education or change your education from your home country to a SA degree. A university degree can help you enter the SA job market. Remember: you must have a valid asylum seeker or refugee status permit. You can apply to study at a university or technikon. A technikon is a university of technology with more practical training. Contact the international student office at your chosen university or technikon. Ask for info about their standards."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_244", function(name) {
+                return new PaginatedState(name, {
+                    text: $("You need to pay an international registration & local tuition fee. Have your academic records evaluated & certified by SAQA. Submit the completed SAQA  form with certified copies of your academic records. The process can take up to 3 months. You must be proficient in English to register. Prove your proficiency by taking one of the following tests: TOEFL, IELTS, PTEEP. Information on scholarships & funding is available online or at the university/technikon’s information desk. UNHCR offers a Dafi Scholarship for refugees not older than 28 & who successfully completed their secondary education. The Dafi Scholarship doesn’t apply to postgraduate studies. For more info & requirements, see ‘Useful contacts’."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_245", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Some NGOs & refugee communities offer adult education to refugees & asylum seekers. Most adult education programmes are free. Some training centres offer English language courses. Self-help programmes & skills training can be important for job seekers. Adult education programmes also encourage social integration in SA. See ‘Useful Contacts’ for more info."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        self.add("state_028", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_246", $("Your rights")),
+                    new Choice("state_247", $("Food & accommodation")),
+                    new Choice("state_248", $("Finding accommodation")),
+                    new Choice("state_249", $("Evictions")),
+                    new Choice("state_250", $("Social assistance grants")),
+                    new Choice("state_251", $("Types of grants")),
+                    new Choice("state_252", $("Applying for a grant")),
+                    new Choice("state_253", $("SASSA offices")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_246", function(name) {
+                return new PaginatedState(name, {
+                    text: $("You must look after your own social & economic needs. The SA Government, UNHCR & NGO’s can only help in exceptional cases. The UNHCR’s role is limited in SA, with no camp-based situations. They can’t provide for all the needs of asylum seekers. The UNHCR & NGOs give limited assistance in cities with an RRO. Assistance is only for the most vulnerable asylum seekers. Vulnerable asylum seekers include mothers with children who have been in SA for less than 2 months. Or; people with very serious illnesses & disabilities & newly arrived single men with special needs. Assistance can include food & basic accommodation for up to 3 months. Most refugee communities have little material assistance to offer, but can give support to newly arrived asylum seekers. Asylum seekers and refugees can access public services like health care & education."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_247", function(name) {
+                return new PaginatedState(name, {
+                    text: $("You have the right to food, water & housing. Some organisations can help vulnerable asylum seekers & refugees with this. Remember: Help is limited and for a short time only. You will be expected to support yourself soon afterwards. Some churches and religious centres run soup kitchens or provide help to asylum seekers and refugees. See ‘Useful Contacts’  for more info on these churches and religious centres."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_248", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Some NGOs might help you find short-term solutions, like a shelter or place for the homeless. See ‘Useful Contacts’ for info. Ask other refugees & asylum seekers for info on accommodation. Check local newspapers for ads. Estate agents can charge a fee. Rent is paid at the beginning of the month. You might have to pay a deposit (a month’s rent) before you can move in. If possible, sign a contract with your landlord. Ask him/her what they expect of you as a tenant."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_249", function(name) {
+                return new PaginatedState(name, {
+                    text: $("The law also protects refugees & asylum seekers from unlawful evictions. The landlord must have a court order before he can evict you. Remember: only a court can force you to leave. You must know when & where the court hearing will take place before the court order is given to you. The landlord cannot threaten you or use force to remove you from the property. Contact the Rental Housing Tribunal 011-630-5035 or 0800-046-873 if there’s a dispute or if you feel you’ve been unfairly treated."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_250", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Recognised refugees can get social assistance under certain circumstances. This doesn’t apply to asylum seekers."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_251", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_352", $("Disability grant")),
+                        new Choice("state_353", $("Foster care grants")),
+                        new Choice("state_354", $("Social relief grant")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_352", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("This is a temporary or permanent monthly grant for recognised refugees who can’t work due to a mental or physical disability. Recognised refugees who are foster parents of a disabled child under 18, can apply for a care dependency grant."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_353", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Recognised refugees who are suitable foster parents can apply to the Dept. of Social Development for a foster care grant. Remember: a court must confirm you are a suitable foster parent. The grants are usually given for a 2 year period."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_354", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Limited to SA citizens only, but the SA Government has given this grant (in the form of food vouchers) to non-citizens in need."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+            self.add("state_252", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Each grant needs a specific set of documents to support your application. Visit www.sassa.gov.za or call SASSA on 0800-60-10-11. You must apply at the SASSA office closest to your home."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_253", function(name) {
+                return new PaginatedState(name, {
+                    text: $("EASTERN CAPE: BKB Building, cnr Fitzpatrick & Merino Road, Quigney. Tel: 043-707-6300 Email: GrantsEnquiriesEC@sassa.gov.za FREE STATE: African Life Building, 75 St. Andrews Street, Bloemfontein. Tel: 051-410-0804/5 Email: GrantsEnquriesFS@sassa.gov.za GAUTENG: 28 Harrison Street, Johannesburg. Tel: 011-241-8300 Email: GrantsEnquiriesGP@sassa.gov.za KWAZULU-NATAL: 1 Bank Street, Pietermaritzburg. Tel: 033-846-3300 Email: GrantsEnquiriesKZN@sassa.gov.za LIMPOPO: 43 Landros Mare, Polokwane. Tel: 015-291-7400 Email: GrantsEnquiriesLIM@sassa.gov.za MPUMALANGA: 18 Ferreira Street, Nelspruit. Tel: 013-754-9428 Email: GrantsEnquiriesMP@sassa.gov.za NORTH WEST: Master Centre, Industrial, Mafikeng. Tel: 018-388-0060 Email: GrantsEnquiriesNW@sassa.gov.za NORTHERN CAPE: Du Toitspan Building 95-97, Du Toitspan Road, Kimberley. Tel: 053-802-4900 Email: GrantsEnquiriesNC@sassa.gov.za WESTERN CAPE: Golden Acre, Adderley Street, Cape Town. Tel: 021-469-0200 Email: GrantsEnquiriesWC@sassa.gov.za"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        self.add("state_029", function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice("state_254", $("Problems at the bank")),
+                    new Choice("state_255", $("Opening a bank account")),
+                    new Choice("state_256", $("More banking options")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_254", function(name) {
+                return new PaginatedState(name, {
+                    text: $("It may be difficult to open a bank account in SA. Most banks want to see a green SA ID before they open a bank account. Banks don’t always know the rights of refugees & asylum seekers with valid permits. They may refuse to open bank accounts. Asylum seekers can use their temporary asylum seeker permit as identification. Refugees can use their refugee permit or refugee ID. FNB, Standard Bank & Nedbank accept asylum seekers & refugees. Ask other refugees which bank in your area is refugee-friendly."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_255", function(name) {
+                return new PaginatedState(name, {
+                    text: $("You must be 16 years or older with a valid asylum seeker permit, refugee permit or refugee ID. You must hand in a proof of residence. This can be a rental contract, telephone bill or utility bill in your name. You need to prove your income with a payslip or affidavit. You also need a small amount of money to put in your bank account. Even if you have the right documents, the bank may decide if they want to give you an account or not. You can also ask a legal counsellor to help you open a bank account."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_256", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Savings & credit co-operatives often open up bank accounts for refugees. They operate as credit unions. Credit unions are groups of people who save together & lend money to each other. They don’t operate as ordinary banks."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        self.add("state_030", function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice("state_257", $("Asylum application")),
+                    new Choice("state_258", $("Permits")),
+                    new Choice("state_259", $("Support services")),
+                    new Choice("state_260", $("Right to work")),
+                    new Choice("state_261", $("Health")),
+                    new Choice("state_262", $("Education")),
+                    new Choice("state_263", $("Safety concerns")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_257", function(name) {
+                return new PaginatedState(name, {
+                    text: $("The asylum process is hard. You may queue for weeks before you get help. You won’t get proof that you’ve been queueing. Until you receive a Section 22 permit, the police or immigration can arrest you. Contact LHR for legal help if you are arrested. If a DHA official asks for a bribe, get his/her name. Make a note of the official’s physical features, the day & time this happened. There is no need to pay any fees. Call the DHA’s toll-free hotline to report corruption. You will remain anonymous. 0800-601-190 If you don’t renew your Section 22 (asylum seeker) permit before it expires, you could be arrested & detained or pay a fine. Remember, if you use the travel document to travel back to your country, you could lose your refugee status in SA."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_258", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Always ask if there is a separate renewal queue for permits. Remember to take all original documents with you when renewing your permit. You have the right to question the fine if you think it’s wrongly given to you. Speak to a lawyer if you are worried about it. Permits aren’t renewed automatically. Renew your permit before it expires. You can get arrested if you have an expired permit. Lost permits are hard to replace. Make certified copies & give to family or keep it safe. Remember your permit’s file & case number. Refugees don’t have to pay to submit a permanent residence application. You need a security clearance certificate from SA police. You don’t need a security clearance certificate from your country of origin. You must get an affidavit from the police declaring whether you have a criminal record in your country of origin."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_259", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Always ask about a lawyer’s fees before you accept their services. Always ensure your lawyer has the right qualifications. If you’re unsure contact the Law Society of SA on 012-366-8800. Always carry your valid permit or certified copy with you. This is proof that you are allowed to stay in SA. Renew your permit on time! If you go to a magistrate’s court, you can ask for ‘legal aid’. You will be able to speak to a lawyer for free."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_260", function(name) {
+                return new PaginatedState(name, {
+                    text: $("It’s important to obey all the by-laws. If you don’t follow the by-laws, you may lose your goods or go to jail."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_261", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Feeling ill? Go to a clinic close to your house first. You will get a letter for a hospital if they can’t help you. If there’s an emergency, go straight to hospital. You cannot get HIV through casual contact, like working together, kissing a friend, sharing the same bathroom or kitchen. Contact LoveLife 0800 121 900, Aids Helpline 0800 01 23 22, Aids Hotline 0800 11 06 05 for more info or help."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_262", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Age groups in schools are flexible. A child may be older than their school friends due to unplanned situations. In most SA government schools a student cannot be more than 2 years older than their grade’s age group. You shouldn’t pay a registration fee at the school. The public school can’t ask your child to leave if you can’t pay."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_263", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Resettlement is possible in exceptional cases, but not an option for many refugees with SA refugee status. It can take more than a year. You’ll lose your refugee status when you leave SA through voluntary repatriation. It must be safe for you to return to your country. Family reunification applications must be made to the DHA at the RRO. Only the DHA considers family reunification for refugees."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        // >> state_031
+
+        self.add("state_032", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_264", $("Xenophobia")),
+                    new Choice("state_265", $("Durable solutions")),
+                    new Choice("state_266", $("Resettlement")),
+                    new Choice("state_267", $("More about resettlement")),
+                    new Choice("state_268", $("Internal relocation")),
+                    new Choice("state_269", $("Voluntary repatriation")),
+                    new Choice("state_270", $("Family reunification")),
+                    new Choice("state_271", $("Tracing")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_264", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Xenophobia is an irrational hatred towards foreigners or an unreasonable fear or hatred of the unfamiliar persons. If you are a victim of xenophobic attacks, you must report it to the police. Go to the police station closest to your home. You must explain in detail what happened. The police will open a case. You will get a case number. Keep it safe! If you’ve lost your document, get an affidavit from the police that explains your situation. Go to the RRO for a new permit."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_265", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Sometimes the UNHCR helps with the movement of refugees from one place to another. This is called relocation. There are 4 relocation options: resettlement, internal relocation, voluntary repatriation & family reunification. Relocation is not part of the asylum process. It only happens when the UNHCR identifies the need for protection. Only recognised refugees will be considered for these relocation options. Asylum seekers will be considered in exceptional cases. A separate status interview will be carried out by the UNHCR. Remember: the UNHCR’s outcome can differ from the DHA’s process."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_266", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Resettlement is the assisted movement of a refugee & his/her nuclear family (husband/wife & children) to another country. This is only done in exceptional cases, if SA officials cannot find a safe housing solution for the affected refugees in SA. General SA problems like xenophobia and lack of employment do not meet the requirements for resettlement. The UNHCR will first try to set up a durable environment for you in SA before resettlement is considered. TIP: Resettlement is possible in exceptional cases, but is not an option for most refugees with SA refugee status."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_267", function(name) {
+                return new ChoiceState(name, {
+                    question: $("Select an option:"),
+                    choices: [
+                        new Choice("state_355", $("Criteria for resettlement")),
+                        new Choice("state_356", $("Applying for resettlement")),
+                    ],
+                    next: function(choice) {
+                        return choice.value;
+                    }
+                });
+            });
+                self.add("state_355", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Exceptional situations where refugees who are of concern to the UNHCR, are refused entry to SA. This also includes refugees who are of concern to the UNHCR who’ve had their asylum applications rejected. Situations where the SA government cannot offer suitable protection to refugees faced with a direct threat to life & safety. When SA medical & psychological services cannot meet the needs of survivors of violence & torture. When SA cannot provide the necessary medical care to refugees with specific medical & disability needs. When SA cannot provide the necessary protection to address the needs of women at risk & elderly refugees. Unaccompanied children may be resettled if the child is considered especially vulnerable."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+                self.add("state_356", function(name) {
+                    return new PaginatedState(name, {
+                        text: $("Ask a legal counsellor for help if you fall within one of the 4 relocation categories. You can also contact the UNHCR for advice. Go to the UNHCR on a Monday to make an appointment. Their consultation days are on Tuesdays & Thursdays. If the UNHCR can’t find a way to solve your problems in SA, they may consider resettlement options. A final decision will be made based on the information you provided. If the decision is negative, they will notify you in writing. If the UNHCR decides that resettlement is necessary, they will ask a third country to review your application. If the third country is satisfied with your case, an entry visa will be prepared. You must go for a medical examination as part of your resettlement application. You may be interviewed again. The IOM will prepare the travel documents for refugees to be resettled. The whole process can take 1 - 2 years."),
+                        characters_per_page: 160,
+                        back: $('Back'),
+                        more: $('More'),
+                        exit: $('Exit'),
+                        next: 'state_main_menu'
+                    });
+                });
+            self.add("state_268", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Internal relocation is the movement of a refugee/asylum seeker & his/her nuclear family (husband/wife & children) within SA. Internal relocation is for protection purposes. In exceptional situations you may be relocated to get better access to the UNHCR. Internal relocation procedures are the same as resettlement procedures. You can’t apply if you simply have transportation needs in SA. If the UNHCR is convinced you need internal relocation, they will find safer locations within SA where you can live. Temporary accommodation & necessary services can be provided. The UNHCR will also arrange transport."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_269", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Voluntary repatriation happens when refugees freely decide to return to their home countries. To apply, fill in a voluntary repatriation application form. Forms are available at UNHCR, LHR, Wits Law Clinic & UCT Law Clinic. You will be interviewed by a legal counsellor. The counsellor must confirm that the information on your form is correct. Your form will be sent with a recommendation to the UNHCR or the IOM. They will make a final decision & arrange your return. TIP: You will lose refugee status if you leave SA through voluntary repatriation. It must be safe to return to your country."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_270", function(name) {
+                return new PaginatedState(name, {
+                    text: $("If you lost a family member during the movement between countries, you can ask for the family member to join you in SA. You may ask to join a family member in another country. Under exceptional circumstances the UNHCR can help with transportation. To apply, contact the UCT Law Clinic, LHR or Jesuit Refugee Services. They will help you with the application. TIP: Family reunification applications must be made to the DHA at the RRO. Only the DHA may consider family reunification."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_271", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Sometimes family members need to be traced before they can be reunited. The SARCS & ICRC help to restore these family links. The Red Cross works with the UNHCR to reunite families. They assist with child protection during the reunification process. The Red Cross can help to reunite unaccompanied & separated children, as well as reuniting the elderly or vulnerable. The Red Cross message system helps to restore contact between family members if the identity & full address of both parties is known. Always give as much info as possible: the missing person’s identity, reason for separation and last place of contact. Consult the Red Cross and the Red Crescent if the missing person has been resettled. The success of finding a missing person depends on information given and the accessibility of the area they occupy. The danger posed by armed conflicts or natural disasters, may delay the tracing of a missing person."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        self.add("state_033", function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice("state_146", $("Who is stateless?")),
+                    new Choice("state_147", $("Birth registration")),
+                    new Choice("state_148", $("South African citizenship")),
+                    new Choice("state_149", $("Get legal advice")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            // >> state_146
+            // >> state_147
+            // >> state_148
+            // >> state_149
+
+        self.add("state_034", function(name) {
+            return new PaginatedState(name, {
+                text: $("SA’s Constitution protects the rights of Lesbian, Gay, Bisexual & Transgender individuals (LGBTI). LGBTI victims of unjust treatment must go to the police. LGBTI victims of hate speech may lay a complaint with the SAHRC or approach the Equality Court for relief. The Refugee act states that the LGBTI group can get protection if they are persecuted for their sexual orientation. Don’t be afraid to disclose your sexual orientation when applying for asylum. The RRO must treat your claim with confidentiality. Contact LHR or another legal organisation if your claim isn’t treated with sensitivity & respect. See Useful Contacts for more info."),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                exit: $('Exit'),
+                next: 'state_main_menu'
+            });
+        });
+
+        self.add("state_035", function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice("state_141", $("Your rights")),
+                    new Choice("state_142", $("Report a case")),
+                    new Choice("state_143", $("Get a protection order")),
+                    new Choice("state_144", $("Trafficking")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            // >> state_141
+            // >> state_142
+            // >> state_143
+            // >> state_144
+
+        self.add("state_036", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_808", $("ARESTA")),
+                    new Choice("state_272", $("Asylum seeker")),
+                    new Choice("state_802", $("CBRMC")),
+                    new Choice("state_273", $("CIPC")),
+                    new Choice("state_801", $("CCMA")),
+                    new Choice("state_274", $("DAFI Scholarship")),
+                    new Choice("state_275", $("Department of Home Affairs (DHA)")),
+                    new Choice("state_276", $("Durable solution")),
+                    new Choice("state_277", $("Form BI-1590")),
+                    new Choice("state_278", $("Family reunification")),
+                    new Choice("state_279", $("Family tracing")),
+                    new Choice("state_800", $("FAMSA")),
+                    new Choice("state_280", $("FWMP")),
+                    new Choice("state_281", $("HPCSA")),
+                    new Choice("state_282", $("ICRC")),
+                    new Choice("state_283", $("IELTS")),
+                    new Choice("state_284", $("Immigration Act")),
+                    new Choice("state_285", $("IOM")),
+                    new Choice("state_286", $("LHR")),
+                    new Choice("state_287", $("Non-refoulement")),
+                    new Choice("state_807", $("PASSOP")),
+                    new Choice("state_288", $("Permanent resident")),
+                    new Choice("state_289", $("Persecution")),
+                    new Choice("state_806", $("POWA")),
+                    new Choice("state_290", $("Prohibited person")),
+                    new Choice("state_291", $("PSIRA")),
+                    new Choice("state_292", $("PTEEP")),
+                    new Choice("state_293", $("RAB")),
+                    new Choice("state_294", $("Recognised refugee")),
+                    new Choice("state_295", $("Refugees Act No. 130 of 1998")),
+                    new Choice("state_296", $("Refugee")),
+                    new Choice("state_297", $("Relocation")),
+                    new Choice("state_298", $("Resettlement")),
+                    new Choice("state_299", $("RRO")),
+                    new Choice("state_300", $("RSDO")),
+                    new Choice("state_301", $("SACE")),
+                    new Choice("state_302", $("SAHRC")),
+                    new Choice("state_303", $("SANC")),
+                    new Choice("state_304", $("SAQA")),
+                    new Choice("state_305", $("SARCS")),
+                    new Choice("state_803", $("SAWIMA")),
+                    new Choice("state_306", $("SASSA")),
+                    new Choice("state_307", $("Section 22 permit")),
+                    new Choice("state_308", $("Section 24 permit")),
+                    new Choice("state_309", $("Standing Committee of Refugee Affairs (SCRA)")),
+                    new Choice("state_310", $("Temporary resident")),
+                    new Choice("state_311", $("TOEFL")),
+                    new Choice("state_312", $("UIF")),
+                    new Choice("state_313", $("Unaccompanied minor")),
+                    new Choice("state_314", $("UNHCR")),
+                    new Choice("state_315", $("Voluntary repatriation")),
+                    new Choice("state_804", $("ZANZAT")),
+                    new Choice("state_805", $("ZIPOVA")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_808", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Agency for Refugee Education, Skills Training and Advocacy"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_272", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A person who has applied for asylum with the Dept. of Home Affairs & is awaiting a decision on his/her refugee status."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_802", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Coordinating Body for Refugee and Migrant Communities"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_273", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Companies & Intellectual Properties Commission."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_801", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Commission for Conciliation, Mediation and Arbitration"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_274", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Albert Einstein German Academic Refugee Initiative Fund Scholarship Programme"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_275", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A department of the South African government responsible for the administration of asylum applications, refugee matters & migrant visas."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_276", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Long-term solutions for refugees who had problems, incl. movement back to the home country, third country of asylum or integration in SA. "),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_277", function(name) {
+                return new PaginatedState(name, {
+                    text: $("The Eligibility Determination form. Fill out this form the first time you report to any of the 7 refugee reception offices."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_278", function(name) {
+                return new PaginatedState(name, {
+                    text: $("When members of the same nuclear family is brought together with the help of the UNHCR & ICRC after approval from DHA."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_279", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Trying to find & connect members of the same nuclear family (father, mother, brother, sister) with or without the help of the UNHCR or ICRC."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_800", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Family and Marriage Society of South Africa"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_280", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Foreign Workforce Management Programme"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_281", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Health Professions Council of South Africa"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_282", function(name) {
+                return new PaginatedState(name, {
+                    text: $("International Committee of the Red Cross"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_283", function(name) {
+                return new PaginatedState(name, {
+                    text: $("International English Language Testing System"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_284", function(name) {
+                return new PaginatedState(name, {
+                    text: $("This law controls who can enter South Africa & covers deportations."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_285", function(name) {
+                return new PaginatedState(name, {
+                    text: $("International Organisation for Migration"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_286", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Lawyers for Human Rights"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_287", function(name) {
+                return new PaginatedState(name, {
+                    text: $("This means that states may not send asylum seekers & refugees back to countries where their lives & freedom may be in danger."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_807", function(name) {
+                return new PaginatedState(name, {
+                    text: $("People Against Suffering, Oppression & Poverty"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_288", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A person who has permission to live in South Africa permanently."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_289", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Life-threatening violation of human rights because of a person’s race, religion, nationality, political opinion or social group."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_806", function(name) {
+                return new PaginatedState(name, {
+                    text: $("People Opposing Women Abuse"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_290", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A person without legal documents allowing him/her to stay in SA, deportees or people with infectious diseases."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_291", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Private Security Industry Regulatory Authority."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_292", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Placement Test in English for Educational Purposes"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_293", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Refugee Appeal Board"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_294", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A person with refugee status in terms of section 24 of the Refugees Act."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_295", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A law passed by the Parliament of South Africa that controls the treatment of refugees in SA."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_296", function(name) {
+                return new PaginatedState(name, {
+                    text: $("If you fled from your country in fear of your life because of persecution, armed conflicts, civil upheavals or generalised violence."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_297", function(name) {
+                return new PaginatedState(name, {
+                    text: $("When a refugee or asylum seeker is transferred from one part of South Africa to another with the help of the UNHCR."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_298", function(name) {
+                return new PaginatedState(name, {
+                    text: $("The relocation of a refugee from SA to a second country of asylum. This happens with the approval of the UNHCR & country of resettlement."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_299", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Refugee Reception Office. You must report to the RRO when you first arrive in SA to start the asylum application process."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_300", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Refugee Status Determination Officer. The RSDO makes the decision about your refugee application."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_301", function(name) {
+                return new PaginatedState(name, {
+                    text: $("South African Council for Educators"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_302", function(name) {
+                return new PaginatedState(name, {
+                    text: $("South African Human Rights Commission"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_303", function(name) {
+                return new PaginatedState(name, {
+                    text: $("South African Nursing Council"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_304", function(name) {
+                return new PaginatedState(name, {
+                    text: $("South African Qualifications Authority"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_305", function(name) {
+                return new PaginatedState(name, {
+                    text: $("South African Red Cross Society"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_803", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Southern African Women’s Institute for Migration Affairs"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_306", function(name) {
+                return new PaginatedState(name, {
+                    text: $("South African Social Security Agency"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_307", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Temporary, renewable permit for asylum seekers while they await a decision on their asylum application. It allows you to live, work & study in SA."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_308", function(name) {
+                return new PaginatedState(name, {
+                    text: $("This renewable permit confirms you are a recognised refugee & confirm you may remain in SA."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_309", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A committee reviewing rejected refugee applications. They certify that a refugee remains a refugee in order to apply for permanent residence."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_310", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A person with a legal permit allowing him/her to stay in SA for a limited period of time, e.g. tourists, foreign students & business people."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_311", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Test of English as Foreign Language"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_312", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Unemployed Insurance Fund"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_313", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A child under the age of 18 who is in South Africa without a parent or guardian."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_314", function(name) {
+                return new PaginatedState(name, {
+                    text: $("The United Nations High Commissioner for Refugees. They provide international protection for refugees & promote long-term durable solutions."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_315", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Voluntary return of a foreign national to their country of origin."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_804", function(name) {
+                return new PaginatedState(name, {
+                    text: $("SA National Zakat Foundation"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            self.add("state_805", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Zimbabwe Political Victims Association"),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+
+        // TODO update this with migrant copy
+        self.add("state_038", function(name) {
+            return new PaginatedState(name, {
+                text: $("Your new settings have been saved. Please dial back for it to take effect. Brought to you by Lawyers for Humans Rights www.lhr.org.za"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                exit: $('Exit'),
+                next: 'state_main_menu'
+            });
+        });
+
+        self.add("state_039", function(name) {
+            return new PaginatedState(name, {
+                text: $("This mobile info system is only a guide. It isn’t the same as complete legal advice. Users should contact a law clinic for complex issues. LHR will not be liable for any loss from actions taken as a result of this service. Your registration & personal details are confidential & safe. It will only be used when you’ve made a follow up request or report to LHR. The registration & the actual mobile application service is free. You will only be charged according to USSD data fees per their usage. LHR reserves the right to terminate usage of this service should there be deemed an abuse of the service."),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                exit: $('Exit'),
+                next: 'state_main_menu'
+            });
+        });
+
+        self.add("state_040", function(name) {
+            return new PaginatedState(name, {
+                text: $("Lawyers for Human Rights is a NGO. We aim to promote awareness, protection & enforcement of legal & human rights. Visit www.lhr.org.za"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                exit: $('Exit'),
+                next: 'state_main_menu'
+            });
+        });
+
 
 
 
