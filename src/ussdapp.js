@@ -2241,7 +2241,6 @@ go.app = function() {
 
     // MIGRANT MENU STATES
 
-        // 060
         self.add('state_060', function(name) {
             return new ChoiceState(name, {
                 question: $('Select an option'),
@@ -2254,8 +2253,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 100
             self.add('state_100', function(name) {
                 return new PaginatedState(name, {
                     text: $("If you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group. Or; if your life, safety or freedom in your home country are at risk because of violence, war and civil unrest. Or; if you are married to or depend upon a person who fled their country in fear of their life for the reasons listed. You are entitled to refugee status if you are married to a recognised refugee, even if your own claim was rejected."),
@@ -2266,8 +2263,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 101
             self.add('state_101', function(name) {
                 return new PaginatedState(name, {
                     text: $("If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa. Remember: a migrant can become a refugee should one of the reasons for refugee status takes place in their country of origin."),
@@ -2279,8 +2274,6 @@ go.app = function() {
                 });
             });
 
-
-        // 061
         self.add('state_061', function(name) {
             return new ChoiceState(name, {
                 question: $('Select your type of application'),
@@ -2295,8 +2288,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 102
             self.add('state_102', function(name) {
                 return new PaginatedState(name, {
                     text: $("The visa application process has changed. Find out what you will need to apply for a visa in SA. There's more on www.vfsglobal.com. There are 2 types of residence permits: one is temporary, the other is permanent. (A visa is the same as a permit.)"),
@@ -2307,8 +2298,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 103
             self.add('state_103', function(name) {
                 return new PaginatedState(name, {
                     text: $("To apply for a temporary residence permit, your passport must be valid. It must stay valid for 30 days after your permit expires. Extend your temporary residence permit 30 days before it expires at any Home Affairs office. You will have to pay a fee. TIP: Hand in your application at any of the 11 VFS Global offices in SA. Go to www.vfsglobal.com for more info.There are 14 types of temporary residence visas. Choose one from this list. Visit www.vfsglobal.com for info on fees, documents & more."),
@@ -2319,8 +2308,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 104
             self.add('state_104', function(name) {
                 return new PaginatedChoiceState(name, {
                     question: $('Select an option'),
@@ -2349,8 +2336,6 @@ go.app = function() {
                     }
                 });
             });
-
-                // 150
                 self.add('state_150', function(name) {
                     return new PaginatedState(name, {
                         text: $("Treaty: When there is a deal between SA & your country. You can enter SA to take part in certain activities or programmes."),
@@ -2361,8 +2346,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 151
                 self.add('state_151', function(name) {
                     return new PaginatedState(name, {
                         text: $("Visitor: For short visits to SA to travel, do business, visit family or friends or attend sports events."),
@@ -2373,8 +2356,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 152
                 self.add('state_152', function(name) {
                     return new PaginatedState(name, {
                         text: $("Exchange: When you are younger than 25 years & want to take part in an exchange programme between your country & SA."),
@@ -2385,8 +2366,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 153
                 self.add('state_153', function(name) {
                     return new PaginatedState(name, {
                         text: $("General work: This allows you to work in SA. You need to prove you have work & meet other conditions, or it will expire after 6 months."),
@@ -2397,8 +2376,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 154
                 self.add('state_154', function(name) {
                     return new PaginatedState(name, {
                         text: $("Retired person: When you are elderly & want to retire in SA. There are financial requirements you need to meet."),
@@ -2409,8 +2386,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 155
                 self.add('state_155', function(name) {
                     return new PaginatedState(name, {
                         text: $("Business: When you want to open a business or become part of a business in SA. You will need to invest money first."),
@@ -2421,8 +2396,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 156
                 self.add('state_156', function(name) {
                     return new PaginatedState(name, {
                         text: $("Relative: When you are a direct family member of a South African citizen or permanent resident."),
@@ -2433,8 +2406,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 157
                 self.add('state_157', function(name) {
                     return new PaginatedState(name, {
                         text: $("Corporate: Groups of factory or farm workers can apply for a corporate worker visa. You need a copy of the main corporate visa application."),
@@ -2445,8 +2416,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 158
                 self.add('state_158', function(name) {
                     return new PaginatedState(name, {
                         text: $("Intra company work transfer: When the company you work for in your home country sends you to work in their SA office."),
@@ -2457,8 +2426,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 159
                 self.add('state_159', function(name) {
                     return new PaginatedState(name, {
                         text: $("Critical skills: When your skills are needed in SA. For a list of critical skills, go to www.vfsglobal.com."),
@@ -2469,8 +2436,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 160
                 self.add('state_160', function(name) {
                     return new PaginatedState(name, {
                         text: $("Medical: When you travel to SA for medical care. You can't work or stay longer than 3 months. You must be able to pay for the treatment."),
@@ -2481,8 +2446,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 161
                 self.add('state_161', function(name) {
                     return new PaginatedState(name, {
                         text: $("Study: If you are a student and want to study in SA. You can work while you study, but certain rules apply."),
@@ -2493,8 +2456,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 162
                 self.add('state_162', function(name) {
                     return new PaginatedState(name, {
                         text: $("Transfer of temporary residence: Lost or stolen passport? Transfer your temporary residence visa to your new passport."),
@@ -2505,8 +2466,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 163
                 self.add('state_163', function(name) {
                     return new PaginatedState(name, {
                         text: $("Fix a mistake on a temporary visa: Fix a mistake at any VFS office in SA. You may have to pay a fee."),
@@ -2517,8 +2476,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-            // 105
             self.add('state_105', function(name) {
                 return new PaginatedState(name, {
                     text: $("You & your spouse may need to go for an interview with a Home Affairs officer. Submit a signed BI947 form with your documents & fee. Need proof of your permanent residence visa? Fill in a form on www.vfsglobal.com Make an appointment at VFS. Take your documents & pay a fee. You can fix a mistake on your visa application at any VFS office in SA. You may have to pay a fee."),
@@ -2530,8 +2487,6 @@ go.app = function() {
                 });
             });
 
-
-        // 062
         self.add('state_062', function(name) {
             return new PaginatedState(name, {
                 text: $("Children without a parent or guardian must be referred to the Dept. of Social Development. A social worker will be assigned to the child. The social worker will go to the Children's Court. The court will confirm if the child is in need of care. The social worker will verify the child's placement in a temporary place of safety. A report must be compiled. If the child is a migrant, the social worker must try to find & reunite the family in the country of origin. If the family can't be located & the child can't be returned home, you must contact a legal counsellor. This is important: children must get documented as soon as possible, otherwise they risk becoming stateless."),
@@ -2543,8 +2498,6 @@ go.app = function() {
             });
         });
 
-
-        // 063
         self.add('state_063', function(name) {
             return new ChoiceState(name, {
                 question: $('Select an option'),
@@ -2560,8 +2513,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 106
             self.add('state_106', function(name) {
                 return new PaginatedState(name, {
                     text: $("If you have visa application problems, a lawyer can help with the process. Know your rights! Lawyers for Human Rights (LHR) can offer free advice under certain situations. LHR normally helps asylum seekers and refugees. If you need general legal help with an immigration issue you must hire a private lawyer. TIP: Always ask about a lawyer's fees before you accept their services. TIP: Always ensure your lawyer has the right qualifications. If you're unsure, contact the Law Society of SA on 012-366-8800."),
@@ -2572,8 +2523,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 107
             self.add('state_107', function(name) {
                 return new PaginatedState(name, {
                     text: $("Valid permit holders are safe from arrest or detention - unless you break the law. There are other exceptional circumstances. Police or immigration officials may request that you provide proof of your regularised stay in the country. Failing which, you may be arrested or detained. If you are arrested, you must prove that you are allowed to be in SA. Remember: You must have a valid visa. You will go to a police station. You will stay there until the DHA verifies your identity. They need to do so within 48 hours. Never bribe a police or immigration officer to avoid being arrested, or to get out of jail. This is against the law! TIP: Always carry your valid visa or certified copy with you. This is proof that you are allowed to stay in SA."),
@@ -2584,8 +2533,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 108
             self.add('state_108', function(name) {
                 return new PaginatedState(name, {
                     text: $("There are legal ways out of your arrest. It may take time. Ask to speak to a lawyer. It is your right. If you are arrested and have a valid visa, ask a friend or family to give copies of your valid documents to the DHA. Remember: You have the right to get legal representation if you are arrested. TIP: If you go to a magistrate's court, you can ask for 'legal aid'. You will be able to speak to a lawyer for free."),
@@ -2596,8 +2543,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 109
             self.add('state_109', function(name) {
                 return new PaginatedState(name, {
                     text: $("The immigration or DHA officer should verify your documents within 48 hours. If not, you must be released. It is your responsibility to carry your documentation on you. Otherwise, the officer must assist you in locating your documents. You have the right to a free phone call to get copies of your permit. The officer must attempt to confirm your status with the DHA. It's your right to write a statement to the DHA. In the statement you can disagree with the decision to detain or deport you. You may not be detained for more than 30 days, unless the court confirms, with a warrant, that you can be detained longer than 30 days. You may write a statement to the judge. When the court makes its decision, you must be informed of this in writing."),
@@ -2608,8 +2553,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 110
             self.add('state_110', function(name) {
                 return new PaginatedState(name, {
                     text: $("If you are taken to the Deportation Centre, you may contact a lawyer for legal advice. LHR visits the centre every week. Ask your family to notify Lawyers for Human Rights about your situation and that you need help. If you don't have legitimate reasons to stay in SA with the necessary documents, you'll be kept at the centre & deported back home. Contact Lawyers for Human Rights if your conditions of detention are unsafe or violate your dignity."),
@@ -2621,8 +2564,6 @@ go.app = function() {
                 });
             });
 
-
-        // 064
         self.add('state_064', function(name) {
             return new PaginatedChoiceState(name, {
                 question: $('Select an option'),
@@ -2644,8 +2585,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 111
             self.add('state_111', function(name) {
                 return new PaginatedState(name, {
                     text: $("As a migrant you need a relevant work visa to work in SA. With the right visa you can be employed or run your own business. Remember: if you want to set up your own business in South Africa, you need to have a valid business permit."),
@@ -2656,8 +2595,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 112
             self.add('state_112', function(name) {
                 return new PaginatedState(name, {
                     text: $("You must first register your business at the CIPC. Find out if your business needs a licence. If you sell food you need a business licence. To obtain a licence, fill out an application form at your municipality. Take copies of your valid permit with you and pay a small fee. At some municipalities you may have to hand in extra documents, like health & safety inspection certificates. After you've handed in your application, a health & safety officer will visit your business site for inspection. Don't bribe the official! If you don't meet the health & safety rules, you must make the changes required.You won't get a licence until you do. When your business meets all the health & safety rules, you will get your business licence. Now you can start to trade. The health & safety officer may inspect your business site again. You need to follow the health & safety rules at all times. Check whether there is an expiry date on your business licence. If there is, make sure you renew it on time."),
@@ -2668,8 +2605,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 113
             self.add('state_113', function(name) {
                 return new PaginatedState(name, {
                     text: $("Every province in SA is allowed to pass laws. Make sure you know the business laws of the area you want to trade in. To trade in KZN, Limpopo, Mpumalanga & North-West Province you need a business licence with health & safety approval. In Limpopo, licences are valid for 1 year. Renew your licence 1 month before it expires or you'll be fined or imprisoned. In KwaZulu-Natal you cannot make changes to the building from which your business trades. You need permission first. Hawkers, peddlars & street vendors in Mpumalanga don't need a licence. You may need to prove that your stall area is assigned to you. You can contact Lawyers for Human Rights in Johannesburg or Pretoria if you need a copy of these laws. See 'Useful Contacts'."),
@@ -2680,8 +2615,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 079
             self.add('state_079', function(name) {
                 return new ChoiceState(name, {
                     question: $('Select an option'),
@@ -2698,8 +2631,6 @@ go.app = function() {
                     }
                 });
             });
-
-                // 164
                 self.add('state_164', function(name) {
                     return new PaginatedState(name, {
                         text: $("The laws of a municipality are called by-laws. By-laws control the way businesses and services work in that area. By-laws are not valid outside of the municipalities in which they are passed. Know the by-laws of the municipality you want to trade in. TIP: It's important to obey all the by-laws. If you don't follow the by-laws, you may lose your goods or go to jail."),
@@ -2710,8 +2641,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 114
                 self.add('state_114', function(name) {
                     return new PaginatedState(name, {
                         text: $("The application fee may be cancelled if you can prove you can't pay it. You also need to hand in a written explanation. The city needs to give you enough notice if you are asked to move your business, or if your permit is cancelled. Your permit can be passed on to someone else on death, illness or if you have long-lasting cultural or religious duties. Informal traders can't block traffic or trade next to important or religious buildings, national monuments or fire hydrants. Your trading site must be clean. If you don't follow the by-laws your property can be impounded. You will pay a penalty. If you can't claim your impounded goods within 1 month, it may be sold or destroyed. The city may sell your impounded food products. You can get some money if you paid the penalty & have an inventory list. If you break any of the by-laws you can be fined R5000 or go to prison for 3 months. Go to www.capetown.gov.za for more info."),
@@ -2722,8 +2651,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 115
                 self.add('state_115', function(name) {
                     return new PaginatedState(name, {
                         text: $("You can't trade in or next to public facilities (like toilets, pools or parks) or ATMs unless you have permission. You can't trade next to important, religious or heritage buildings or in front of fire hydrants. You can't block any traffic. If your stall is in a public space, it can't be larger than 3 square meters. Your stall and goods must be removed at the end of the day. You may be asked to move your stall for a short while if the city needs to work on the road or the space you're trading in. Your stall must be kept clean at all times. You are not allowed to sleep in your stall at night. You can rent a stall from the local authority. You'll get a lease agreement & a token to prove your lease to the police. Children aren't allowed to trade. If you break any of the by-laws, an authorised official can take away your products. Go to www.tshwane.gov.za or call 012-358-9999 for more information."),
@@ -2734,8 +2661,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 116
                 self.add('state_116', function(name) {
                     return new PaginatedState(name, {
                         text: $("Preference will be given to permit applications made by the unemployed, registered taxpayers or those new to the informal sector. Your permit may have an expiry date. Check other conditions like trading hours, products you can trade & allowed stall types. Your permit must be for a specific trading bay. You aren't allowed to build structures for your stall. Your permit can be cancelled if you don't follow the rules, if you give the wrong information or if you sell illegal goods. Before your permit is cancelled, you're allowed to make a written statement first. Go to www.durban.gov.za for more info. You may not sleep in your stall at night. Your products cannot cover a public space area bigger than 6 square meters. No trading next to public & religious buildings, national monuments, homes, CCTV cameras, ATMs, fire hydrants or blocking traffic. You can only use an open-flame or gas fire if you are allowed to cook food. Your stall must be clean at all times."),
@@ -2746,8 +2671,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 117
                 self.add('state_117', function(name) {
                     return new PaginatedState(name, {
                         text: $("No trading in public parks, monuments or important buildings, near fire hydrants, ATMs or blocking traffic. Your stall & goods must be removed at the end of the day, unless you have permission from the municipality. You can't sleep in your stall at night or put your stall on a public road or facility. It must be kept clean at all times. You may be asked to move your stall for a short while if the city needs to clean or work in the area where you trade. You cannot sell your products in front of another business that sells the same products. If you trade where you're not allowed to, an official can take away your goods. Remember: you must get a written receipt. Your receipt for impounded goods must say where, when & how you can get your goods back. Unclaimed goods will be sold. If you break the by-laws, you can be fined or imprisoned for up to 3 months. Go to www.nelsonmandelabay.gov.za for more info."),
@@ -2758,8 +2681,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 118
                 self.add('state_118', function(name) {
                     return new PaginatedState(name, {
                         text: $("You can rent a stall from the local authority. You'll get a lease agreement & a token to prove your lease to the police. Your stall must be kept clean at all times. You cannot sleep in your stall at night. Your permit may have an expiry date. Check other conditions like trading hours, products you can trade & allowed stall types. No trading in parks, important/religious buildings, public monuments, near fire hydrants, ATMs or blocking traffic. Your goods can't cover a public area bigger than 6 square meters. If you're trading in front of a shop, you can't block the window. If you trade where you're not allowed to, an official can take away your goods. Remember: you must get a written receipt. Your receipt for impounded goods must say where, when & how much it will cost to get your goods back. If you break any of the by-laws you may be fined up to R500 or 3 months in jail. Go to www.joburg.org.za for more info."),
@@ -2770,8 +2691,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-            // 080
             self.add('state_080', function(name) {
                 return new ChoiceState(name, {
                     question: $('Select an option'),
@@ -2786,8 +2705,6 @@ go.app = function() {
                     }
                 });
             });
-
-                // 119
                 self.add('state_119', function(name) {
                     return new PaginatedState(name, {
                         text: $("You need a work visa to apply for formal employment. The visa depends on the work you can do. Go to www.vfsglobal.com for info. Security & car guards must register at PSIRA. SA nationals, permanent residents & refugees with immunity can work as guards."),
@@ -2798,8 +2715,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 120
                 self.add('state_120', function(name) {
                     return new PaginatedState(name, {
                         text: $("You need a work visa to apply for formal employment. The visa depends on the work you can do. Go to www.vfsglobal.com for info. If you are a qualified nurse with the correct work visa you can apply to work as a nurse in SA. The South African Nursing Council (SANC) processes applications for nurses with qualifications from foreign countries."),
@@ -2810,8 +2725,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 121
                 self.add('state_121', function(name) {
                     return new PaginatedState(name, {
                         text: $("You need a work visa to apply for formal employment. The visa depends on the work you can do. Go to www.vfsglobal.com for info. If you are a qualified medical doctor with the correct work visa you can apply to register as a doctor in SA. The Department of Health (DOH) employs foreign doctors with the right qualifications & experience in government hospitals. To register, contact the Department of Health's Foreign Workforce Management Programme (FWMP) on 012 312 0467. To register, you need a job offer from a government hospital or health department. Apply for a formal endorsement from FWMP. When you have a job offer & endorsement, apply to register with the Health Professions Council of SA (HPCSA) 012-338-9350."),
@@ -2822,8 +2735,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 122
                 self.add('state_122', function(name) {
                     return new PaginatedState(name, {
                         text: $("You need a work visa to apply for formal employment. The visa depends on the work you can do. Go to www.vfsglobal.com for info. If you are a public school teacher you need to check your international teaching qualification with the SA Qualifications Authority (SAQA). The SAQA evaluation doesn't guarantee a job. Also register with SA Council for Educators (SACE). Go to www.sace.org.za for more info."),
@@ -2834,8 +2745,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-            // 123
             self.add('state_123', function(name) {
                 return new PaginatedState(name, {
                     text: $("There are laws in SA that protect you from discrimination or unfair treatment when you are at work. Your employer can't discriminate against you because you're an immigrant. The law protects you from unfair treatment. The law also protects your minimum working hours, leave, salary & the way you are dismissed."),
@@ -2846,8 +2755,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 124
             self.add('state_124', function(name) {
                 return new PaginatedState(name, {
                     text: $("You can claim from the UIF if you end up unemployed because you're sick or have a baby. You need a 13-digit ID number to claim. If you are hurt or become infected with a disease at work & you end up being disabled, the Compensation Fund will pay out money. If you die because of your injuries your dependants will get money. The Compensation Fund will help to pay the medical bills."),
@@ -2859,8 +2766,6 @@ go.app = function() {
                 });
             });
 
-
-        // 065
         self.add('state_065', function(name) {
             return new PaginatedChoiceState(name, {
                 question: $('Select an option'),
@@ -2882,8 +2787,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 125
             self.add('state_125', function(name) {
                 return new PaginatedState(name, {
                     text: $("Apply for a medical visa in your country before you travel to SA to get medical care. See Temporary Visa section for info. Remember: this visa doesn't mean you will get free health care. You will have to pay for it yourself. Already in SA with a visa? You have the right to access medical care just like anybody else. Hospital workers don't always know the rights of migrants with valid visas. It's your right to access public health services. You can contact Lawyers for Human Rights when you've a problem accessing public health services."),
@@ -2894,8 +2797,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 126
             self.add('state_126', function(name) {
                 return new PaginatedState(name, {
                     text: $("People from SADC countries pay the same medical fees as SA residents. You need an ID to prove you're from a SADC country. SADC countries: Angola, Botswana, DRC, Lesotho, Malawi, Mauritius, Mozambique, Namibia, Swaziland, Tanzania, Zambia, Zimbabwe. As a SADC national, your health care payments will be based on how much you earn. There are 3 income groups: H1, H2 and H3. H1: you earn less than R36 000 a year. H2: you earn less than R72 000 a year. H3: you earn more than R72 000 a year. Take the following with to hospital: ID, appointment card, payslip or proof of salary & proof of address. If you don't have the right documents, you will be placed in the H3 group. If you come from a non-SADC country you will pay more than SA citizens to access health care services."),
@@ -2906,8 +2807,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 127
             self.add('state_127', function(name) {
                 return new PaginatedState(name, {
                     text: $("Clinics provide care for adults & children. Most of the time you will not have to pay to see the doctor or get treatment. Go to the clinic closest to your home. Make an appointment first. If there's an emergency, just go. Wait for a doctor. After you've seen the doctor, the clinic will give you medicine if you need it. You don't have to pay for the medicine. If you want to go to the hospital, you need a letter from the clinic first. If there's an emergency, go straight to the hospital. Can't pay the public hospital fees? Get an affidavit from the police that states why you can't pay. You can also contact a NGO in the contact list if you can't pay your fees. They may ask the hospital to drop the fees. This is important: if you go to a private doctor or private hospital you will have to pay all the fees yourself. TIP: Feeling ill? Go to a clinic close to your house first. You will get a letter for a hospital if they can't help you."),
@@ -2918,8 +2817,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 128
             self.add('state_128', function(name) {
                 return new PaginatedState(name, {
                     text: $("Suffering through a traumatic event like abuse, violence or natural disaster can lead to post-traumatic stress disorder. Signs of post-traumatic stress disorder: struggling to sleep or concentrate, nightmares & headaches. More signs of post-traumatic stress disorder: flashbacks, anxiety, feeling helpless or scared. You should tell a professional about your experience. It's important to share your story if you have post-traumatic stress. During counselling you will talk about your experience & feelings. You can go alone, as a couple, with family or in a group. You can visit the Trauma Clinic in Johannesburg or the Trauma Centre for Survivors of Violence & Torture in Cape Town. There are other trauma clinics across SA that can also help you. Go to the contact list for more information."),
@@ -2930,8 +2827,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 129
             self.add('state_129', function(name) {
                 return new PaginatedState(name, {
                     text: $("People who don't know they have HIV can feel healthy for up to 10 years. Know your status & get treatment sooner. HIV weakens your body's power to fight off infections like pneumonia, diarrhoea, tumours & other illnesses. There isn't a cure for HIV or AIDS. Know your status, get the right treatment to help manage HIV & lead a normal life. You can get HIV doing very specific things, like having unprotected sex or using unsterilised needles & syringes. If you are HIV positive & pregnant, your baby can get HIV in the womb or when you give birth or breastfeed. TIP: You cannot get HIV through casual contact, like working together, kissing a friend, sharing the same bathroom or kitchen."),
@@ -2942,8 +2837,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 130
             self.add('state_130', function(name) {
                 return new ChoiceState(name, {
                     question: $('Select an option'),
@@ -2957,8 +2850,6 @@ go.app = function() {
                     }
                 });
             });
-
-                // 131
                 self.add('state_131', function(name) {
                     return new PaginatedState(name, {
                         text: $("To know your HIV status you need to get a blood test. You can get tested at most public health centres. The test is free. You'll receive counselling before & after your test. Sometimes two tests are done. You'll know your status after 20 minutes. Your blood sample might have to go to a laboratory. You'll only know your status in a few days. HIV tests are very accurate. Many organisations in SA offer HIV tests, counselling & treatment. Go to www.tac.org.za or the contact list for more info."),
@@ -2969,8 +2860,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 132
                 self.add('state_132', function(name) {
                     return new PaginatedState(name, {
                         text: $("Pregnant women with HIV should ask for Nevirapine at public health centres. It can prevent HIV infection during childbirth. Nevirapine is an anti-retroviral drug (ARV). Go to the contact list or www.tac.org.za for info on centres with ARV treatments."),
@@ -2981,8 +2870,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-                // 133
                 self.add('state_133', function(name) {
                     return new PaginatedState(name, {
                         text: $("ARV treatment begins during a serious HIV-related illness or when your CD4 count drops below 350. Most people start ARV 8-10 years after infection. It isn't the same for all. See a doctor & get the best treatment for you! Remember: It doesn't matter what your document status is - you are entitled to free ARV treatment."),
@@ -2993,8 +2880,6 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
-
-            // 134
             self.add('state_134', function(name) {
                 return new PaginatedState(name, {
                     text: $("If you've been raped, go to a police station as soon as possible. However, it's your choice if you want to report the case or not. Don't shower, drink liquids or use the toilet before reporting a rape. This will help the police to collect evidence for a strong case. You can change into new clothes before going to the police, but take the clothes you we wearing with you as evidence. Remember: You don't need to report the case to access medical treatment. Rape or sexual assault victims have the right to a 28-day course of antiretrovirals (ARVs) to prevent HIV. If you choose to get treatment, you must take it within 72 hours of being assaulted. This 28-course of ARV's is for people who were HIV-negative before they were sexually assaulted. TIP: Contact LoveLife 0800 121 900, Aids Helpline 0800 01 23 22, Aids Hotline 0800 11 0605 for more info or help."),
@@ -3006,8 +2891,6 @@ go.app = function() {
                 });
             });
 
-
-        // 066
         self.add('state_066', function(name) {
             return new ChoiceState(name, {
                 question: $('Select an option'),
@@ -3024,8 +2907,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 135
             self.add('state_135', function(name) {
                 return new PaginatedState(name, {
                     text: $("Everyone has the right to basic education in SA. You must have a valid study permit to study in SA. In SA on another valid permit? Check first if your permit allows you to study in SA. Some conditions might apply."),
@@ -3036,8 +2917,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 136
             self.add('state_136', function(name) {
                 return new PaginatedState(name, {
                     text: $("A creche is a preschool day-care centre for children from 1-6 years old. You have to pay a school fee. Can't pay? Ask to work in exchange for a cheaper fee. Remember: your child must have a visa and passport to be in SA. Children in SA must go to school. It's the law. Primary school is for children from 7-13 years old. Secondary school is for children from 13 to 19 years old. Secondary schools can be academic or technical. TIP: Age groups in schools are flexible. A child may be older than their school friends due to unplanned situations. TIP: In most SA government schools a student cannot be more than 2 years older than their grade's age group."),
@@ -3048,8 +2927,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 137
             self.add('state_137', function(name) {
                 return new PaginatedState(name, {
                     text: $("You can study at a university to further your education or change your education from your home country to a SA degree. A university degree can help you to get into the SA job market. Remember: You must have a valid study permit to study in SA. You can apply to study at a university or technikon. A technikon is a university of technology with more practical training. Contact the international student office at your chosen university or technikon. Ask for info about their standards."),
@@ -3060,8 +2937,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 138
             self.add('state_138', function(name) {
                 return new PaginatedState(name, {
                     text: $("Your child must have a visa & passport to be in SA. There will be conditions for your child to attend school during your stay in SA. Register for primary school at the school closest to your house. English not good? Take a friend who can help with you. Schools get full quickly. You need to apply early. Try to apply from July for entry into the school for the following year. If the school closest to your house is full, the school must show you to another school that can help you. If you struggle to register, go back to the school close to your house. They must refer you to the Dept. of Education for help. Still can't find a school for your child? Contact a social service provider for education or LHR. Go to the contact list for more info."),
@@ -3072,7 +2947,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
             self.add('state_139', function(name) {
                 return new PaginatedState(name, {
                     text: $("You must pay school fees. If you can't pay, you can ask for exemption. This means you can ask the school to cancel/reduce your fees. Ask for an exemption form & complete it. You need to show proof of income & give info on your expenses & responsibilities. Proof of income can be a payslip, an affidavit or letter of support. You must apply for exemption at the start of each term. Remember: keep all your letters & appointments with the school. If you ignore any notices, the school can ask you to pay. Need help filling out the exemption form? Contact a NGO in the contact list & ask for help. School uniforms & learning materials also cost money. Even if you can't afford a uniform, your child must still go to school. Second-hand school uniforms are cheaper. Ask at the school. Your child can also wear normal clothes that resemble the uniform. TIP: You shouldn't pay a registration fee at the school. The public school can't ask your child to leave if you can't pay."),
@@ -3083,8 +2957,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 140
             self.add('state_140', function(name) {
                 return new PaginatedState(name, {
                     text: $("Children with special learning needs can go to a special education school. Contact the Dept. of Education & ask about schools. Placing your child in a special education school is a long process. Get your child on a waiting list as soon as possible."),
@@ -3096,8 +2968,6 @@ go.app = function() {
                 });
             });
 
-
-        // 067
         self.add('state_067', function(name) {
             return new PaginatedState(name, {
                 text: $("You must be 16 years or older with a valid passport & visa. You must hand in a proof of residence. This can be a rental contract, telephone bill or utility bill in your name. You need to prove your income with a payslip or affidavit. You also need a small amount of money to put in your bank account. It may be difficult to open a bank account in SA. Most banks want to see a green SA ID before they open a bank account. Even if you have the right documents, the bank can decide if they want to give you an account or not. You can also ask a legal counsellor to help you open a bank account."),
@@ -3109,8 +2979,6 @@ go.app = function() {
             });
         });
 
-
-        // 068
         self.add('state_068', function(name) {
             return new PaginatedState(name, {
                 text: $("SA's Constitution protects the rights of Lesbian, Gay, Bisexual & Transgender individuals (LGBTI). LGBTI victims of unjust treatment must go to the police. LGBTI victims of hate speech must lay a complaint with the SAHRC. Ask for legal assistance if you're struggling to lodge your claim. Go to the contact list for more info. For LGBTI support in Johannesburg: GALA 011 717 4239. In Pretoria: Out Wellbeing 012 430 3272. In Durban: Gay & Lesbian Network 033 342 6165"),
@@ -3122,8 +2990,6 @@ go.app = function() {
             });
         });
 
-
-        // 069
         self.add('state_069', function(name) {
             return new ChoiceState(name, {
                 question: $('Select an option'),
@@ -3138,8 +3004,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 141
             self.add('state_141', function(name) {
                 return new PaginatedState(name, {
                     text: $("Women & children have the right to live free from physical, verbal or sexual abuse. All types of abuse must be reported to the police. Remember: a protection order can prevent more violence. Violence can mean intimidation, physical, sexual or verbal abuse, being threatened with abuse or when you lose your freedom. Abuse can happen when men feel angry or powerless. Some men feel that women & children are their property. Some women & children accept violence or abuse. They believe violence shows love & that they can't question a man's authority. Abuse of women & children is illegal in SA. Not all abusers are men. Women can also abuse other women. Get free legal help from selected women & children's organisations or call the toll-free helpline 0800150150 for help & counselling."),
@@ -3150,8 +3014,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 142
             self.add('state_142', function(name) {
                 return new PaginatedState(name, {
                     text: $("If you or your child suffers from abuse, you must report it to the police. The police will open a criminal case. You must make a statement. You'll get a case number. An officer will investigate your case. Some police stations have special units for domestic violence, sexual offences & child protection. Go to a police station close to your home. If you don't, your case will take longer to process. You'll go for a medical examination & counseling. An officer must take you through the process."),
@@ -3162,8 +3024,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 143
             self.add('state_143', function(name) {
                 return new PaginatedState(name, {
                     text: $("If you're afraid of more violence or feel threatened, you can go to court & get a protection order. You don't need a lawyer. A protection order can order your abuser to stop abusing you, to stay away from you or force him/her out of your home. Documents like medical reports & photos of your injuries can help your abuse case. Take them with you to court. If there's enough proof of abuse, you'll get an interim protection order & suspended warrant of arrest. The police will give the protection order to your abuser. If the abuser disobeys the order, you can get him/her arrested. You'll need to go back to court a second time. Your abuser must also be there. The court will listen to your case. The court may give you a final protection order. If your abuser disobeys the order, he/she can get arrested."),
@@ -3174,8 +3034,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 144
             self.add('state_144', function(name) {
                 return new PaginatedState(name, {
                     text: $("Human trafficking happens when people are recruited & taken to another country under a false act. They're exploited & cannot leave. Trafficked victims are tricked with false promises of good jobs & better lives. Victims are forced to work under brutal & inhumane conditions. Human trafficking is a form of modern-day slavery. People who force others into trafficking are dangerous & shouldn't be confronted. Call the International Organisation for Migration (IOM) 0800 555999 or go to a police station if you know of someone who has been trafficked."),
@@ -3187,7 +3045,6 @@ go.app = function() {
                 });
             });
 
-        // 070
         self.add("state_070", function(name) {
             return new PaginatedState(name, {
                 text: $("Xenophobia is an irrational hatred towards foreigners or an unreasonable fear or hatred of the unfamiliar persons.If you are a victim of xenophobic attacks, you must report it to the police. Go to the police station closest to your home. You must explain in detail what happened. The police will open a case. You will get a case number. Keep it safe! If you've lost your document, get an affidavit from the police that explains your situation. Go to the DHA for a new permit. If you've lost your passport, you must go to your country's embassy & then to the DHA to get a new visa."),
@@ -3199,7 +3056,6 @@ go.app = function() {
             });
         });
 
-        // 071
         self.add('state_071', function(name) {
             return new ChoiceState(name, {
                 question: $('Select an option'),
@@ -3214,8 +3070,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 146
             self.add('state_146', function(name) {
                 return new PaginatedState(name, {
                     text: $("A stateless person doesn't have citizenship in any country. You are also at risk of being stateless if your nationality status is undecided. Not all undocumented persons are considered stateless, e.g. when your birth isn't registered or if you don't have a birth certificate, ID or passport. An undocumented person's risk of being stateless increases when he/she belongs to a certain category or when certain factors are present. These factors include: birth outside your parents' country of nationality, death or desertion of your parent(s). Or; irregular migration across international borders, mixed nationality of your parents, loss of clinic cards or records. Or; if you're close to an international border with high cross-border movement or when the law doesn't allow you to have dual nationality."),
@@ -3226,8 +3080,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 147
             self.add('state_147', function(name) {
                 return new PaginatedState(name, {
                     text: $("A birth certificate proves your place of birth & identifies your parent/s. It's also the most important proof of your nationality. South African citizens born outside South Africa are entitled to a South African birth certificate. Foreign children born in South Africa are entitled to a birth certificate. This doesn't mean they're South African citizens. Children born in SA must be registered within 30 days. If you were born in SA, apply for late birth registration. Applications close Dec 2015."),
@@ -3238,8 +3090,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 148
             self.add('state_148', function(name) {
                 return new PaginatedState(name, {
                     text: $("You have a claim to SA citizenship if you were born in or outside SA to a parent with SA citizenship at the time of your birth. Or; if you were born in SA to a parent who was a permanent resident of SA at the time of your birth & if you lived in SA until the age of 18. Or; if you have been adopted by a South African citizen, or applied for & received a certificate of naturalisation from the DHA. Or; if you were born in SA & have no other citizenship or nationality or have no right to other citizenship or nationality."),
@@ -3250,8 +3100,6 @@ go.app = function() {
                     next: 'state_main_menu'
                 });
             });
-
-            // 149
             self.add('state_149', function(name) {
                 return new PaginatedState(name, {
                     text: $("If you struggle to register a birth or access nationality in your country of birth, contact LHR on 011-339-1960 or 012-320-2943."),
@@ -3263,7 +3111,6 @@ go.app = function() {
                 });
             });
 
-        // 072
         self.add('state_072', function(name) {
             return new ChoiceState(name, {
                 question: $('Select setting to change:'),
@@ -3278,8 +3125,6 @@ go.app = function() {
                 }
             });
         });
-
-            // 165
             self.add('state_165', function(name) {
                 return new ChoiceState(name, {
                     question: $('Please choose your language:'),
@@ -3299,8 +3144,6 @@ go.app = function() {
                     }
                 });
             });
-
-            // 166
             self.add('state_166', function(name) {
                 return new PaginatedChoiceState(name, {
                     question: $('Select your country of origin:'),
@@ -3333,8 +3176,6 @@ go.app = function() {
                     }
                 });
             });
-
-            // 167
             self.add('state_167', function(name) {
                 return new ChoiceState(name, {
                     question: $('Are you a refugee or migrant?'),
@@ -3351,8 +3192,6 @@ go.app = function() {
                     }
                 });
             });
-
-            // 168
             self.add('state_168', function(name) {
                 return new ChoiceState(name, {
                     question: $("Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za"),
@@ -3364,6 +3203,110 @@ go.app = function() {
                     }
                 });
             });
+
+        self.add("state_074", function(name) {
+            return new PaginatedChoiceState(name, {
+                question: $("Select an option:"),
+                characters_per_page: 160,
+                back: $('Back'),
+                more: $('More'),
+                options_per_page: null,
+                choices: [
+                    new Choice("state_801", $("CCMA")),
+                    new Choice("state_273", $("CIPC")),
+                    new Choice("state_275", $("Department of Home Affairs (DHA)")),
+                    new Choice("state_800", $("FAMSA")),
+                    new Choice("state_280", $("FWMP")),
+                    new Choice("state_281", $("HPCSA")),
+                    new Choice("state_282", $("ICRC")),
+                    new Choice("state_284", $("Immigration Act")),
+                    new Choice("state_286", $("LHR")),
+                    new Choice("state_807", $("PASSOP")),
+                    new Choice("state_288", $("Permanent resident")),
+                    new Choice("state_806", $("POWA")),
+                    new Choice("state_290", $("Prohibited person")),
+                    new Choice("state_291", $("PSIRA")),
+                    new Choice("state_301", $("SACE")),
+                    new Choice("state_302", $("SAHRC")),
+                    new Choice("state_303", $("SANC")),
+                    new Choice("state_304", $("SAQA")),
+                    new Choice("state_803", $("SAWIMA")),
+                    new Choice("state_310", $("Temporary resident")),
+                    new Choice("state_312", $("UIF")),
+                    new Choice("state_313", $("Unaccompanied minor")),
+                    new Choice("state_316", $("Undocumented migrant")),
+                    new Choice("state_804", $("ZANZAT")),
+                    new Choice("state_805", $("ZIPOVA")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            // >> state_801"
+            // >> state_273"
+            // >> state_275"
+            // >> state_800"
+            // >> state_280"
+            // >> state_281"
+            // >> state_282"
+            // >> state_284"
+            // >> state_286"
+            // >> state_807"
+            // >> state_288"
+            // >> state_806"
+            // >> state_290"
+            // >> state_291"
+            // >> state_301"
+            // >> state_302"
+            // >> state_303"
+            // >> state_304"
+            // >> state_803"
+            // >> state_310"
+            // >> state_312"
+            // >> state_313"
+            self.add("state_316", function(name) {
+                return new PaginatedState(name, {
+                    text: $("A person who doesn’t have a valid visa or residence permit needed to be in SA legally."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            // >> state_804"
+            // >> state_805"
+
+        self.add("state_075", function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice("state_317", $("Visa application")),
+                    new Choice("state_259", $("Support services")),
+                    new Choice("state_260", $("Right to work")),
+                    new Choice("state_261", $("Health")),
+                    new Choice("state_262", $("Education")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+            self.add("state_317", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Hand in your application at any of the 11 VFS Global offices in SA. Go to www.vfsglobal.com for more info."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
+            // >> state_259
+            // >> state_260
+            // >> state_261
+            // >> state_262
 
     });
 
