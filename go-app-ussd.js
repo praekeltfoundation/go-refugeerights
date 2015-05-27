@@ -9,6 +9,7 @@ var Q = require('q');
 var moment = require('moment');
 var vumigo = require('vumigo_v02');
 var JsonApi = vumigo.http.api.JsonApi;
+var Choice = vumigo.states.Choice;
 
 // Shared utils lib
 go.utils = {
@@ -395,7 +396,9 @@ go.utils = {
             response: {
                 type: "USSD",
                 to_addr: contact.msisdn,
-                template: im.config.template  // used for SMS only
+                template: im.config.template,  // used for SMS only
+                results: "",
+                results_detailed: '[]'
             },
             location: user_location
         };
@@ -422,10 +425,32 @@ go.utils = {
                 'Authorization': ['Token ' + im.config.control.api_key]
             }
         });
-        return http.get(contact.extra.poi_url)
-        .then(function(response) {
-            return response.data.response.results;
+        return http
+            .get(contact.extra.poi_url)
+            .then(function(response) {
+                return JSON.parse(response.data.response.results_detailed);
+            });
+    },
+
+    location_contains_details: function(poi_result_text) {
+        return poi_result_text.indexOf('(') !== -1;
+    },
+
+    extract_poi_name: function(poi_result_text) {
+        return go.utils.location_contains_details(poi_result_text)
+                ? poi_result_text.slice(0, poi_result_text.indexOf('(')).trim()
+                : poi_result_text;
+    },
+
+    extract_choices_from_results: function(poi_results) {
+        var choices = [];
+        var index = 0;
+        poi_results.forEach(function(poi_result) {
+            var poi_name = go.utils.extract_poi_name(poi_result[1]);
+            choices.push(new Choice(index.toString(), poi_name));
+            index++;
         });
+        return choices;
     },
 
     shorten_province: function(province) {
@@ -957,18 +982,35 @@ go.app = function() {
 
         // state_locate_show_results
         self.add('state_locate_show_results', function(name, opts) {
-            var choices = [];
-            opts.poi_results.forEach(function(poi_result) {
-                choices.push(new Choice('state_locate_details', poi_result));
-            });
+            var poi_results = opts.poi_results;
+            var choices = go.utils.extract_choices_from_results(poi_results);
 
             return new ChoiceState(name, {
                 question: $('Select a service for more info'),
                 choices: choices,
                 next: function(choice) {
-                    // TODO create state that shows the selected service's details after Api has
-                    // been implemented
-                    return choice.value;
+                    var opts = {
+                        poi_results: poi_results,
+                        poi_details: poi_results[choice.value][1]
+                    };
+                    return self.states.create('state_locate_details', opts);
+                }
+            });
+        });
+
+        // state_locate_details
+        self.add('state_locate_details', function(name, opts) {
+            var poi_results = opts.poi_results;
+            return new PaginatedState(name, {
+                // TODO test for possible translation problems here
+                text: $(opts.poi_details),
+                characters_per_page: 160,
+                exit: $('Exit'),
+                back: $('Back'),
+                more: $('More'),
+                next: function() {
+                    var opts = { poi_results: poi_results };
+                    return self.states.create('state_locate_show_results', opts);
                 }
             });
         });

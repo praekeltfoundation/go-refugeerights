@@ -144,7 +144,9 @@ return [
                     "response": {
                         "type": "USSD",
                         "to_addr": "+064001",
-                        "template": "Nearby services: {{ results }}."
+                        "template": "Nearby services: {{ results }}.",
+                        "results": "",
+                        "results_detailed": '[]'
                     },
                     "location": {
                         "point": {
@@ -166,7 +168,8 @@ return [
                         "type": "USSD",
                         "to_addr": "+064001",
                         "template": "Nearby services: {{ results }}.",
-                        "results": []
+                        "results": "",
+                        "results_detailed": '[]'
                     },
                     "location": {
                         "point": {
@@ -196,8 +199,8 @@ return [
                         "type": "USSD",
                         "to_addr": "+064001",
                         "template": "Nearby services: {{ results }}.",
-                        // TODO update 'results' after setting up API
-                        "results": ["Mowbray Police station", "Turkmenistan Police station"]
+                        "results": "Mowbray Police station (012 001 0002) AND Turkmenistan Police station",
+                        "results_detailed": '[[1, "Mowbray Police (012 001 0002)"], [2, "Turkmenistan Police"]]'
                     },
                     "location": {
                         "id": 1,
@@ -223,7 +226,9 @@ return [
                     "response": {
                         "type": "USSD",
                         "to_addr": "+064003",
-                        "template": "Nearby services: {{ results }}."
+                        "template": "Nearby services: {{ results }}.",
+                        "results": "",
+                        "results_detailed": '[]'
                     },
                     "location": {
                         "point": {
@@ -245,7 +250,8 @@ return [
                         "type": "USSD",
                         "to_addr": "+064003",
                         "template": "Nearby services: {{ results }}.",
-                        "results": []
+                        "results": "",
+                        "results_detailed": '[]'
                     },
                     "location": {
                         "point": {
@@ -275,7 +281,8 @@ return [
                         "type": "USSD",
                         "to_addr": "+064003",
                         "template": "Nearby services: {{ results }}.",
-                        "results": []
+                        "results": "",
+                        "results_detailed": '[]'
                     },
                     "location": {
                         "point": {

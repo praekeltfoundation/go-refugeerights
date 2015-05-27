@@ -509,18 +509,35 @@ go.app = function() {
 
         // state_locate_show_results
         self.add('state_locate_show_results', function(name, opts) {
-            var choices = [];
-            opts.poi_results.forEach(function(poi_result) {
-                choices.push(new Choice('state_locate_details', poi_result));
-            });
+            var poi_results = opts.poi_results;
+            var choices = go.utils.extract_choices_from_results(poi_results);
 
             return new ChoiceState(name, {
                 question: $('Select a service for more info'),
                 choices: choices,
                 next: function(choice) {
-                    // TODO create state that shows the selected service's details after Api has
-                    // been implemented
-                    return choice.value;
+                    var opts = {
+                        poi_results: poi_results,
+                        poi_details: poi_results[choice.value][1]
+                    };
+                    return self.states.create('state_locate_details', opts);
+                }
+            });
+        });
+
+        // state_locate_details
+        self.add('state_locate_details', function(name, opts) {
+            var poi_results = opts.poi_results;
+            return new PaginatedState(name, {
+                // TODO test for possible translation problems here
+                text: $(opts.poi_details),
+                characters_per_page: 160,
+                exit: $('Exit'),
+                back: $('Back'),
+                more: $('More'),
+                next: function() {
+                    var opts = { poi_results: poi_results };
+                    return self.states.create('state_locate_show_results', opts);
                 }
             });
         });
