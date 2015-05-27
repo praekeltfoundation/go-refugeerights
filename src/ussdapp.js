@@ -458,27 +458,35 @@ go.app = function() {
 
         // state_locate_stall_initial
         self.add('state_locate_stall_initial', function(name) {
+            var opts = { retries: 0 };
             return new ChoiceState(name, {
                 question: $("The system is looking up services near you. This usually takes less than a minute."),
                 choices: [
                     new Choice('state_locate_get_results', $("View services"))
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    return {
+                        name: choice.value,
+                        creator_opts: opts
+                    };
                 }
             });
         });
 
-        // state_locate_stall_again
-        self.add('state_locate_stall_again', function(name) {
+        // state_locate_no_results
+        self.add('state_locate_no_results', function(name) {
+            var opts = { retries: 1 };
             return new ChoiceState(name, {
-                question: $("The system was still busy finding your services. Please try again now or choose Exit and dial back later."),
+                question: $("Unfortunately we couldn't find any locations close to you. Try one more time or exit?"),
                 choices: [
-                    new Choice('state_locate_get_results', $("View services")),
+                    new Choice('state_locate_get_results', $("Try again")),
                     new Choice('state_locate_exit', $("Exit"))
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    return {
+                        name: choice.value,
+                        creator_opts: opts
+                    };
                 }
             });
         });
@@ -486,23 +494,26 @@ go.app = function() {
         // state_locate_exit
         self.add('state_locate_exit', function(name) {
             return new EndState(name, {
-                text: $('Please dial back in a few minutes to see your services results'),
-                next: 'state_locate_stall_again'
+                text: $("Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off."),
+                next: 'state_main_menu'
             });
         });
 
 
         // state_locate_get_results
-        self.add('state_locate_get_results', function(name) {
+        self.add('state_locate_get_results', function(name, opts) {
             return go.utils.get_poi_results(self.im, self.contact)
             .then(function(poi_results) {
-                if (poi_results.length === 0) {
-                    // stall again if results are not available
-                    // TODO handle search complete but no results found
-                    return self.states.create('state_locate_stall_again');
+                if (poi_results.length > 0) {
+                    // results have been found
+                    var creator_opts = { poi_results: poi_results };
+                    return self.states.create('state_locate_show_results', creator_opts);
+                } else if (opts.retries === 0) {
+                    // stall again if results are not available and no previous retries
+                    return self.states.create('state_locate_no_results');
                 } else {
-                    var opts = { poi_results: poi_results };
-                    return self.states.create('state_locate_show_results', opts);
+                    // exit if they've retried before
+                    return self.states.create('state_locate_exit');
                 }
             });
         });
