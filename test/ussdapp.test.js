@@ -1546,8 +1546,75 @@ describe("refugeerights app", function() {
                             state: 'state_locate_show_results',
                             reply: [
                                 "Select a service for more info",
-                                "1. Mowbray Police station",
-                                "2. Turkmenistan Police station"
+                                "1. Mowbray Police",
+                                "2. Turkmenistan Police"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("when the user selects to see more info about a location", function() {
+                it("should show them more info (with details)", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                            , '1'  // state_locate_show_results
+                        )
+                        .check.interaction({
+                            state: 'state_locate_details',
+                            reply: [
+                                "Mowbray Police (012 001 0002)",
+                                "1. Exit"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should show them more info (without details)", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                            , '2'  // state_locate_show_results
+                        )
+                        .check.interaction({
+                            state: 'state_locate_details',
+                            reply: [
+                                "Turkmenistan Police",
+                                "1. Exit"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should show them their locations again when they exit", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_refugee_main (support services)
+                            , '1'  // state_024 (find nearest SService)
+                            , 'Friend Street'  // state_locate_me
+                            , '1'  // state_locate_stall_initial
+                            , '1'  // state_locate_show_results
+                            , '1'  // state_locate_details
+                        )
+                        .check.interaction({
+                            state: 'state_locate_show_results',
+                            reply: [
+                                "Select a service for more info",
+                                "1. Mowbray Police",
+                                "2. Turkmenistan Police"
                             ].join('\n')
                         })
                         .run();
