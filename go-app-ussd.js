@@ -1035,7 +1035,7 @@ go.app = function() {
                     new Choice("state_215", $("Tips for the RRO")),
                     new Choice("state_216", $("Your duties")),
                     new Choice("state_217", $("The application process")),
-                    new Choice("state_172", $("Help with interpreting")),
+                    new Choice("state_218", $("Help with interpreting")),
                 ],
                 next: function(choice) {
                     return choice.value;
@@ -1118,7 +1118,6 @@ go.app = function() {
                     }
                 });
             });
-            // >> state_172
                 self.add("state_170", function(name) {
                     return new PaginatedState(name, {
                         text: $("Fill out the Eligibility form. Answer honestly. You will be interviewed later so your answers must be the same. Bring with you all documents that show who you are & where you come from. Copies will be taken so you keep the originals. After fingerprints are taken, a case number & file number will be given. Write down these important numbers. Man & wife must both be interviewed if applying together. Name your wife or children in another country to add them to your file. English not good? Take an interpreter with you. If you cannot, one will be arranged for another day & you'll come back on that day. You may have to pay an interpreter. Don't pay anyone else – no officials, no security guards. The process is free. Fight corruption. TIP: If a DHA official asks for a bribe, get his/her name. Note down the official's physical features, the day & time it happened. TIP: There is no need to pay fees. Call the DHA's toll-free hotline to report corruption. You will stay anonymous. 0800-601-190"),
@@ -1179,6 +1178,16 @@ go.app = function() {
                         next: 'state_main_menu'
                     });
                 });
+            self.add("state_218", function(name) {
+                return new PaginatedState(name, {
+                    text: $("Many asylum seekers can't understand or speak any of SA's languages well enough to make their case in front of an official. The DHA may be able to provide an interpreter who speaks your language. If not, you must get your own interpreter. Get an interpreter you can trust. He or she must translate word-for-word what you and the officials are saying. The interpreter should never tell their own version as to why you're fleeing your country. This can damage your case. You must speak slowly to the interpreter. Give him/her time to interpret what you are saying. Don't use interpreters who demand money to make up stories they believe will get you refugee status. Ask to have your statements read back to you. Ask the DHA official to write down any changes you make. Sign the form. These people cannot interpret for you: your legal help; a testifying witness; a representative of your home country."),
+                    characters_per_page: 160,
+                    back: $('Back'),
+                    more: $('More'),
+                    exit: $('Exit'),
+                    next: 'state_main_menu'
+                });
+            });
 
         self.add("state_022", function(name) {
             return new ChoiceState(name, {

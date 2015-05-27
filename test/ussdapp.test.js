@@ -1716,6 +1716,21 @@ describe("refugeerights app", function() {
                             .run();
                     });
 
+                it("021 - 218", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '2'  // state_refugee_main
+                            , '7'  // state_021 (next)
+                            , '2'  // state_021
+                        )
+                        .check.interaction({
+                            state: 'state_218'
+                        })
+                        .run();
+                });
+
             it("refugee menu - 022", function() {
                 return tester
                     .setup.user.addr('064001')
