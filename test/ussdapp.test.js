@@ -1582,10 +1582,10 @@ describe("refugeerights app", function() {
                             , '1'  // state_locate_stall_initial
                         )
                         .check.interaction({
-                            state: 'state_locate_stall_again',
+                            state: 'state_locate_no_results',
                             reply: [
-                                "The system was still busy finding your services. Please try again now or choose Exit and dial back later.",
-                                "1. View services",
+                                "Unfortunately we couldn't find any locations close to you. Try one more time or exit?",
+                                "1. Try again",
                                 "2. Exit"
                             ].join('\n')
                         })
@@ -1594,7 +1594,7 @@ describe("refugeerights app", function() {
             });
 
             describe("when the user decides to exit rather than retry", function() {
-                it("should exit, remind to redial later", function() {
+                it("should go to exit state", function() {
                     return tester
                         .setup.user.addr('064003')
                         .inputs(
@@ -1603,19 +1603,19 @@ describe("refugeerights app", function() {
                             , '1'  // state_024 (find nearest SService)
                             , 'Friend Street'  // state_locate_me
                             , '1'  // state_locate_stall_initial
-                            , '2'  // state_locate_stall_again
+                            , '2'  // state_locate_no_results
                         )
                         .check.interaction({
                             state: 'state_locate_exit',
-                            reply: 'Please dial back in a few minutes to see your services results'
+                            reply: "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off."
                         })
                         .check.reply.ends_session()
                         .run();
                 });
             });
 
-            describe("when the user dials back to retry location finding", function() {
-                it("should show them stalling state", function() {
+            describe("when the user tries again after first failure and still no results", function() {
+                it("should go to exit state", function() {
                     return tester
                         .setup.user.addr('064003')
                         .inputs(
@@ -1624,12 +1624,13 @@ describe("refugeerights app", function() {
                             , '1'  // state_024 (find nearest SService)
                             , 'Friend Street'  // state_locate_me
                             , '1'  // state_locate_stall_initial
-                            , '2'  // state_locate_stall_again
-                            , {session_event: 'new'}
+                            , '1'  // state_locate_no_results
                         )
                         .check.interaction({
-                            state: 'state_locate_stall_again'
+                            state: 'state_locate_exit',
+                            reply: "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off."
                         })
+                        .check.reply.ends_session()
                         .run();
                 });
             });
