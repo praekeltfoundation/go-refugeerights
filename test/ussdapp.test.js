@@ -1027,7 +1027,7 @@ describe("refugeerights app", function() {
                                 state: 'state_who_refugee',
                                 reply: [
                                     "If you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group. Or; if your",
-                                    "1. ->",
+                                    "1. Next",
                                     "2. OK"
                                 ].join('\n')
                             })
@@ -1048,8 +1048,8 @@ describe("refugeerights app", function() {
                             .check.interaction({
                                 state: 'state_who_migrant',
                                 reply: [
-                                    "If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa.Remember: a migrant",
-                                    '1. ->',
+                                    "If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa.Remember: a",
+                                    '1. Next',
                                     '2. OK'
                                 ].join('\n')
                             })

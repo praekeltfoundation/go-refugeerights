@@ -471,7 +471,7 @@ go.utils = {
     "commas": "commas"
 };
 
-// Find and replace this character: ’
+// Find and replace these characters: ’‘
 
 go.app = function() {
     var vumigo = require('vumigo_v02');
@@ -695,8 +695,8 @@ go.app = function() {
             return new PaginatedState(name, {
                 text: $("If you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group. Or; if your life, safety or freedom in your home country are at risk because of violence, war & civil unrest. Or; if you are married to or depend upon a person who fled their country in fear of their life for the reasons listed. You are entitled to refugee status if you are married to a recognised refugee, even if your own claim was rejected."),
                 characters_per_page: 160,
-                back: $('<-'),
-                more: $('->'),
+                back: $('Back'),
+                more: $('Next'),
                 exit: $('OK'),
                 next: 'state_status'
             });
@@ -707,8 +707,8 @@ go.app = function() {
             return new PaginatedState(name, {
                 text: $("If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa.Remember: a migrant can become a refugee should one of the reasons for refugee status takes place in their country of origin."),
                 characters_per_page: 160,
-                back: $('<-'),
-                more: $('->'),
+                back: $('Back'),
+                more: $('Next'),
                 exit: $('OK'),
                 next: 'state_status'
             });
@@ -1127,7 +1127,7 @@ go.app = function() {
             });
             self.add("state_214", function(name) {
                 return new PaginatedState(name, {
-                    text: $("There are Refugee Reception Offices (RRO) in Cape Town, Durban, Musina and Pretoria. Click ‘Next' to find the nearest office. Cape Town (Nyanga):142 Voortrekker Road,Maitland 021-514-8414 Fax:021-514-8403 No new applications, only renewals of existing asylum seekers. Durban: 132 Moore Street. 031-362-1205 Fax: 031-362-1220. Musina: 8 Harold Street (next to the post office) 015-534-5300 Fax: 015-534-5332. Pretoria: Marabastad, corner E'skia Mphahlele & Struben Street, Pretoria West. 012-327-3515 Fax: 012-327-5782. Pretoria (TIRRO): 203 Soutter Street, Pretoria Showgrounds. 012-306-0800 or 012-306-0806 Fax: 086-579-7823"),
+                    text: $("There are Refugee Reception Offices (RRO) in Cape Town, Durban, Musina and Pretoria. Click 'Next' to find the nearest office. Cape Town (Nyanga):142 Voortrekker Road,Maitland 021-514-8414 Fax:021-514-8403 No new applications, only renewals of existing asylum seekers. Durban: 132 Moore Street. 031-362-1205 Fax: 031-362-1220. Musina: 8 Harold Street (next to the post office) 015-534-5300 Fax: 015-534-5332. Pretoria: Marabastad, corner E'skia Mphahlele & Struben Street, Pretoria West. 012-327-3515 Fax: 012-327-5782. Pretoria (TIRRO): 203 Soutter Street, Pretoria Showgrounds. 012-306-0800 or 012-306-0806 Fax: 086-579-7823"),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1203,7 +1203,7 @@ go.app = function() {
                 });
                 self.add("state_173", function(name) {
                     return new PaginatedState(name, {
-                        text: $("If your application is approved, you'll get a Section 24 permit (Refugee Status permit). Now you're officially a refugee in SA! Your permit is valid for 2 years or sometimes 4 years. You must renew it 3 months before it expires. Go to the relevant RRO for a renewal. Refugees can apply for a refugee Identity Document (a maroon ‘ID' or smart card) & travel documents. It may take time. Only apply for travel documents if you have a refugee identity document (ID). You must be interviewed by a UNHCR representative. If you don't have a refugee ID but must travel out of SA for an emergency, contact a legal counselor or UNHCR Pretoria. TIP: Remember, if you use a travel document to travel back to your country, you could lose your refugee status in SA."),
+                        text: $("If your application is approved, you'll get a Section 24 permit (Refugee Status permit). Now you're officially a refugee in SA! Your permit is valid for 2 years or sometimes 4 years. You must renew it 3 months before it expires. Go to the relevant RRO for a renewal. Refugees can apply for a refugee Identity Document (a maroon 'ID' or smart card) & travel documents. It may take time. Only apply for travel documents if you have a refugee identity document (ID). You must be interviewed by a UNHCR representative. If you don't have a refugee ID but must travel out of SA for an emergency, contact a legal counselor or UNHCR Pretoria. TIP: Remember, if you use a travel document to travel back to your country, you could lose your refugee status in SA."),
                         characters_per_page: 160,
                         back: $('Back'),
                         more: $('More'),
@@ -1223,7 +1223,7 @@ go.app = function() {
                 });
                 self.add("state_175", function(name) {
                     return new PaginatedState(name, {
-                        text: $("The Refugee Appeal Board offers asylum seekers with rejected applications a second chance to prove their claims. Within 30 days, submit an appeal request to the RRO that issued the rejection letter. Say why you disagree with the decision. The RRO will hand the case over to the Refugee Appeal Board. (You can ask LHR for help in requesting an appeal.) To get an appeal hearing date, you will be called in to the RRO to present your case & your reasons for applying for asylum. You must appear in person at the RRO to get the appeal hearing date. It cannot be given over the phone. You must get legal assistance to prepare for your appeal. Some NGOs give free legal help. See ‘Useful Contacts' for more info. You may get a decision within 90 days of the hearing. It can take longer. Renew your asylum seeker permit while you wait."),
+                        text: $("The Refugee Appeal Board offers asylum seekers with rejected applications a second chance to prove their claims. Within 30 days, submit an appeal request to the RRO that issued the rejection letter. Say why you disagree with the decision. The RRO will hand the case over to the Refugee Appeal Board. (You can ask LHR for help in requesting an appeal.) To get an appeal hearing date, you will be called in to the RRO to present your case & your reasons for applying for asylum. You must appear in person at the RRO to get the appeal hearing date. It cannot be given over the phone. You must get legal assistance to prepare for your appeal. Some NGOs give free legal help. See 'Useful Contacts' for more info. You may get a decision within 90 days of the hearing. It can take longer. Renew your asylum seeker permit while you wait."),
                         characters_per_page: 160,
                         back: $('Back'),
                         more: $('More'),
@@ -1267,7 +1267,7 @@ go.app = function() {
             });
             self.add("state_177", function(name) {
                 return new PaginatedState(name, {
-                    text: $("A child asylum seeker is unaccompanied when there isn't a person present whose main responsibility is to take care of the child. Children who were separated from their parents before or during the flight from their country are also ‘unaccompanied' children."),
+                    text: $("A child asylum seeker is unaccompanied when there isn't a person present whose main responsibility is to take care of the child. Children who were separated from their parents before or during the flight from their country are also 'unaccompanied' children."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1332,7 +1332,7 @@ go.app = function() {
             });
             self.add("state_182", function(name) {
                 return new PaginatedState(name, {
-                    text: $("Recognised refugees may apply for  permanent residence. You must have lived in SA for 5 years in a row as a recognised refugee. Consult the Immigration Act of 2002 for more info on the requirements for a permanent residence application. It is important to get a certificate from the Standing Committee for Refugee Affairs (SCRA) saying you will remain a refugee indefinitely. To apply for a permanent residence permit, complete an application form at the SCRA. You can ask a legal counsellor like the LHR for help. Submit the SCRA certificate & the documents required by the Immigration Act, to a regional DHA office (not RRO). See ‘Useful Contacts'. TIP: Refugees don't have to pay to submit a permanent residence application. TIP: You need a security clearance certificate from SA police - but not from your country of origin. TIP: You must get an affidavit from the police stating whether or not you have a criminal record in your country of origin."),
+                    text: $("Recognised refugees may apply for  permanent residence. You must have lived in SA for 5 years in a row as a recognised refugee. Consult the Immigration Act of 2002 for more info on the requirements for a permanent residence application. It is important to get a certificate from the Standing Committee for Refugee Affairs (SCRA) saying you will remain a refugee indefinitely. To apply for a permanent residence permit, complete an application form at the SCRA. You can ask a legal counsellor like the LHR for help. Submit the SCRA certificate & the documents required by the Immigration Act, to a regional DHA office (not RRO). See 'Useful Contacts'. TIP: Refugees don't have to pay to submit a permanent residence application. TIP: You need a security clearance certificate from SA police - but not from your country of origin. TIP: You must get an affidavit from the police stating whether or not you have a criminal record in your country of origin."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1365,7 +1365,7 @@ go.app = function() {
             // >> state_locate_me
             self.add("state_189", function(name) {
                 return new PaginatedState(name, {
-                    text: $("Some university law clinics & human rights organisations offer free legal advice to asylum seekers & refugees. The UNHCR has legal counsellors specialising in refugee law in 5 SA cities. See ‘Useful Contacts' for more info. Legal counsellors can advise on your asylum application, or help you with an appeal if your asylum application has been rejected. Counsellors can only give you legal advice. They don't provide accommodation or food. See Social Services for more info."),
+                    text: $("Some university law clinics & human rights organisations offer free legal advice to asylum seekers & refugees. The UNHCR has legal counsellors specialising in refugee law in 5 SA cities. See 'Useful Contacts' for more info. Legal counsellors can advise on your asylum application, or help you with an appeal if your asylum application has been rejected. Counsellors can only give you legal advice. They don't provide accommodation or food. See Social Services for more info."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1375,7 +1375,7 @@ go.app = function() {
             });
             self.add("state_190", function(name) {
                 return new PaginatedState(name, {
-                    text: $("A private practice attorney can also help you with your asylum application, appeal or SCRA review. Ordinarily you need to pay for legal services. Or, contact LHR - they may be able to help or refer you to the right organisation. The Law Society of South Africa has a list of attorneys with experience in refugee law. See ‘Useful Contacts' for more info.TIP: Always ask about a lawyer's fees before you accept their services. TIP: Always make sure your lawyer has the right qualifications. If you're unsure contact the Law Society of SA on 012-366-8800."),
+                    text: $("A private practice attorney can also help you with your asylum application, appeal or SCRA review. Ordinarily you need to pay for legal services. Or, contact LHR - they may be able to help or refer you to the right organisation. The Law Society of South Africa has a list of attorneys with experience in refugee law. See 'Useful Contacts' for more info.TIP: Always ask about a lawyer's fees before you accept their services. TIP: Always make sure your lawyer has the right qualifications. If you're unsure contact the Law Society of SA on 012-366-8800."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1395,7 +1395,7 @@ go.app = function() {
             });
             self.add("state_192", function(name) {
                 return new PaginatedState(name, {
-                    text: $("There are legal ways out of your arrest. It may take time. Ask to speak to a lawyer. It is your right. If arrested but you have a valid Section 22 or 24 permit, ask someone to get copies of your permit to the DHA. Sometimes the RRO must first confirm your permit before you can be released. The DHA may detain you while verifying your permit. You cannot be sent back to your country before a decision on your asylum application or appeal has been made. If you didn't apply for asylum before your arrest, tell the officer you will still apply. Give reasons why you have not yet. If you break the law, your asylum application may be turned down & you may be sent home - before or after serving a sentence. Remember: You have the right to get legal representation if you are arrested. TIP: If you go to a magistrate's court, you can ask for ‘legal aid'. You will be able to speak to a lawyer for free."),
+                    text: $("There are legal ways out of your arrest. It may take time. Ask to speak to a lawyer. It is your right. If arrested but you have a valid Section 22 or 24 permit, ask someone to get copies of your permit to the DHA. Sometimes the RRO must first confirm your permit before you can be released. The DHA may detain you while verifying your permit. You cannot be sent back to your country before a decision on your asylum application or appeal has been made. If you didn't apply for asylum before your arrest, tell the officer you will still apply. Give reasons why you have not yet. If you break the law, your asylum application may be turned down & you may be sent home - before or after serving a sentence. Remember: You have the right to get legal representation if you are arrested. TIP: If you go to a magistrate's court, you can ask for 'legal aid'. You will be able to speak to a lawyer for free."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1551,7 +1551,7 @@ go.app = function() {
             });
             self.add("state_238", function(name) {
                 return new PaginatedState(name, {
-                    text: $("Clinics provide care for adults & children. Most of the time you will not have to pay to see the doctor or get treatment. Go to the clinic closest to your home. Make an appointment first. If there's an emergency, just go. Wait for a doctor. Take your valid Section 22 or 24 permit with you. If you haven't received it yet, ask an NGO for a letter. See ‘Useful Contacts'. After you've seen the doctor, the clinic will give you medicine if you need it. You don't have to pay for the medicine. If you want to go to the hospital, you need a letter from the clinic first. If there's an emergency, go straight to the hospital. Can't pay the public hospital fees? Get an affidavit from the police that states why you can't pay. You can also contact a NGO in the contact list if you can't pay your fees. They may ask the hospital to drop the fees. This is important: if you go to a private doctor or private hospital you will have to pay all the fees yourself."),
+                    text: $("Clinics provide care for adults & children. Most of the time you will not have to pay to see the doctor or get treatment. Go to the clinic closest to your home. Make an appointment first. If there's an emergency, just go. Wait for a doctor. Take your valid Section 22 or 24 permit with you. If you haven't received it yet, ask an NGO for a letter. See 'Useful Contacts'. After you've seen the doctor, the clinic will give you medicine if you need it. You don't have to pay for the medicine. If you want to go to the hospital, you need a letter from the clinic first. If there's an emergency, go straight to the hospital. Can't pay the public hospital fees? Get an affidavit from the police that states why you can't pay. You can also contact a NGO in the contact list if you can't pay your fees. They may ask the hospital to drop the fees. This is important: if you go to a private doctor or private hospital you will have to pay all the fees yourself."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1652,7 +1652,7 @@ go.app = function() {
             });
             self.add("state_244", function(name) {
                 return new PaginatedState(name, {
-                    text: $("You need to pay an international registration & local tuition fee. Have your academic records evaluated & certified by SAQA. Submit the completed SAQA  form with certified copies of your academic records. The process can take up to 3 months. You must be proficient in English to register. Prove your proficiency by taking one of the following tests: TOEFL, IELTS, PTEEP. Information on scholarships & funding is available online or at the university/technikon's information desk. UNHCR offers a Dafi Scholarship for refugees not older than 28 & who successfully completed their secondary education. The Dafi Scholarship doesn't apply to postgraduate studies. For more info & requirements, see ‘Useful contacts'."),
+                    text: $("You need to pay an international registration & local tuition fee. Have your academic records evaluated & certified by SAQA. Submit the completed SAQA  form with certified copies of your academic records. The process can take up to 3 months. You must be proficient in English to register. Prove your proficiency by taking one of the following tests: TOEFL, IELTS, PTEEP. Information on scholarships & funding is available online or at the university/technikon's information desk. UNHCR offers a Dafi Scholarship for refugees not older than 28 & who successfully completed their secondary education. The Dafi Scholarship doesn't apply to postgraduate studies. For more info & requirements, see 'Useful contacts'."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1662,7 +1662,7 @@ go.app = function() {
             });
             self.add("state_245", function(name) {
                 return new PaginatedState(name, {
-                    text: $("Some NGOs & refugee communities offer adult education to refugees & asylum seekers. Most adult education programmes are free. Some training centres offer English language courses. Self-help programmes & skills training can be important for job seekers. Adult education programmes also encourage social integration in SA. See ‘Useful Contacts' for more info."),
+                    text: $("Some NGOs & refugee communities offer adult education to refugees & asylum seekers. Most adult education programmes are free. Some training centres offer English language courses. Self-help programmes & skills training can be important for job seekers. Adult education programmes also encourage social integration in SA. See 'Useful Contacts' for more info."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1705,7 +1705,7 @@ go.app = function() {
             });
             self.add("state_247", function(name) {
                 return new PaginatedState(name, {
-                    text: $("You have the right to food, water & housing. Some organisations can help vulnerable asylum seekers & refugees with this. Remember: Help is limited and for a short time only. You will be expected to support yourself soon afterwards. Some churches and religious centres run soup kitchens or provide help to asylum seekers and refugees. See ‘Useful Contacts'  for more info on these churches and religious centres."),
+                    text: $("You have the right to food, water & housing. Some organisations can help vulnerable asylum seekers & refugees with this. Remember: Help is limited and for a short time only. You will be expected to support yourself soon afterwards. Some churches and religious centres run soup kitchens or provide help to asylum seekers and refugees. See 'Useful Contacts'  for more info on these churches and religious centres."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1715,7 +1715,7 @@ go.app = function() {
             });
             self.add("state_248", function(name) {
                 return new PaginatedState(name, {
-                    text: $("Some NGOs might help you find short-term solutions, like a shelter or place for the homeless. See ‘Useful Contacts' for info. Ask other refugees & asylum seekers for info on accommodation. Check local newspapers for ads. Estate agents can charge a fee. Rent is paid at the beginning of the month. You might have to pay a deposit (a month's rent) before you can move in. If possible, sign a contract with your landlord. Ask him/her what they expect of you as a tenant."),
+                    text: $("Some NGOs might help you find short-term solutions, like a shelter or place for the homeless. See 'Useful Contacts' for info. Ask other refugees & asylum seekers for info on accommodation. Check local newspapers for ads. Estate agents can charge a fee. Rent is paid at the beginning of the month. You might have to pay a deposit (a month's rent) before you can move in. If possible, sign a contract with your landlord. Ask him/her what they expect of you as a tenant."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
@@ -1890,7 +1890,7 @@ go.app = function() {
             });
             self.add("state_259", function(name) {
                 return new PaginatedState(name, {
-                    text: $("Always ask about a lawyer's fees before you accept their services. Always ensure your lawyer has the right qualifications. If you're unsure contact the Law Society of SA on 012-366-8800. Always carry your valid permit or certified copy with you. This is proof that you are allowed to stay in SA. Renew your permit on time! If you go to a magistrate's court, you can ask for ‘legal aid'. You will be able to speak to a lawyer for free."),
+                    text: $("Always ask about a lawyer's fees before you accept their services. Always ensure your lawyer has the right qualifications. If you're unsure contact the Law Society of SA on 012-366-8800. Always carry your valid permit or certified copy with you. This is proof that you are allowed to stay in SA. Renew your permit on time! If you go to a magistrate's court, you can ask for 'legal aid'. You will be able to speak to a lawyer for free."),
                     characters_per_page: 160,
                     back: $('Back'),
                     more: $('More'),
