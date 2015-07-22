@@ -574,15 +574,15 @@ go.app = function() {
 
     // START STATE
 
-        // delegator 01
+        // verified
+        // delegator 1
         self.add('state_start', function(name) {
+            var status = self.contact.extra.status;
             return go.utils
                 .set_language(self.im, self.contact)
                 .then(function() {
-                    if (self.contact.extra.status === 'refugee') {
-                        return self.states.create('state_refugee_main');
-                    } else if (self.contact.extra.status === 'migrant') {
-                        return self.states.create('state_migrant_main');
+                    if (status === 'refugee' || status === 'migrant') {
+                        return self.states.create('state_registered_landing');
                     } else {
                         return self.states.create('state_language');
                     }
@@ -592,10 +592,10 @@ go.app = function() {
 
     // REGISTRATION STATES
 
-        // 001
+        // verified
         self.add('state_language', function(name) {
             return new ChoiceState(name, {
-                question: $('Welcome! Find info about migrants, asylum, refugees & support services. Please choose your language:'),
+                question: $("Welcome! Would you like to find out about refugee and migrant rights in SA? First select your language:"),
                 choices: [
                     new Choice('en', $("English")),
                     new Choice('fr', $("French")),
@@ -607,13 +607,30 @@ go.app = function() {
                     return go.utils
                         .save_language(self.im, self.contact, choice.value)
                         .then(function() {
-                            return 'state_country';
+                            return 'state_unregistered_menu';
                         });
                 }
             });
         });
 
-        // 002
+        // verified
+        self.add('state_unregistered_menu', function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice('state_country', $("Find info about refugee/migrant rights in SA")),
+                    new Choice('state_report_xeno_legal', $("Report xenophobia")),
+                    new Choice('state_report_arrest_legal', $("Report unlawful arrest")),
+                    new Choice('state_report_corruption_legal', $("Report corruption")),
+                    new Choice('state_report_other_legal', $("Report something else")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // verified
         self.add('state_country', function(name) {
             return new PaginatedChoiceState(name, {
                 question: $('Select your country of origin:'),
@@ -643,98 +660,206 @@ go.app = function() {
                         self.im.contacts.save(self.contact)
                     ])
                     .then(function() {
-                        return 'state_status';
+                        return 'state_ref_mig_1';
                     });
                 }
             });
         });
 
-        // 003
-        self.add('state_status', function(name) {
+        // verified
+        self.add('state_ref_mig_1', function(name) {
             return new ChoiceState(name, {
-                question: $('Are you a refugee or migrant?'),
+                question: $("Would you like to find out if you qualify for refugee status?"),
                 choices: [
-                    new Choice('state_who_refugee', $('Who is a refugee?')),
-                    new Choice('state_who_migrant', $('Who is a migrant?')),
-                    new Choice('state_refugee_rights_info', $('I am a refugee')),
-                    new Choice('state_migrant_rights_info', $('I am a migrant')),
-                    new Choice('state_neither', $('I am neither'))
+                    new Choice('state_ref_mig_2', $("Yes, I want to find out if I qualify")),
+                    new Choice('state_migrant_main', $("No, I'd like to access information for migrants")),
                 ],
                 next: function(choice) {
-                    if (choice.value === 'state_who_refugee' || choice.value === 'state_who_migrant') {
-                        return choice.value;
-                    } else if (choice.value === 'state_neither') {
-                        self.contact.extra.status = 'neither';
-                        return self.im.contacts
-                            .save(self.contact)
+                    if (choice.value === 'state_migrant_main') {
+                        return go.utils
+                            .register_user(self.contact, self.im, 'migrant')
                             .then(function() {
                                 return choice.value;
                             });
                     } else {
-                        var status = (choice.value === 'state_refugee_rights_info') ? 'refugee' : 'migrant';
-                        return go.utils
-                            .register_user(self.contact, self.im, status)
-                            .then(function() {
-                                return choice.value;
-                            });
+                        return choice.value;
                     }
                 }
             });
         });
 
-        // unknown 01
-        self.add('state_neither', function(name) {
+        // verified
+        self.add('state_ref_mig_2', function(name) {
+            return new ChoiceState(name, {
+                question: $("Have you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group?"),
+                choices: [
+                    new Choice('state_register_refugee', $("Yes")),
+                    new Choice('state_ref_mig_3', $("No")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // verified
+        self.add('state_ref_mig_3', function(name) {
+            return new ChoiceState(name, {
+                question: $("Are you married to or depend upon a person who fled their country in fear of their life?"),
+                choices: [
+                    new Choice('state_register_refugee', $("Yes")),
+                    new Choice('state_ref_mig_4', $("No")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // verified
+        self.add('state_ref_mig_4', function(name) {
+            return new ChoiceState(name, {
+                question: $("Are you married to a recognised refugee?"),
+                choices: [
+                    new Choice('state_register_refugee', $("Yes")),
+                    new Choice('state_ref_noqualify', $("No")),
+                ],
+                next: function(choice) {
+                    if (choice.value === 'state_ref_noqualify') {
+                        return go.utils
+                            .register_user(self.contact, self.im, 'migrant')
+                            .then(function() {
+                                return choice.value;
+                            });
+                    } else {
+                        return choice.value;
+                    }
+                }
+            });
+        });
+
+        // verified
+        self.add('state_register_refugee', function(name) {
+            return go.utils
+                .register_user(self.contact, self.im, 'refugee')
+                .then(function() {
+                    return self.states.create('state_ref_qualify');
+                });
+        });
+
+        // verified
+        self.add('state_ref_qualify', function(name) {
+            return new ChoiceState(name, {
+                question: $("It looks like you may qualify for refugee status! Your asylum application process will confirm this. Please start this application now."),
+                choices: [
+                    new Choice('state_refugee_main', $("Find out more")),
+                    new Choice('state_registration_end', $("Exit")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // verified
+        self.add('state_ref_noqualify', function(name) {
+            return new ChoiceState(name, {
+                question: $("You don't qualify for refugee status in SA. If you are a foreign national looking to work, study or run a business you'll need a visa."),
+                choices: [
+                    new Choice('state_migrant_main', $("Find out more")),
+                    new Choice('state_registration_end', $("Exit")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // verified
+        self.add('state_registration_end', function(name) {
             return new EndState(name, {
-                text: $('Unknown 01'),
-                next: 'state_language'
+                text: $("Thank you for dialling into the refugee and migrants rights service. Please dial back in to find out more."),
+                next: 'state_registered_landing'
             });
         });
 
-        // 004
-        self.add('state_who_refugee', function(name) {
-            return new PaginatedState(name, {
-                text: $("If you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group. Or; if your life, safety or freedom in your home country are at risk because of violence, war & civil unrest. Or; if you are married to or depend upon a person who fled their country in fear of their life for the reasons listed. You are entitled to refugee status if you are married to a recognised refugee, even if your own claim was rejected."),
-                characters_per_page: 160,
-                back: $('Back'),
-                more: $('Next'),
-                exit: $('OK'),
-                next: 'state_status'
+
+    // OTHER STATES
+
+        // verified
+        self.add('state_registered_landing', function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice('more_info', $("Find more info")),
+                    new Choice('state_report_xeno_legal', $("Report xenophobia")),
+                    new Choice('state_report_arrest_legal', $("Report unlawful arrest")),
+                    new Choice('state_report_corruption_legal', $("Report corruption")),
+                    new Choice('state_report_other_legal', $("Report something else")),
+                ],
+                next: function(choice) {
+                    if (choice.value === 'more_info') {
+                        return self.contact.extra.status === 'refugee'
+                            ? 'state_refugee_main'
+                            : 'state_migrant_main';
+                    } else {
+                        return choice.value;
+                    }
+                }
             });
         });
 
-        // 005
-        self.add('state_who_migrant', function(name) {
-            return new PaginatedState(name, {
-                text: $("If you have come to SA to look for a job, study, visit friends & family or run a business. You need to apply for a visa.Remember: a migrant can become a refugee should one of the reasons for refugee status takes place in their country of origin."),
-                characters_per_page: 160,
-                back: $('Back'),
-                more: $('Next'),
-                exit: $('OK'),
-                next: 'state_status'
+    // REPORT STATES
+
+        self.add('state_report_xeno_legal', function(name) {
+            return new ChoiceState(name, {
+                question: $("xeno"),
+                choices: [
+                    new Choice('state_report_xeno_info', $("I understand")),
+                    new Choice('state_report_end', $("Exit")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
             });
         });
 
-        // 006
-        self.add('state_refugee_rights_info', function(name) {
-            return new PaginatedState(name, {
-                text: $("Welcome! This is a step-by-step guide for foreign nationals in South Africa. Read all the Menu options to find the help you need. Choose 'Word Definitions' for an explanation of words you may not be familiar with. Choose 'Tips' for a short-cut to helpful advice at each stage of your visa process - with more detail in each Menu section. Choose 'Useful Contacts' for the phone numbers of government, private or support organisations that can help. Remember: this service might not have all the information you're looking for. If your case is complicated, consult a lawyer from LHR."),
-                characters_per_page: 160,
-                back: $('Back'),
-                more: $('More'),
-                exit: $('Exit'),
-                next: 'state_main_menu'
+        self.add('state_report_arrest_legal', function(name) {
+            return new ChoiceState(name, {
+                question: $("arrest"),
+                choices: [
+                    new Choice('state_report_arrest_info', $("I understand")),
+                    new Choice('state_report_end', $("Exit")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
             });
         });
 
-        // 007
-        self.add('state_migrant_rights_info', function(name) {
-            return new PaginatedState(name, {
-                text: $("Welcome! This is a step-by-step guide for foreign nationals in South Africa. Read all the Menu options to find the help you need. Choose 'Word Definitions' for an explanation of words you may not be familiar with. Choose 'Tips' for a short-cut to helpful advice at each stage of your visa process - with more detail in each Menu section. Choose 'Useful Contacts' for the phone numbers of government, private or support organisations that can help. Remember: this service might not have all the information you're looking for. If your case is complicated, consult a lawyer from LHR."),
-                characters_per_page: 160,
-                back: $('Back'),
-                more: $('More'),
-                exit: $('Exit'),
-                next: 'state_main_menu'
+        self.add('state_report_corruption_legal', function(name) {
+            return new ChoiceState(name, {
+                question: $("corruption"),
+                choices: [
+                    new Choice('state_report_corruption_info', $("I understand")),
+                    new Choice('state_report_end', $("Exit")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        self.add('state_report_other_legal', function(name) {
+            return new ChoiceState(name, {
+                question: $("other"),
+                choices: [
+                    new Choice('state_report_other_info', $("I understand")),
+                    new Choice('state_report_end', $("Exit")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
             });
         });
 
