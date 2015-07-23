@@ -15,8 +15,10 @@ var Choice = vumigo.states.Choice;
 go.utils = {
 
     timed_out: function(im) {
-        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main',
-                            'state_locate_exit'];
+        var no_redirects = [
+            'state_language',
+            'state_registered_landing'
+        ];
         return im.msg.session_event === 'new'
             && im.user.state.name
             && no_redirects.indexOf(im.user.state.name) === -1;
@@ -29,6 +31,7 @@ go.utils = {
     },
 
     should_send_dialback_reminder: function(e, contact) {
+        // TODO #24
         var dialback_states = [
             'state_language',
             'state_country',
@@ -551,20 +554,32 @@ go.app = function() {
         self.states.add('state_timed_out', function(name, creator_opts) {
 
             return new ChoiceState(name, {
-                question: $('Would you like to continue where you left off?'),
+                question: $("Select an option:"),
                 choices: [
-                    new Choice('continue', $('Yes, continue')),
-                    new Choice('restart', $('No, restart'))
+                    new Choice('continue', $("Return to where I left off")),
+                    new Choice('info', $("Find more info")),
+                    new Choice('state_report_xeno_legal', $("Report xenophobia")),
+                    new Choice('state_report_arrest_legal', $("Report unlawful arrest")),
+                    new Choice('state_report_corruption_legal', $("Report corruption")),
+                    new Choice('state_report_other_legal', $("Report something else")),
                 ],
 
                 next: function(choice) {
                     return go.utils
                         .track_redials(self.contact, self.im, choice.value)
                         .then(function() {
-                            if (choice.value === 'restart') {
-                                return 'state_start';
-                            } else {
+                            if (choice.value === 'continue') {
                                 return creator_opts.name;
+                            } else if (choice.value === 'info') {
+                                if (self.contact.extra.status === 'refugee') {
+                                    return 'state_refugee_main';
+                                } else if (self.contact.extra.status === 'migrant') {
+                                    return 'state_migrant_main';
+                                } else {
+                                    return 'state_country';
+                                }
+                            } else {
+                                return choice.value;
                             }
                         });
                 }
@@ -808,6 +823,7 @@ go.app = function() {
                 }
             });
         });
+
 
     // REPORT STATES
 

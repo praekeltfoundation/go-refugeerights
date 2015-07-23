@@ -317,423 +317,735 @@ describe("refugeerights app", function() {
 
         // TEST TIMEOUT REDIALING
 
-        // describe("Timeout redial testing", function() {
-        //     describe("should not show timeout question for:", function() {
-        //         it("state_language", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_language'
-        //                 })
-        //                 .run();
-        //         });
+        describe("Timeout redial testing", function() {
+            describe("should not show timeout question for:", function() {
+                it("state_language", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_language'
+                        })
+                        .run();
+                });
 
-        //         it("state_refugee_main", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_refugee_main'
-        //                 })
-        //                 .run();
-        //         });
+                it("state_registered_landing", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_registered_landing'
+                        })
+                        .run();
+                });
+            });
 
-        //         it("state_migrant_main", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_migrant_main'
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+            describe("if the user was busy with registration and redials", function() {
+                it("should display timeout continuation page in their language", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_unregistered_menu - more info
+                            , '5'  // state_country - burundi
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_timed_out',
+                            reply: [
+                                "Select an option:",
+                                "1. Return to where I left off",
+                                "2. Find more info",
+                                "3. Report xenophobia",
+                                "4. Report unlawful arrest",
+                                "5. Report corruption",
+                                "6. Report something else"
+                            ].join('\n')
+                        })
+                        // check user language is set
+                        .check.user.properties({lang: 'fr'})
+                        .run();
+                });
 
-        //     describe("if the user was busy with registration and redials", function() {
-        //         it("should display timeout continuation page in their language", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                 )
-        //                 // check navigation
-        //                 .check.interaction({
-        //                     state: 'state_timed_out',
-        //                     reply: [
-        //                         "Would you like to continue where you left off?",
-        //                         "1. Yes, continue",
-        //                         "2. No, restart"
-        //                     ].join('\n')
-        //                 })
-        //                 // check user language is set
-        //                 .check.user.properties({lang: 'fr'})
-        //                 .run();
-        //         });
+                describe("if they choose to continue", function() {
+                    it("should go back to state they timed out", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out (continue)
+                            )
+                            .check.interaction({
+                                state: 'state_ref_mig_1'
+                            })
+                            .run();
+                    });
 
-        //         describe("if they choose to continue", function() {
-        //             it("should go back to state they timed out", function() {
-        //                 return tester
-        //                     .setup.user.addr('082111')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in
-        //                         , '2'  // state_language (french)
-        //                         , '5'  // state_country (burundi)
-        //                         , {session_event: 'close'}  // may or may not work
-        //                         , {session_event: 'new'}  // redial
-        //                         , '1'  // state_timed_out (continue)
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_status'
-        //                     })
-        //                     .run();
-        //             });
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out (continue)
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.continue.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
 
-        //             it("should fire metrics", function() {
-        //                 return tester
-        //                     .setup.user.addr('082111')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in
-        //                         , '2'  // state_language (french)
-        //                         , '5'  // state_country (burundi)
-        //                         , {session_event: 'close'}  // may or may not work
-        //                         , {session_event: 'new'}  // redial
-        //                         , '1'  // state_timed_out (continue)
-        //                     )
-        //                     .check(function(api) {
-        //                         var metrics = api.metrics.stores.refugeerights_test;
-        //                         assert.equal(Object.keys(metrics).length, 14);
-        //                         assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
-        //                         assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
-        //                         assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
-        //                         assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
-        //                         assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
-        //                         assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.continue.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.continue.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.unregistered.continue.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.unregistered.continue.sum'].values, [1]);
-        //                     })
-        //                     .run();
-        //             });
+                describe("if they choose more info", function() {
+                    it("should take them back to country page", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out - find more info
+                            )
+                            .check.interaction({
+                                state: 'state_country'
+                            })
+                            .run();
+                    });
 
-        //         });
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out - find more info
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.info.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.info.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.info.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.info.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
 
-        //         describe("if they choose to restart", function() {
-        //             it("should take them back to language page", function() {
-        //                 return tester
-        //                     .setup.user.addr('082111')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in
-        //                         , '2'  // state_language (french)
-        //                         , '5'  // state_country (burundi)
-        //                         , {session_event: 'close'}  // may or may not work
-        //                         , {session_event: 'new'}  // redial
-        //                         , '2'  // state_timed_out (restart)
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_language'
-        //                     })
-        //                     .run();
-        //             });
+                describe("if they choose to report xenophobia", function() {
+                    it("should go to state_report_xeno_legal", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '3'  // state_timed_out - report xenophobia
+                            )
+                            .check.interaction({
+                                state: 'state_report_xeno_legal'
+                            })
+                            .run();
+                    });
 
-        //             it("should fire metrics", function() {
-        //                 return tester
-        //                     .setup.user.addr('082111')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in
-        //                         , '2'  // state_language (french)
-        //                         , '5'  // state_country (burundi)
-        //                         , {session_event: 'close'}  // may or may not work
-        //                         , {session_event: 'new'}  // redial
-        //                         , '2'  // state_timed_out (restart)
-        //                     )
-        //                     .check(function(api) {
-        //                         var metrics = api.metrics.stores.refugeerights_test;
-        //                         assert.equal(Object.keys(metrics).length, 14);
-        //                         assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
-        //                         assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
-        //                         assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
-        //                         assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
-        //                         assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
-        //                         assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.restart.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.restart.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.unregistered.restart.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.unregistered.restart.sum'].values, [1]);
-        //                     })
-        //                     .run();
-        //             });
-        //         });
-        //     });
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '3'  // state_timed_out - report xenophobia
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.state_report_xeno_legal.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.state_report_xeno_legal.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.state_report_xeno_legal.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.state_report_xeno_legal.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
 
-        //     describe("if the user was already registered and redials", function() {
-        //         it("should display timeout continuation page", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
-        //                     , '3'  // state_status (refugee)
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_timed_out',
-        //                     reply: [
-        //                         "Would you like to continue where you left off?",
-        //                         "1. Yes, continue",
-        //                         "2. No, restart"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
+                describe("if they choose to report arrest", function() {
+                    it("should go to state_report_arrest_legal", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '4'  // state_timed_out - report arrest
+                            )
+                            .check.interaction({
+                                state: 'state_report_arrest_legal'
+                            })
+                            .run();
+                    });
 
-        //         describe("if they choose to continue", function() {
-        //             it("should continue where they left off", function() {
-        //                 return tester
-        //                     .setup.user.addr('082111')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in
-        //                         , '2'  // state_language (french)
-        //                         , '5'  // state_country (burundi)
-        //                         , '3'  // state_status (refugee)
-        //                         , {session_event: 'close'}  // may or may not work
-        //                         , {session_event: 'new'}  // redial
-        //                         , '1'  // state_timed_out (continue)
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_refugee_rights_info'
-        //                     })
-        //                     .run();
-        //             });
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '4'  // state_timed_out - report arrest
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.state_report_arrest_legal.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.state_report_arrest_legal.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.state_report_arrest_legal.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.state_report_arrest_legal.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
 
-        //             it("should fire metrics", function() {
-        //                 return tester
-        //                     .setup.user.addr('082111')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in
-        //                         , '2'  // state_language (french)
-        //                         , '5'  // state_country (burundi)
-        //                         , '3'  // state_status (refugee)
-        //                         , {session_event: 'close'}  // may or may not work
-        //                         , {session_event: 'new'}  // redial
-        //                         , '1'  // state_timed_out (continue)
-        //                     )
-        //                     .check(function(api) {
-        //                         var metrics = api.metrics.stores.refugeerights_test;
-        //                         assert.equal(Object.keys(metrics).length, 26);
-        //                         assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
-        //                         assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
-        //                         assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
-        //                         assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
-        //                         assert.deepEqual(metrics['total.registrations.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.refugee.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.burundi.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.burundi.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.refugee.burundi.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.refugee.burundi.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
-        //                         assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.refugee.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.refugee.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.continue.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.continue.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.refugee.continue.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.refugee.continue.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.subscription_subscribe_success.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.subscription_subscribe_success.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.returning_users.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.returning_users.sum'].values, [1]);
-        //                     })
-        //                     .run();
-        //             });
-        //         });
+                describe("if they choose to report corruption", function() {
+                    it("should go to state_report_corruption_legal", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '5'  // state_timed_out - report corruption
+                            )
+                            .check.interaction({
+                                state: 'state_report_corruption_legal'
+                            })
+                            .run();
+                    });
 
-        //         describe("if they choose to restart", function() {
-        //             it("should take them back to menu page", function() {
-        //                 return tester
-        //                     .setup.user.addr('082111')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in
-        //                         , '2'  // state_language (french)
-        //                         , '5'  // state_country (burundi)
-        //                         , '3'  // state_status (refugee)
-        //                         , {session_event: 'close'}  // may or may not work
-        //                         , {session_event: 'new'}  // redial
-        //                         , '2'  // state_timed_out (restart)
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_refugee_main'
-        //                     })
-        //                     .run();
-        //             });
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '5'  // state_timed_out - report corruption
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.state_report_corruption_legal.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.state_report_corruption_legal.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.state_report_corruption_legal.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.state_report_corruption_legal.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
 
-        //             it("should fire metrics", function() {
-        //                 return tester
-        //                     .setup.user.addr('082111')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in
-        //                         , '2'  // state_language (french)
-        //                         , '5'  // state_country (burundi)
-        //                         , '3'  // state_status (refugee)
-        //                         , {session_event: 'close'}  // may or may not work
-        //                         , {session_event: 'new'}  // redial
-        //                         , '2'  // state_timed_out (restart)
-        //                     )
-        //                     .check(function(api) {
-        //                         var metrics = api.metrics.stores.refugeerights_test;
-        //                         assert.equal(Object.keys(metrics).length, 26);
-        //                         assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
-        //                         assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
-        //                         assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
-        //                         assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
-        //                         assert.deepEqual(metrics['total.registrations.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.refugee.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.refugee.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.burundi.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.burundi.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.refugee.burundi.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.registrations.refugee.burundi.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
-        //                         assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.refugee.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.refugee.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.restart.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.restart.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.refugee.restart.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.redials.refugee.restart.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.subscription_subscribe_success.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.subscription_subscribe_success.sum'].values, [1]);
-        //                         assert.deepEqual(metrics['total.returning_users.last'].values, [1]);
-        //                         assert.deepEqual(metrics['total.returning_users.sum'].values, [1]);
-        //                     })
-        //                     .run();
-        //             });
-        //         });
-        //     });
+                describe("if they choose to report other", function() {
+                    it("should go to state_report_other_legal", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '6'  // state_timed_out - report other
+                            )
+                            .check.interaction({
+                                state: 'state_report_other_legal'
+                            })
+                            .run();
+                    });
 
-        //     describe("if the user times out on timeout page and redials", function() {
-        //         it("should display timeout continuation page", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial again
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_timed_out',
-        //                     reply: [
-        //                         "Would you like to continue where you left off?",
-        //                         "1. Yes, continue",
-        //                         "2. No, restart"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '6'  // state_timed_out - report other
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.state_report_other_legal.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.state_report_other_legal.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.state_report_other_legal.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.state_report_other_legal.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
+            });
 
-        //         it("should fire metrics", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial again
-        //                 )
-        //                 .check(function(api) {
-        //                     var metrics = api.metrics.stores.refugeerights_test;
-        //                     assert.equal(Object.keys(metrics).length, 6);
-        //                     assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
-        //                     assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
-        //                     assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2, 3]);
-        //                     assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1, 1]);
-        //                     // note metrics below do not increment twice - 'enter' doesn't happen twice
-        //                     assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
-        //                     assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
-        //                 })
-        //                 .run();
-        //         });
+            describe("if the user was already registered as refugee and redials", function() {
+                it("should display timeout continuation page", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_registered_landing - report xenophobia
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_timed_out',
+                            reply: [
+                                "Select an option:",
+                                "1. Return to where I left off",
+                                "2. Find more info",
+                                "3. Report xenophobia",
+                                "4. Report unlawful arrest",
+                                "5. Report corruption",
+                                "6. Report something else"
+                            ].join('\n')
+                        })
+                        .run();
+                });
 
-        //         it("should continue where they left off if chosen", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                     , '1'  // state_timed_out (yes)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_status'
-        //                 })
-        //                 .run();
-        //         });
+                describe("if they choose to continue", function() {
+                    it("should continue where they left off", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out - continue
+                            )
+                            .check.interaction({
+                                state: 'state_report_xeno_legal'
+                            })
+                            .run();
+                    });
 
-        //         it("should take them back to language page if they start over", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                     , '2'  // state_timed_out (no)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_language'
-        //                 })
-        //                 .run();
-        //         });
-        //     });
-        // });
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out - continue
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 16);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.continue.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.returning_users.last'].values, [1]);
+                                assert.deepEqual(metrics['total.returning_users.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if they choose to restart", function() {
+                    it("should take them back to menu page", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out - restart
+                            )
+                            .check.interaction({
+                                state: 'state_refugee_main'
+                            })
+                            .run();
+                    });
+
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out - restart
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 16);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.info.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.info.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.info.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.refugee.info.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.returning_users.last'].values, [1]);
+                                assert.deepEqual(metrics['total.returning_users.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("if the user was already registered as refugee and redials", function() {
+                it("should display timeout continuation page", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_registered_landing - report xenophobia
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                        )
+                        .check.interaction({
+                            state: 'state_timed_out',
+                            reply: [
+                                "Select an option:",
+                                "1. Return to where I left off",
+                                "2. Find more info",
+                                "3. Report xenophobia",
+                                "4. Report unlawful arrest",
+                                "5. Report corruption",
+                                "6. Report something else"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                describe("if they choose to continue", function() {
+                    it("should continue where they left off", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out - continue
+                            )
+                            .check.interaction({
+                                state: 'state_report_xeno_legal'
+                            })
+                            .run();
+                    });
+
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '1'  // state_timed_out - continue
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.migrant.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.migrant.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.continue.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.migrant.continue.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.migrant.continue.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if they choose to restart", function() {
+                    it("should take them back to menu page", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out - restart
+                            )
+                            .check.interaction({
+                                state: 'state_migrant_main'
+                            })
+                            .run();
+                    });
+
+                    it("should fire metrics", function() {
+                        return tester
+                            .setup.user.addr('064002')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , {session_event: 'close'}  // may or may not work
+                                , {session_event: 'new'}  // redial
+                                , '2'  // state_timed_out - restart
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                assert.equal(Object.keys(metrics).length, 14);
+                                assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2]);
+                                assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                                assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.migrant.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.migrant.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.info.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.info.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.migrant.info.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.migrant.info.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("if the user times out on timeout page and redials", function() {
+                it("should display timeout continuation page", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_unregistered_menu - more info
+                            , '5'  // state_country - burundi
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial again
+                        )
+                        .check.interaction({
+                            state: 'state_timed_out',
+                            reply: [
+                                "Select an option:",
+                                "1. Return to where I left off",
+                                "2. Find more info",
+                                "3. Report xenophobia",
+                                "4. Report unlawful arrest",
+                                "5. Report corruption",
+                                "6. Report something else"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_unregistered_menu - more info
+                            , '5'  // state_country - burundi
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial again
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.equal(Object.keys(metrics).length, 6);
+                            assert.deepEqual(metrics['total.ussd.unique_users'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.unique_users.transient'].values, [1]);
+                            assert.deepEqual(metrics['total.ussd.sessions'].values, [1, 2, 3]);
+                            assert.deepEqual(metrics['total.ussd.sessions.transient'].values, [1, 1, 1]);
+                            // note metrics below do not increment twice - 'enter' doesn't happen twice
+                            assert.deepEqual(metrics['total.reached_state_timed_out'].values, [1]);
+                            assert.deepEqual(metrics['total.reached_state_timed_out.transient'].values, [1]);
+                        })
+                        .run();
+                });
+
+                it("should continue where they left off if chosen", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_unregistered_menu - more info
+                            , '5'  // state_country - burundi
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '1'  // state_timed_out - continue
+                        )
+                        .check.interaction({
+                            state: 'state_ref_mig_1'
+                        })
+                        .run();
+                });
+
+                it("should take them back to country page if they start over", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_unregistered_menu - more info
+                            , '5'  // state_country - burundi
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '2'  // state_timed_out - find more info
+                        )
+                        .check.interaction({
+                            state: 'state_country'
+                        })
+                        .run();
+                });
+            });
+        });
 
         // TEST SENDING REDIAL REMINDER SMS
 
@@ -744,8 +1056,8 @@ describe("refugeerights app", function() {
         //                 .setup.user.addr('082111')
         //                 .inputs(
         //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
+        //                     , '2'  // state_language - french
+        //                     , '5'  // state_country - burundi
         //                     , {session_event: 'close'}  // may or may not work
         //                 )
         //                 .check(function(api) {
@@ -762,8 +1074,8 @@ describe("refugeerights app", function() {
         //                 .setup.user.addr('082111')
         //                 .inputs(
         //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
+        //                     , '2'  // state_language - french
+        //                     , '5'  // state_country - burundi
         //                     , {session_event: 'close'}  // may or may not work
         //                 )
         //                 .check(function(api) {
@@ -782,10 +1094,10 @@ describe("refugeerights app", function() {
         //                 .setup.user.addr('082111')
         //                 .inputs(
         //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
+        //                     , '2'  // state_language - french
         //                     , {session_event: 'close'}  // may or may not work
         //                     , {session_event: 'new'}  // redial
-        //                     , '5'  // state_country (burundi)
+        //                     , '5'  // state_country - burundi
         //                     , {session_event: 'close'}  // may or may not work
         //                 )
         //                 .check(function(api) {
@@ -802,10 +1114,10 @@ describe("refugeerights app", function() {
         //                 .setup.user.addr('082111')
         //                 .inputs(
         //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
+        //                     , '2'  // state_language - french
         //                     , {session_event: 'close'}  // may or may not work
         //                     , {session_event: 'new'}  // redial
-        //                     , '5'  // state_country (burundi)
+        //                     , '5'  // state_country - burundi
         //                     , {session_event: 'close'}  // may or may not work
         //                 )
         //                 .check(function(api) {
@@ -824,8 +1136,8 @@ describe("refugeerights app", function() {
         //                 .setup.user.addr('082111')
         //                 .inputs(
         //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
+        //                     , '2'  // state_language - french
+        //                     , '5'  // state_country - burundi
         //                     , '4'  // state_status (migrant)
         //                     , '2'  // state_migrant_rights_info (exit)
         //                     , {session_event: 'close'}  // may or may not work
@@ -844,8 +1156,8 @@ describe("refugeerights app", function() {
         //                 .setup.user.addr('082111')
         //                 .inputs(
         //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
+        //                     , '2'  // state_language - french
+        //                     , '5'  // state_country - burundi
         //                     , '4'  // state_status (migrant)
         //                     , '2'  // state_migrant_rights_info (exit)
         //                     , {session_event: 'close'}  // may or may not work
@@ -4564,7 +4876,7 @@ describe("refugeerights app", function() {
         //                 .setup.user.addr('082111')
         //                 .inputs(
         //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
+        //                     , '2'  // state_language - french
         //                     , {session_event: 'close'}
         //                     , {session_event: 'new'}
         //                 )
@@ -4601,8 +4913,8 @@ describe("refugeerights app", function() {
         //                 .setup.user.addr('082111')
         //                 .inputs(
         //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language (french)
-        //                     , '5'  // state_country (burundi)
+        //                     , '2'  // state_language - french
+        //                     , '5'  // state_country - burundi
         //                     , '3'  // state_status (refugee)
         //                     , '3'  // state_refugee_rights_info (exit)
         //                     , {session_event: 'close'}
