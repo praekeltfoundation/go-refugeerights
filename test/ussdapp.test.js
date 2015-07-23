@@ -296,24 +296,96 @@ describe("refugeerights app", function() {
 
         // TEST REDIS KEY EXPIRY
 
-        // describe("Redis expiry testing", function() {
-        //     describe("when a user registers, then returns after state expiration", function() {
-        //         it("should show them the main menu in their language", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                 )
-        //                 // check navigation
-        //                 .check.interaction({
-        //                     state: 'state_refugee_main'
-        //                 })
-        //                 // check user language is set
-        //                 .check.user.properties({lang: 'fr'})
-        //                 .run();
-        //         });
-        //     });
-        // });
+        describe("Redis expiry testing", function() {
+            describe("when a registered user returns after state expiration", function() {
+                it("should show them state_registered_landing in their language", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_registered_landing'
+                        })
+                        // check user language is set
+                        .check.user.properties({lang: 'fr'})
+                        .run();
+                });
+            });
+
+            describe("if they choose an option on state_registered_landing", function() {
+                it("should should navigate to 1. main", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - more info
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_refugee_main'
+                        })
+                        .run();
+                });
+
+                it("should should navigate to 2. state_report_xeno_legal", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_registered_landing - report xenophobia
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_report_xeno_legal'
+                        })
+                        .run();
+                });
+
+                it("should should navigate to 3. state_report_arrest_legal", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '3'  // state_registered_landing - report arrest
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_report_arrest_legal'
+                        })
+                        .run();
+                });
+
+                it("should should navigate to 4. state_report_corruption_legal", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '4'  // state_registered_landing - report corruption
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_report_corruption_legal'
+                        })
+                        .run();
+                });
+
+                it("should should navigate to 5. state_report_other_legal", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '5'  // state_registered_landing - report other
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_report_other_legal'
+                        })
+                        .run();
+                });
+            });
+        });
 
         // TEST TIMEOUT REDIALING
 
@@ -2009,6 +2081,29 @@ describe("refugeerights app", function() {
                             reply: "Thank you for dialling into the refugee and migrants rights service. Please dial back in to find out more."
                         })
                         .check.reply.ends_session()
+                        .run();
+                });
+            });
+
+            describe("dialing in after reaching state_registration_end", function() {
+                it("should navigate to state_registered_landing", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_unregistered_menu - more info
+                                , '5'  // state_country - burundi
+                                , '1'  // state_ref_mig_1 - yes
+                                , '2'  // state_ref_mig_2 - no
+                                , '2'  // state_ref_mig_3 - no
+                                , '2'  // state_ref_mig_4 - no
+                                , '2'  // state_ref_noqualify - exit
+                                , {session_event: 'new'}  // redial
+                            )
+                        .check.interaction({
+                            state: 'state_registered_landing',
+                        })
                         .run();
                 });
             });
