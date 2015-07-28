@@ -922,7 +922,7 @@ go.app = function() {
         });
 
         self.add('state_report_submit_critical', function(name) {
-            // Upload basic info reports to snappy & ona
+            // Post basic info report to nightingale
             return self.states.create('state_report_details');
         });
 
