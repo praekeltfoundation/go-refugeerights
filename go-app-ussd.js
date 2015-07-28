@@ -813,7 +813,7 @@ go.app = function() {
 
         self.add('state_report_xeno_legal', function(name) {
             return new ChoiceState(name, {
-                question: $("xeno"),
+                question: $("Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved."),
                 choices: [
                     new Choice('state_report_xeno_info', $("I understand")),
                     new Choice('state_report_end', $("Exit")),
@@ -824,9 +824,11 @@ go.app = function() {
             });
         });
 
+
+
         self.add('state_report_arrest_legal', function(name) {
             return new ChoiceState(name, {
-                question: $("arrest"),
+                question: $("LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved."),
                 choices: [
                     new Choice('state_report_arrest_info', $("I understand")),
                     new Choice('state_report_end', $("Exit")),
@@ -839,7 +841,7 @@ go.app = function() {
 
         self.add('state_report_corruption_legal', function(name) {
             return new ChoiceState(name, {
-                question: $("corruption"),
+                question: $("Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved."),
                 choices: [
                     new Choice('state_report_corruption_info', $("I understand")),
                     new Choice('state_report_end', $("Exit")),
@@ -852,7 +854,7 @@ go.app = function() {
 
         self.add('state_report_other_legal', function(name) {
             return new ChoiceState(name, {
-                question: $("other"),
+                question: $("LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved."),
                 choices: [
                     new Choice('state_report_other_info', $("I understand")),
                     new Choice('state_report_end', $("Exit")),
@@ -6958,6 +6960,7 @@ go.app = function() {
         GoRR: GoRR
     };
 }();
+
 go.init = function() {
     var vumigo = require('vumigo_v02');
     var InteractionMachine = vumigo.InteractionMachine;

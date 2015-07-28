@@ -1001,7 +1001,7 @@ describe("refugeerights app", function() {
                         .check.interaction({
                             state: 'state_report_xeno_legal',
                             reply: [
-                                "xeno",
+                                "Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved.",
                                 "1. I understand",
                                 "2. Exit"
                             ].join('\n')
@@ -1020,7 +1020,7 @@ describe("refugeerights app", function() {
                         .check.interaction({
                             state: 'state_report_arrest_legal',
                             reply: [
-                                "arrest",
+                                "LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved.",
                                 "1. I understand",
                                 "2. Exit"
                             ].join('\n')
@@ -1039,7 +1039,7 @@ describe("refugeerights app", function() {
                         .check.interaction({
                             state: 'state_report_corruption_legal',
                             reply: [
-                                "corruption",
+                                "Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved.",
                                 "1. I understand",
                                 "2. Exit"
                             ].join('\n')
@@ -1058,7 +1058,7 @@ describe("refugeerights app", function() {
                         .check.interaction({
                             state: 'state_report_other_legal',
                             reply: [
-                                "other",
+                                "LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved.",
                                 "1. I understand",
                                 "2. Exit"
                             ].join('\n')
