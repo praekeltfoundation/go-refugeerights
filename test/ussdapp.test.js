@@ -2165,7 +2165,7 @@ describe("refugeerights app", function() {
                                 // check navigation
                                 .check.interaction({
                                     state: 'state_report_end_permission',
-                                    reply: "Unfortunately you cannot submit a report without indicating agreement. Redial to try again."
+                                    reply: "Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again."
                                 })
                                 .check.reply.ends_session()
                                 .run();

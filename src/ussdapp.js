@@ -373,7 +373,7 @@ go.app = function() {
 
         self.add('state_report_end_permission', function(name) {
             return new EndState(name, {
-                text: $("Unfortunately you cannot submit a report without indicating agreement. Redial to try again."),
+                text: $("Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again."),
                 next: 'state_start'
             });
         });
