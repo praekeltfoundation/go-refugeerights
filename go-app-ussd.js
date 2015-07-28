@@ -485,6 +485,7 @@ go.app = function() {
     var PaginatedChoiceState = vumigo.states.PaginatedChoiceState;
     var PaginatedState = vumigo.states.PaginatedState;
     var EndState = vumigo.states.EndState;
+    var FreeText = vumigo.states.FreeText;
     var location = require('go-jsbox-location');
     var LocationState = location.LocationState;
     var OpenStreetMap = location.providers.openstreetmap.OpenStreetMap;
@@ -557,10 +558,10 @@ go.app = function() {
                 choices: [
                     new Choice('continue', $("Return to where I left off")),
                     new Choice('info', $("Find more info")),
-                    new Choice('state_report_xeno_legal', $("Report xenophobia")),
-                    new Choice('state_report_arrest_legal', $("Report unlawful arrest")),
-                    new Choice('state_report_corruption_legal', $("Report corruption")),
-                    new Choice('state_report_other_legal', $("Report something else")),
+                    new Choice('xenophobia', $("Report xenophobia")),
+                    new Choice('arrest', $("Report unlawful arrest")),
+                    new Choice('corruption', $("Report corruption")),
+                    new Choice('other', $("Report something else")),
                 ],
 
                 next: function(choice) {
@@ -578,7 +579,12 @@ go.app = function() {
                                     return 'state_country';
                                 }
                             } else {
-                                return choice.value;
+                                self.contact.extra.report_theme = choice.value;
+                                return self.im.contacts
+                                    .save(self.contact)
+                                    .then(function() {
+                                        return 'state_report_legal';
+                                    });
                             }
                         });
                 }
@@ -633,13 +639,22 @@ go.app = function() {
                 question: $("Select an option:"),
                 choices: [
                     new Choice('state_country', $("Find info about refugee/migrant rights in SA")),
-                    new Choice('state_report_xeno_legal', $("Report xenophobia")),
-                    new Choice('state_report_arrest_legal', $("Report unlawful arrest")),
-                    new Choice('state_report_corruption_legal', $("Report corruption")),
-                    new Choice('state_report_other_legal', $("Report something else")),
+                    new Choice('xenophobia', $("Report xenophobia")),
+                    new Choice('arrest', $("Report unlawful arrest")),
+                    new Choice('corruption', $("Report corruption")),
+                    new Choice('other', $("Report something else")),
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    if (choice.value === 'state_country') {
+                        return 'state_country';
+                    } else {
+                        self.contact.extra.report_theme = choice.value;
+                        return self.im.contacts
+                            .save(self.contact)
+                            .then(function() {
+                                return 'state_report_legal';
+                            });
+                    }
                 }
             });
         });
@@ -806,10 +821,10 @@ go.app = function() {
                 question: $("Select an option:"),
                 choices: [
                     new Choice('more_info', $("Find more info")),
-                    new Choice('state_report_xeno_legal', $("Report xenophobia")),
-                    new Choice('state_report_arrest_legal', $("Report unlawful arrest")),
-                    new Choice('state_report_corruption_legal', $("Report corruption")),
-                    new Choice('state_report_other_legal', $("Report something else")),
+                    new Choice('xenophobia', $("Report xenophobia")),
+                    new Choice('arrest', $("Report unlawful arrest")),
+                    new Choice('corruption', $("Report corruption")),
+                    new Choice('other', $("Report something else")),
                 ],
                 next: function(choice) {
                     if (choice.value === 'more_info') {
@@ -817,7 +832,12 @@ go.app = function() {
                             ? 'state_refugee_main'
                             : 'state_migrant_main';
                     } else {
-                        return choice.value;
+                        self.contact.extra.report_theme = choice.value;
+                        return self.im.contacts
+                            .save(self.contact)
+                            .then(function() {
+                                return 'state_report_legal';
+                            });
                     }
                 }
             });
@@ -826,11 +846,111 @@ go.app = function() {
 
     // REPORT STATES
 
-        self.add('state_report_xeno_legal', function(name) {
+        self.add('state_report_end_permission', function(name) {
+            return new EndState(name, {
+                text: $("Unfortunately you cannot submit a report without indicating agreement. Redial to try again."),
+                next: 'state_start'
+            });
+        });
+
+        self.add('state_report_legal', function(name) {
+            var question_map = {
+                xenophobia: $("Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved."),
+                arrest: $("LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved."),
+                corruption: $("Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved."),
+                other: $("LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved.")
+            };
             return new ChoiceState(name, {
-                question: $("Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved."),
+                question: question_map[self.contact.extra.report_theme],
                 choices: [
-                    new Choice('state_report_xeno_info', $("I understand")),
+                    new Choice('state_report_category', $("I understand")),
+                    new Choice('state_report_end_permission', $("Exit")),
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        self.add('state_report_category', function(name) {
+            var question_map = {
+                xenophobia: $("Which of these xenophobic acts is taking place?"),
+                arrest: $("Why have you been arrested?"),
+                corruption: $("Where have you experienced corruption?"),
+                other: $("What would you like to report?")
+            };
+            var choices_map = {
+                xenophobia: [
+                    new Choice('physical_threat', $("Physical threat")),
+                    new Choice('protests', $("Protests in your area")),
+                    new Choice('looting', $("Looting in your area"))
+                ],
+                arrest: [
+                    new Choice('no_asylum_permit', $("Not having an asylum permit")),
+                    new Choice('no_migrant_visa', $("Not having a migrant visa")),
+                    new Choice('unknown', $("You don't know")),
+                    new Choice('other', $("Other"))
+                ],
+                corruption: [
+                    new Choice('refugee_reception_office', $("Refugee Reception Office")),
+                    new Choice('saps', $("South African Police Service")),
+                    new Choice('department_of_home_affairs', $("Department of Home Affairs")),
+                    new Choice('social_services', $("Social services")),
+                    new Choice('other', $("Other"))
+                ],
+                other: [
+                    new Choice('complaint', $("A complaint")),
+                    new Choice('other', $("Other"))
+                ],
+            };
+            return new ChoiceState(name, {
+                question: question_map[self.contact.extra.report_theme],
+                choices: choices_map[self.contact.extra.report_theme],
+                next: function(choice) {
+                    return 'state_report_location';
+                }
+            });
+        });
+
+        self.add('state_report_location', function(name) {
+            return new FreeText(name, {
+                question: $("Please type the name of the suburb in which the incident took place."),
+                next: function(choice) {
+                    return 'state_report_submit_critical';
+                }
+            });
+        });
+
+        self.add('state_report_submit_critical', function(name) {
+            // Upload basic info reports to snappy & ona
+            return self.states.create('state_report_details');
+        });
+
+        self.add('state_report_details', function(name) {
+            var question_map = {
+                xenophobia: $("Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific – it'll enable us to send the right response & help you faster."),
+                arrest: $("Please type the full name of the person who was arrested. Also, what happened to cause the arrest? And what documentation/permit does this person have, if any?"),
+                corruption: $("Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time"),
+                other: $("Please explain the incident in as much detail as you can: What happened; where it happened; the offender's name; his/her physical features; date/time.")
+            };
+            return new FreeText(name, {
+                question: question_map[self.contact.extra.report_theme],
+                next: function(choice) {
+                    return 'state_report_submit_detail';
+                }
+            });
+        });
+
+        self.add('state_report_submit_detail', function(name) {
+            // Update snappy ticket with extra information
+            return self.states.create('state_report_complete');
+        });
+
+        self.add('state_report_complete', function(name) {
+            return new ChoiceState(name, {
+                question: $("Thank you very much. Your report has been submitted."),
+                choices: [
+                    new Choice('state_start', $("Main menu")),
                     new Choice('state_report_end', $("Exit")),
                 ],
                 next: function(choice) {
@@ -839,46 +959,13 @@ go.app = function() {
             });
         });
 
-
-
-        self.add('state_report_arrest_legal', function(name) {
-            return new ChoiceState(name, {
-                question: $("LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved."),
-                choices: [
-                    new Choice('state_report_arrest_info', $("I understand")),
-                    new Choice('state_report_end', $("Exit")),
-                ],
-                next: function(choice) {
-                    return choice.value;
-                }
+        self.add('state_report_end', function(name) {
+            return new EndState(name, {
+                text: $("Goodbye!"),
+                next: 'state_start'
             });
         });
 
-        self.add('state_report_corruption_legal', function(name) {
-            return new ChoiceState(name, {
-                question: $("Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved."),
-                choices: [
-                    new Choice('state_report_corruption_info', $("I understand")),
-                    new Choice('state_report_end', $("Exit")),
-                ],
-                next: function(choice) {
-                    return choice.value;
-                }
-            });
-        });
-
-        self.add('state_report_other_legal', function(name) {
-            return new ChoiceState(name, {
-                question: $("LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved."),
-                choices: [
-                    new Choice('state_report_other_info', $("I understand")),
-                    new Choice('state_report_end', $("Exit")),
-                ],
-                next: function(choice) {
-                    return choice.value;
-                }
-            });
-        });
 
 
     // MAIN MENU STATES
