@@ -2338,7 +2338,232 @@ describe("refugeerights app", function() {
                 });
             });
 
-        // });
+            describe.only("corruption reporting", function() {
+                it("should navigate to state_report_legal", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '4'  // state_registered_landing - report corruption
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_report_legal'
+                        })
+                        .run();
+                });
+
+                describe("upon state_report_legal selection", function() {
+                    describe("selecting I understand", function() {
+                        it("should navigate to state_report_category", function() {
+                            return tester
+                                .setup.user.addr('064001')
+                                .inputs(
+                                    {session_event: 'new'}  // dial in
+                                    , '4'  // state_registered_landing - report corruption
+                                    , '1'  // state_report_legal - i understand
+                                )
+                                // check navigation
+                                .check.interaction({
+                                    state: 'state_report_category',
+                                    reply: [
+                                        "Where have you experienced corruption?",
+                                        "1. Refugee Reception Office",
+                                        "2. South African Police Service",
+                                        "3. Department of Home Affairs",
+                                        "4. Social services",
+                                        "5. Other"
+                                    ].join('\n')
+                                })
+                                .run();
+                        });
+                    });
+
+                    describe("selecting Exit", function() {
+                        it("should navigate to state_report_end_permission", function() {
+                            return tester
+                                .setup.user.addr('064001')
+                                .inputs(
+                                    {session_event: 'new'}  // dial in
+                                    , '4'  // state_registered_landing - report corruption
+                                    , '2'  // state_report_legal - exit
+                                )
+                                // check navigation
+                                .check.interaction({
+                                    state: 'state_report_end_permission',
+                                    reply: "Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again."
+                                })
+                                .check.reply.ends_session()
+                                .run();
+                        });
+                    });
+                });
+
+                describe("upon state_report_category selection", function() {
+                    it("should navigate to state_report_location", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '4'  // state_registered_landing - report corruption
+                                , '1'  // state_report_legal - i understand
+                                , '5'  // state_report_category - other
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_location',
+                                reply: "Please type the name of the suburb in which the incident took place.",
+                            })
+                            .run();
+                    });
+                });
+
+                describe("upon state_report_location entry 1", function() {
+                    // Note in-depth testing of location state is done elsewhere
+                    it("if multiple results, should ask which suburb", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '4'  // state_registered_landing - report corruption
+                                , '1'  // state_report_legal - i understand
+                                , '5'  // state_report_category - other
+                                , 'Quad Street'  // state_report_location
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_location',
+                                reply: [
+                                    "Please select your location:",
+                                    "1. Suburb number 1, City number 1, WC",
+                                    "2. Suburb number 2, Town number 2, GP",
+                                    "3. Suburb number 3, City number 3, FS",
+                                    "n. More",
+                                    "p. Back"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+
+                describe("upon state_report_location entry 2", function() {
+                    it("navigate to state_report_details", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '4'  // state_registered_landing - report corruption
+                                , '1'  // state_report_legal - i understand
+                                , '5'  // state_report_category - other
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_details',
+                                reply: "Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time",
+                            })
+                            .run();
+                    });
+
+                    it("should save data to contact upon choice", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '4'  // state_registered_landing - report corruption
+                                , '1'  // state_report_legal - i understand
+                                , '5'  // state_report_category - other
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                            )
+                            .check(function(api) {
+                                var contact = _.find(api.contacts.store, {
+                                                    msisdn: '+064001'
+                                                });
+                                assert.equal(contact.extra['location:formatted_address'],
+                                    'Suburb number 3, City number 3, FS');
+                                assert.equal(contact.extra['location:lon'], '3.1415');
+                                assert.equal(contact.extra['location:lat'], '2.7182');
+                                assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
+                                assert.equal(contact.extra['location:city'], 'City number 3');
+                                assert.equal(contact.extra['location:province'], 'FS');
+                            })
+                            .run();
+                    });
+                });
+
+                describe("upon state_report_details entry", function() {
+                    it("should navigate to state_report_complete", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '4'  // state_registered_landing - report corruption
+                                , '1'  // state_report_legal - i understand
+                                , '5'  // state_report_category - other
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                                , 'Send help plz'  // state_report_details
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_complete',
+                                reply: [
+                                    "Thank you very much. Your report has been submitted.",
+                                    "1. Main menu",
+                                    "2. Exit"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+
+                describe("upon state_report_complete entry", function() {
+                    it("should navigate to 1. state_registered_landing", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '4'  // state_registered_landing - report corruption
+                                , '1'  // state_report_legal - i understand
+                                , '5'  // state_report_category - other
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                                , 'Send help plz'  // state_report_details
+                                , '1'  // state_report_complete - main menu
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_registered_landing',
+                            })
+                            .run();
+                    });
+
+                    it("should navigate to 2. state_report_end", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '4'  // state_registered_landing - report corruption
+                                , '1'  // state_report_legal - i understand
+                                , '5'  // state_report_category - other
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                                , 'Send help plz'  // state_report_details
+                                , '2'  // state_report_complete - exit
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_end',
+                                reply: 'Goodbye!'
+                            })
+                            .check.reply.ends_session()
+                            .run();
+                    });
+                });
+            });
+
         });
 
         // TEST LOCATION FINDING
