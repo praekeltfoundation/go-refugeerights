@@ -2112,7 +2112,7 @@ describe("refugeerights app", function() {
 
         // TEST REPORTING
 
-        describe.only("Reporting testing", function() {
+        describe("Reporting testing", function() {
 
             describe("xenophobia reporting", function() {
                 it("should navigate to state_report_legal", function() {
