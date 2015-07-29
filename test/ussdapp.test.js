@@ -315,7 +315,7 @@ describe("refugeerights app", function() {
             });
 
             describe("if they choose an option on state_registered_landing", function() {
-                it("should should navigate to 1. main", function() {
+                it("should navigate to 1. main", function() {
                     return tester
                         .setup.user.addr('064001')
                         .inputs(
@@ -329,7 +329,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("should should navigate to 2. state_report_xeno_legal", function() {
+                it("should navigate to 2. state_report_legal", function() {
                     return tester
                         .setup.user.addr('064001')
                         .inputs(
@@ -338,12 +338,12 @@ describe("refugeerights app", function() {
                         )
                         // check navigation
                         .check.interaction({
-                            state: 'state_report_xeno_legal'
+                            state: 'state_report_legal'
                         })
                         .run();
                 });
 
-                it("should should navigate to 3. state_report_arrest_legal", function() {
+                it("should navigate to 3. state_report_legal", function() {
                     return tester
                         .setup.user.addr('064001')
                         .inputs(
@@ -352,12 +352,12 @@ describe("refugeerights app", function() {
                         )
                         // check navigation
                         .check.interaction({
-                            state: 'state_report_arrest_legal'
+                            state: 'state_report_legal'
                         })
                         .run();
                 });
 
-                it("should should navigate to 4. state_report_corruption_legal", function() {
+                it("should navigate to 4. state_report_legal", function() {
                     return tester
                         .setup.user.addr('064001')
                         .inputs(
@@ -366,12 +366,12 @@ describe("refugeerights app", function() {
                         )
                         // check navigation
                         .check.interaction({
-                            state: 'state_report_corruption_legal'
+                            state: 'state_report_legal'
                         })
                         .run();
                 });
 
-                it("should should navigate to 5. state_report_other_legal", function() {
+                it("should navigate to 5. state_report_legal", function() {
                     return tester
                         .setup.user.addr('064001')
                         .inputs(
@@ -380,7 +380,7 @@ describe("refugeerights app", function() {
                         )
                         // check navigation
                         .check.interaction({
-                            state: 'state_report_other_legal'
+                            state: 'state_report_legal'
                         })
                         .run();
                 });
@@ -557,7 +557,7 @@ describe("refugeerights app", function() {
                 });
 
                 describe("if they choose to report xenophobia", function() {
-                    it("should go to state_report_xeno_legal", function() {
+                    it("should go to state_report_legal", function() {
                         return tester
                             .setup.user.addr('082111')
                             .inputs(
@@ -570,7 +570,7 @@ describe("refugeerights app", function() {
                                 , '3'  // state_timed_out - report xenophobia
                             )
                             .check.interaction({
-                                state: 'state_report_xeno_legal'
+                                state: 'state_report_legal'
                             })
                             .run();
                     });
@@ -600,17 +600,17 @@ describe("refugeerights app", function() {
                                 assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.state_report_xeno_legal.last'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.state_report_xeno_legal.sum'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.unregistered.state_report_xeno_legal.last'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.unregistered.state_report_xeno_legal.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.xenophobia.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.xenophobia.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.xenophobia.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.xenophobia.sum'].values, [1]);
                             })
                             .run();
                     });
                 });
 
                 describe("if they choose to report arrest", function() {
-                    it("should go to state_report_arrest_legal", function() {
+                    it("should go to state_report_legal", function() {
                         return tester
                             .setup.user.addr('082111')
                             .inputs(
@@ -623,7 +623,7 @@ describe("refugeerights app", function() {
                                 , '4'  // state_timed_out - report arrest
                             )
                             .check.interaction({
-                                state: 'state_report_arrest_legal'
+                                state: 'state_report_legal'
                             })
                             .run();
                     });
@@ -653,17 +653,17 @@ describe("refugeerights app", function() {
                                 assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.state_report_arrest_legal.last'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.state_report_arrest_legal.sum'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.unregistered.state_report_arrest_legal.last'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.unregistered.state_report_arrest_legal.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.arrest.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.arrest.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.arrest.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.arrest.sum'].values, [1]);
                             })
                             .run();
                     });
                 });
 
                 describe("if they choose to report corruption", function() {
-                    it("should go to state_report_corruption_legal", function() {
+                    it("should go to state_report_legal", function() {
                         return tester
                             .setup.user.addr('082111')
                             .inputs(
@@ -676,7 +676,7 @@ describe("refugeerights app", function() {
                                 , '5'  // state_timed_out - report corruption
                             )
                             .check.interaction({
-                                state: 'state_report_corruption_legal'
+                                state: 'state_report_legal'
                             })
                             .run();
                     });
@@ -706,17 +706,17 @@ describe("refugeerights app", function() {
                                 assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.state_report_corruption_legal.last'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.state_report_corruption_legal.sum'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.unregistered.state_report_corruption_legal.last'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.unregistered.state_report_corruption_legal.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.corruption.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.corruption.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.corruption.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.corruption.sum'].values, [1]);
                             })
                             .run();
                     });
                 });
 
                 describe("if they choose to report other", function() {
-                    it("should go to state_report_other_legal", function() {
+                    it("should go to state_report_legal", function() {
                         return tester
                             .setup.user.addr('082111')
                             .inputs(
@@ -729,7 +729,7 @@ describe("refugeerights app", function() {
                                 , '6'  // state_timed_out - report other
                             )
                             .check.interaction({
-                                state: 'state_report_other_legal'
+                                state: 'state_report_legal'
                             })
                             .run();
                     });
@@ -759,10 +759,10 @@ describe("refugeerights app", function() {
                                 assert.deepEqual(metrics['total.redials.choice_made.sum'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.unregistered.last'].values, [1]);
                                 assert.deepEqual(metrics['total.redials.unregistered.sum'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.state_report_other_legal.last'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.state_report_other_legal.sum'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.unregistered.state_report_other_legal.last'].values, [1]);
-                                assert.deepEqual(metrics['total.redials.unregistered.state_report_other_legal.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.other.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.other.sum'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.other.last'].values, [1]);
+                                assert.deepEqual(metrics['total.redials.unregistered.other.sum'].values, [1]);
                             })
                             .run();
                     });
@@ -806,7 +806,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_timed_out - continue
                             )
                             .check.interaction({
-                                state: 'state_report_xeno_legal'
+                                state: 'state_report_legal'
                             })
                             .run();
                     });
@@ -934,7 +934,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_timed_out - continue
                             )
                             .check.interaction({
-                                state: 'state_report_xeno_legal'
+                                state: 'state_report_legal'
                             })
                             .run();
                     });
@@ -1374,7 +1374,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("should navigate to 2. state_report_xeno_legal", function() {
+                it("should navigate to 2. state_report_legal", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
@@ -1383,9 +1383,9 @@ describe("refugeerights app", function() {
                             , '2'  // state_unregistered_menu - report xenophobia
                         )
                         .check.interaction({
-                            state: 'state_report_xeno_legal',
+                            state: 'state_report_legal',
                             reply: [
-                                "xeno",
+                                "Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved.",
                                 "1. I understand",
                                 "2. Exit"
                             ].join('\n')
@@ -1393,7 +1393,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("should navigate to 3. state_report_arrest_legal", function() {
+                it("should navigate to 3. state_report_legal", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
@@ -1402,9 +1402,9 @@ describe("refugeerights app", function() {
                             , '3'  // state_unregistered_menu - report arrest
                         )
                         .check.interaction({
-                            state: 'state_report_arrest_legal',
+                            state: 'state_report_legal',
                             reply: [
-                                "arrest",
+                                "LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved.",
                                 "1. I understand",
                                 "2. Exit"
                             ].join('\n')
@@ -1412,7 +1412,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("should navigate to 4. state_report_corruption_legal", function() {
+                it("should navigate to 4. state_report_legal", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
@@ -1421,9 +1421,9 @@ describe("refugeerights app", function() {
                             , '4'  // state_unregistered_menu - report corruption
                         )
                         .check.interaction({
-                            state: 'state_report_corruption_legal',
+                            state: 'state_report_legal',
                             reply: [
-                                "corruption",
+                                "Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved.",
                                 "1. I understand",
                                 "2. Exit"
                             ].join('\n')
@@ -1431,7 +1431,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("should navigate to 5. state_report_other_legal", function() {
+                it("should navigate to 5. state_report_legal", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
@@ -1440,9 +1440,9 @@ describe("refugeerights app", function() {
                             , '5'  // state_unregistered_menu - report xenophobia
                         )
                         .check.interaction({
-                            state: 'state_report_other_legal',
+                            state: 'state_report_legal',
                             reply: [
-                                "other",
+                                "LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved.",
                                 "1. I understand",
                                 "2. Exit"
                             ].join('\n')
@@ -2108,6 +2108,179 @@ describe("refugeerights app", function() {
                 });
             });
 
+        });
+
+        // TEST REPORTING
+
+        describe("Reporting testing", function() {
+
+            describe("xenophobia reporting", function() {
+                it("should navigate to state_report_legal", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_registered_landing - report xenophobia
+                        )
+                        // check navigation
+                        .check.interaction({
+                            state: 'state_report_legal'
+                        })
+                        .run();
+                });
+
+                describe("upon state_report_legal selection", function() {
+                    describe("selecting I understand", function() {
+                        it("should navigate to state_report_category", function() {
+                            return tester
+                                .setup.user.addr('064001')
+                                .inputs(
+                                    {session_event: 'new'}  // dial in
+                                    , '2'  // state_registered_landing - report xenophobia
+                                    , '1'  // state_report_legal - i understand
+                                )
+                                // check navigation
+                                .check.interaction({
+                                    state: 'state_report_category',
+                                    reply: [
+                                        "Which of these xenophobic acts is taking place?",
+                                        "1. Physical threat",
+                                        "2. Protests in your area",
+                                        "3. Looting in your area"
+                                    ].join('\n')
+                                })
+                                .run();
+                        });
+                    });
+
+                    describe("selecting Exit", function() {
+                        it("should navigate to state_report_end_permission", function() {
+                            return tester
+                                .setup.user.addr('064001')
+                                .inputs(
+                                    {session_event: 'new'}  // dial in
+                                    , '2'  // state_registered_landing - report xenophobia
+                                    , '2'  // state_report_legal - exit
+                                )
+                                // check navigation
+                                .check.interaction({
+                                    state: 'state_report_end_permission',
+                                    reply: "Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again."
+                                })
+                                .check.reply.ends_session()
+                                .run();
+                        });
+                    });
+                });
+
+                describe("upon state_report_category selection", function() {
+                    it("should navigate to state_report_location", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , '1'  // state_report_legal - i understand
+                                , '3'  // state_report_category - looting
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_location',
+                                reply: "Please type the name of the suburb in which the incident took place.",
+                            })
+                            .run();
+                    });
+                });
+
+                describe("upon state_report_location entry", function() {
+                    it("should navigate to state_report_details", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , '1'  // state_report_legal - i understand
+                                , '3'  // state_report_category - looting
+                                , 'Suburb'  // state_report_location
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_details',
+                                reply: "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific – it'll enable us to send the right response & help you faster.",
+                            })
+                            .run();
+                    });
+                });
+
+                describe("upon state_report_details entry", function() {
+                    it("should navigate to state_report_complete", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , '1'  // state_report_legal - i understand
+                                , '3'  // state_report_category - looting
+                                , 'Suburb'  // state_report_location
+                                , 'Send help plz'  // state_report_details
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_complete',
+                                reply: [
+                                    "Thank you very much. Your report has been submitted.",
+                                    "1. Main menu",
+                                    "2. Exit"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+
+                describe("upon state_report_complete entry", function() {
+                    it("should navigate to 1. state_registered_landing", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , '1'  // state_report_legal - i understand
+                                , '3'  // state_report_category - looting
+                                , 'Suburb'  // state_report_location
+                                , 'help plz'  // state_report_details
+                                , '1'  // state_report_complete - main menu
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_registered_landing',
+                            })
+                            .run();
+                    });
+
+                    it("should navigate to 2. state_report_end", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , '1'  // state_report_legal - i understand
+                                , '3'  // state_report_category - looting
+                                , 'Suburb'  // state_report_location
+                                , 'help plz'  // state_report_details
+                                , '2'  // state_report_complete - exit
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_end',
+                                reply: 'Goodbye!'
+                            })
+                            .check.reply.ends_session()
+                            .run();
+                    });
+                });
+            });
+
+        // });
         });
 
         // TEST LOCATION FINDING
