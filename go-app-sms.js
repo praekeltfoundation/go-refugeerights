@@ -470,6 +470,42 @@ go.utils = {
         return province_shortening[province];
     },
 
+    get_snappy_topics: function (im, faq_id) {
+        var http = new JsonApi(im, {
+          auth: {
+            username: im.config.snappy.username,
+            password: 'x'
+          }
+        });
+        return http.get(im.config.snappy.endpoint + 'account/'+im.config.snappy.account_id+'/faqs/'+faq_id+'/topics', {
+          data: JSON.stringify(),
+          headers: {
+            'Content-Type': ['application/json']
+          },
+          ssl_method: "SSLv3"
+        });
+    },
+
+    get_snappy_questions: function(im, faq_id, topic_id) {
+        var http = new JsonApi(im, {
+            auth: {
+                username: im.config.snappy.username,
+                password: 'x'
+            }
+        });
+        var snappy_questions_url = im.config.snappy.endpoint + 'account/' +
+                im.config.snappy.account_id + '/faqs/' + faq_id + '/topics/' +
+                topic_id + '/questions';
+
+        return http.get(snappy_questions_url, {
+            data: JSON.stringify(),
+            headers: {
+                'Content-Type': ['application/json']
+            },
+            ssl_method: "SSLv3"
+        });
+    },
+
     "commas": "commas"
 };
 

@@ -470,6 +470,42 @@ go.utils = {
         return province_shortening[province];
     },
 
+    get_snappy_topics: function (im, faq_id) {
+        var http = new JsonApi(im, {
+          auth: {
+            username: im.config.snappy.username,
+            password: 'x'
+          }
+        });
+        return http.get(im.config.snappy.endpoint + 'account/'+im.config.snappy.account_id+'/faqs/'+faq_id+'/topics', {
+          data: JSON.stringify(),
+          headers: {
+            'Content-Type': ['application/json']
+          },
+          ssl_method: "SSLv3"
+        });
+    },
+
+    get_snappy_questions: function(im, faq_id, topic_id) {
+        var http = new JsonApi(im, {
+            auth: {
+                username: im.config.snappy.username,
+                password: 'x'
+            }
+        });
+        var snappy_questions_url = im.config.snappy.endpoint + 'account/' +
+                im.config.snappy.account_id + '/faqs/' + faq_id + '/topics/' +
+                topic_id + '/questions';
+
+        return http.get(snappy_questions_url, {
+            data: JSON.stringify(),
+            headers: {
+                'Content-Type': ['application/json']
+            },
+            ssl_method: "SSLv3"
+        });
+    },
+
     "commas": "commas"
 };
 
@@ -479,6 +515,7 @@ go.app = function() {
     var vumigo = require('vumigo_v02');
     var MetricsHelper = require('go-jsbox-metrics-helper');
     var Q = require('q');
+    var _ = require('lodash');
     var App = vumigo.App;
     var Choice = vumigo.states.Choice;
     var ChoiceState = vumigo.states.ChoiceState;
@@ -571,13 +608,7 @@ go.app = function() {
                             if (choice.value === 'continue') {
                                 return creator_opts.name;
                             } else if (choice.value === 'info') {
-                                if (self.contact.extra.status === 'refugee') {
-                                    return 'state_refugee_main';
-                                } else if (self.contact.extra.status === 'migrant') {
-                                    return 'state_migrant_main';
-                                } else {
-                                    return 'state_country';
-                                }
+                                return 'state_main';
                             } else {
                                 self.contact.extra.report_theme = choice.value;
                                 return self.im.contacts
@@ -592,9 +623,8 @@ go.app = function() {
         });
 
 
-    // START STATE
+    // START STATES
 
-        // verified
         // delegator 1
         self.add('state_start', function(name) {
             var status = self.contact.extra.status;
@@ -609,10 +639,46 @@ go.app = function() {
                 });
         });
 
+        // delegator 2
+        self.add('state_main', function(name) {
+            var status = self.contact.extra.status;
+                if (status === 'refugee') {
+                    return self.states.create('state_refugee_main');
+                } else if (status === 'migrant') {
+                    return self.states.create('state_migrant_main');
+                } else {
+                    return self.states.create('state_country');
+                }
+        });
+
+        self.add('state_registered_landing', function(name) {
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
+                choices: [
+                    new Choice('more_info', $("Find more info")),
+                    new Choice('xenophobia', $("Report xenophobia")),
+                    new Choice('arrest', $("Report unlawful arrest")),
+                    new Choice('corruption', $("Report corruption")),
+                    new Choice('other', $("Report something else")),
+                ],
+                next: function(choice) {
+                    if (choice.value === 'more_info') {
+                        return 'state_main';
+                    } else {
+                        self.contact.extra.report_theme = choice.value;
+                        return self.im.contacts
+                            .save(self.contact)
+                            .then(function() {
+                                return 'state_report_legal';
+                            });
+                    }
+                }
+            });
+        });
+
 
     // REGISTRATION STATES
 
-        // verified
         self.add('state_language', function(name) {
             return new ChoiceState(name, {
                 question: $("Welcome! Would you like to find out about refugee and migrant rights in SA? First select your language:"),
@@ -633,7 +699,6 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_unregistered_menu', function(name) {
             return new ChoiceState(name, {
                 question: $("Select an option:"),
@@ -659,7 +724,6 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_country', function(name) {
             return new PaginatedChoiceState(name, {
                 question: $('Select your country of origin:'),
@@ -695,7 +759,6 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_ref_mig_1', function(name) {
             return new ChoiceState(name, {
                 question: $("Would you like to find out if you qualify for refugee status?"),
@@ -717,7 +780,6 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_ref_mig_2', function(name) {
             return new ChoiceState(name, {
                 question: $("Have you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group?"),
@@ -731,7 +793,6 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_ref_mig_3', function(name) {
             return new ChoiceState(name, {
                 question: $("Are you married to or depend upon a person who fled their country in fear of their life?"),
@@ -745,7 +806,6 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_ref_mig_4', function(name) {
             return new ChoiceState(name, {
                 question: $("Are you married to a recognised refugee?"),
@@ -767,7 +827,6 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_register_refugee', function(name) {
             return go.utils
                 .register_user(self.contact, self.im, 'refugee')
@@ -776,7 +835,6 @@ go.app = function() {
                 });
         });
 
-        // verified
         self.add('state_ref_qualify', function(name) {
             return new ChoiceState(name, {
                 question: $("It looks like you may qualify for refugee status! Your asylum application process will confirm this. Please start this application now."),
@@ -790,7 +848,6 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_ref_noqualify', function(name) {
             return new ChoiceState(name, {
                 question: $("You don't qualify for refugee status in SA. If you are a foreign national looking to work, study or run a business you'll need a visa."),
@@ -804,42 +861,10 @@ go.app = function() {
             });
         });
 
-        // verified
         self.add('state_registration_end', function(name) {
             return new EndState(name, {
                 text: $("Thank you for dialling into the refugee and migrants rights service. Please dial back in to find out more."),
                 next: 'state_registered_landing'
-            });
-        });
-
-
-    // OTHER STATES
-
-        // verified
-        self.add('state_registered_landing', function(name) {
-            return new ChoiceState(name, {
-                question: $("Select an option:"),
-                choices: [
-                    new Choice('more_info', $("Find more info")),
-                    new Choice('xenophobia', $("Report xenophobia")),
-                    new Choice('arrest', $("Report unlawful arrest")),
-                    new Choice('corruption', $("Report corruption")),
-                    new Choice('other', $("Report something else")),
-                ],
-                next: function(choice) {
-                    if (choice.value === 'more_info') {
-                        return self.contact.extra.status === 'refugee'
-                            ? 'state_refugee_main'
-                            : 'state_migrant_main';
-                    } else {
-                        self.contact.extra.report_theme = choice.value;
-                        return self.im.contacts
-                            .save(self.contact)
-                            .then(function() {
-                                return 'state_report_legal';
-                            });
-                    }
-                }
             });
         });
 
@@ -1032,89 +1057,53 @@ go.app = function() {
         });
 
 
-
     // MAIN MENU STATES
 
-        // delegator 02
-        self.add('state_main_menu', function(name) {
-            if (self.contact.extra.status === 'refugee') {
-                return self.states.create('state_refugee_main');
-            } else if (self.contact.extra.status === 'migrant') {
-                return self.states.create('state_migrant_main');
-            }
-        });
-
-        // 010
         self.add('state_refugee_main', function(name) {
-            return new PaginatedChoiceState(name, {
-                question: $('MAIN MENU'),
-                characters_per_page: 160,
-                options_per_page: null,
-                more: $('Next'),
-                back: $('Back'),
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
                 choices: [
-                    new Choice("state_020", $("Refugee definitions")),
-                    new Choice("state_021", $("Asylum applications")),
-                    new Choice("state_022", $("Asylum applications: children")),
-                    new Choice("state_023", $("Permits")),
-                    new Choice("state_024", $("Support services")),
-                    new Choice("state_025", $("Right to work")),
-                    new Choice("state_026", $("Health rights")),
-                    new Choice("state_027", $("Education")),
-                    new Choice("state_028", $("Social services")),
-                    new Choice("state_029", $("Banking")),
-                    new Choice("state_030", $("Tips")),
-                    new Choice("state_031", $("Useful contacts")),
-                    new Choice("state_032", $("Safety concerns")),
-                    new Choice("state_033", $("Statelessness")),
-                    new Choice("state_034", $("LGBTI rights")),
-                    new Choice("state_035", $("Violence against women & children")),
-                    new Choice("state_036", $("Word definitions")),
-                    new Choice("state_072", $("Change settings")),
-                    new Choice("state_039", $("Ts & Cs of this service")),
-                    new Choice("state_040", $("About LHR")),
+                    new Choice("state_registered_landing", $("Report")),
+                    new Choice("refugee_step1", $("Step 1: Applying for asylum")),
+                    new Choice("refugee_step2", $("Step 2: Life in SA")),
+                    new Choice("refugee_tips", $("Tips")),
+                    new Choice("refugee_about", $("About/T&Cs")),
+                    new Choice("state_services", $("Services Near Me")),
+                    new Choice("state_change_settings", $("Change Settings")),
                 ],
                 next: function(choice) {
                     return go.utils
-                        .fire_main_menu_metrics(self.im, 'refugee', choice.value)
+                        .fire_main_menu_metrics(self.im, 'refugee_main', choice.value)
                         .then(function() {
-                            return choice.value;
+                            if (choice.value.substr(0,5) === "state") {
+                                return choice.value;
+                            } else {
+                                self.contact.extra.faq_id = self.im.config.snappy.faq_id[choice.value];
+                                return self.im.contacts
+                                    .save(self.contact)
+                                    .then(function() {
+                                        return 'state_faq_topics';
+                                    });
+                            }
                         });
                 }
             });
         });
 
-        // 011
         self.add('state_migrant_main', function(name) {
-            return new PaginatedChoiceState(name, {
-                question: $('MAIN MENU'),
-                characters_per_page: 160,
-                options_per_page: null,
-                more: $('Next'),
-                back: $('Back'),
+            return new ChoiceState(name, {
+                question: $("Select an option:"),
                 choices: [
-                    new Choice("state_060", $("New to SA")),
-                    new Choice("state_061", $("The visa application process")),
-                    new Choice("state_062", $("Unaccompanied / separated children")),
-                    new Choice("state_063", $("Support services")),
-                    new Choice("state_064", $("Employment")),
-                    new Choice("state_065", $("Healthcare")),
-                    new Choice("state_066", $("Education")),
-                    new Choice("state_067", $("Banking")),
-                    new Choice("state_068", $("LGBTI rights")),
-                    new Choice("state_069", $("Violence against women & children")),
-                    new Choice("state_070", $("Safety concerns")),
-                    new Choice("state_071", $("Statelessness")),
-                    new Choice("state_072", $("Change settings")),
-                    new Choice("state_039", $("Ts & Cs of this service")),
-                    new Choice("state_074", $("Word definitions")),
-                    new Choice("state_075", $("Tips")),
-                    new Choice("state_031", $("Useful contacts")),
-                    new Choice("state_040", $("About LHR")),
+                    new Choice("state_registered_landing", $("Report")),
+                    new Choice("state_migrant_step1_apply_visa", $("Step 1: Visa application")),
+                    new Choice("state_migrant_step2_life_sa", $("Step 2: Life in SA")),
+                    new Choice("state_migrant_about", $("About/T&Cs")),
+                    new Choice("state_services", $("Services Near Me")),
+                    new Choice("state_change_settings", $("Change Settings")),
                 ],
                 next: function(choice) {
                     return go.utils
-                        .fire_main_menu_metrics(self.im, 'migrant', choice.value)
+                        .fire_main_menu_metrics(self.im, 'migrant_main', choice.value)
                         .then(function() {
                             return choice.value;
                         });
@@ -1320,6 +1309,90 @@ go.app = function() {
             });
         });
 
+
+    // SNAPPY FAQ BROWSER STATES
+
+        self.add('state_faq_topics', function (name) {
+            return go.utils
+                .get_snappy_topics(self.im, self.contact.extra.faq_id)
+                .then(function(response) {
+                    if (typeof response.data.error  !== 'undefined') {
+                        // TODO Throw proper error
+                        return error;
+                    } else {
+                        var choices = _.sortBy(response.data, function (d) {
+                                return parseInt(d.order, 10);
+                            })
+                            .map(function(d) {
+                                return new Choice(d.id, d.topic);
+                            });
+                        choices.push(new Choice('back', $('Back')));
+
+                        return new PaginatedChoiceState(name, {
+                            question: $("Select an option:"),
+                            choices: choices,
+                            options_per_page: null,
+                            next: function(choice) {
+                                var topic_id = choice.value;
+                                if (topic_id === 'back') {
+                                    return 'state_main';
+                                } else {
+                                    self.contact.extra.topic_id = topic_id;
+                                    return Q
+                                        .all([
+                                            self.im.metrics.fire.inc(['faq_view_topic', topic_id].join('.'), 1),
+                                            self.im.contacts.save(self.contact)
+                                        ])
+                                        .then(function() {
+                                            return 'state_faq_questions';
+                                        });
+
+                                }
+                            }
+                        });
+                    }
+                });
+        });
+
+        self.add('state_faq_questions', function(name) {
+            return go.utils
+                .get_snappy_questions(self.im, self.contact.extra.faq_id, self.contact.extra.topic_id)
+                .then(function(response) {
+                    if (typeof response.data.error  !== 'undefined') {
+                        // TODO Throw proper error
+                        return error;
+                    } else {
+                        var choices = _.sortBy(response.data, function (d) {
+                                return parseInt(d.pivot.order, 10);
+                            })
+                            .map(function(d) {
+                                return new Choice(d.id, d.question);
+                            });
+                        choices.push(new Choice('back', $('Back')));
+
+                        return new PaginatedChoiceState(name, {
+                            question: $("Select an option:"),
+                            choices: choices,
+                            options_per_page: null,
+                            next: function(choice) {
+                                var question_id = choice.value;
+                                var index = _.findIndex(response.data, { 'id': question_id });
+                                var answer = response.data[index].answer.trim();
+                                return self.im.metrics.fire
+                                    .inc([self.env, 'faq_view_question'].join('.'), 1)
+                                    .then(function() {
+                                        return {
+                                            name: 'states_answers',
+                                            creator_opts: {
+                                                answer: answer
+                                            }
+                                        };
+                                    });
+                            }
+                        });
+                    }
+                });
+        });
 
     // REFUGEE MENU STATES
 
