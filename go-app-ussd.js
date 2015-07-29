@@ -912,12 +912,77 @@ go.app = function() {
             });
         });
 
-        self.add('state_report_location', function(name) {
-            return new FreeText(name, {
-                question: $("Please type the name of the suburb in which the incident took place."),
-                next: function(choice) {
-                    return 'state_report_submit_critical';
-                }
+        self.states.add('state_report_location', function(name) {
+            return new LocationState(name, {
+                question:
+                    $("Please type the name of the suburb in which the incident took place."),
+                refine_question:
+                    $("Please select your location:"),
+                error_question:
+                    $("Sorry, we're not sure which suburb you mean. Please re-enter your location again carefully and make sure you use the correct spelling."),
+                next: 'state_report_submit_critical',
+                next_text: 'More',
+                previous_text: 'Back',
+
+                map_provider: new OpenStreetMap({
+                    bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
+                    address_limit: 4,
+
+                    extract_address_data: function(result) {
+                        var formatted_address;
+                        var addr_from_details = [];
+                        if (!result.address) {
+                            formatted_address = result.display_name;
+                        } else {
+                            result.address.city = result.address.city ||
+                                result.address.town || result.address.village;
+
+                            var addr_details = ['suburb', 'city', 'state'];
+
+                            addr_details.forEach(function(detail) {
+                                if (result.address[detail] !== undefined) {
+                                    addr_from_details.push(result.address[detail]);
+                                } else {
+                                    addr_from_details.push('n/a');
+                                }
+                            });
+
+                            formatted_address = addr_from_details.join(', ');
+                        }
+                        return {
+                            formatted_address: formatted_address,
+                            lat: result.lat,
+                            lon: result.lon,
+                            suburb: addr_from_details[0],
+                            city: addr_from_details[1],
+                            province: addr_from_details[2]
+                        };
+                    },
+
+                    extract_address_label: function(result) {
+                        if (!result.address) {
+                            return result.display_name;
+                        } else {
+                            result.address.city = result.address.city ||
+                                result.address.town || result.address.village;
+
+                            var addr_details = ['suburb', 'city', 'state'];
+                            var addr_from_details = [];
+
+                            addr_details.forEach(function(detail) {
+                                if (result.address[detail] !== undefined) {
+                                    if (detail === 'state') {
+                                        result.address[detail] = go.utils
+                                                        .shorten_province(result.address[detail]);
+                                    }
+                                    addr_from_details.push(result.address[detail]);
+                                }
+                            });
+
+                            return addr_from_details.join(', ');
+                        }
+                    }
+                })
             });
         });
 
@@ -942,7 +1007,7 @@ go.app = function() {
         });
 
         self.add('state_report_submit_detail', function(name) {
-            // Update snappy ticket with extra information
+            // Patch nightingale report with extra information
             return self.states.create('state_report_complete');
         });
 

@@ -2192,8 +2192,9 @@ describe("refugeerights app", function() {
                     });
                 });
 
-                describe("upon state_report_location entry", function() {
-                    it("should navigate to state_report_details", function() {
+                describe("upon state_report_location entry 1", function() {
+                    // Note in-depth testing of location state is done elsewhere
+                    it("if multiple results, should ask which suburb", function() {
                         return tester
                             .setup.user.addr('064001')
                             .inputs(
@@ -2201,12 +2202,66 @@ describe("refugeerights app", function() {
                                 , '2'  // state_registered_landing - report xenophobia
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
-                                , 'Suburb'  // state_report_location
+                                , 'Quad Street'  // state_report_location
+                            )
+                            // check navigation
+                            .check.interaction({
+                                state: 'state_report_location',
+                                reply: [
+                                    "Please select your location:",
+                                    "1. Suburb number 1, City number 1, WC",
+                                    "2. Suburb number 2, Town number 2, GP",
+                                    "3. Suburb number 3, City number 3, FS",
+                                    "n. More",
+                                    "p. Back"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+
+                describe("upon state_report_location entry 2", function() {
+                    it("navigate to state_report_details", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , '1'  // state_report_legal - i understand
+                                , '3'  // state_report_category - looting
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
                             )
                             // check navigation
                             .check.interaction({
                                 state: 'state_report_details',
                                 reply: "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific – it'll enable us to send the right response & help you faster.",
+                            })
+                            .run();
+                    });
+
+                    it("should save data to contact upon choice", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , '1'  // state_report_legal - i understand
+                                , '3'  // state_report_category - looting
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                            )
+                            .check(function(api) {
+                                var contact = _.find(api.contacts.store, {
+                                                    msisdn: '+064001'
+                                                });
+                                assert.equal(contact.extra['location:formatted_address'],
+                                    'Suburb number 3, City number 3, FS');
+                                assert.equal(contact.extra['location:lon'], '3.1415');
+                                assert.equal(contact.extra['location:lat'], '2.7182');
+                                assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
+                                assert.equal(contact.extra['location:city'], 'City number 3');
+                                assert.equal(contact.extra['location:province'], 'FS');
                             })
                             .run();
                     });
@@ -2221,7 +2276,8 @@ describe("refugeerights app", function() {
                                 , '2'  // state_registered_landing - report xenophobia
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
-                                , 'Suburb'  // state_report_location
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
                                 , 'Send help plz'  // state_report_details
                             )
                             // check navigation
@@ -2246,8 +2302,9 @@ describe("refugeerights app", function() {
                                 , '2'  // state_registered_landing - report xenophobia
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
-                                , 'Suburb'  // state_report_location
-                                , 'help plz'  // state_report_details
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                                , 'Send help plz'  // state_report_details
                                 , '1'  // state_report_complete - main menu
                             )
                             // check navigation
@@ -2265,8 +2322,9 @@ describe("refugeerights app", function() {
                                 , '2'  // state_registered_landing - report xenophobia
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
-                                , 'Suburb'  // state_report_location
-                                , 'help plz'  // state_report_details
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                                , 'Send help plz'  // state_report_details
                                 , '2'  // state_report_complete - exit
                             )
                             // check navigation
@@ -2316,14 +2374,14 @@ describe("refugeerights app", function() {
         //                 )
         //                 .check.interaction({
         //                     state: 'state_locate_me',
-        //                     reply: [
-        //                         "Please select your location:",
-        //                         "1. Suburb number 1, City number 1, WC",
-        //                         "2. Suburb number 2, Town number 2, GP",
-        //                         "3. Suburb number 3, City number 3, FS",
-        //                         "n. More",
-        //                         "p. Back"
-        //                     ].join('\n')
+                            // reply: [
+                            //     "Please select your location:",
+                            //     "1. Suburb number 1, City number 1, WC",
+                            //     "2. Suburb number 2, Town number 2, GP",
+                            //     "3. Suburb number 3, City number 3, FS",
+                            //     "n. More",
+                            //     "p. Back"
+                            // ].join('\n')
         //                 })
         //                 .run();
         //         });
