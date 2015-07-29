@@ -15,8 +15,12 @@ var Choice = vumigo.states.Choice;
 go.utils = {
 
     timed_out: function(im) {
-        var no_redirects = ['state_language', 'state_migrant_main', 'state_refugee_main',
-                            'state_locate_exit'];
+        var no_redirects = [
+            'state_language',
+            'state_registered_landing',
+            'state_registration_end',
+            'state_report_end'
+        ];
         return im.msg.session_event === 'new'
             && im.user.state.name
             && no_redirects.indexOf(im.user.state.name) === -1;
@@ -30,13 +34,11 @@ go.utils = {
 
     should_send_dialback_reminder: function(e, contact) {
         var dialback_states = [
-            'state_language',
             'state_country',
-            'state_status',
-            'state_who_refugee',
-            'state_who_migrant',
-            'state_refugee_rights_info',
-            'state_migrant_rights_info'
+            'state_ref_mig_1',
+            'state_ref_mig_2',
+            'state_ref_mig_3',
+            'state_ref_mig_4'
         ];
         return e.user_terminated
             && (contact.extra.dialback_reminder_sent !== 'true')
