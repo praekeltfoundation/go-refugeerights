@@ -865,23 +865,63 @@ go.app = function() {
                             options_per_page: null,
                             next: function(choice) {
                                 var question_id = choice.value;
-                                var index = _.findIndex(response.data, { 'id': question_id });
-                                var answer = response.data[index].answer.trim();
-                                return self.im.metrics.fire
-                                    .inc([self.env, 'faq_view_question'].join('.'), 1)
-                                    .then(function() {
-                                        return {
-                                            name: 'states_answers',
-                                            creator_opts: {
-                                                answer: answer
-                                            }
-                                        };
-                                    });
+                                if (question_id === 'back') {
+                                    return 'state_faq_topics';
+                                } else {
+                                    var index = _.findIndex(response.data, { 'id': question_id });
+                                    self.contact.extra.faq_answer = response.data[index].answer.trim();
+                                    self.contact.extra.question_id = question_id;
+                                    return Q
+                                        .all([
+                                            self.im.metrics.fire.inc(['faq_view_question'].join('.'), 1),
+                                            self.im.contacts.save(self.contact)
+                                        ])
+                                        .then(function() {
+                                            return 'state_faq_answer';
+                                        });
+                                }
                             }
                         });
                     }
                 });
         });
+
+        self.add('state_faq_answer', function(name) {
+            return new PaginatedState(name, {
+                text: self.contact.extra.faq_answer,
+                more: $('Next'),
+                back: $('Back'),
+                exit: $('Send to me by SMS'),
+                next: function() {
+                    return 'state_send_faq_sms';
+                }
+            });
+        });
+
+        self.add('state_send_faq_sms', function(name) {
+            return self.im
+                .outbound.send_to_user({
+                    endpoint: 'sms',
+                    content: self.contact.extra.faq_answer
+                })
+                .then(function() {
+                    return self.im.metrics.fire.inc(['faq_sent_via_sms'].join('.'), 1);
+                })
+                .then(function () {
+                    return self.states.create('state_faq_end');
+                });
+        });
+
+        self.add('state_faq_end', function(name) {
+            return new EndState(name, {
+                text: $("Your SMS will be sent to you shortly. Don't forget to dial back in to {{ ussd_num }} to find all the info you need about applying for asylum and living in SA."
+                    ).context({
+                        ussd_num: self.im.config.channel
+                    }),
+                next: 'state_start'
+            });
+        });
+
 
     // REFUGEE MENU STATES
 

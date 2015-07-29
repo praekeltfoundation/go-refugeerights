@@ -22,7 +22,7 @@ describe("refugeerights app", function() {
                 .setup.char_limit(160)
                 .setup.config.app({
                     name: 'refugeerights',
-                    channel: '*120*8864*0000',
+                    channel: '*120*8864*0000#',
                     testing_today: '2015-04-03 06:07:08.999',
                     metric_store: 'refugeerights_test',  // _env at the end
                     control: {
@@ -3260,6 +3260,93 @@ describe("refugeerights app", function() {
                             .run();
                     });
                 });
+            });
+
+            describe("When the user chooses a question", function() {
+                describe("if they choose Back", function() {
+                    it("should show the topics page", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                                , '4'  // state_faq_questions - back
+                            )
+                            .check.interaction({
+                                state: "state_faq_topics"
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if they choose an actual question", function() {
+                    it("should show the answer for that question", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                                , '3'  // state_faq_questions - musina
+                            )
+                            .check.interaction({
+                                state: "state_faq_answer",
+                                reply: [
+                                    "Your nearest Refugee Reception Office (RRO) in Musina is situated at 8 Harold Street (next to the post office). Tel:",
+                                    "1. Next",
+                                    "2. Send to me by SMS"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("When a user chooses to get answer by SMS", function() {
+                it("should send them the answer via sms", function() {
+                    return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                                , '3'  // state_faq_questions - musina
+                                , '2'  // state_faq_answer - send via sms
+                            )
+                            .check(function(api) {
+                                var smses = _.where(api.outbound.store, {
+                                    endpoint: 'sms'
+                                });
+                                var sms = smses[0];
+                                assert.equal(smses.length, 1);
+                                assert.equal(sms.content, "Your nearest Refugee Reception Office (RRO) in Musina is situated at 8 Harold Street (next to the post office). Tel: 015-534-5300; Fax: 015-534-5332.");
+                            })
+                            .run();
+                });
+
+                it("show them an exit message and exit", function() {
+                    return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                                , '3'  // state_faq_questions - musina
+                                , '2'  // state_faq_answer - send via sms
+                            )
+                            .check.interaction({
+                                state: "state_faq_end",
+                                reply: "Your SMS will be sent to you shortly. Don't forget to dial back in to *120*8864*0000# to find all the info you need about applying for asylum and living in SA."
+                            })
+                            .check.reply.ends_session()
+                            .run();
+                });
+
             });
 
         });
