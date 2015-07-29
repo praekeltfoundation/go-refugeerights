@@ -22,7 +22,7 @@ describe("refugeerights app", function() {
                 .setup.char_limit(160)
                 .setup.config.app({
                     name: 'refugeerights',
-                    channel: '*120*8864*0000',
+                    channel: '*120*8864*0000#',
                     testing_today: '2015-04-03 06:07:08.999',
                     metric_store: 'refugeerights_test',  // _env at the end
                     control: {
@@ -35,7 +35,22 @@ describe("refugeerights app", function() {
                     template: "Nearby services: {{ results }}.",  // SMS template
                     endpoints: {
                         "sms": {"delivery_class": "sms"}
-                    }
+                    },
+                    snappy: {
+                        "endpoint": "https://app.besnappy.com/api/v1/",
+                        "username": "980d2423-292b-4c34-be81-c74784b9e99a",
+                        "account_id": "1",
+                        "default_faq": "1",
+                        "faq_id": {
+                            "refugee_step1": "11",
+                            "refugee_step2": "12",
+                            "refugee_tips": "13",
+                            "refugee_about": "14",
+                            "migrant_step1": "21",
+                            "migrant_step2": "22",
+                            "migrant_about": "23"
+                        }
+                    },
                 })
                 .setup(function(api) {
                     fixtures().forEach(function(d) {
@@ -897,7 +912,7 @@ describe("refugeerights app", function() {
                 });
             });
 
-            describe("if the user was already registered as refugee and redials", function() {
+            describe("if the user was already registered as migrant and redials", function() {
                 it("should display timeout continuation page", function() {
                     return tester
                         .setup.user.addr('064002')
@@ -1531,17 +1546,7 @@ describe("refugeerights app", function() {
                                 , '2'  // state_ref_mig_1 - no
                             )
                             .check.interaction({
-                                state: 'state_migrant_main',
-                                reply: [
-                                    'MAIN MENU',
-                                    '1. New to SA',
-                                    '2. The visa application process',
-                                    '3. Unaccompanied / separated children',
-                                    '4. Support services',
-                                    '5. Employment',
-                                    '6. Healthcare',
-                                    '7. Next'
-                                ].join('\n')
+                                state: 'state_migrant_main'
                             })
                             .run();
                     });
@@ -2900,2481 +2905,451 @@ describe("refugeerights app", function() {
         //     });
         // });
 
-        // TEST NAVIGATION FROM REFUGEE MAIN MENU
-
-        // describe("Refugee menu navigation testing", function() {
-
-        //     describe("When navigating away from the refugee main menu", function() {
-        //         it("should fire metrics", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '1'  // state_refugee_main
-        //                 )
-        //                 .check(function(api) {
-        //                     var metrics = api.metrics.stores.refugeerights_test;
-        //                     assert.deepEqual(metrics['total.refugee.state_020.last'].values, [1]);
-        //                     assert.deepEqual(metrics['total.refugee.state_020.sum'].values, [1]);
-        //                 })
-        //                 .run();
-        //         });
-        //     });
-
-        //     it("starting a new session - refugee main menu", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_refugee_main'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("refugee menu - 020", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '1'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_020'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("020 - 201", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '1'  // state_refugee_main
-        //                     , '1'  // state_020
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_201'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("020 - 203", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '1'  // state_refugee_main
-        //                     , '3'  // state_020
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_203'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 021", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '2'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_021'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("021 - 211", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '2'  // state_refugee_main
-        //                     , '1'  // state_021
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_211'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("021 - 217", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '2'  // state_refugee_main
-        //                     , '7'  // state_021 (next)
-        //                     , '1'  // state_021
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_217'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("217 - 170", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_refugee_main
-        //                         , '7'  // state_021 (next)
-        //                         , '1'  // state_021
-        //                         , '1'  // state_217
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_170'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("217 - 175", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_refugee_main
-        //                         , '7'  // state_021 (next)
-        //                         , '1'  // state_021
-        //                         , '6'  // state_217
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_175'
-        //                     })
-        //                     .run();
-        //             });
-
-        //         it("021 - 218", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '2'  // state_refugee_main
-        //                     , '7'  // state_021 (next)
-        //                     , '2'  // state_021
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_218'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 022", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '3'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_022'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("022 - 176", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '3'  // state_refugee_main
-        //                     , '1'  // state_022
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_176'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("022 - 178", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '3'  // state_refugee_main
-        //                     , '3'  // state_022
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_178'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 023", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '4'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_023'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("023 - 179", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '4'  // state_refugee_main
-        //                     , '1'  // state_023
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_179'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("023 - 182", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '4'  // state_refugee_main
-        //                     , '4'  // state_023
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_182'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 024", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '5'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_024'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("024 - locate_me", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_refugee_main
-        //                     , '1'  // state_024
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_me'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("024 - 110", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_refugee_main
-        //                     , '6'  // state_024 (next)
-        //                     , '2'  // state_024
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_110'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 025", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '6'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_025'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("025 - 230", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_refugee_main
-        //                     , '1'  // state_025
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_230'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("025 - 350", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_refugee_main
-        //                     , '5'  // state_025
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_350'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("350 - 231", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '6'  // state_refugee_main
-        //                         , '5'  // state_025
-        //                         , '1'  // state_350
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_231'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("350 - 235", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '6'  // state_refugee_main
-        //                         , '5'  // state_025
-        //                         , '5'  // state_350
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_235'
-        //                     })
-        //                     .run();
-        //             });
-
-        //         it("025 - 124", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_refugee_main
-        //                     , '6'  // state_025 (next)
-        //                     , '2'  // state_025
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_124'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 026", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '1'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_026'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("026 - 236", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '1'  // state_refugee_main
-        //                     , '1'  // state_026
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_236'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("026 - 134", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '1'  // state_refugee_main
-        //                     , '7'  // state_026 (next)
-        //                     , '1'  // state_026
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_134'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 027", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '2'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_027'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("027 - 239", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '2'  // state_refugee_main
-        //                     , '1'  // state_027
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_239'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("027 - 351", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '2'  // state_refugee_main
-        //                     , '3'  // state_027
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_351'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("351 - 241", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '7'  // state_refugee_main (next)
-        //                         , '2'  // state_refugee_main
-        //                         , '3'  // state_027
-        //                         , '1'  // state_351
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_241'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("351 - 139", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '7'  // state_refugee_main (next)
-        //                         , '2'  // state_refugee_main
-        //                         , '3'  // state_027
-        //                         , '3'  // state_351
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_139'
-        //                     })
-        //                     .run();
-        //             });
-
-        //         it("027 - 245", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '2'  // state_refugee_main
-        //                     , '7'  // state_027 (next)
-        //                     , '1'  // state_027
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_245'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 028", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '3'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_028'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("028 - 246", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '3'  // state_refugee_main
-        //                     , '1'  // state_028
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_246'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("028 - 251", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '3'  // state_refugee_main
-        //                     , '6'  // state_028
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_251'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("251 - 352", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '7'  // state_refugee_main (next)
-        //                         , '3'  // state_refugee_main
-        //                         , '6'  // state_028
-        //                         , '1'  // state_251
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_352'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("251 - 354", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '7'  // state_refugee_main (next)
-        //                         , '3'  // state_refugee_main
-        //                         , '6'  // state_028
-        //                         , '3'  // state_251
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_354'
-        //                     })
-        //                     .run();
-        //             });
-
-        //         it("028 - 253", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '3'  // state_refugee_main
-        //                     , '7'  // state_028 (next)
-        //                     , '2'  // state_028
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_253'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 029", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '4'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_029'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("029 - 254", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '4'  // state_refugee_main
-        //                     , '1'  // state_029
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_254'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("029 - 256", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '4'  // state_refugee_main
-        //                     , '3'  // state_029
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_256'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 030", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '5'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_030'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("030 - 257", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '5'  // state_refugee_main
-        //                     , '1'  // state_030
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_257'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("030 - 263", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '5'  // state_refugee_main
-        //                     , '7'  // state_030
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_263'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 031", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '6'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_031'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("031 - 360", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '6'  // state_refugee_main
-        //                     , '1'  // state_031
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_360'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("031 - 053", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '6'  // state_refugee_main
-        //                     , '7'  // state_031 (next)
-        //                     , '7'  // state_031
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_053'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("053 - 416", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '7'  // state_refugee_main (next)
-        //                         , '6'  // state_refugee_main
-        //                         , '7'  // state_031 (next)
-        //                         , '7'  // state_031
-        //                         , '4'  // state_053
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_416'
-        //                     })
-        //                     .run();
-        //             });
-
-        //                 it("416 - 798", function() {
-        //                     return tester
-        //                         .setup.user.addr('064001')
-        //                         .inputs(
-        //                             {session_event: 'new'}  // dial in first time
-        //                             , '7'  // state_refugee_main (next)
-        //                             , '6'  // state_refugee_main
-        //                             , '7'  // state_031 (next)
-        //                             , '7'  // state_031
-        //                             , '4'  // state_053
-        //                             , '2'  // state_416
-        //                         )
-        //                         .check.interaction({
-        //                             state: 'state_798'
-        //                         })
-        //                         .run();
-        //                 });
-
-        //     it("refugee menu - 032", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '7'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_032'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("032 - 264", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '7'  // state_refugee_main
-        //                     , '1'  // state_032
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_264'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("032 - 267", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '7'  // state_refugee_main
-        //                     , '4'  // state_032
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_267'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("267 - 355", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '7'  // state_refugee_main (next)
-        //                         , '7'  // state_refugee_main
-        //                         , '4'  // state_032
-        //                         , '1'  // state_267
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_355'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("267 - 356", function() {
-        //                 return tester
-        //                     .setup.user.addr('064001')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '7'  // state_refugee_main (next)
-        //                         , '7'  // state_refugee_main
-        //                         , '4'  // state_032
-        //                         , '2'  // state_267
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_356'
-        //                     })
-        //                     .run();
-        //             });
-
-        //         it("032 - 271", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '7'  // state_refugee_main
-        //                     , '7'  // state_032 (next)
-        //                     , '2'  // state_032
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_271'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 033", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '8'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_033'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("033 - 146", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '8'  // state_refugee_main
-        //                     , '1'  // state_033
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_146'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("033 - 149", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '8'  // state_refugee_main
-        //                     , '4'  // state_033
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_149'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 034", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '9'  // state_refugee_main (next)
-        //                 , '1'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_034'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("refugee menu - 035", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '9'  // state_refugee_main (next)
-        //                 , '2'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_035'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("035 - 141", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '9'  // state_refugee_main (next)
-        //                     , '2'  // state_refugee_main
-        //                     , '1'  // state_035
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_141'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("035 - 144", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '9'  // state_refugee_main (next)
-        //                     , '2'  // state_refugee_main
-        //                     , '4'  // state_035
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_144'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 036", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '9'  // state_refugee_main (next)
-        //                 , '3'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_036'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("036 - 808", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '9'  // state_refugee_main (next)
-        //                     , '3'  // state_refugee_main
-        //                     , '1'  // state_036
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_808'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("036 - 805", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_refugee_main (next)
-        //                     , '9'  // state_refugee_main (next)
-        //                     , '3'  // state_refugee_main
-        //                     , '9'  // state_036 (next)
-        //                     , '10'  // state_036 (next)
-        //                     , '10'  // state_036 (next)
-        //                     , '9'  // state_036 (next)
-        //                     , '11'  // state_036 (next)
-        //                     , '7'  // state_036 (next)
-        //                     , '3'  // state_036
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_805'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("refugee menu - 072", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '9'  // state_refugee_main (next)
-        //                 , '4'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_072'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("refugee menu - 039", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '9'  // state_refugee_main (next)
-        //                 , '5'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_039'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("refugee menu - 040", function() {
-        //         return tester
-        //             .setup.user.addr('064001')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_refugee_main (next)
-        //                 , '9'  // state_refugee_main (next)
-        //                 , '6'  // state_refugee_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_040'
-        //             })
-        //             .run();
-        //     });
-
-        // });
-
-        // TEST NAVIGATION FROM MIGRANT MAIN MENU
-
-        // describe("Migrant menu navigation testing", function() {
-
-        //     describe("When navigating away from the migrant main menu", function() {
-        //         it("should fire metrics", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '1'  // state_migrant_main
-        //                 )
-        //                 .check(function(api) {
-        //                     var metrics = api.metrics.stores.refugeerights_test;
-        //                     assert.deepEqual(metrics['total.migrant.state_060.last'].values, [1]);
-        //                     assert.deepEqual(metrics['total.migrant.state_060.sum'].values, [1]);
-        //                 })
-        //                 .run();
-        //         });
-        //     });
-
-        //     it("starting a new session - main menu", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_migrant_main'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("migrant menu - 060", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '1'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_060'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("060 - 100", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '1'  // state_migrant_main
-        //                     , '1'  // state_060
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_100'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("060 - 101", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '1'  // state_migrant_main
-        //                     , '2'  // state_060
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_101'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 061", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '2'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_061'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("061 - 102", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '2'  // state_migrant_main
-        //                     , '1'  // state_061
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_102'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("060 - 103", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '2'  // state_migrant_main
-        //                     , '2'  // state_061
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_103'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("061 - 104", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '2'  // state_migrant_main
-        //                     , '3'  // state_061
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_104'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("104 - 150", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '1'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_150'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 151", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '2'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_151'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 152", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '3'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_152'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 153", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '4'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_153'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 154", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '5'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_154'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 155", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '6'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_155'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 156", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '7'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_156'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 157", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '8'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_157'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 158", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '9'  // state_104 (next page)
-        //                         , '1'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_158'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 159", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '9'  // state_104 (next page)
-        //                         , '2'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_159'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 160", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '9'  // state_104 (next page)
-        //                         , '3'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_160'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 161", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '9'  // state_104 (next page)
-        //                         , '4'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_161'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 162", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '9'  // state_104 (next page)
-        //                         , '5'  // state_104
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_162'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("104 - 163", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '2'  // state_migrant_main
-        //                         , '3'  // state_061
-        //                         , '9'  // state_104 (next page)
-        //                         , '6'  // state_104 (next page)
-        //                         , '1'
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_163'
-        //                     })
-        //                     .run();
-        //             });
-
-        //         it("061 - 105", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '2'  // state_migrant_main
-        //                     , '4'  // state_061
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_105'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 062", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '3'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_062'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("migrant menu - 063", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '4'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_063'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("063 - 106", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '4'  // state_migrant_main
-        //                     , '1'  // state_063
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_106'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("063 - 107", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '4'  // state_migrant_main
-        //                     , '2'  // state_063
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_107'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("063 - 108", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '4'  // state_migrant_main
-        //                     , '3'  // state_063
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_108'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("063 - 109", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '4'  // state_migrant_main
-        //                     , '4'  // state_063
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_109'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("063 - 110", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '4'  // state_migrant_main
-        //                     , '5'  // state_063
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_110'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 064", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '5'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_064'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("064 - 111", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_migrant_main
-        //                     , '1'  // state_064
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_111'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("064 - 112", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_migrant_main
-        //                     , '2'  // state_064
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_112'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("064 - 113", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_migrant_main
-        //                     , '3'  // state_064
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_113'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("064 - 079", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_migrant_main
-        //                     , '4'  // state_064
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_079'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("079 - 164", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '4'  // state_064
-        //                         , '1'  // state_079
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_164'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("079 - 114", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '4'  // state_064
-        //                         , '2'  // state_079
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_114'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("079 - 115", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '4'  // state_064
-        //                         , '3'  // state_079
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_115'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("079 - 116", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '4'  // state_064
-        //                         , '4'  // state_079
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_116'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("079 - 117", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '4'  // state_064
-        //                         , '5'  // state_079
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_117'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("079 - 118", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '4'  // state_064
-        //                         , '6'  // state_079
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_118'
-        //                     })
-        //                     .run();
-        //             });
-
-        //         it("064 - 080", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_migrant_main
-        //                     , '5'  // state_064
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_080'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("080 - 119", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '5'  // state_064
-        //                         , '1'  // state_080
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_119'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("080 - 120", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '5'  // state_064
-        //                         , '2'  // state_080
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_120'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("080 - 121", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '5'  // state_064
-        //                         , '3'  // state_080
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_121'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("080 - 122", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '5'  // state_migrant_main
-        //                         , '5'  // state_064
-        //                         , '4'  // state_080
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_122'
-        //                     })
-        //                     .run();
-        //             });
-
-
-        //         it("064 - 123", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_migrant_main
-        //                     , '6'  // state_064 (next)
-        //                     , '1'  // state_064
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_123'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("064 - 124", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '5'  // state_migrant_main
-        //                     , '6'  // state_064 (next)
-        //                     , '2'  // state_064
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_124'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 065", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '6'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_065'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("065 - 125", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_migrant_main
-        //                     , '1'  // state_065
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_125'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("065 - 126", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_migrant_main
-        //                     , '2'  // state_065
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_126'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("065 - 127", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_migrant_main
-        //                     , '3'  // state_065
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_127'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("065 - 128", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_migrant_main
-        //                     , '4'  // state_065
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_128'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("065 - 129", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_migrant_main
-        //                     , '5'  // state_065
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_129'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("065 - 130", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_migrant_main
-        //                     , '6'  // state_065
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_130'
-        //                 })
-        //                 .run();
-        //         });
-
-        //             it("130 - 131", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '6'  // state_migrant_main
-        //                         , '6'  // state_065
-        //                         , '1'  // state_130
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_131'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("130 - 132", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '6'  // state_migrant_main
-        //                         , '6'  // state_065
-        //                         , '2'  // state_130
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_132'
-        //                     })
-        //                     .run();
-        //             });
-
-        //             it("130 - 133", function() {
-        //                 return tester
-        //                     .setup.user.addr('064002')
-        //                     .inputs(
-        //                         {session_event: 'new'}  // dial in first time
-        //                         , '6'  // state_migrant_main
-        //                         , '6'  // state_065
-        //                         , '3'  // state_130
-        //                     )
-        //                     .check.interaction({
-        //                         state: 'state_133'
-        //                     })
-        //                     .run();
-        //             });
-
-        //         it("065 - 134", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '6'  // state_migrant_main
-        //                     , '7'  // state_065 (next)
-        //                     , '1'  // state_065
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_134'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 066", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '1'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_066'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("066 - 135", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '1'  // state_migrant_main
-        //                     , '1'  // state_066
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_135'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("066 - 136", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '1'  // state_migrant_main
-        //                     , '2'  // state_066
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_136'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("066 - 137", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '1'  // state_migrant_main
-        //                     , '3'  // state_066
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_137'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("066 - 138", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '1'  // state_migrant_main
-        //                     , '4'  // state_066
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_138'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("066 - 139", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '1'  // state_migrant_main
-        //                     , '5'  // state_066
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_139'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("066 - 140", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '1'  // state_migrant_main
-        //                     , '6'  // state_066
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_140'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 067", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '2'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_067'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("migrant menu - 068", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '3'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_068'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("migrant menu - 069", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '4'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_069'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("069 - 141", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '4'  // state_migrant_main
-        //                     , '1'  // state_069
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_141'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("069 - 142", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '4'  // state_migrant_main
-        //                     , '2'  // state_069
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_142'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("069 - 143", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '4'  // state_migrant_main
-        //                     , '3'  // state_069
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_143'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("069 - 144", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '4'  // state_migrant_main
-        //                     , '4'  // state_069
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_144'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 070", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '5'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_070'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("migrant menu - 071", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '6'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_071'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("071 - 146", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '6'  // state_migrant_main
-        //                     , '1'  // state_071
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_146'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("071 - 147", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '6'  // state_migrant_main
-        //                     , '2'  // state_071
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_147'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("071 - 148", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '6'  // state_migrant_main
-        //                     , '3'  // state_071
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_148'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("071 - 149", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '6'  // state_migrant_main
-        //                     , '4'  // state_071
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_149'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 072", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '7'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_072'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("072 - 165", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '1'  // state_072
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_165'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("072 - 166", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '2'  // state_072
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_166'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("072 - 167", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '3'  // state_072
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_167'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("072 - 168", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '4'  // state_072
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_168'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 039", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '8'  // state_migrant_main (next)
-        //                 , '1'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_039'
-        //             })
-        //             .run();
-        //     });
-
-        //     it("migrant menu - 074", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '8'  // state_migrant_main (next)
-        //                 , '2'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_074'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("074 - 801", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '8'  // state_migrant_main (next)
-        //                     , '2'  // state_migrant_main
-        //                     , '1'  // state_074
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_801'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("074 - 316", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '8'  // state_migrant_main (next)
-        //                     , '2'  // state_migrant_main
-        //                     , '11'  // state_074 (next)
-        //                     , '10'  // state_074 (next)
-        //                     , '4'  // state_074
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_316'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("074 - 805", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '8'  // state_migrant_main (next)
-        //                     , '2'  // state_migrant_main
-        //                     , '11'  // state_074 (next)
-        //                     , '10'  // state_074 (next)
-        //                     , '6'  // state_074
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_805'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 075", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '8'  // state_migrant_main (next)
-        //                 , '3'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_075'
-        //             })
-        //             .run();
-        //     });
-
-        //         it("075 - 317", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '8'  // state_migrant_main (next)
-        //                     , '3'  // state_migrant_main
-        //                     , '1'  // state_075
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_317'
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("075 - 262", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '8'  // state_migrant_main (next)
-        //                     , '3'  // state_migrant_main
-        //                     , '5'  // state_075
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_262'
-        //                 })
-        //                 .run();
-        //         });
-
-        //     it("migrant menu - 031", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '8'  // state_migrant_main (next)
-        //                 , '4'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_031'
-        //             })
-        //             .run();
-        //     });
-
-        //         // other 031 navigation tested under refugee nav
-
-        //     it("migrant menu - 040", function() {
-        //         return tester
-        //             .setup.user.addr('064002')
-        //             .inputs(
-        //                 {session_event: 'new'}  // dial in first time
-        //                 , '7'  // state_migrant_main (next)
-        //                 , '8'  // state_migrant_main (next)
-        //                 , '5'  // state_migrant_main
-        //             )
-        //             .check.interaction({
-        //                 state: 'state_040'
-        //             })
-        //             .run();
-        //     });
-
-        // });
+        // REFUGEE MAIN MENU TESTING
+
+        describe("Refugee menu navigation testing", function() {
+
+            describe("Refugee choosing to see menu", function() {
+                it("should show main menu", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_main',
+                            reply: [
+                                "Select an option:",
+                                "1. Report",
+                                "2. Step 1: Applying for asylum",
+                                "3. Step 2: Life in SA",
+                                "4. Tips",
+                                "5. About/T&Cs",
+                                "6. Services Near Me",
+                                "7. Change Settings"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("When navigating away from the refugee main menu", function() {
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '1'  // state_refugee_main
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.refugee_main.state_registered_landing.last'].values, [1]);
+                            assert.deepEqual(metrics['total.refugee_main.state_registered_landing.sum'].values, [1]);
+                        })
+                        .run();
+                });
+            });
+
+            describe("Navigation from the Refugee Main Menu", function() {
+                it("1. Report", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '1'  // state_refugee_main
+                        )
+                        .check.interaction({
+                            state: 'state_registered_landing'
+                        })
+                        .run();
+                });
+
+                it("2. Step 1", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '2'  // state_refugee_main
+                        )
+                        .check.interaction({
+                            state: "state_faq_topics"
+                        })
+                        .run();
+                });
+
+                it("3. Step 2", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '3'  // state_refugee_main
+                        )
+                        .check.interaction({
+                            state: "state_faq_topics"
+                        })
+                        .run();
+                });
+
+                it("4. Tips", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '4'  // state_refugee_main
+                        )
+                        .check.interaction({
+                            state: "state_faq_topics"
+                        })
+                        .run();
+                });
+
+                it("5. About TCs", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '5'  // state_refugee_main
+                        )
+                        .check.interaction({
+                            state: "state_faq_topics"
+                        })
+                        .run();
+                });
+
+                it("6. Services Near Me", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '6'  // state_refugee_main
+                        )
+                        .check.interaction({
+                            state: "state_services"
+                        })
+                        .run();
+                });
+
+                it("7. Change settings", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '7'  // state_refugee_main
+                        )
+                        .check.interaction({
+                            state: "state_change_settings"
+                        })
+                        .run();
+                });
+            });
+
+        });
+
+        // MIGRANT MAIN MENU TESTING
+
+        describe("Migrant menu navigation testing", function() {
+
+            describe("Migrant choosing to see menu", function() {
+                it("should show main menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                        )
+                        .check.interaction({
+                            state: 'state_migrant_main',
+                            reply: [
+                                "Select an option:",
+                                "1. Report",
+                                "2. Step 1: Visa application",
+                                "3. Step 2: Life in SA",
+                                "4. About/T&Cs",
+                                "5. Services Near Me",
+                                "6. Change Settings"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("When navigating away from the migrant main menu", function() {
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '1'  // state_migrant_main
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.migrant_main.state_registered_landing.last'].values, [1]);
+                            assert.deepEqual(metrics['total.migrant_main.state_registered_landing.sum'].values, [1]);
+                        })
+                        .run();
+                });
+            });
+
+            describe("Navigation from the migrant Main Menu", function() {
+                it("1. Report", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '1'  // state_migrant_main
+                        )
+                        .check.interaction({
+                            state: 'state_registered_landing'
+                        })
+                        .run();
+                });
+
+                it("2. Step 1", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '2'  // state_migrant_main
+                        )
+                        .check.interaction({
+                            state: "state_faq_topics"
+                        })
+                        .run();
+                });
+
+                it("3. Step 2", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '3'  // state_migrant_main
+                        )
+                        .check.interaction({
+                            state: "state_faq_topics"
+                        })
+                        .run();
+                });
+
+                it("4. About TCs", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '4'  // state_migrant_main
+                        )
+                        .check.interaction({
+                            state: "state_faq_topics"
+                        })
+                        .run();
+                });
+
+                it("5. Services Near Me", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '5'  // state_migrant_main
+                        )
+                        .check.interaction({
+                            state: "state_services"
+                        })
+                        .run();
+                });
+
+                it("6. Change settings", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '6'  // state_migrant_main
+                        )
+                        .check.interaction({
+                            state: "state_change_settings"
+                        })
+                        .run();
+                });
+            });
+
+        });
+
+        // SNAPPY FAQ BROWSER TESTING
+
+        describe("Snappy FAQ Browser testing", function() {
+
+            describe("When the user chooses an FAQ", function() {
+                it("should show the topics", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in first time
+                            , '1'  // state_registered_landing
+                            , '2'  // state_refugee_main
+                        )
+                        .check.interaction({
+                            state: "state_faq_topics",
+                            reply: [
+                                "Select an option:",
+                                "1. When/where to apply",
+                                "2. Children",
+                                "3. Arrest",
+                                "4. Your Rights",
+                                "5. Appl. Results",
+                                "6. The Process",
+                                "7. Helplines",
+                                "8. Back"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+
+            describe("When the user chooses a topic", function() {
+                describe("if they choose Back", function() {
+                    it("should show the main menu", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '8'  // state_faq_topics
+                            )
+                            .check.interaction({
+                                state: "state_refugee_main"
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if they choose an actual topic", function() {
+                    it("should show the questions for that topic", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                            )
+                            .check.interaction({
+                                state: "state_faq_questions",
+                                reply: [
+                                    "Select an option:",
+                                    "1. Apply at RRO",
+                                    "2. Durban",
+                                    "3. Musina",
+                                    "4. Back"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("When the user chooses a question", function() {
+                describe("if they choose Back", function() {
+                    it("should show the topics page", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                                , '4'  // state_faq_questions - back
+                            )
+                            .check.interaction({
+                                state: "state_faq_topics"
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if they choose an actual question", function() {
+                    it("should show the answer for that question", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                                , '3'  // state_faq_questions - musina
+                            )
+                            .check.interaction({
+                                state: "state_faq_answer",
+                                reply: [
+                                    "Your nearest Refugee Reception Office (RRO) in Musina is situated at 8 Harold Street (next to the post office). Tel:",
+                                    "1. Next",
+                                    "2. Send to me by SMS"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("When a user chooses to get answer by SMS", function() {
+                it("should send them the answer via sms", function() {
+                    return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                                , '3'  // state_faq_questions - musina
+                                , '2'  // state_faq_answer - send via sms
+                            )
+                            .check(function(api) {
+                                var smses = _.where(api.outbound.store, {
+                                    endpoint: 'sms'
+                                });
+                                var sms = smses[0];
+                                assert.equal(smses.length, 1);
+                                assert.equal(sms.content, "Your nearest Refugee Reception Office (RRO) in Musina is situated at 8 Harold Street (next to the post office). Tel: 015-534-5300; Fax: 015-534-5332.");
+                            })
+                            .run();
+                });
+
+                it("show them an exit message and exit", function() {
+                    return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in first time
+                                , '1'  // state_registered_landing
+                                , '2'  // state_refugee_main
+                                , '1'  // state_faq_topics - when/where to apply
+                                , '3'  // state_faq_questions - musina
+                                , '2'  // state_faq_answer - send via sms
+                            )
+                            .check.interaction({
+                                state: "state_faq_end",
+                                reply: "Your SMS will be sent to you shortly. Don't forget to dial back in to *120*8864*0000# to find all the info you need about applying for asylum and living in SA."
+                            })
+                            .check.reply.ends_session()
+                            .run();
+                });
+
+            });
+
+        });
 
         // TEST RETURNING USER METRICS
 
