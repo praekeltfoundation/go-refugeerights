@@ -2338,7 +2338,7 @@ describe("refugeerights app", function() {
                 });
             });
 
-            describe.only("corruption reporting", function() {
+            describe("corruption reporting", function() {
                 it("should navigate to state_report_legal", function() {
                     return tester
                         .setup.user.addr('064001')
