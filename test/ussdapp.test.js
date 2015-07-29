@@ -3124,7 +3124,7 @@ describe("refugeerights app", function() {
                             , '2'  // state_migrant_main
                         )
                         .check.interaction({
-                            state: "state_migrant_step1_apply_visa"
+                            state: "state_faq_topics"
                         })
                         .run();
                 });
@@ -3138,7 +3138,7 @@ describe("refugeerights app", function() {
                             , '3'  // state_migrant_main
                         )
                         .check.interaction({
-                            state: "state_migrant_step2_life_sa"
+                            state: "state_faq_topics"
                         })
                         .run();
                 });
@@ -3152,7 +3152,7 @@ describe("refugeerights app", function() {
                             , '4'  // state_migrant_main
                         )
                         .check.interaction({
-                            state: "state_migrant_about"
+                            state: "state_faq_topics"
                         })
                         .run();
                 });
@@ -3190,7 +3190,7 @@ describe("refugeerights app", function() {
 
         // SNAPPY FAQ BROWSER TESTING
 
-        describe.only("Snappy FAQ Browser testing", function() {
+        describe("Snappy FAQ Browser testing", function() {
 
             describe("When the user chooses an FAQ", function() {
                 it("should show the topics", function() {

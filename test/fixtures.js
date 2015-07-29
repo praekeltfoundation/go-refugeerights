@@ -527,6 +527,57 @@ return [
             }
         },
 
+    // GET TOPICS FOR MIGRANT step 1 - FAQ 21
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'GET',
+                'headers': {
+                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
+                    'Content-Type': ['application/json']
+                },
+                'url': 'https://app.besnappy.com/api/v1/account/1/faqs/21/topics'
+            },
+            'response': {
+                "code": "200",
+                "data": []
+            }
+        },
+
+    // GET TOPICS FOR MIGRANT step 2 - FAQ 22
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'GET',
+                'headers': {
+                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
+                    'Content-Type': ['application/json']
+                },
+                'url': 'https://app.besnappy.com/api/v1/account/1/faqs/22/topics'
+            },
+            'response': {
+                "code": "200",
+                "data": []
+            }
+        },
+
+    // GET TOPICS FOR MIGRANT about - FAQ 23
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'GET',
+                'headers': {
+                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
+                    'Content-Type': ['application/json']
+                },
+                'url': 'https://app.besnappy.com/api/v1/account/1/faqs/23/topics'
+            },
+            'response': {
+                "code": "200",
+                "data": []
+            }
+        },
+
     // GET QUESTIONS FOR REFUGEE Step 1 When + Where - Faq_id 11, Topic_id 11_01
         {
             'repeatable': true,
