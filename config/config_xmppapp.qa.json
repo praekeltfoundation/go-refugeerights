@@ -17,14 +17,14 @@
             "refugee_step2": "3583",
             "refugee_tips": "3588",
             "refugee_about": "3584",
-            "migrant_step1": "3485",
-            "migrant_step2": "3486",
-            "migrant_about": "3487"
+            "migrant_step1": "3585",
+            "migrant_step2": "3586",
+            "migrant_about": "3587"
         }
     },
     "location_api_url": "http://rr.praekeltfoundation.org/locationfinder/",
     "poi_types": [],
-    "template": "Nearby services: {{ results }}.",  // SMS template
+    "template": "Nearby services: {{ results }}.",
     "endpoints": {
         "sms": {
             "delivery_class": "sms"

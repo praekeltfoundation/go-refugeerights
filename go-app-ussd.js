@@ -1420,7 +1420,7 @@ go.app = function() {
                         choices: choices,
                         options_per_page: null,
                         next: function(choice) {
-                            var topic_id = choice.value;
+                            var topic_id = choice.value.toString();
                             if (topic_id === 'back') {
                                 return 'state_main';
                             } else {
@@ -1458,11 +1458,11 @@ go.app = function() {
                         choices: choices,
                         options_per_page: null,
                         next: function(choice) {
-                            var question_id = choice.value;
+                            var question_id = choice.value.toString();
                             if (question_id === 'back') {
                                 return 'state_faq_topics';
                             } else {
-                                var index = _.findIndex(questions, { 'id': question_id });
+                                var index = _.findIndex(questions, { 'id': parseInt(question_id, 10) });
                                 self.contact.extra.faq_answer = questions[index].answer.trim();
                                 self.contact.extra.question_id = question_id;
                                 return Q

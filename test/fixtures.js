@@ -418,116 +418,116 @@ return [
                 "code": "200",
                 "data": [
                 {
-                    "id": "11_01",
-                    "faq_id": "11",
+                    "id": 1101,
+                    "faq_id": 11,
                     "topic": "[en] When/where to apply",
-                    "order": "0",
+                    "order": 0,
                     "created_at": "2014-01-08 02:15:05",
                     "updated_at": "2014-01-08 02:15:05",
                     "slug": "When/where to apply"
                 }, {
-                    "id": "11_02",
-                    "faq_id": "11",
+                    "id": 1102,
+                    "faq_id": 11,
                     "topic": "[en] The Process",
-                    "order": "1",
+                    "order": 1,
                     "created_at": "2014-01-08 02:15:09",
                     "updated_at": "2014-01-08 02:15:09",
                     "slug": "The Process"
                 }, {
-                    "id": "11_03",
-                    "faq_id": "11",
+                    "id": 1103,
+                    "faq_id": 11,
                     "topic": "[en] Appl. Results",
-                    "order": "2",
+                    "order": 2,
                     "created_at": "2014-01-08 02:15:07",
                     "updated_at": "2014-01-08 02:15:07",
                     "slug": "Appl. Results"
                 }, {
-                    "id": "11_04",
-                    "faq_id": "11",
+                    "id": 1104,
+                    "faq_id": 11,
                     "topic": "[en] Your Rights",
-                    "order": "3",
+                    "order": 3,
                     "created_at": "2014-02-24 09:37:24",
                     "updated_at": "2014-02-24 09:37:24",
                     "slug": "Your Rights"
                 }, {
-                    "id": "11_05",
-                    "faq_id": "11",
+                    "id": 1105,
+                    "faq_id": 11,
                     "topic": "[en] Arrest",
-                    "order": "4",
+                    "order": 4,
                     "created_at": "2014-01-08 02:15:06",
                     "updated_at": "2014-01-08 02:15:06",
                     "slug": "Arrest"
                 }, {
-                    "id": "11_06",
-                    "faq_id": "11",
+                    "id": 1106,
+                    "faq_id": 11,
                     "topic": "[en] Children",
-                    "order": "5",
+                    "order": 5,
                     "created_at": "2014-01-08 02:15:05",
                     "updated_at": "2014-01-08 02:15:05",
                     "slug": "Children"
                 }, {
-                    "id": "11_07",
-                    "faq_id": "11",
+                    "id": 1107,
+                    "faq_id": 11,
                     "topic": "[en] Helplines",
-                    "order": "6",
+                    "order": 6,
                     "created_at": "2014-01-08 02:15:05",
                     "updated_at": "2014-01-08 02:15:05",
                     "slug": "Helplines"
                 },
                 // switches to french here
                 {
-                    "id": "11_08",
-                    "faq_id": "11",
+                    "id": 1108,
+                    "faq_id": 11,
                     "topic": "[fr] When/where to appfr",
-                    "order": "7",
+                    "order": 7,
                     "created_at": "2014-01-08 02:15:05",
                     "updated_at": "2014-01-08 02:15:05",
                     "slug": "When/where to apply"
                 }, {
-                    "id": "11_09",
-                    "faq_id": "11",
+                    "id": 1109,
+                    "faq_id": 11,
                     "topic": "[fr] The Procefr",
-                    "order": "8",
+                    "order": 8,
                     "created_at": "2014-01-08 02:15:09",
                     "updated_at": "2014-01-08 02:15:09",
                     "slug": "The Process"
                 }, {
-                    "id": "11_10",
-                    "faq_id": "11",
+                    "id": 1110,
+                    "faq_id": 11,
                     "topic": "[fr] Appl. Resulfr",
-                    "order": "9",
+                    "order": 9,
                     "created_at": "2014-01-08 02:15:07",
                     "updated_at": "2014-01-08 02:15:07",
                     "slug": "Appl. Results"
                 }, {
-                    "id": "11_11",
-                    "faq_id": "11",
+                    "id": 1111,
+                    "faq_id": 11,
                     "topic": "[fr] Your Righfr",
-                    "order": "10",
+                    "order": 10,
                     "created_at": "2014-02-24 09:37:24",
                     "updated_at": "2014-02-24 09:37:24",
                     "slug": "Your Rights"
                 }, {
-                    "id": "11_12",
-                    "faq_id": "11",
+                    "id": 1112,
+                    "faq_id": 11,
                     "topic": "[fr] Arrefr",
-                    "order": "11",
+                    "order": 11,
                     "created_at": "2014-01-08 02:15:06",
                     "updated_at": "2014-01-08 02:15:06",
                     "slug": "Arrest"
                 }, {
-                    "id": "11_13",
-                    "faq_id": "11",
+                    "id": 1113,
+                    "faq_id": 11,
                     "topic": "[fr] Childrfr",
-                    "order": "12",
+                    "order": 12,
                     "created_at": "2014-01-08 02:15:05",
                     "updated_at": "2014-01-08 02:15:05",
                     "slug": "Children"
                 }, {
-                    "id": "11_14",
-                    "faq_id": "11",
+                    "id": 1114,
+                    "faq_id": 11,
                     "topic": "[fr] Helplinfr",
-                    "order": "13",
+                    "order": 13,
                     "created_at": "2014-01-08 02:15:05",
                     "updated_at": "2014-01-08 02:15:05",
                     "slug": "Helplines"
@@ -638,7 +638,7 @@ return [
             }
         },
 
-    // GET QUESTIONS FOR REFUGEE Step 1 When + Where - Faq_id 11, Topic_id 11_08
+    // GET QUESTIONS FOR REFUGEE Step 1 When + Where - Faq_id 11, Topic_id 1108
         {
             'repeatable': true,
             'request': {
@@ -647,14 +647,14 @@ return [
                     'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
                     'Content-Type': ['application/json']
                 },
-                'url': 'https://app.besnappy.com/api/v1/account/1/faqs/11/topics/11_08/questions'
+                'url': 'https://app.besnappy.com/api/v1/account/1/faqs/11/topics/1108/questions'
             },
             'responses': [
                 {
                     "code": 200,
                     "data": [
                         {
-                            "id": "11_08_01",
+                            "id": 110801,
                             "account_id": "50",
                             "question": "[fr] Apply at Rfr",
                             "answer": "Apply immediately after you arrive by visiting a Refugee Reception Office (RRO). If an officer questions you before that, you must say you are going to apply.",
@@ -663,8 +663,8 @@ return [
                             "active": "1",
                             "parsed_answer": "Apply immediately after you arrive by visiting a Refugee Reception Office (RRO). If an officer questions you before that, you must say you are going to apply.",
                             "pivot": {
-                                "topic_id": "11_08",
-                                "question_id": "11_08_01",
+                                "topic_id": 1108,
+                                "question_id": 110801,
                                 "featured": "0",
                                 "order": "0"
                             },
@@ -686,7 +686,7 @@ return [
                                 "is_trial": false
                             }
                         }, {
-                            "id": "11_08_02",
+                            "id": 110802,
                             "account_id": "50",
                             "question": "[fr] Durbfr",
                             "answer": "Your nearest Refugee Reception Office (RRO) in Durban is situated at 132 Moore Street, Durban. Call them on 031-362-1205 or fax on 031-362-1220.",
@@ -695,8 +695,8 @@ return [
                             "active": "1",
                             "parsed_answer": "Your nearest Refugee Reception Office (RRO) in Durban is situated at 132 Moore Street, Durban. Call them on 031-362-1205 or fax on 031-362-1220.",
                             "pivot": {
-                                "topic_id": "11_08",
-                                "question_id": "11_08_02",
+                                "topic_id": 1108,
+                                "question_id": 110802,
                                 "featured": "0",
                                 "order": "1"
                             },
@@ -718,7 +718,7 @@ return [
                                 "is_trial": false
                             }
                         }, {
-                            "id": "11_08_03",
+                            "id": 110803,
                             "account_id": "50",
                             "question": "[fr] Musifr",
                             "answer": "Your nearest Refugee Reception Office (RRO) in Musina is situated at 8 Harold Street (next to the post office). Tel: 015-534-5300; Fax: 015-534-5332.",
@@ -728,7 +728,7 @@ return [
                             "parsed_answer": "Your nearest Refugee Reception Office (RRO) in Musina is situated at 8 Harold Street (next to the post office). Tel: 015-534-5300; Fax: 015-534-5332.",
                             "pivot": {
                                 "topic_id": "52",
-                                "question_id": "11_08_03",
+                                "question_id": 110803,
                                 "featured": "0",
                                 "order": "2"
                             },
@@ -756,7 +756,7 @@ return [
                     "code": 200,
                     "data": [
                         {
-                            "id": "11_08_01",
+                            "id": 110801,
                             "account_id": "50",
                             "question": "[fr] Apply at Rfr",
                             "answer": "Apply immediately after you arrive by visiting a Refugee Reception Office (RRO). If an officer questions you before that, you must say you are going to apply.",
@@ -765,8 +765,8 @@ return [
                             "active": "1",
                             "parsed_answer": "Apply immediately after you arrive by visiting a Refugee Reception Office (RRO). If an officer questions you before that, you must say you are going to apply.",
                             "pivot": {
-                                "topic_id": "11_08",
-                                "question_id": "11_08_01",
+                                "topic_id": 1108,
+                                "question_id": 110801,
                                 "featured": "0",
                                 "order": "0"
                             },
@@ -788,7 +788,7 @@ return [
                                 "is_trial": false
                             }
                         }, {
-                            "id": "11_08_02",
+                            "id": 110802,
                             "account_id": "50",
                             "question": "[fr] Durbfr",
                             "answer": "Your nearest Refugee Reception Office (RRO) in Durban is situated at 132 Moore Street, Durban. Call them on 031-362-1205 or fax on 031-362-1220.",
@@ -797,8 +797,8 @@ return [
                             "active": "1",
                             "parsed_answer": "Your nearest Refugee Reception Office (RRO) in Durban is situated at 132 Moore Street, Durban. Call them on 031-362-1205 or fax on 031-362-1220.",
                             "pivot": {
-                                "topic_id": "11_08",
-                                "question_id": "11_08_02",
+                                "topic_id": 1108,
+                                "question_id": 110802,
                                 "featured": "0",
                                 "order": "1"
                             },
@@ -820,7 +820,7 @@ return [
                                 "is_trial": false
                             }
                         }, {
-                            "id": "11_08_03",
+                            "id": 110803,
                             "account_id": "50",
                             "question": "[fr] Musifr",
                             "answer": "Your nearest Refugee Reception Office (RRO) in Musina is situated at 8 Harold Street (next to the post office). Tel: 015-534-5300; Fax: 015-534-5332.",
@@ -830,7 +830,7 @@ return [
                             "parsed_answer": "Your nearest Refugee Reception Office (RRO) in Musina is situated at 8 Harold Street (next to the post office). Tel: 015-534-5300; Fax: 015-534-5332.",
                             "pivot": {
                                 "topic_id": "52",
-                                "question_id": "11_08_03",
+                                "question_id": 110803,
                                 "featured": "0",
                                 "order": "2"
                             },
