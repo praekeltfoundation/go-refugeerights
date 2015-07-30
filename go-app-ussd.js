@@ -650,7 +650,11 @@ go.app = function() {
                         .track_redials(self.contact, self.im, choice.value)
                         .then(function() {
                             if (choice.value === 'continue') {
-                                return creator_opts.name;
+                                return {
+                                    name: creator_opts.name,
+                                    creator_opts: creator_opts
+                                };
+                                // return creator_opts.name;
                             } else if (choice.value === 'info') {
                                 return 'state_main';
                             } else {
@@ -1208,16 +1212,12 @@ go.app = function() {
         self.states.add('state_services', function(name) {
             return new LocationState(name, {
                 question:
-                    $("To find your closest SService we need to know " +
-                      "what suburb or area u are in. Please be " +
-                      "specific. e.g. Inanda Sandton"),
+                    $("To find services near you we need to know what suburb or area you are in. Please type this in below & be specific. e.g. Inanda Sandton"),
                 refine_question:
                     $("Please select your location:"),
                 error_question:
-                    $("Sorry there are no results for your location. " +
-                      "Please re-enter your location again carefully " +
-                      "and make sure you use the correct spelling."),
-                next: 'state_locate_SService',
+                    $("Sorry there are no results for your location. Please re-enter your location again carefully and make sure you use the correct spelling."),
+                next: 'state_locate_service',
                 next_text: 'More',
                 previous_text: 'Back',
 
@@ -1283,8 +1283,8 @@ go.app = function() {
             });
         });
 
-        // state_locate_SService
-        self.states.add('state_locate_SService', function(name) {
+        // state_locate_service
+        self.states.add('state_locate_service', function(name) {
             // reload the contact
             return self.im.contacts
                 .for_user()
@@ -3310,11 +3310,6 @@ go.app = function() {
                     } else {
                         return 'state_change_status_confirm';
                     }
-                    // return go.utils
-                    //     .update_status(self.im, self.contact, choice.value)
-                    //     .then(function() {
-                    //         return 'state_change_settings';
-                    //     });
                 }
             });
         });

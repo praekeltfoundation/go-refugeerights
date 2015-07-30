@@ -2729,337 +2729,337 @@ describe("refugeerights app", function() {
 
         // TEST LOCATION FINDING
 
-        // describe("Location finder testing", function() {
-        //     describe("when a user initialises location finding", function() {
-        //         it("should ask them to enter their suburb", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_me',
-        //                     reply:
-        //                         "To find your closest SService we need to know what suburb or area u are in. Please be specific. e.g. Inanda Sandton",
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+        describe("Location finder testing", function() {
+            describe("when a user initialises location finding", function() {
+                it("should ask them to enter their suburb", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                        )
+                        .check.interaction({
+                            state: 'state_services',
+                            reply:
+                                "To find services near you we need to know what suburb or area you are in. Please type this in below & be specific. e.g. Inanda Sandton",
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("when the user enters data that returns multiple location results", function() {
-        //         it("should display a list of address options", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Quad Street'  // state_locate_me
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_me',
-                            // reply: [
-                            //     "Please select your location:",
-                            //     "1. Suburb number 1, City number 1, WC",
-                            //     "2. Suburb number 2, Town number 2, GP",
-                            //     "3. Suburb number 3, City number 3, FS",
-                            //     "n. More",
-                            //     "p. Back"
-                            // ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
+            describe("when the user enters data that returns multiple location results", function() {
+                it("should display a list of address options", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Quad Street'  // state_services
+                        )
+                        .check.interaction({
+                            state: 'state_services',
+                            reply: [
+                                "Please select your location:",
+                                "1. Suburb number 1, City number 1, WC",
+                                "2. Suburb number 2, Town number 2, GP",
+                                "3. Suburb number 3, City number 3, FS",
+                                "n. More",
+                                "p. Back"
+                            ].join('\n')
+                        })
+                        .run();
+                });
 
-        //         it("should go the next page if 'n' is chosen", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Quad Street'  // state_locate_me
-        //                     , 'n'  // state_locate_me
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_me',
-        //                     reply: [
-        //                         "Please select your location:",
-        //                         "1. Suburb number 4, KZN",
-        //                         "n. More",
-        //                         "p. Back"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
+                it("should go the next page if 'n' is chosen", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Quad Street'  // state_services
+                            , 'n'  // state_services
+                        )
+                        .check.interaction({
+                            state: 'state_services',
+                            reply: [
+                                "Please select your location:",
+                                "1. Suburb number 4, KZN",
+                                "n. More",
+                                "p. Back"
+                            ].join('\n')
+                        })
+                        .run();
+                });
 
-        //         it("should save data to contact upon choice", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Quad Street'  // state_locate_me
-        //                     , '3'  // state_locate_me
-        //                 )
-        //                 .check(function(api) {
-        //                     var contact = _.find(api.contacts.store, {
-        //                                         msisdn: '+064001'
-        //                                     });
-        //                     assert.equal(contact.extra['location:formatted_address'],
-        //                         'Suburb number 3, City number 3, FS');
-        //                     assert.equal(contact.extra['location:lon'], '3.1415');
-        //                     assert.equal(contact.extra['location:lat'], '2.7182');
-        //                     assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
-        //                     assert.equal(contact.extra['location:city'], 'City number 3');
-        //                     assert.equal(contact.extra['location:province'], 'FS');
-        //                 })
-        //                 .run();
-        //         });
+                it("should save data to contact upon choice", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Quad Street'  // state_services
+                            , '3'  // state_services
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                                msisdn: '+064001'
+                                            });
+                            assert.equal(contact.extra['location:formatted_address'],
+                                'Suburb number 3, City number 3, FS');
+                            assert.equal(contact.extra['location:lon'], '3.1415');
+                            assert.equal(contact.extra['location:lat'], '2.7182');
+                            assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
+                            assert.equal(contact.extra['location:city'], 'City number 3');
+                            assert.equal(contact.extra['location:province'], 'FS');
+                        })
+                        .run();
+                });
 
-        //         it("should save data to contact upon choice if info missing", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Quad Street'  // state_locate_me
-        //                     , 'n'  // state_locate_me
-        //                     , '1'
-        //                 )
-        //                 .check(function(api) {
-        //                     var contact = _.find(api.contacts.store, {
-        //                                         msisdn: '+064001'
-        //                                     });
-        //                     assert.equal(contact.extra['location:formatted_address'],
-        //                         'Suburb number 4, n/a, KZN');
-        //                     assert.equal(contact.extra['location:lon'], '3.1415');
-        //                     assert.equal(contact.extra['location:lat'], '2.7182');
-        //                     assert.equal(contact.extra['location:suburb'], 'Suburb number 4');
-        //                     assert.equal(contact.extra['location:city'], 'n/a');
-        //                     assert.equal(contact.extra['location:province'], 'KZN');
-        //                 })
-        //                 .run();
-        //         });
+                it("should save data to contact upon choice if info missing", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Quad Street'  // state_services
+                            , 'n'  // state_services
+                            , '1'
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                                msisdn: '+064001'
+                                            });
+                            assert.equal(contact.extra['location:formatted_address'],
+                                'Suburb number 4, n/a, KZN');
+                            assert.equal(contact.extra['location:lon'], '3.1415');
+                            assert.equal(contact.extra['location:lat'], '2.7182');
+                            assert.equal(contact.extra['location:suburb'], 'Suburb number 4');
+                            assert.equal(contact.extra['location:city'], 'n/a');
+                            assert.equal(contact.extra['location:province'], 'KZN');
+                        })
+                        .run();
+                });
 
-        //         it("should stall them after they choose their location", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Quad Street'  // state_locate_me
-        //                     , '3'  // state_locate_me
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_stall_initial',
-        //                     reply: [
-        //                         "The system is looking up services near you. This usually takes less than a minute.",
-        //                         "1. View services"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
+                it("should stall them after they choose their location", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Quad Street'  // state_services
+                            , '3'  // state_services
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_initial',
+                            reply: [
+                                "The system is looking up services near you. This usually takes less than a minute.",
+                                "1. View services"
+                            ].join('\n')
+                        })
+                        .run();
+                });
 
-        //         it("should fire metrics after their location is submitted", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Quad Street'  // state_locate_me
-        //                     , '3'  // state_locate_me
-        //                 )
-        //                 .check(function(api) {
-        //                     var metrics = api.metrics.stores.refugeerights_test;
-        //                     assert.deepEqual(metrics['total.location_queries.last'].values, [1]);
-        //                     assert.deepEqual(metrics['total.location_queries.sum'].values, [1]);
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+                it("should fire metrics after their location is submitted", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Quad Street'  // state_services
+                            , '3'  // state_services
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.location_queries.last'].values, [1]);
+                            assert.deepEqual(metrics['total.location_queries.sum'].values, [1]);
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("when the user enters data that returns 1 location result", function() {
-        //         it("should stall them", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Friend Street'  // state_locate_me
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_stall_initial',
-        //                     reply: [
-        //                         "The system is looking up services near you. This usually takes less than a minute.",
-        //                         "1. View services"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+            describe("when the user enters data that returns 1 location result", function() {
+                it("should stall them", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Friend Street'  // state_services
+                        )
+                        .check.interaction({
+                            state: 'state_locate_stall_initial',
+                            reply: [
+                                "The system is looking up services near you. This usually takes less than a minute.",
+                                "1. View services"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("when the nearest SService locations have been found", function() {
-        //         it("should let them select the options for more info", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Friend Street'  // state_locate_me
-        //                     , '1'  // state_locate_stall_initial
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_show_results',
-        //                     reply: [
-        //                         "Select a service for more info",
-        //                         "1. Mowbray Police",
-        //                         "2. Turkmenistan Police"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+            describe("when the nearest SService locations have been found", function() {
+                it("should let them select the options for more info", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Friend Street'  // state_services
+                            , '1'  // state_locate_stall_initial
+                        )
+                        .check.interaction({
+                            state: 'state_locate_show_results',
+                            reply: [
+                                "Select a service for more info",
+                                "1. Mowbray Police",
+                                "2. Turkmenistan Police"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("when the user selects to see more info about a location", function() {
-        //         it("should show them more info (with details)", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Friend Street'  // state_locate_me
-        //                     , '1'  // state_locate_stall_initial
-        //                     , '1'  // state_locate_show_results
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_details',
-        //                     reply: [
-        //                         "Mowbray Police (012 001 0002)",
-        //                         "1. Exit"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
+            describe("when the user selects to see more info about a location", function() {
+                it("should show them more info (with details)", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Friend Street'  // state_services
+                            , '1'  // state_locate_stall_initial
+                            , '1'  // state_locate_show_results
+                        )
+                        .check.interaction({
+                            state: 'state_locate_details',
+                            reply: [
+                                "Mowbray Police (012 001 0002)",
+                                "1. Exit"
+                            ].join('\n')
+                        })
+                        .run();
+                });
 
-        //         it("should show them more info (without details)", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Friend Street'  // state_locate_me
-        //                     , '1'  // state_locate_stall_initial
-        //                     , '2'  // state_locate_show_results
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_details',
-        //                     reply: [
-        //                         "Turkmenistan Police",
-        //                         "1. Exit"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
+                it("should show them more info (without details)", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Friend Street'  // state_services
+                            , '1'  // state_locate_stall_initial
+                            , '2'  // state_locate_show_results
+                        )
+                        .check.interaction({
+                            state: 'state_locate_details',
+                            reply: [
+                                "Turkmenistan Police",
+                                "1. Exit"
+                            ].join('\n')
+                        })
+                        .run();
+                });
 
-        //         it("should show them their locations again when they exit", function() {
-        //             return tester
-        //                 .setup.user.addr('064001')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Friend Street'  // state_locate_me
-        //                     , '1'  // state_locate_stall_initial
-        //                     , '1'  // state_locate_show_results
-        //                     , '1'  // state_locate_details
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_show_results',
-        //                     reply: [
-        //                         "Select a service for more info",
-        //                         "1. Mowbray Police",
-        //                         "2. Turkmenistan Police"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+                it("should show them their locations again when they exit", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Friend Street'  // state_services
+                            , '1'  // state_locate_stall_initial
+                            , '1'  // state_locate_show_results
+                            , '1'  // state_locate_details
+                        )
+                        .check.interaction({
+                            state: 'state_locate_show_results',
+                            reply: [
+                                "Select a service for more info",
+                                "1. Mowbray Police",
+                                "2. Turkmenistan Police"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("when the user tries to view service locations too quickly", function() {
-        //         it("should stall them again", function() {
-        //             return tester
-        //                 .setup.user.addr('064003')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Friend Street'  // state_locate_me
-        //                     , '1'  // state_locate_stall_initial
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_no_results',
-        //                     reply: [
-        //                         "Unfortunately we couldn't find any locations close to you. Try one more time or exit?",
-        //                         "1. Try again",
-        //                         "2. Exit"
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+            describe("when the user tries to view service locations too quickly", function() {
+                it("should stall them again", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Friend Street'  // state_services
+                            , '1'  // state_locate_stall_initial
+                        )
+                        .check.interaction({
+                            state: 'state_locate_no_results',
+                            reply: [
+                                "Unfortunately we couldn't find any locations close to you. Try one more time or exit?",
+                                "1. Try again",
+                                "2. Exit"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("when the user decides to exit rather than retry", function() {
-        //         it("should go to exit state", function() {
-        //             return tester
-        //                 .setup.user.addr('064003')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Friend Street'  // state_locate_me
-        //                     , '1'  // state_locate_stall_initial
-        //                     , '2'  // state_locate_no_results
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_exit',
-        //                     reply: "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off."
-        //                 })
-        //                 .check.reply.ends_session()
-        //                 .run();
-        //         });
-        //     });
+            describe("when the user decides to exit rather than retry", function() {
+                it("should go to exit state", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Friend Street'  // state_services
+                            , '1'  // state_locate_stall_initial
+                            , '2'  // state_locate_no_results
+                        )
+                        .check.interaction({
+                            state: 'state_locate_exit',
+                            reply: "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off."
+                        })
+                        .check.reply.ends_session()
+                        .run();
+                });
+            });
 
-        //     describe("when the user tries again after first failure and still no results", function() {
-        //         it("should go to exit state", function() {
-        //             return tester
-        //                 .setup.user.addr('064003')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '5'  // state_refugee_main (support services)
-        //                     , '1'  // state_024 (find nearest SService)
-        //                     , 'Friend Street'  // state_locate_me
-        //                     , '1'  // state_locate_stall_initial
-        //                     , '1'  // state_locate_no_results
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_locate_exit',
-        //                     reply: "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off."
-        //                 })
-        //                 .check.reply.ends_session()
-        //                 .run();
-        //         });
-        //     });
-        // });
+            describe("when the user tries again after first failure and still no results", function() {
+                it("should go to exit state", function() {
+                    return tester
+                        .setup.user.addr('064003')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_refugee_main - find service
+                            , 'Friend Street'  // state_services
+                            , '1'  // state_locate_stall_initial
+                            , '1'  // state_locate_no_results
+                        )
+                        .check.interaction({
+                            state: 'state_locate_exit',
+                            reply: "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off."
+                        })
+                        .check.reply.ends_session()
+                        .run();
+                });
+            });
+        });
 
         // REFUGEE MAIN MENU TESTING
 
