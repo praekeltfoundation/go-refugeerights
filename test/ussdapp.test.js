@@ -3678,213 +3678,246 @@ describe("refugeerights app", function() {
 
         // TEST USER SETTINGS CHANGING
 
-        // describe("User settings changes testing", function() {
-        //     describe("when the user changes their language", function() {
-        //         it("should navigate back to settings change menu", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '1'  // state_072 (change language)
-        //                     , '1'  // state_165 (english)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_072'
-        //                 })
-        //                 .run();
-        //         });
+        describe("User settings changes testing", function() {
+            describe("when the user changes their language", function() {
+                it("should navigate back to settings change menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '1'  // state_change_settings - change language
+                            , '1'  // state_change_language - english
+                        )
+                        .check.interaction({
+                            state: 'state_change_settings'
+                        })
+                        .run();
+                });
 
-        //         it("should change their language", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '1'  // state_072 (change language)
-        //                     , '1'  // state_165 (english)
-        //                 )
-        //                 // check user extras
-        //                 .check(function(api) {
-        //                     var contact = _.find(api.contacts.store, {
-        //                         msisdn: '+064002'
-        //                     });
-        //                     assert.equal(contact.extra.language, 'english');
-        //                     assert.equal(contact.extra.lang, 'en');
-        //                 })
-        //                 // check user language is set
-        //                 .check.user.properties({lang: 'en'})
-        //                 .run();
-        //         });
+                it("should change their language", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '1'  // state_change_settings - change language
+                            , '1'  // state_change_language - english
+                        )
+                        // check user extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064002'
+                            });
+                            assert.equal(contact.extra.language, 'english');
+                            assert.equal(contact.extra.lang, 'en');
+                        })
+                        // check user language is set
+                        .check.user.properties({lang: 'en'})
+                        .run();
+                });
 
-        //         it("should fire metrics", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '1'  // state_072 (change language)
-        //                     , '1'  // state_165 (english)
-        //                 )
-        //                 .check(function(api) {
-        //                     var metrics = api.metrics.stores.refugeerights_test;
-        //                     assert.deepEqual(metrics['total.change_language.last'].values, [1]);
-        //                     assert.deepEqual(metrics['total.change_language.sum'].values, [1]);
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '1'  // state_change_settings - change language
+                            , '1'  // state_change_language - english
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.change_language.last'].values, [1]);
+                            assert.deepEqual(metrics['total.change_language.sum'].values, [1]);
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("when the user changes their country", function() {
-        //         it("should navigate back to settings change menu", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '2'  // state_072 (change country)
-        //                     , '3'  // state_166 (eritrea)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_072'
-        //                 })
-        //                 .run();
-        //         });
+            describe("when the user changes their country", function() {
+                it("should navigate back to settings change menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '2'  // state_change_settings - change country
+                            , '3'  // state_change_country - eritrea
+                        )
+                        .check.interaction({
+                            state: 'state_change_settings'
+                        })
+                        .run();
+                });
 
-        //         it("should change their country", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '2'  // state_072 (change country)
-        //                     , '3'  // state_166 (eritrea)
-        //                 )
-        //                 // check user extras
-        //                 .check(function(api) {
-        //                     var contact = _.find(api.contacts.store, {
-        //                         msisdn: '+064002'
-        //                     });
-        //                     assert.equal(contact.extra.country, 'eritrea');
-        //                 })
-        //                 .run();
-        //         });
+                it("should change their country", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '2'  // state_change_settings - change country
+                            , '3'  // state_change_country - eritrea
+                        )
+                        // check user extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064002'
+                            });
+                            assert.equal(contact.extra.country, 'eritrea');
+                        })
+                        .run();
+                });
 
-        //         it("should fire metrics", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '2'  // state_072 (change country)
-        //                     , '3'  // state_166 (eritrea)
-        //                 )
-        //                 .check(function(api) {
-        //                     var metrics = api.metrics.stores.refugeerights_test;
-        //                     assert.deepEqual(metrics['total.change_country.last'].values, [1]);
-        //                     assert.deepEqual(metrics['total.change_country.sum'].values, [1]);
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '2'  // state_change_settings - change country
+                            , '3'  // state_change_country - eritrea
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.change_country.last'].values, [1]);
+                            assert.deepEqual(metrics['total.change_country.sum'].values, [1]);
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("when the user changes their status", function() {
-        //         it("should navigate back to settings change menu", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '3'  // state_072 (change status)
-        //                     , '1'  // state_167 (refugee)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_072'
-        //                 })
-        //                 .run();
-        //         });
+            describe("when the user changes their status", function() {
+                it("should navigate back to status change confirmation menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '3'  // state_change_settings - change status
+                            , '1'  // state_change_status - refugee
+                        )
+                        .check.interaction({
+                            state: 'state_change_status_confirm',
+                            reply: [
+                                "When you registered, you were identified as a migrant. Are you sure you would like to change your status?",
+                                "1. Yes",
+                                "2. No"
+                            ].join('\n')
+                        })
+                        .run();
+                });
 
-        //         it("should change their status", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '3'  // state_072 (change status)
-        //                     , '1'  // state_167 (refugee)
-        //                 )
-        //                 // check user extras
-        //                 .check(function(api) {
-        //                     var contact = _.find(api.contacts.store, {
-        //                         msisdn: '+064002'
-        //                     });
-        //                     assert.equal(contact.extra.status, 'refugee');
-        //                 })
-        //                 .run();
-        //         });
+                it("should change their status if they select yes", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '3'  // state_change_settings - change status
+                            , '1'  // state_change_status - refugee
+                            , '1'  // state_change_status_confirm - yes
+                        )
+                        // check user extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064002'
+                            });
+                            assert.equal(contact.extra.status, 'refugee');
+                        })
+                        .run();
+                });
 
-        //         it("should fire metrics", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '3'  // state_072 (change status)
-        //                     , '1'  // state_167 (refugee)
-        //                 )
-        //                 .check(function(api) {
-        //                     var metrics = api.metrics.stores.refugeerights_test;
-        //                     assert.deepEqual(metrics['total.change_status.last'].values, [1]);
-        //                     assert.deepEqual(metrics['total.change_status.sum'].values, [1]);
-        //                 })
-        //                 .run();
-        //         });
+                it("should not change their status if they select no", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '3'  // state_change_settings - change status
+                            , '1'  // state_change_status - refugee
+                            , '2'  // state_change_status_confirm - no
+                        )
+                        // check user extras
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064002'
+                            });
+                            assert.equal(contact.extra.status, 'migrant');
+                        })
+                        .check.interaction({
+                            state: 'state_change_settings'
+                        })
+                        .run();
+                });
 
-        //         it("should show the settings updates screen when they exit the menu", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '3'  // state_072 (change status)
-        //                     , '1'  // state_167 (refugee)
-        //                     , '4'  // state_972 (exit)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_168'
-        //                 })
-        //                 .run();
-        //         });
+                it("should fire metrics", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '3'  // state_change_settings - change status
+                            , '1'  // state_change_status - refugee
+                            , '1'  // state_change_status_confirm - yes
+                        )
+                        .check(function(api) {
+                            var metrics = api.metrics.stores.refugeerights_test;
+                            assert.deepEqual(metrics['total.change_status.last'].values, [1]);
+                            assert.deepEqual(metrics['total.change_status.sum'].values, [1]);
+                        })
+                        .run();
+                });
 
-        //         it("should show the main menu corresponding with the new status", function() {
-        //             return tester
-        //                 .setup.user.addr('064002')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in first time
-        //                     , '7'  // state_migrant_main (next)
-        //                     , '7'  // state_migrant_main
-        //                     , '3'  // state_072 (change status)
-        //                     , '1'  // state_167 (refugee)
-        //                     , '4'  // state_072 (exit)
-        //                     , '1'  // state_168 (continue)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_refugee_main'
-        //                 })
-        //                 .run();
-        //         });
-        //     });
-        // });
+                it("should show the settings updates screen when they exit the menu", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '3'  // state_change_settings - change status
+                            , '1'  // state_change_status - refugee
+                            , '1'  // state_change_status_confirm - yes
+                            , '4'  // state_change_settings - back to main menu
+                        )
+                        .check.interaction({
+                            state: 'state_change_confirmation'
+                        })
+                        .run();
+                });
+
+                it("should show the main menu corresponding with the new status", function() {
+                    return tester
+                        .setup.user.addr('064002')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '1'  // state_registered_landing - menu
+                            , '6'  // state_migrant_main - change settings
+                            , '3'  // state_change_settings - change status
+                            , '1'  // state_change_status - refugee
+                            , '1'  // state_change_status_confirm - yes
+                            , '4'  // state_change_settings - back to main menu
+                            , '1'  // state_change_confirmation - continue
+                        )
+                        .check.interaction({
+                            state: 'state_refugee_main'
+                        })
+                        .run();
+                });
+            });
+        });
 
 
     });
