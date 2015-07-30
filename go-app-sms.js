@@ -470,20 +470,42 @@ go.utils = {
         return province_shortening[province];
     },
 
-    get_snappy_topics: function (im, faq_id) {
+    get_snappy_topics: function(im, faq_id) {
         var http = new JsonApi(im, {
-          auth: {
-            username: im.config.snappy.username,
-            password: 'x'
-          }
+            auth: {
+                username: im.config.snappy.username,
+                password: 'x'
+            }
         });
         return http.get(im.config.snappy.endpoint + 'account/'+im.config.snappy.account_id+'/faqs/'+faq_id+'/topics', {
-          data: JSON.stringify(),
-          headers: {
-            'Content-Type': ['application/json']
-          },
-          ssl_method: "SSLv3"
+            data: JSON.stringify(),
+            headers: {
+                'Content-Type': ['application/json']
+            },
+            ssl_method: "SSLv3"
         });
+    },
+
+    get_snappy_topics_lang: function(im, faq_id, lang) {
+        var lang_prefix = '[' + lang + '] ';
+        return go.utils
+            .get_snappy_topics(im, faq_id)
+            .then(function(response) {
+                if (typeof response.data.error  !== 'undefined') {
+                    // TODO Throw proper error
+                    return error;
+                } else {
+                    var topics = [];
+                    for (var topic in response.data) {
+                        current_topic = response.data[topic];
+                        if (current_topic.topic.substr(0,5) === lang_prefix) {
+                            current_topic.topic = current_topic.topic.substr(5);
+                            topics.push(current_topic);
+                        }
+                    }
+                    return topics;
+                }
+            });
     },
 
     get_snappy_questions: function(im, faq_id, topic_id) {
@@ -504,6 +526,28 @@ go.utils = {
             },
             ssl_method: "SSLv3"
         });
+    },
+
+    get_snappy_questions_lang: function(im, faq_id, topic_id, lang) {
+        var lang_prefix = '[' + lang + '] ';
+        return go.utils
+            .get_snappy_questions(im, faq_id, topic_id)
+            .then(function(response) {
+                if (typeof response.data.error  !== 'undefined') {
+                    // TODO Throw proper error
+                    return error;
+                } else {
+                    var questions = [];
+                    for (var question in response.data) {
+                        current_question = response.data[question];
+                        if (current_question.question.substr(0,5) === lang_prefix) {
+                            current_question.question = current_question.question.substr(5);
+                            questions.push(current_question);
+                        }
+                    }
+                    return questions;
+                }
+            });
     },
 
     "commas": "commas"

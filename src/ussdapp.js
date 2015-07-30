@@ -849,86 +849,78 @@ go.app = function() {
 
         self.add('state_faq_topics', function (name) {
             return go.utils
-                .get_snappy_topics(self.im, self.contact.extra.faq_id)
-                .then(function(response) {
-                    if (typeof response.data.error  !== 'undefined') {
-                        // TODO Throw proper error
-                        return error;
-                    } else {
-                        var choices = _.sortBy(response.data, function (d) {
-                                return parseInt(d.order, 10);
-                            })
-                            .map(function(d) {
-                                return new Choice(d.id, d.topic);
-                            });
-                        choices.push(new Choice('back', $('Back')));
+                .get_snappy_topics_lang(self.im, self.contact.extra.faq_id, self.contact.extra.lang)
+                .then(function(topics) {
 
-                        return new PaginatedChoiceState(name, {
-                            question: $("Select an option:"),
-                            choices: choices,
-                            options_per_page: null,
-                            next: function(choice) {
-                                var topic_id = choice.value;
-                                if (topic_id === 'back') {
-                                    return 'state_main';
-                                } else {
-                                    self.contact.extra.topic_id = topic_id;
-                                    return Q
-                                        .all([
-                                            self.im.metrics.fire.inc(['faq_view_topic', topic_id].join('.'), 1),
-                                            self.im.contacts.save(self.contact)
-                                        ])
-                                        .then(function() {
-                                            return 'state_faq_questions';
-                                        });
-
-                                }
-                            }
+                    var choices = _.sortBy(topics, function (d) {
+                            return parseInt(d.order, 10);
+                        })
+                        .map(function(d) {
+                            return new Choice(d.id, d.topic);
                         });
-                    }
+                    choices.push(new Choice('back', $('Back')));
+
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: choices,
+                        options_per_page: null,
+                        next: function(choice) {
+                            var topic_id = choice.value;
+                            if (topic_id === 'back') {
+                                return 'state_main';
+                            } else {
+                                self.contact.extra.topic_id = topic_id;
+                                return Q
+                                    .all([
+                                        self.im.metrics.fire.inc(['faq_view_topic', topic_id].join('.'), 1),
+                                        self.im.contacts.save(self.contact)
+                                    ])
+                                    .then(function() {
+                                        return 'state_faq_questions';
+                                    });
+
+                            }
+                        }
+                    });
                 });
         });
 
         self.add('state_faq_questions', function(name) {
             return go.utils
-                .get_snappy_questions(self.im, self.contact.extra.faq_id, self.contact.extra.topic_id)
-                .then(function(response) {
-                    if (typeof response.data.error  !== 'undefined') {
-                        // TODO Throw proper error
-                        return error;
-                    } else {
-                        var choices = _.sortBy(response.data, function (d) {
-                                return parseInt(d.pivot.order, 10);
-                            })
-                            .map(function(d) {
-                                return new Choice(d.id, d.question);
-                            });
-                        choices.push(new Choice('back', $('Back')));
-
-                        return new PaginatedChoiceState(name, {
-                            question: $("Select an option:"),
-                            choices: choices,
-                            options_per_page: null,
-                            next: function(choice) {
-                                var question_id = choice.value;
-                                if (question_id === 'back') {
-                                    return 'state_faq_topics';
-                                } else {
-                                    var index = _.findIndex(response.data, { 'id': question_id });
-                                    self.contact.extra.faq_answer = response.data[index].answer.trim();
-                                    self.contact.extra.question_id = question_id;
-                                    return Q
-                                        .all([
-                                            self.im.metrics.fire.inc(['faq_view_question'].join('.'), 1),
-                                            self.im.contacts.save(self.contact)
-                                        ])
-                                        .then(function() {
-                                            return 'state_faq_answer';
-                                        });
-                                }
-                            }
+                .get_snappy_questions_lang(self.im, self.contact.extra.faq_id,
+                    self.contact.extra.topic_id, self.contact.extra.lang)
+                .then(function(questions) {
+                    var choices = _.sortBy(questions, function (d) {
+                            return parseInt(d.pivot.order, 10);
+                        })
+                        .map(function(d) {
+                            return new Choice(d.id, d.question);
                         });
-                    }
+                    choices.push(new Choice('back', $('Back')));
+
+                    return new PaginatedChoiceState(name, {
+                        question: $("Select an option:"),
+                        choices: choices,
+                        options_per_page: null,
+                        next: function(choice) {
+                            var question_id = choice.value;
+                            if (question_id === 'back') {
+                                return 'state_faq_topics';
+                            } else {
+                                var index = _.findIndex(questions, { 'id': question_id });
+                                self.contact.extra.faq_answer = questions[index].answer.trim();
+                                self.contact.extra.question_id = question_id;
+                                return Q
+                                    .all([
+                                        self.im.metrics.fire.inc(['faq_view_question'].join('.'), 1),
+                                        self.im.contacts.save(self.contact)
+                                    ])
+                                    .then(function() {
+                                        return 'state_faq_answer';
+                                    });
+                            }
+                        }
+                    });
                 });
         });
 

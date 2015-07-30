@@ -3361,13 +3361,13 @@ describe("refugeerights app", function() {
                             state: "state_faq_topics",
                             reply: [
                                 "Select an option:",
-                                "1. When/where to apply",
-                                "2. Children",
-                                "3. Arrest",
-                                "4. Your Rights",
-                                "5. Appl. Results",
-                                "6. The Process",
-                                "7. Helplines",
+                                "1. When/where to appfr",
+                                "2. The Procefr",
+                                "3. Appl. Resulfr",
+                                "4. Your Righfr",
+                                "5. Arrefr",
+                                "6. Childrfr",
+                                "7. Helplinfr",
                                 "8. Back"
                             ].join('\n')
                         })
@@ -3407,9 +3407,9 @@ describe("refugeerights app", function() {
                                 state: "state_faq_questions",
                                 reply: [
                                     "Select an option:",
-                                    "1. Apply at RRO",
-                                    "2. Durban",
-                                    "3. Musina",
+                                    "1. Apply at Rfr",
+                                    "2. Durbfr",
+                                    "3. Musifr",
                                     "4. Back"
                                 ].join('\n')
                             })
