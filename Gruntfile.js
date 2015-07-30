@@ -95,9 +95,9 @@ module.exports = function (grunt) {
             },
             test_ussdapp: {
                 src: ['<%= paths.test.ussdapp %>']
-            },
-            test_smsapp: {
-                src: ['<%= paths.test.smsapp %>']
+            // },
+            // test_smsapp: {
+            //     src: ['<%= paths.test.smsapp %>']
             }
         }
     });

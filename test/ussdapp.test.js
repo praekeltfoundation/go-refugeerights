@@ -442,6 +442,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '1'  // state_unregistered_menu - more info
                             , '5'  // state_country - burundi
                             , {session_event: 'close'}  // may or may not work
@@ -472,6 +473,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -490,6 +492,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -525,6 +528,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -543,6 +547,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -578,6 +583,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -596,6 +602,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -631,6 +638,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -649,6 +657,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -684,6 +693,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -702,6 +712,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -737,6 +748,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -755,6 +767,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , {session_event: 'close'}  // may or may not work
@@ -1043,6 +1056,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '1'  // state_unregistered_menu - more info
                             , '5'  // state_country - burundi
                             , {session_event: 'close'}  // may or may not work
@@ -1071,6 +1085,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '1'  // state_unregistered_menu - more info
                             , '5'  // state_country - burundi
                             , {session_event: 'close'}  // may or may not work
@@ -1098,6 +1113,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '1'  // state_unregistered_menu - more info
                             , '5'  // state_country - burundi
                             , {session_event: 'close'}  // may or may not work
@@ -1118,6 +1134,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '1'  // state_unregistered_menu - more info
                             , '5'  // state_country - burundi
                             , {session_event: 'close'}  // may or may not work
@@ -1332,6 +1349,7 @@ describe("refugeerights app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
+                            assert.equal(Object.keys(contact.extra).length, 3);
                             assert.equal(contact.extra.language, 'french');
                             assert.equal(contact.extra.lang, 'fr');
                         })
@@ -1340,7 +1358,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it("should navigate to unregistered menu", function() {
+                it("should navigate to consent menu", function() {
                     return tester
                         .setup.user.addr('082111')
                         .inputs(
@@ -1348,17 +1366,119 @@ describe("refugeerights app", function() {
                             , '2'  // state_language - french
                         )
                         .check.interaction({
-                            state: 'state_unregistered_menu',
+                            state: 'state_consent',
                             reply: [
-                                "Select an option:",
-                                "1. Find info about refugee/migrant rights in SA",
-                                "2. Report xenophobia",
-                                "3. Report unlawful arrest",
-                                "4. Report corruption",
-                                "5. Report something else"
+                                "To give you the info & help you need, we will:",
+                                "- Store your cell #, language & country of origin",
+                                "- Sometimes send u SMSs",
+                                "Do you consent to this?",
+                                "1. Yes",
+                                "2. No"
                             ].join('\n')
                         })
                         .run();
+                });
+            });
+
+            describe("upon consent selection", function() {
+                describe("if the give consent", function() {
+                    it("should navigate to unregistered menu", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
+                            )
+                            .check.interaction({
+                                state: 'state_unregistered_menu',
+                                reply: [
+                                    "Select an option:",
+                                    "1. Find info about refugee/migrant rights in SA",
+                                    "2. Report xenophobia",
+                                    "3. Report unlawful arrest",
+                                    "4. Report corruption",
+                                    "5. Report something else"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+
+                    it("should save extras", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
+                            )
+                            .check(function(api) {
+                                var contact = _.find(api.contacts.store, {
+                                    msisdn: '+082111'
+                                });
+                                assert.equal(Object.keys(contact.extra).length, 4);
+                                assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if they deny consent", function() {
+                    it("should navigate to consent required state", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '2'  // state_consent - deny consent
+                            )
+                            .check.interaction({
+                                state: 'state_consent_required',
+                                reply: [
+                                    "We're sorry, we can't help without you providing consent to us storing your info & sending you SMSs. What would you like to do?",
+                                    "1. Go back to consent",
+                                    "2. Exit"
+                                ].join('\n')
+                            })
+                            .run();
+                    });
+                });
+            });
+
+            describe("if they deny consent initially", function() {
+                describe("if they then give consent", function() {
+                    it("should go to state_consent", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '2'  // state_consent - deny consent
+                                , '1'  // state_consent_required - consent
+                            )
+                            .check.interaction({
+                                state: 'state_consent'
+                            })
+                            .run();
+                    });
+                });
+
+                describe("if they Exit", function() {
+                    it("should go to state_report_end", function() {
+                        return tester
+                            .setup.user.addr('082111')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_language - french
+                                , '2'  // state_consent - deny consent
+                                , '2'  // state_consent_required - exit
+                            )
+                            .check.interaction({
+                                state: 'state_report_end'
+                            })
+                            .check.reply.ends_session()
+                            .run();
+                    });
                 });
             });
 
@@ -1369,6 +1489,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '1'  // state_unregistered_menu - more info
                         )
                         .check.interaction({
@@ -1395,6 +1516,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '2'  // state_unregistered_menu - report xenophobia
                         )
                         .check.interaction({
@@ -1414,6 +1536,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '3'  // state_unregistered_menu - report arrest
                         )
                         .check.interaction({
@@ -1433,6 +1556,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '4'  // state_unregistered_menu - report corruption
                         )
                         .check.interaction({
@@ -1452,6 +1576,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '5'  // state_unregistered_menu - report xenophobia
                         )
                         .check.interaction({
@@ -1473,6 +1598,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '1'  // state_unregistered_menu - more info
                             , '5'  // state_country - burundi
                         )
@@ -1493,6 +1619,7 @@ describe("refugeerights app", function() {
                         .inputs(
                             {session_event: 'new'}  // dial in
                             , '2'  // state_language - french
+                            , '1'  // state_consent - give consent
                             , '1'  // state_unregistered_menu - more info
                             , '5'  // state_country - burundi
                         )
@@ -1500,9 +1627,10 @@ describe("refugeerights app", function() {
                             var contact = _.find(api.contacts.store, {
                                 msisdn: '+082111'
                             });
-                            assert.equal(Object.keys(contact.extra).length, 4);
+                            assert.equal(Object.keys(contact.extra).length, 5);
                             assert.equal(contact.extra.language, 'french');
                             assert.equal(contact.extra.lang, 'fr');
+                            assert.equal(contact.extra.consent, 'give_consent');
                             assert.equal(contact.extra.country, 'burundi');
                             assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                         })
@@ -1518,6 +1646,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1541,6 +1670,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '2'  // state_ref_mig_1 - no
@@ -1557,6 +1687,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '2'  // state_ref_mig_1 - no
@@ -1565,9 +1696,10 @@ describe("refugeerights app", function() {
                                 var contact = _.find(api.contacts.store, {
                                     msisdn: '+082111'
                                 });
-                                assert.equal(Object.keys(contact.extra).length, 5);
+                                assert.equal(Object.keys(contact.extra).length, 6);
                                 assert.equal(contact.extra.language, 'french');
                                 assert.equal(contact.extra.lang, 'fr');
+                                assert.equal(contact.extra.consent, 'give_consent');
                                 assert.equal(contact.extra.country, 'burundi');
                                 assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                                 assert.equal(contact.extra.status, 'migrant');
@@ -1581,6 +1713,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '2'  // state_ref_mig_1 - no
@@ -1616,6 +1749,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1640,6 +1774,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1662,6 +1797,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1671,9 +1807,10 @@ describe("refugeerights app", function() {
                                 var contact = _.find(api.contacts.store, {
                                     msisdn: '+082111'
                                 });
-                                assert.equal(Object.keys(contact.extra).length, 5);
+                                assert.equal(Object.keys(contact.extra).length, 6);
                                 assert.equal(contact.extra.language, 'french');
                                 assert.equal(contact.extra.lang, 'fr');
+                                assert.equal(contact.extra.consent, 'give_consent');
                                 assert.equal(contact.extra.country, 'burundi');
                                 assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                                 assert.equal(contact.extra.status, 'refugee');
@@ -1687,6 +1824,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1723,6 +1861,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1748,6 +1887,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1771,6 +1911,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1781,9 +1922,10 @@ describe("refugeerights app", function() {
                                 var contact = _.find(api.contacts.store, {
                                     msisdn: '+082111'
                                 });
-                                assert.equal(Object.keys(contact.extra).length, 5);
+                                assert.equal(Object.keys(contact.extra).length, 6);
                                 assert.equal(contact.extra.language, 'french');
                                 assert.equal(contact.extra.lang, 'fr');
+                                assert.equal(contact.extra.consent, 'give_consent');
                                 assert.equal(contact.extra.country, 'burundi');
                                 assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                                 assert.equal(contact.extra.status, 'refugee');
@@ -1797,6 +1939,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1834,6 +1977,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1858,6 +2002,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1869,9 +2014,10 @@ describe("refugeerights app", function() {
                                 var contact = _.find(api.contacts.store, {
                                     msisdn: '+082111'
                                 });
-                                assert.equal(Object.keys(contact.extra).length, 5);
+                                assert.equal(Object.keys(contact.extra).length, 6);
                                 assert.equal(contact.extra.language, 'french');
                                 assert.equal(contact.extra.lang, 'fr');
+                                assert.equal(contact.extra.consent, 'give_consent');
                                 assert.equal(contact.extra.country, 'burundi');
                                 assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                                 assert.equal(contact.extra.status, 'migrant');
@@ -1885,6 +2031,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1921,6 +2068,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1945,6 +2093,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -1956,9 +2105,10 @@ describe("refugeerights app", function() {
                                 var contact = _.find(api.contacts.store, {
                                     msisdn: '+082111'
                                 });
-                                assert.equal(Object.keys(contact.extra).length, 5);
+                                assert.equal(Object.keys(contact.extra).length, 6);
                                 assert.equal(contact.extra.language, 'french');
                                 assert.equal(contact.extra.lang, 'fr');
+                                assert.equal(contact.extra.consent, 'give_consent');
                                 assert.equal(contact.extra.country, 'burundi');
                                 assert.equal(contact.extra.last_seen, '2015-04-03 06:07:08.999');
                                 assert.equal(contact.extra.status, 'refugee');
@@ -1972,6 +2122,7 @@ describe("refugeerights app", function() {
                             .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -2009,6 +2160,7 @@ describe("refugeerights app", function() {
                         .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -2029,6 +2181,7 @@ describe("refugeerights app", function() {
                         .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -2053,6 +2206,7 @@ describe("refugeerights app", function() {
                         .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -2073,6 +2227,7 @@ describe("refugeerights app", function() {
                         .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes
@@ -2097,6 +2252,7 @@ describe("refugeerights app", function() {
                         .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
+                                , '1'  // state_consent - give consent
                                 , '1'  // state_unregistered_menu - more info
                                 , '5'  // state_country - burundi
                                 , '1'  // state_ref_mig_1 - yes

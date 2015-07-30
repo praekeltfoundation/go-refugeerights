@@ -182,8 +182,46 @@ go.app = function() {
                     return go.utils
                         .save_language(self.im, self.contact, choice.value)
                         .then(function() {
-                            return 'state_unregistered_menu';
+                            return 'state_consent';
                         });
+                }
+            });
+        });
+
+        self.add('state_consent', function(name) {
+            return new ChoiceState(name, {
+                question: $("To give you the info & help you need, we will:\n" +
+                    "- Store your cell #, language & country of origin\n" +
+                    "- Sometimes send u SMSs\n" +
+                    "Do you consent to this?"),
+                choices: [
+                    new Choice('give_consent', $("Yes")),
+                    new Choice('deny_consent', $("No"))
+                ],
+                next: function(choice) {
+                    self.contact.extra.consent = choice.value;
+                    return self.im.contacts
+                        .save(self.contact)
+                        .then(function() {
+                            if (choice.value === 'give_consent') {
+                                return 'state_unregistered_menu';
+                            } else {
+                                return 'state_consent_required';
+                            }
+                        });
+                }
+            });
+        });
+
+        self.add('state_consent_required', function(name) {
+            return new ChoiceState(name, {
+                question: $("We're sorry, we can't help without you providing consent to us storing your info & sending you SMSs. What would you like to do?"),
+                choices: [
+                    new Choice('state_consent', $("Go back to consent")),
+                    new Choice('state_report_end', $("Exit"))  // TODO Use unique end state
+                ],
+                next: function(choice) {
+                    return choice.value;
                 }
             });
         });
