@@ -7,6 +7,24 @@
         "api_key": "test_key",
         "url": "http://rr.praekeltfoundation.org/subscription/"
     },
+    "snappy": {
+        "endpoint": "https://app.besnappy.com/api/v1/",
+        "username": "1",
+        "account_id": "1",
+        "default_faq": "1",
+        "faq_id": {
+            "refugee_step1": "3582",
+            "refugee_step2": "3583",
+            "refugee_tips": "3588",
+            "refugee_about": "3584",
+            "migrant_step1": "3485",
+            "migrant_step2": "3486",
+            "migrant_about": "3487"
+        }
+    },
+    "location_api_url": "http://rr.praekeltfoundation.org/locationfinder/",
+    "poi_types": [],
+    "template": "Nearby services: {{ results }}.",  // SMS template
     "endpoints": {
         "sms": {
             "delivery_class": "sms"
