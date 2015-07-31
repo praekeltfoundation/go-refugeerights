@@ -586,6 +586,11 @@ go.utils = {
             }
     },
 
+    nightingale_patch: function(im, contact) {
+        // get the report
+        return ;
+    },
+
     nightingale_post: function(im, contact) {
         var method = "post";
         var params = null;
@@ -598,8 +603,8 @@ go.utils = {
                 point: {
                     type: "Point",
                     coordinates: [
-                        contact.extra["location:lon"],
-                        contact.extra["location:lat"]
+                        parseFloat(contact.extra["location:lon"]),
+                        parseFloat(contact.extra["location:lat"])
                     ]
                 }
             },
@@ -615,10 +620,14 @@ go.utils = {
             .nightingale_api_call(method, params, payload, endpoint, im)
             .then(function(result) {
                 if (result.code >= 200 && result.code < 300){
-                    return Q.all([
-                        im.metrics.fire.inc(["total", "nightingale_post_success", "last"].join('.')),
-                        im.metrics.fire.sum(["total", "nightingale_post_success", "sum"].join('.'), 1)
-                    ]);
+                    return Q
+                        .all([
+                            im.metrics.fire.inc(["total", "nightingale_post_success", "last"].join('.')),
+                            im.metrics.fire.sum(["total", "nightingale_post_success", "sum"].join('.'), 1)
+                        ])
+                        .then(function() {
+                            return result;
+                        });
                 } else {
                     return Q.all([
                         im.metrics.fire.inc(["total", "nightingale_post_fail", "last"].join('.')),
@@ -626,6 +635,16 @@ go.utils = {
                     ]);
                 }
             });
+    },
+
+    save_report_id_to_contact: function(im, contact, report_id) {
+        contact.extra.last_report_id = report_id.toString();
+        var reports_posted = (contact.extra.reports_posted === undefined)
+            ? []
+            : JSON.parse(contact.extra.reports_posted);
+        reports_posted.push(report_id);
+        contact.extra.reports_posted = JSON.stringify(reports_posted);
+        return im.contacts.save(contact);
     },
 
     "commas": "commas"

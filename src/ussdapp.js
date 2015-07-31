@@ -558,8 +558,12 @@ go.app = function() {
                     // Post basic info report to nightingale
                     return go.utils
                         .nightingale_post(self.im, self.contact)
-                        .then(function() {
-                            return self.states.create('state_report_details');
+                        .then(function(response) {
+                            return go.utils
+                                .save_report_id_to_contact(self.im, self.contact, response.data.id)
+                                .then(function() {
+                                    return self.states.create('state_report_details');
+                                });
                         });
                 });
         });

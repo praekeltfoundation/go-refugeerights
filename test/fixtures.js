@@ -863,8 +863,7 @@ return [
             'request': {
                 'method': 'POST',
                 'headers': {
-                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
-                    'Content-Type': ['application/json']
+                    'Authorization': ['Token nightingaleapikey']
                 },
                 'url': 'https://nightingale_root/api/v1/report/',
                 "data": {
@@ -874,7 +873,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": ["3.1415","2.7182"]
+                            "coordinates": [3.1415, 2.7182]
                         }
                     },
                     "metadata": {
@@ -886,8 +885,34 @@ return [
                 }
             },
             'response': {
-                "code": "200",
-                "data": []
+                "code": "201",
+                "data": {
+                    "id": 888,
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": [
+                        "111",
+                        "444"
+                    ],
+                    "project": "project-id",
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                3.1415,
+                                2.7182
+                            ]
+                        }
+                    },
+                    "description": null,
+                    "incident_at": null,
+                    "metadata": {
+                        "status": "refugee",
+                        "country": "drc",
+                        "language": "fr"
+                    }
+                }
             }
         },
 
@@ -897,8 +922,7 @@ return [
             'request': {
                 'method': 'POST',
                 'headers': {
-                    'Authorization': ['Basic ' + new Buffer('test:test').toString('base64')],
-                    'Content-Type': ['application/json']
+                    'Authorization': ['Token nightingaleapikey']
                 },
                 'url': 'https://nightingale_root/api/v1/report/',
                 "data": {
@@ -908,7 +932,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": ["3.1415","2.7182"]
+                            "coordinates": [3.1415, 2.7182]
                         }
                     },
                     "metadata": {
@@ -920,8 +944,34 @@ return [
                 }
             },
             'response': {
-                "code": "200",
-                "data": []
+                "code": "201",
+                "data": {
+                    "id": 889,
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": [
+                        "1111",
+                        "999"
+                    ],
+                    "project": "project-id",
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                3.1415,
+                                2.7182
+                            ]
+                        }
+                    },
+                    "description": null,
+                    "incident_at": null,
+                    "metadata": {
+                        "status": "refugee",
+                        "country": "drc",
+                        "language": "fr"
+                    }
+                }
             }
         },
 
