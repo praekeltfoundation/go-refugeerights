@@ -126,6 +126,8 @@ go.app = function() {
                 .then(function() {
                     if (status === 'refugee' || status === 'migrant') {
                         return self.states.create('state_registered_landing');
+                    } else if (self.contact.extra.consent !== undefined) {
+                        return self.states.create('state_unregistered_menu');
                     } else {
                         return self.states.create('state_language');
                     }
@@ -423,7 +425,13 @@ go.app = function() {
                     new Choice('state_report_end_permission', $("Exit")),
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    // reset dialback sms reminder checking since it's a new report
+                    self.contact.extra.dialback_reminder_report_sent = 'false';
+                    return self.im.contacts
+                        .save(self.contact)
+                        .then(function() {
+                            return choice.value;
+                        });
                 }
             });
         });
@@ -570,7 +578,7 @@ go.app = function() {
 
         self.add('state_report_details', function(name) {
             var question_map = {
-                xenophobia: $("Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific – it'll enable us to send the right response & help you faster."),
+                xenophobia: $("Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific - it'll enable us to send the right response & help you faster."),
                 arrest: $("Please type the full name of the person who was arrested. Also, what happened to cause the arrest? And what documentation/permit does this person have, if any?"),
                 corruption: $("Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time"),
                 other: $("Please explain the incident in as much detail as you can: What happened; where it happened; the offender's name; his/her physical features; date/time.")

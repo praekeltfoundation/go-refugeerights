@@ -27,41 +27,53 @@ go.utils = {
     },
 
     eval_dialback_reminder: function(e, im, contact, $) {
-        return go.utils.should_send_dialback_reminder(e, contact)
-            ? go.utils.send_dialback_reminder(im, contact, $)
-            : Q();
-    },
-
-    should_send_dialback_reminder: function(e, contact) {
-        var dialback_states = [
+        var dialback_states_registration = [
             'state_country',
             'state_ref_mig_1',
             'state_ref_mig_2',
             'state_ref_mig_3',
-            'state_ref_mig_4'
+            'state_ref_mig_4',
         ];
-        return e.user_terminated
-            && (contact.extra.dialback_reminder_sent !== 'true')
-            && dialback_states.indexOf(e.im.state.name) !== -1;
-    },
+        var dialback_states_reporting = [
+            'state_report_details'
+        ];
+        var close_state = e.im.state.name;
 
-    send_dialback_reminder: function(im, contact, $) {
-        return im.outbound
-            .send_to_user({
-                endpoint: 'sms',
-                content: go.utils.get_dialback_reminder_sms(im, $)
-            })
-            .then(function() {
-                contact.extra.dialback_reminder_sent = 'true';
-                return im.contacts.save(contact);
-            });
-    },
-
-    get_dialback_reminder_sms: function(im, $) {
-        return $("Please dial back in to {{ USSD_number }} to complete the registration.")
-            .context({
-                USSD_number: im.config.channel
-            });
+        if (dialback_states_registration.indexOf(close_state) !== -1) {
+            // session closed while on a registration state
+            if (e.user_terminated && contact.extra.dialback_reminder_reg_sent !== 'true') {
+                return im.outbound
+                    .send_to_user({
+                        endpoint: 'sms',
+                        content: $("Please dial back in to {{ USSD_number }} to complete the registration.")
+                            .context({
+                                USSD_number: im.config.channel
+                            })
+                    })
+                    .then(function() {
+                        contact.extra.dialback_reminder_reg_sent = 'true';
+                        return im.contacts.save(contact);
+                    });
+            }
+        } else if (dialback_states_reporting.indexOf(close_state) !== -1) {
+            // session closed while on a reporting state
+            // will send an sms for every report
+            if (e.user_terminated && contact.extra.dialback_reminder_report_sent !== 'true') {
+                return im.outbound
+                    .send_to_user({
+                        endpoint: 'sms',
+                        content: $("Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}")
+                            .context({
+                                USSD_number: im.config.channel
+                            })
+                    })
+                    .then(function() {
+                        contact.extra.dialback_reminder_report_sent = 'true';
+                        return im.contacts.save(contact);
+                    });
+            }
+        }
+        return Q();
     },
 
     save_language: function(im, contact, lang) {
@@ -481,8 +493,7 @@ go.utils = {
             data: JSON.stringify(),
             headers: {
                 'Content-Type': ['application/json']
-            },
-            ssl_method: "SSLv3"
+            }
         });
     },
 
@@ -524,7 +535,6 @@ go.utils = {
             headers: {
                 'Content-Type': ['application/json']
             },
-            ssl_method: "SSLv3"
         });
     },
 
