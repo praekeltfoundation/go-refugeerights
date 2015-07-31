@@ -29,7 +29,7 @@ return [
                             "url": "http://127.0.0.1:8000/subscription/subscription/1/",
                             "active": true,
                             "completed": false,
-                            "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
+                            "contact_key": "contact_key_064001",
                             "created_at": "2014-08-05T11:22:34.838969",
                             "id": 1,
                             "lang": "en",
@@ -44,7 +44,7 @@ return [
                             "url": "http://127.0.0.1:8000/subscription/subscription/2/",
                             "active": true,
                             "completed": false,
-                            "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
+                            "contact_key": "contact_key_064001",
                             "created_at": "2014-08-05T11:31:50.908974",
                             "id": 2,
                             "lang": "af",
@@ -73,7 +73,7 @@ return [
                             "url": "http://127.0.0.1:8000/subscription/subscription/1/",
                             "active": false,
                             "completed": false,
-                            "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
+                            "contact_key": "contact_key_064001",
                             "created_at": "2014-08-05T11:22:34.838969",
                             "id": 1,
                             "lang": "en",
@@ -88,7 +88,7 @@ return [
                             "url": "http://127.0.0.1:8000/subscription/subscription/2/",
                             "active": false,
                             "completed": false,
-                            "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
+                            "contact_key": "contact_key_064001",
                             "created_at": "2014-08-05T11:31:50.908974",
                             "id": 2,
                             "lang": "af",
@@ -118,7 +118,7 @@ return [
                 'headers': ['Token test_key'],
                 "url": 'http://127.0.0.1:8000/subscription/subscription/',
                 "data": {
-                    "contact_key": "contact_key",
+                    "contact_key": "contact_key_082111",
                     "to_addr": "+082111",
                     "lang": "fr",
                     "messageset_id": 1,
@@ -322,7 +322,7 @@ return [
                             "url": "http://127.0.0.1:8000/subscription/subscription/1/",
                             "active": true,
                             "completed": false,
-                            "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
+                            "contact_key": "contact_key_064001",
                             "created_at": "2014-08-05T11:22:34.838969",
                             "id": 1,
                             "lang": "fr",
@@ -337,7 +337,7 @@ return [
                             "url": "http://127.0.0.1:8000/subscription/subscription/2/",
                             "active": true,
                             "completed": false,
-                            "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
+                            "contact_key": "contact_key_064001",
                             "created_at": "2014-08-05T11:31:50.908974",
                             "id": 2,
                             "lang": "fr",
@@ -366,7 +366,7 @@ return [
                             "url": "http://127.0.0.1:8000/subscription/subscription/1/",
                             "active": true,
                             "completed": false,
-                            "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
+                            "contact_key": "contact_key_064001",
                             "created_at": "2014-08-05T11:22:34.838969",
                             "id": 1,
                             "lang": "en",
@@ -381,7 +381,7 @@ return [
                             "url": "http://127.0.0.1:8000/subscription/subscription/2/",
                             "active": true,
                             "completed": false,
-                            "contact_key": "e5b0888cdb4347158ea5cd2f2147d28f",
+                            "contact_key": "contact_key_064001",
                             "created_at": "2014-08-05T11:31:50.908974",
                             "id": 2,
                             "lang": "en",
@@ -855,6 +855,299 @@ return [
                     ]
                 }
             ]
+        },
+
+    // POST REPORT - XENOPHOBIA, LOOTING
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'POST',
+                'headers': {
+                    'Authorization': ['Token nightingaleapikey']
+                },
+                'url': 'https://nightingale_root/api/v1/report/',
+                "data": {
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": ["111","444"],
+                    "location": {
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [3.1415, 2.7182]
+                        }
+                    },
+                    "metadata": {
+                        "language": "fr",
+                        "status": "refugee",
+                        "country": "drc"
+                    }
+                }
+            },
+            'response': {
+                "code": "201",
+                "data": {
+                    "id": 888,
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": [
+                        "111",
+                        "444"
+                    ],
+                    "project": "project-id",
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                3.1415,
+                                2.7182
+                            ]
+                        }
+                    },
+                    "description": null,
+                    "incident_at": null,
+                    "metadata": {
+                        "status": "refugee",
+                        "country": "drc",
+                        "language": "fr"
+                    }
+                }
+            }
+        },
+
+    // POST REPORT - CORRUPTION, OTHER
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'POST',
+                'headers': {
+                    'Authorization': ['Token nightingaleapikey']
+                },
+                'url': 'https://nightingale_root/api/v1/report/',
+                "data": {
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": ["1111","999"],
+                    "location": {
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [3.1415, 2.7182]
+                        }
+                    },
+                    "metadata": {
+                        "language": "fr",
+                        "status": "refugee",
+                        "country": "drc"
+                    }
+                }
+            },
+            'response': {
+                "code": "201",
+                "data": {
+                    "id": 889,
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": [
+                        "1111",
+                        "999"
+                    ],
+                    "project": "project-id",
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                3.1415,
+                                2.7182
+                            ]
+                        }
+                    },
+                    "description": null,
+                    "incident_at": null,
+                    "metadata": {
+                        "status": "refugee",
+                        "country": "drc",
+                        "language": "fr"
+                    }
+                }
+            }
+        },
+
+    // GET REPORT 888
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'GET',
+                'headers': {
+                    'Authorization': ['Token nightingaleapikey']
+                },
+                'url': 'https://nightingale_root/api/v1/report/888/',
+                "params": {}
+            },
+            'response': {
+                "code": "200",
+                "data": {
+                    "id": 888,
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": [
+                        "111",
+                        "444"
+                    ],
+                    "project": "project-id",
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                3.1415,
+                                2.7182
+                            ]
+                        }
+                    },
+                    "description": null,
+                    "incident_at": null,
+                    "metadata": {
+                        "status": "refugee",
+                        "country": "drc",
+                        "language": "fr"
+                    }
+                }
+            }
+        },
+
+    // PATCH REPORT 888
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'PATCH',
+                'headers': {
+                    'Authorization': ['Token nightingaleapikey']
+                },
+                'url': 'https://nightingale_root/api/v1/report/888/',
+                "data": {
+                    "description": "Send help plz"
+                }
+            },
+            'response': {
+                "code": "200",
+                "data": {
+                    "id": 888,
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": [
+                        "111",
+                        "444"
+                    ],
+                    "project": "project-id",
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                3.1415,
+                                2.7182
+                            ]
+                        }
+                    },
+                    "description": "Send help plz",
+                    "incident_at": null,
+                    "metadata": {
+                        "status": "refugee",
+                        "country": "drc",
+                        "language": "fr"
+                    }
+                }
+            }
+        },
+
+
+    // GET REPORT 889
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'GET',
+                'headers': {
+                    'Authorization': ['Token nightingaleapikey']
+                },
+                'url': 'https://nightingale_root/api/v1/report/889/',
+                "params": {}
+            },
+            'response': {
+                "code": "200",
+                "data": {
+                    "id": 889,
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": [
+                        "1111",
+                        "999"
+                    ],
+                    "project": "project-id",
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                3.1415,
+                                2.7182
+                            ]
+                        }
+                    },
+                    "description": null,
+                    "incident_at": null,
+                    "metadata": {
+                        "status": "refugee",
+                        "country": "drc",
+                        "language": "fr"
+                    }
+                }
+            }
+        },
+
+    // PATCH REPORT 889
+        {
+            'repeatable': true,
+            'request': {
+                'method': 'PATCH',
+                'headers': {
+                    'Authorization': ['Token nightingaleapikey']
+                },
+                'url': 'https://nightingale_root/api/v1/report/889/',
+                "data": {
+                    "description": "Send help plz"
+                }
+            },
+            'response': {
+                "code": "200",
+                "data": {
+                    "id": 889,
+                    "contact_key": "contact_key_064001",
+                    "to_addr": "+064001",
+                    "categories": [
+                        "1111",
+                        "999"
+                    ],
+                    "project": "project-id",
+                    "location": {
+                        "id": 1,
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                3.1415,
+                                2.7182
+                            ]
+                        }
+                    },
+                    "description": "Send help plz",
+                    "incident_at": null,
+                    "metadata": {
+                        "status": "refugee",
+                        "country": "drc",
+                        "language": "fr"
+                    }
+                }
+            }
         },
 
 ];

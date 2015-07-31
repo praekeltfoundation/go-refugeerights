@@ -543,5 +543,122 @@ go.utils = {
             });
     },
 
+    nightingale_categories: function(im, contact) {
+        return [
+            im.config.nightingale.category[contact.extra.report_theme],
+            im.config.nightingale.category[contact.extra.report_category]
+        ];
+    },
+
+    nightingale_api_call: function (method, params, payload, endpoint, im) {
+        var http = new JsonApi(im, {
+            headers: {
+                'Authorization': ['Token ' + im.config.nightingale.api_key]
+            }
+        });
+        switch (method) {
+            case "post":
+                return http.post(im.config.nightingale.api_root + endpoint, {
+                    data: payload
+                });
+            case "get":
+                return http.get(im.config.nightingale.api_root + endpoint, {
+                    params: params
+                });
+            case "patch":
+                return http.patch(im.config.nightingale.api_root + endpoint, {
+                    data: payload
+                });
+            case "put":
+                return http.put(im.config.nightingale.api_root + endpoint, {
+                    params: params,
+                  data: payload
+                });
+            case "delete":
+                return http.delete(im.config.nightingale.api_root + endpoint);
+            }
+    },
+
+    nightingale_get_report: function(im, contact) {
+        var method = "get";
+        var params = null;
+        var endpoint = "report/" + contact.extra.last_report_id + "/";
+        var payload = null;
+        return go.utils
+            .nightingale_api_call(method, params, payload, endpoint, im)
+            .then(function(response) {
+                return response;
+            });
+    },
+
+    nightingale_patch: function(im, contact) {
+        var method = "patch";
+        var params = null;
+        var endpoint = "report/" + contact.extra.last_report_id + "/";
+        var payload = {
+            description: im.user.answers.state_report_details
+        };
+        return go.utils
+            .nightingale_api_call(method, params, payload, endpoint, im)
+            .then(function(response) {
+                return response;
+            });
+    },
+
+    nightingale_post: function(im, contact) {
+        var method = "post";
+        var params = null;
+        var endpoint = "report/";
+        var payload = {
+            contact_key: contact.key,
+            to_addr: contact.msisdn,
+            categories: go.utils.nightingale_categories(im, contact),
+            location: {
+                point: {
+                    type: "Point",
+                    coordinates: [
+                        parseFloat(contact.extra["location:lon"]),
+                        parseFloat(contact.extra["location:lat"])
+                    ]
+                }
+            },
+            metadata: {
+                language: contact.extra.lang,
+                status: contact.extra.status || "unregistered",
+                country: contact.extra.country || "unregistered"
+            }
+        };
+
+        return go.utils
+            .nightingale_api_call(method, params, payload, endpoint, im)
+            .then(function(result) {
+                if (result.code >= 200 && result.code < 300){
+                    return Q
+                        .all([
+                            im.metrics.fire.inc(["total", "nightingale_post_success", "last"].join('.')),
+                            im.metrics.fire.sum(["total", "nightingale_post_success", "sum"].join('.'), 1)
+                        ])
+                        .then(function() {
+                            return result;
+                        });
+                } else {
+                    return Q.all([
+                        im.metrics.fire.inc(["total", "nightingale_post_fail", "last"].join('.')),
+                        im.metrics.fire.inc(["total", "nightingale_post_fail", "sum"].join('.'), 1)
+                    ]);
+                }
+            });
+    },
+
+    save_report_id_to_contact: function(im, contact, report_id) {
+        contact.extra.last_report_id = report_id.toString();
+        var reports_posted = (contact.extra.reports_posted === undefined)
+            ? []
+            : JSON.parse(contact.extra.reports_posted);
+        reports_posted.push(report_id);
+        contact.extra.reports_posted = JSON.stringify(reports_posted);
+        return im.contacts.save(contact);
+    },
+
     "commas": "commas"
 };

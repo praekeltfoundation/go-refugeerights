@@ -51,6 +51,27 @@ describe("refugeerights app", function() {
                             "migrant_about": "23"
                         }
                     },
+                    nightingale: {
+                        "api_key": "nightingaleapikey",
+                        "api_root": "https://nightingale_root/api/v1/",
+                        "category": {
+                            "xenophobia": "111",
+                            "physical_threat": "222",
+                            "protests": "333",
+                            "looting": "444",
+                            "arrest": "555",
+                            "no_asylum_permit": "666",
+                            "no_migrant_visa": "777",
+                            "unknown": "888",
+                            "other": "999",
+                            "corruption": "1111",
+                            "refugee_reception_office": "2222",
+                            "saps": "3333",
+                            "department_of_home_affairs": "4444",
+                            "social_services": "5555",
+                            "complaint": "6666"
+                        }
+                    },
                 })
                 .setup(function(api) {
                     fixtures().forEach(function(d) {
@@ -69,7 +90,7 @@ describe("refugeerights app", function() {
                     api.contacts.add({
                         msisdn: '+082111',
                         extra: {},
-                        key: "contact_key",
+                        key: "contact_key_082111",
                         user_account: "contact_user_account"
                     });
                 })
@@ -85,7 +106,7 @@ describe("refugeerights app", function() {
                             last_seen: '2015-03-03 12:00:00.000',
                             last_returning_metric_fire: '2015-03-03 12:00:00.000'  // >7d ago
                         },
-                        key: "contact_key",
+                        key: "contact_key_064001",
                         user_account: "contact_user_account"
                     });
                 })
@@ -101,7 +122,7 @@ describe("refugeerights app", function() {
                             last_seen: '2015-03-03 12:00:00.000',
                             last_returning_metric_fire: '2015-03-03 12:00:00.000'  // >7d ago
                         },
-                        key: "contact_key",
+                        key: "contact_key_064003",
                         user_account: "contact_user_account"
                     });
                 })
@@ -117,7 +138,7 @@ describe("refugeerights app", function() {
                             last_seen: '2015-03-31 12:00:00.000',
                             last_returning_metric_fire: '2015-03-31 12:00:00.000'  // <7d ago
                         },
-                        key: "contact_key",
+                        key: "contact_key_064002",
                         user_account: "contact_user_account"
                     });
                 });
@@ -3517,7 +3538,7 @@ describe("refugeerights app", function() {
         //                     api.contacts.add({
         //                         msisdn: '+082111',
         //                         extra : {},
-        //                         key: "contact_key",
+        //                         key: "contact_key_082111",
         //                         user_account: "contact_user_account"
         //                     });
         //                 })
@@ -3551,7 +3572,7 @@ describe("refugeerights app", function() {
         //                         extra : {
         //                             last_seen: '2015-03-03'  // 31d ago
         //                         },
-        //                         key: "contact_key",
+        //                         key: "contact_key_082111",
         //                         user_account: "contact_user_account"
         //                     });
         //                 })
@@ -3588,7 +3609,7 @@ describe("refugeerights app", function() {
         //                     api.contacts.add({
         //                         msisdn: '+082111',
         //                         extra : {},
-        //                         key: "contact_key",
+        //                         key: "contact_key_082111",
         //                         user_account: "contact_user_account"
         //                     });
         //                 })
