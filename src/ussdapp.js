@@ -585,7 +585,11 @@ go.app = function() {
 
         self.add('state_report_submit_detail', function(name) {
             // Patch nightingale report with extra information
-            return self.states.create('state_report_complete');
+            return go.utils
+                .nightingale_patch(self.im, self.contact)
+                .then(function() {
+                    return self.states.create('state_report_complete');
+                });
         });
 
         self.add('state_report_complete', function(name) {
