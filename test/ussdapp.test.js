@@ -2296,7 +2296,7 @@ describe("refugeerights app", function() {
 
         describe("Reporting testing", function() {
 
-            describe("xenophobia reporting", function() {
+            describe.only("xenophobia reporting", function() {
                 it("should navigate to state_report_legal", function() {
                     return tester
                         .setup.user.addr('064001')

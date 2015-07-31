@@ -579,9 +579,33 @@ go.utils = {
             }
     },
 
+    nightingale_get_report: function(im, contact) {
+        var method = "get";
+        var params = null;
+        var endpoint = "report/" + contact.extra.last_report_id + "/";
+        var payload = null;
+        return go.utils
+            .nightingale_api_call(method, params, payload, endpoint, im)
+            .then(function(response) {
+                return response;
+            });
+    },
+
     nightingale_patch: function(im, contact) {
-        // get the report
-        return ;
+        var method = "patch";
+        var params = null;
+        var endpoint = "report/" + contact.extra.last_report_id + "/";
+        return go.utils
+            .nightingale_get_report(im, contact)
+            .then(function(report) {
+                var payload = report.data;
+                payload.description = im.user.answers.state_report_details;
+                return go.utils
+                    .nightingale_api_call(method, params, payload, endpoint, im)
+                    .then(function(response) {
+                        return response;
+                    });
+            });
     },
 
     nightingale_post: function(im, contact) {
