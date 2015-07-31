@@ -880,8 +880,7 @@ return [
                         "language": "fr",
                         "status": "refugee",
                         "country": "drc"
-                    },
-                    "description":""
+                    }
                 }
             },
             'response': {
@@ -939,8 +938,7 @@ return [
                         "language": "fr",
                         "status": "refugee",
                         "country": "drc"
-                    },
-                    "description":""
+                    }
                 }
             },
             'response': {
@@ -1028,31 +1026,7 @@ return [
                 },
                 'url': 'https://nightingale_root/api/v1/report/888/',
                 "data": {
-                    "id": 888,
-                    "contact_key": "contact_key_064001",
-                    "to_addr": "+064001",
-                    "categories": [
-                        "111",
-                        "444"
-                    ],
-                    "project": "project-id",
-                    "location": {
-                        "id": 1,
-                        "point": {
-                            "type": "Point",
-                            "coordinates": [
-                                3.1415,
-                                2.7182
-                            ]
-                        }
-                    },
-                    "description": "Send help plz",
-                    "incident_at": null,
-                    "metadata": {
-                        "status": "refugee",
-                        "country": "drc",
-                        "language": "fr"
-                    }
+                    "description": "Send help plz"
                 }
             },
             'response': {
@@ -1076,7 +1050,7 @@ return [
                             ]
                         }
                     },
-                    "description": null,
+                    "description": "Send help plz",
                     "incident_at": null,
                     "metadata": {
                         "status": "refugee",
@@ -1141,6 +1115,12 @@ return [
                 },
                 'url': 'https://nightingale_root/api/v1/report/889/',
                 "data": {
+                    "description": "Send help plz"
+                }
+            },
+            'response': {
+                "code": "200",
+                "data": {
                     "id": 889,
                     "contact_key": "contact_key_064001",
                     "to_addr": "+064001",
@@ -1160,36 +1140,6 @@ return [
                         }
                     },
                     "description": "Send help plz",
-                    "incident_at": null,
-                    "metadata": {
-                        "status": "refugee",
-                        "country": "drc",
-                        "language": "fr"
-                    }
-                }
-            },
-            'response': {
-                "code": "200",
-                "data": {
-                    "id": 888,
-                    "contact_key": "contact_key_064001",
-                    "to_addr": "+064001",
-                    "categories": [
-                        "111",
-                        "444"
-                    ],
-                    "project": "project-id",
-                    "location": {
-                        "id": 1,
-                        "point": {
-                            "type": "Point",
-                            "coordinates": [
-                                3.1415,
-                                2.7182
-                            ]
-                        }
-                    },
-                    "description": null,
                     "incident_at": null,
                     "metadata": {
                         "status": "refugee",

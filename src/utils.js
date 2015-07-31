@@ -595,16 +595,13 @@ go.utils = {
         var method = "patch";
         var params = null;
         var endpoint = "report/" + contact.extra.last_report_id + "/";
+        var payload = {
+            description: im.user.answers.state_report_details
+        };
         return go.utils
-            .nightingale_get_report(im, contact)
-            .then(function(report) {
-                var payload = report.data;
-                payload.description = im.user.answers.state_report_details;
-                return go.utils
-                    .nightingale_api_call(method, params, payload, endpoint, im)
-                    .then(function(response) {
-                        return response;
-                    });
+            .nightingale_api_call(method, params, payload, endpoint, im)
+            .then(function(response) {
+                return response;
             });
     },
 
@@ -629,8 +626,7 @@ go.utils = {
                 language: contact.extra.lang,
                 status: contact.extra.status || "unregistered",
                 country: contact.extra.country || "unregistered"
-            },
-            description: ""
+            }
         };
 
         return go.utils
