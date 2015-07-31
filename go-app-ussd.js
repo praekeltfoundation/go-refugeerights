@@ -26,12 +26,6 @@ go.utils = {
             && no_redirects.indexOf(im.user.state.name) === -1;
     },
 
-    // eval_dialback_reminder: function(e, im, contact, $) {
-    //     return go.utils.should_send_dialback_reminder(e, contact)
-    //         ? go.utils.send_dialback_reminder(e, im, contact, $)
-    //         : Q();
-    // },
-
     eval_dialback_reminder: function(e, im, contact, $) {
         var dialback_states_registration = [
             'state_country',
@@ -81,27 +75,6 @@ go.utils = {
         }
         return Q();
     },
-
-    // send_dialback_reminder: function(e, im, contact, $) {
-    //     return im.outbound
-    //         .send_to_user({
-    //             endpoint: 'sms',
-    //             content: go.utils.get_dialback_reminder_sms(im, $)
-    //         })
-    //         .then(function() {
-    //             contact.extra.dialback_reminder_reg_sent = 'true';
-    //             return im.contacts.save(contact);
-    //         });
-    // },
-
-    // get_dialback_reminder_sms: function(im, $) {
-
-    //     return $("Please dial back in to {{ USSD_number }} to complete the registration.")
-    //         .context({
-    //             USSD_number: im.config.channel
-    //         });
-    //         // $("Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}")
-    // },
 
     save_language: function(im, contact, lang) {
         var lang_map = {
