@@ -463,7 +463,12 @@ go.app = function() {
                 question: question_map[self.contact.extra.report_theme],
                 choices: choices_map[self.contact.extra.report_theme],
                 next: function(choice) {
-                    return 'state_report_location';
+                    self.contact.extra.report_category = choice.value;
+                    return self.im.contacts
+                        .save(self.contact)
+                        .then(function() {
+                            return 'state_report_location';
+                        });
                 }
             });
         });
@@ -543,8 +548,20 @@ go.app = function() {
         });
 
         self.add('state_report_submit_critical', function(name) {
-            // Post basic info report to nightingale
-            return self.states.create('state_report_details');
+            // Reload contact
+            return self.im.contacts
+                .for_user()
+                .then(function(user_contact) {
+                    self.contact = user_contact;
+                })
+                .then(function() {
+                    // Post basic info report to nightingale
+                    return go.utils
+                        .nightingale_post(self.im, self.contact)
+                        .then(function() {
+                            return self.states.create('state_report_details');
+                        });
+                });
         });
 
         self.add('state_report_details', function(name) {
