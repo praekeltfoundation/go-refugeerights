@@ -1242,7 +1242,7 @@ go.app = function() {
 
         self.add('state_report_details', function(name) {
             var question_map = {
-                xenophobia: $("Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific – it'll enable us to send the right response & help you faster."),
+                xenophobia: $("Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific - it'll enable us to send the right response & help you faster."),
                 arrest: $("Please type the full name of the person who was arrested. Also, what happened to cause the arrest? And what documentation/permit does this person have, if any?"),
                 corruption: $("Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time"),
                 other: $("Please explain the incident in as much detail as you can: What happened; where it happened; the offender's name; his/her physical features; date/time.")

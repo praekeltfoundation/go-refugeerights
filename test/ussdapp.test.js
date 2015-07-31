@@ -2417,7 +2417,7 @@ describe("refugeerights app", function() {
                             // check navigation
                             .check.interaction({
                                 state: 'state_report_details',
-                                reply: "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific – it'll enable us to send the right response & help you faster.",
+                                reply: "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific - it'll enable us to send the right response & help you faster.",
                             })
                             .run();
                     });
@@ -2447,6 +2447,27 @@ describe("refugeerights app", function() {
                             })
                             .run();
                     });
+
+                    it("should save data to contact upon choice", function() {
+                        return tester
+                            .setup.user.addr('064001')
+                            .inputs(
+                                {session_event: 'new'}  // dial in
+                                , '2'  // state_registered_landing - report xenophobia
+                                , '1'  // state_report_legal - i understand
+                                , '3'  // state_report_category - looting
+                                , 'Quad Street'  // state_report_location
+                                , '3'  // state_report_location
+                            )
+                            .check(function(api) {
+                                var metrics = api.metrics.stores.refugeerights_test;
+                                console.log(metrics);
+                                assert.deepEqual(metrics['total.nightingale_post_success.last'].values, [1]);
+                                assert.deepEqual(metrics['total.nightingale_post_success.sum'].values, [1]);
+                            })
+                            .run();
+                    });
+
                 });
 
                 describe("upon state_report_details entry", function() {
