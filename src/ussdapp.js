@@ -126,6 +126,8 @@ go.app = function() {
                 .then(function() {
                     if (status === 'refugee' || status === 'migrant') {
                         return self.states.create('state_registered_landing');
+                    } else if (self.contact.extra.consent !== undefined) {
+                        return self.states.create('state_unregistered_menu');
                     } else {
                         return self.states.create('state_language');
                     }
@@ -423,7 +425,13 @@ go.app = function() {
                     new Choice('state_report_end_permission', $("Exit")),
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    // reset dialback sms reminder checking since it's a new report
+                    self.contact.extra.dialback_reminder_report_sent = 'false';
+                    return self.im.contacts
+                        .save(self.contact)
+                        .then(function() {
+                            return choice.value;
+                        });
                 }
             });
         });

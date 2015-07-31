@@ -1174,129 +1174,239 @@ describe("refugeerights app", function() {
 
         // TEST SENDING REDIAL REMINDER SMS
 
-        // describe("Redial reminder testing", function() {
-        //     describe("if the user times out once during registration", function() {
-        //         it("should send redial reminder sms", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language - french
-        //                     , '5'  // state_country - burundi
-        //                     , {session_event: 'close'}  // may or may not work
-        //                 )
-        //                 .check(function(api) {
-        //                     var smses = _.where(api.outbound.store, {
-        //                         endpoint: 'sms'
-        //                     });
-        //                     assert.equal(smses.length, 1);
-        //                 })
-        //                 .run();
-        //         });
+        describe("Redial reminder testing", function() {
+            describe("if the user times out once during registration", function() {
+                it("should send redial reminder sms", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_consent - consent
+                            , '1'  // state_unregistered_menu - info
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 1);
+                        })
+                        .run();
+                });
 
-        //         it("should save extras", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language - french
-        //                     , '5'  // state_country - burundi
-        //                     , {session_event: 'close'}  // may or may not work
-        //                 )
-        //                 .check(function(api) {
-        //                     var contact = _.find(api.contacts.store, {
-        //                         msisdn: '+082111'
-        //                     });
-        //                     assert.equal(contact.extra.dialback_reminder_sent, 'true');
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+                it("should save extras", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_consent - consent
+                            , '1'  // state_unregistered_menu - info
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(contact.extra.dialback_reminder_reg_sent, 'true');
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("if the user times out twice during registration", function() {
-        //         it("should only send one redial reminder sms", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language - french
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                     , '5'  // state_country - burundi
-        //                     , {session_event: 'close'}  // may or may not work
-        //                 )
-        //                 .check(function(api) {
-        //                     var smses = _.where(api.outbound.store, {
-        //                         endpoint: 'sms'
-        //                     });
-        //                     assert.equal(smses.length, 1);
-        //                 })
-        //                 .run();
-        //         });
+            describe("if the user times out twice during registration", function() {
+                it("should only send one redial reminder sms", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_consent - consent
+                            , '1'  // state_unregistered_menu - info
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '5'  // state_country - burundi
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 1);
+                        })
+                        .run();
+                });
 
-        //         it("should save extras", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language - french
-        //                     , {session_event: 'close'}  // may or may not work
-        //                     , {session_event: 'new'}  // redial
-        //                     , '5'  // state_country - burundi
-        //                     , {session_event: 'close'}  // may or may not work
-        //                 )
-        //                 .check(function(api) {
-        //                     var contact = _.find(api.contacts.store, {
-        //                         msisdn: '+082111'
-        //                     });
-        //                     assert.equal(contact.extra.dialback_reminder_sent, 'true');
-        //                 })
-        //                 .run();
-        //         });
-        //     });
+                it("should save extras", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , '1'  // state_consent - consent
+                            , '1'  // state_unregistered_menu - info
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}  // redial
+                            , '5'  // state_country - burundi
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(contact.extra.dialback_reminder_reg_sent, 'true');
+                        })
+                        .run();
+                });
+            });
 
-        //     describe("if the user times out only after registration", function() {
-        //         it("should not send a redial reminder sms", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language - french
-        //                     , '5'  // state_country - burundi
-        //                     , '4'  // state_status (migrant)
-        //                     , '2'  // state_migrant_rights_info (exit)
-        //                     , {session_event: 'close'}  // may or may not work
-        //                 )
-        //                 .check(function(api) {
-        //                     var smses = _.where(api.outbound.store, {
-        //                         endpoint: 'sms'
-        //                     });
-        //                     assert.equal(smses.length, 0);
-        //                 })
-        //                 .run();
-        //         });
+            describe("if the user times out not on registration", function() {
+                it("should not send a redial reminder sms", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 0);
+                        })
+                        .run();
+                });
 
-        //         it("should not save extras", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .inputs(
-        //                     {session_event: 'new'}  // dial in
-        //                     , '2'  // state_language - french
-        //                     , '5'  // state_country - burundi
-        //                     , '4'  // state_status (migrant)
-        //                     , '2'  // state_migrant_rights_info (exit)
-        //                     , {session_event: 'close'}  // may or may not work
-        //                 )
-        //                 .check(function(api) {
-        //                     var contact = _.find(api.contacts.store, {
-        //                         msisdn: '+082111'
-        //                     });
-        //                     assert.equal(contact.extra.dialback_reminder_sent, undefined);
-        //                 })
-        //                 .run();
-        //         });
-        //     });
-        // });
+                it("should not save extras", function() {
+                    return tester
+                        .setup.user.addr('082111')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_language - french
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+082111'
+                            });
+                            assert.equal(contact.extra.dialback_reminder_sent, undefined);
+                        })
+                        .run();
+                });
+            });
+
+            describe("if the user times out on state_report_details", function() {
+                it("should send a report finish sms", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_registered_landing - report xenophobia
+                            , '1'  // state_report_legal - i understand
+                            , '3'  // state_report_category - looting
+                            , 'Quad Street'  // state_report_location
+                            , '3'  // state_report_location
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 1);
+                        })
+                        .run();
+                });
+
+                it("should save extras", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_registered_landing - report xenophobia
+                            , '1'  // state_report_legal - i understand
+                            , '3'  // state_report_category - looting
+                            , 'Quad Street'  // state_report_location
+                            , '3'  // state_report_location
+                            , {session_event: 'close'}  // may or may not work
+                        )
+                        .check(function(api) {
+                            var contact = _.find(api.contacts.store, {
+                                msisdn: '+064001'
+                            });
+                            assert.equal(contact.extra.dialback_reminder_report_sent, 'true');
+                        })
+                        .run();
+                });
+            });
+
+            describe("if the user times out twice on state_report_details", function() {
+                it("should send only one report finish sms", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '2'  // state_registered_landing - report xenophobia
+                            , '1'  // state_report_legal - i understand
+                            , '3'  // state_report_category - looting
+                            , 'Quad Street'  // state_report_location
+                            , '3'  // state_report_location
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}
+                            , '1'
+                            , {session_event: 'close'}
+                        )
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 1);
+                        })
+                        .run();
+                });
+            });
+
+            describe("if the user times out like a boss on two different reports", function() {
+                it("should send two timeout report smss", function() {
+                    return tester
+                        .setup.user.addr('064001')
+                        .inputs(
+                            {session_event: 'new'}  // dial in
+                            , '4'  // state_registered_landing - report xenophobia
+                            , '1'  // state_report_legal - i understand
+                            , '5'  // state_report_category - looting
+                            , 'Quad Street'  // state_report_location
+                            , '3'  // state_report_location
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}
+                            , '1'
+                            , {session_event: 'close'}
+                            , {session_event: 'new'}
+                            , 'Send help plz'  // state_report_details
+                            , '1'  // state_report_complete - main menu
+                            , '4'  // state_registered_landing - report xenophobia
+                            , '1'  // state_report_legal - i understand
+                            , '5'  // state_report_category - looting
+                            , 'Friend Street'  // state_report_location
+                            , {session_event: 'close'}  // may or may not work
+                            , {session_event: 'new'}
+                            , {session_event: 'close'}
+                            , {session_event: 'new'}
+                        )
+                        .check.interaction({
+                            state: 'state_report_details'
+                        })
+                        .check(function(api) {
+                            var smses = _.where(api.outbound.store, {
+                                endpoint: 'sms'
+                            });
+                            assert.equal(smses.length, 2);
+                        })
+                        .run();
+                });
+            });
+        });
 
         // TEST REGISTRATION
 
@@ -2461,7 +2571,6 @@ describe("refugeerights app", function() {
                             )
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
-                                console.log(metrics);
                                 assert.deepEqual(metrics['total.nightingale_post_success.last'].values, [1]);
                                 assert.deepEqual(metrics['total.nightingale_post_success.sum'].values, [1]);
                             })
