@@ -1821,6 +1821,8 @@ go.app = function() {
         self.add('state_test_paginated', function(name) {
             return new PaginatedState(name, {
                 text: $("You will get a Section 22 permit (Asylum-seeker permit) when you apply. It's proof you've applied. You're not a refugee yet. Your permit lets you work or study in SA. Check the permit conditions or ask. Know if it’s valid for 1 month or 3. Make a copy of the permit. Always carry it with you. Keep renewing it before it expires. A decision can take months or years. Tip: If you don’t renew your Section 22 permit before expiry, you could be arrested/detained/fined."),
+                // text: $("Some university law clinics and human rights organisations offer free legal advice to asylum seekers and refugees. The UNHCR has legal counsellors specialising in refugee law in 5 SA cities. See ‘Useful Services’ for more info. Legal counsellors can advise on your asylum application or help you with an appeal if your asylum application has been rejected. Counsellors can only give you legal advice. They don’t provide accommodation or food. See Social Services for more info."),
+                // text: $("You'll be interviewed when you apply for asylum. Expect questions about you and your country. You may bring a legal representative or interpreter. Your representative can only observe. You can also bring witnesses, affidavits or other evidence to help. You will get a decision on the day or later. Get your permit stamped before you leave. Married couples must both be interviewed if applying together. Name your wife or children in another country to add them to your file."),
                 more: $('Next'),
                 back: $('Back'),
                 exit: $('Send to me by SMS'),
