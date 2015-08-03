@@ -218,118 +218,6 @@ describe("refugeerights app", function() {
             });
         });
 
-        // TEST PAGINATEDCHOICESTATE PAGING
-
-        // describe("PaginatedChoiceState testing using Refugee Main Menu", function() {
-        //     describe("forward navigation", function() {
-        //         it("should display page 2 on Next", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .setup.user.state('state_refugee_main')
-        //                 .inputs(
-        //                     '7'  // state_refugee_main (Next)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_refugee_main',
-        //                     reply: [
-        //                         'MAIN MENU',
-        //                         '1. Health rights',
-        //                         '2. Education',
-        //                         '3. Social services',
-        //                         '4. Banking',
-        //                         '5. Tips',
-        //                         '6. Useful contacts',
-        //                         '7. Safety concerns',
-        //                         '8. Statelessness',
-        //                         '9. Next',
-        //                         '10. Back'
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("should display page 3 on Next", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .setup.user.state('state_refugee_main')
-        //                 .inputs(
-        //                     '7'  // state_refugee_main (Next p1)
-        //                     , '9'  // state_refugee_main (Next p2)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_refugee_main',
-        //                     reply: [
-        //                         'MAIN MENU',
-        //                         '1. LGBTI rights',
-        //                         '2. Violence against women & children',
-        //                         '3. Word definitions',
-        //                         '4. Change settings',
-        //                         '5. Ts & Cs of this service',
-        //                         '6. About LHR',
-        //                         '7. Back'
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
-        //     });
-
-        //     describe("backward navigation", function() {
-        //         it("should display page 2 on Back", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .setup.user.state('state_refugee_main')
-        //                 .inputs(
-        //                     '7'  // state_refugee_main (Next p1)
-        //                     , '9'  // state_refugee_main (Next p2)
-        //                     , '7'  // state_refugee_main (Back p3)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_refugee_main',
-        //                     reply: [
-        //                         'MAIN MENU',
-        //                         '1. Health rights',
-        //                         '2. Education',
-        //                         '3. Social services',
-        //                         '4. Banking',
-        //                         '5. Tips',
-        //                         '6. Useful contacts',
-        //                         '7. Safety concerns',
-        //                         '8. Statelessness',
-        //                         '9. Next',
-        //                         '10. Back'
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
-
-        //         it("should display page 1 on Back", function() {
-        //             return tester
-        //                 .setup.user.addr('082111')
-        //                 .setup.user.state('state_refugee_main')
-        //                 .inputs(
-        //                     '7'  // state_refugee_main (Next p1)
-        //                     , '9'  // state_refugee_main (Next p2)
-        //                     , '7'  // state_refugee_main (Back p3)
-        //                     , '10'  // state_refugee_main (Back p2)
-        //                 )
-        //                 .check.interaction({
-        //                     state: 'state_refugee_main',
-        //                     reply: [
-        //                         'MAIN MENU',
-        //                         '1. Refugee definitions',
-        //                         '2. Asylum applications',
-        //                         '3. Asylum applications: children',
-        //                         '4. Permits',
-        //                         '5. Support services',
-        //                         '6. Right to work',
-        //                         '7. Next'
-        //                     ].join('\n')
-        //                 })
-        //                 .run();
-        //         });
-        //     });
-        // });
-
         // TEST REDIS KEY EXPIRY
 
         describe("Redis expiry testing", function() {
@@ -4069,6 +3957,208 @@ describe("refugeerights app", function() {
                 });
             });
         });
+
+        // TEST PAGINATEDCHOICE PAGING
+
+        describe.only("PaginatedChoice testing", function() {
+            describe("forward navigation", function() {
+                it("should display page 1", function() {
+                    return tester
+                        .setup.user({
+                            state: 'state_test_choice',
+                        })
+                        .inputs(
+                            '1'  // state_test_choice
+                        )
+                        .check.interaction({
+                            state: 'state_test_paginated',
+                            reply: [
+                                "You will get a Section 22 permit (Asylum-seeker permit) when you apply. It's proof you've applied. You're not a refugee",
+                                "1. Next",
+                                "2. Send to me by SMS"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should display page 2", function() {
+                    return tester
+                        .setup.user({
+                            state: 'state_test_choice',
+                        })
+                        .inputs(
+                            '1'  // state_test_choice
+                            , '1'  // state_test_paginated - Next
+                        )
+                        .check.interaction({
+                            state: 'state_test_paginated',
+                            reply: [
+                                "yet. Your permit lets you work or study in SA. Check the permit conditions or ask. Know if it’s valid for 1 month or 3.",
+                                "1. Next",
+                                "2. Back",
+                                "3. Send to me by SMS"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should display page 3", function() {
+                    return tester
+                        .setup.user({
+                            state: 'state_test_choice',
+                        })
+                        .inputs(
+                            '1'  // state_test_choice
+                            , '1'  // state_test_paginated - Next
+                            , '1'  // state_test_paginated - Next
+                        )
+                        .check.interaction({
+                            state: 'state_test_paginated',
+                            reply: [
+                                "Make a copy of the permit. Always carry it with you. Keep renewing it before it expires. A decision can take months or",
+                                "1. Next",
+                                "2. Back",
+                                "3. Send to me by SMS"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+
+                it("should display page 4", function() {
+                    return tester
+                        .setup.user({
+                            state: 'state_test_choice',
+                        })
+                        .inputs(
+                            '1'  // state_test_choice
+                            , '1'  // state_test_paginated - Next
+                            , '1'  // state_test_paginated - Next
+                            , '1'  // state_test_paginated - Next
+                        )
+                        .check.interaction({
+                            state: 'state_test_paginated',
+                            reply: [
+                                "years. Tip: If you don’t renew your Section 22 permit before expiry, you could be arrested/detained/fined.",
+                                "1. Back",
+                                "2. Send to me by SMS"
+                            ].join('\n')
+                        })
+                        .run();
+                });
+            });
+        });
+
+        // TEST PAGINATEDCHOICESTATE PAGING
+
+        // describe("PaginatedChoiceState testing using Refugee Main Menu", function() {
+        //     describe("forward navigation", function() {
+        //         it("should display page 2 on Next", function() {
+        //             return tester
+        //                 .setup.user.addr('082111')
+        //                 .setup.user.state('state_refugee_main')
+        //                 .inputs(
+        //                     '7'  // state_refugee_main (Next)
+        //                 )
+        //                 .check.interaction({
+        //                     state: 'state_refugee_main',
+        //                     reply: [
+        //                         'MAIN MENU',
+        //                         '1. Health rights',
+        //                         '2. Education',
+        //                         '3. Social services',
+        //                         '4. Banking',
+        //                         '5. Tips',
+        //                         '6. Useful contacts',
+        //                         '7. Safety concerns',
+        //                         '8. Statelessness',
+        //                         '9. Next',
+        //                         '10. Back'
+        //                     ].join('\n')
+        //                 })
+        //                 .run();
+        //         });
+
+        //         it("should display page 3 on Next", function() {
+        //             return tester
+        //                 .setup.user.addr('082111')
+        //                 .setup.user.state('state_refugee_main')
+        //                 .inputs(
+        //                     '7'  // state_refugee_main (Next p1)
+        //                     , '9'  // state_refugee_main (Next p2)
+        //                 )
+        //                 .check.interaction({
+        //                     state: 'state_refugee_main',
+        //                     reply: [
+        //                         'MAIN MENU',
+        //                         '1. LGBTI rights',
+        //                         '2. Violence against women & children',
+        //                         '3. Word definitions',
+        //                         '4. Change settings',
+        //                         '5. Ts & Cs of this service',
+        //                         '6. About LHR',
+        //                         '7. Back'
+        //                     ].join('\n')
+        //                 })
+        //                 .run();
+        //         });
+        //     });
+
+        //     describe("backward navigation", function() {
+        //         it("should display page 2 on Back", function() {
+        //             return tester
+        //                 .setup.user.addr('082111')
+        //                 .setup.user.state('state_refugee_main')
+        //                 .inputs(
+        //                     '7'  // state_refugee_main (Next p1)
+        //                     , '9'  // state_refugee_main (Next p2)
+        //                     , '7'  // state_refugee_main (Back p3)
+        //                 )
+        //                 .check.interaction({
+        //                     state: 'state_refugee_main',
+        //                     reply: [
+        //                         'MAIN MENU',
+        //                         '1. Health rights',
+        //                         '2. Education',
+        //                         '3. Social services',
+        //                         '4. Banking',
+        //                         '5. Tips',
+        //                         '6. Useful contacts',
+        //                         '7. Safety concerns',
+        //                         '8. Statelessness',
+        //                         '9. Next',
+        //                         '10. Back'
+        //                     ].join('\n')
+        //                 })
+        //                 .run();
+        //         });
+
+        //         it("should display page 1 on Back", function() {
+        //             return tester
+        //                 .setup.user.addr('082111')
+        //                 .setup.user.state('state_refugee_main')
+        //                 .inputs(
+        //                     '7'  // state_refugee_main (Next p1)
+        //                     , '9'  // state_refugee_main (Next p2)
+        //                     , '7'  // state_refugee_main (Back p3)
+        //                     , '10'  // state_refugee_main (Back p2)
+        //                 )
+        //                 .check.interaction({
+        //                     state: 'state_refugee_main',
+        //                     reply: [
+        //                         'MAIN MENU',
+        //                         '1. Refugee definitions',
+        //                         '2. Asylum applications',
+        //                         '3. Asylum applications: children',
+        //                         '4. Permits',
+        //                         '5. Support services',
+        //                         '6. Right to work',
+        //                         '7. Next'
+        //                     ].join('\n')
+        //                 })
+        //                 .run();
+        //         });
+        //     });
+        // });
 
 
     });
