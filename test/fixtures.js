@@ -23,40 +23,38 @@ return [
                     "previous": null,
                     "total_count": 2
                 },
-                "data": {
-                    "objects": [
-                        {
-                            "url": "http://127.0.0.1:8000/subscription/subscription/1/",
-                            "active": true,
-                            "completed": false,
-                            "contact_key": "contact_key_064001",
-                            "created_at": "2014-08-05T11:22:34.838969",
-                            "id": 1,
-                            "lang": "en",
-                            "messageset_id": 1,
-                            "next_sequence_number": 1,
-                            "process_status": 0,
-                            "schedule": 1,
-                            "to_addr": "+064001",
-                            "updated_at": "2014-08-05T11:22:34.838996",
-                        },
-                        {
-                            "url": "http://127.0.0.1:8000/subscription/subscription/2/",
-                            "active": true,
-                            "completed": false,
-                            "contact_key": "contact_key_064001",
-                            "created_at": "2014-08-05T11:31:50.908974",
-                            "id": 2,
-                            "lang": "af",
-                            "messageset_id": 1,
-                            "next_sequence_number": 1,
-                            "process_status": 0,
-                            "schedule": 1,
-                            "to_addr": "+064001",
-                            "updated_at": "2014-08-05T11:31:50.909025",
-                        }
-                    ]
-                }
+                "data": [
+                    {
+                        "url": "http://127.0.0.1:8000/subscription/subscription/1/",
+                        "active": false,
+                        "completed": false,
+                        "contact_key": "contact_key_064001",
+                        "created_at": "2014-08-05T11:22:34.838969",
+                        "id": 1,
+                        "lang": "en",
+                        "messageset_id": 1,
+                        "next_sequence_number": 1,
+                        "process_status": 0,
+                        "schedule": 1,
+                        "to_addr": "+064001",
+                        "updated_at": "2014-08-05T11:22:34.838996",
+                    },
+                    {
+                        "url": "http://127.0.0.1:8000/subscription/subscription/2/",
+                        "active": true,
+                        "completed": false,
+                        "contact_key": "contact_key_064001",
+                        "created_at": "2014-08-05T11:31:50.908974",
+                        "id": 2,
+                        "lang": "af",
+                        "messageset_id": 1,
+                        "next_sequence_number": 1,
+                        "process_status": 0,
+                        "schedule": 1,
+                        "to_addr": "+064001",
+                        "updated_at": "2014-08-05T11:31:50.909025",
+                    }
+                ]
             }
         },
         // 01b Patch subscriptions
@@ -66,40 +64,21 @@ return [
                 'headers': {
                     'Authorization': ['Token test_key']
                 },
-                'url': 'http://127.0.0.1:8000/subscription/subscription/',
+                'url': 'http://127.0.0.1:8000/subscription/subscription/2/',
                 "data": {
-                    "objects": [
-                        {
-                            "url": "http://127.0.0.1:8000/subscription/subscription/1/",
-                            "active": false,
-                            "completed": false,
-                            "contact_key": "contact_key_064001",
-                            "created_at": "2014-08-05T11:22:34.838969",
-                            "id": 1,
-                            "lang": "en",
-                            "messageset_id": 1,
-                            "next_sequence_number": 1,
-                            "process_status": 0,
-                            "schedule": 1,
-                            "to_addr": "+064001",
-                            "updated_at": "2014-08-05T11:22:34.838996",
-                        },
-                        {
-                            "url": "http://127.0.0.1:8000/subscription/subscription/2/",
-                            "active": false,
-                            "completed": false,
-                            "contact_key": "contact_key_064001",
-                            "created_at": "2014-08-05T11:31:50.908974",
-                            "id": 2,
-                            "lang": "af",
-                            "messageset_id": 1,
-                            "next_sequence_number": 1,
-                            "process_status": 0,
-                            "schedule": 1,
-                            "to_addr": "+064001",
-                            "updated_at": "2014-08-05T11:31:50.909025",
-                        }
-                    ]
+                    "url": "http://127.0.0.1:8000/subscription/subscription/2/",
+                    "active": false,
+                    "completed": false,
+                    "contact_key": "contact_key_064001",
+                    "created_at": "2014-08-05T11:31:50.908974",
+                    "id": 2,
+                    "lang": "af",
+                    "messageset_id": 1,
+                    "next_sequence_number": 1,
+                    "process_status": 0,
+                    "schedule": 1,
+                    "to_addr": "+064001",
+                    "updated_at": "2014-08-05T11:31:50.909025",
                 }
             },
             'response': {
@@ -316,40 +295,53 @@ return [
                     "previous": null,
                     "total_count": 2
                 },
-                "data": {
-                    "objects": [
-                        {
-                            "url": "http://127.0.0.1:8000/subscription/subscription/1/",
-                            "active": true,
-                            "completed": false,
-                            "contact_key": "contact_key_064001",
-                            "created_at": "2014-08-05T11:22:34.838969",
-                            "id": 1,
-                            "lang": "fr",
-                            "messageset_id": 1,
-                            "next_sequence_number": 1,
-                            "process_status": 0,
-                            "schedule": 1,
-                            "to_addr": "+064002",
-                            "updated_at": "2014-08-05T11:22:34.838996",
-                        },
-                        {
-                            "url": "http://127.0.0.1:8000/subscription/subscription/2/",
-                            "active": true,
-                            "completed": false,
-                            "contact_key": "contact_key_064001",
-                            "created_at": "2014-08-05T11:31:50.908974",
-                            "id": 2,
-                            "lang": "fr",
-                            "messageset_id": 1,
-                            "next_sequence_number": 1,
-                            "process_status": 0,
-                            "schedule": 1,
-                            "to_addr": "+064002",
-                            "updated_at": "2014-08-05T11:31:50.909025",
-                        }
-                    ]
-                }
+                "data": [
+                    {
+                        "url": "http://127.0.0.1:8000/subscription/subscription/1/",
+                        "active": false,
+                        "completed": false,
+                        "contact_key": "contact_key_064001",
+                        "created_at": "2014-08-05T11:22:34.838969",
+                        "id": 1,
+                        "lang": "fr",
+                        "messageset_id": 1,
+                        "next_sequence_number": 1,
+                        "process_status": 0,
+                        "schedule": 1,
+                        "to_addr": "+064002",
+                        "updated_at": "2014-08-05T11:22:34.838996",
+                    },
+                    {
+                        "url": "http://127.0.0.1:8000/subscription/subscription/2/",
+                        "active": true,
+                        "completed": false,
+                        "contact_key": "contact_key_064001",
+                        "created_at": "2014-08-05T11:31:50.908974",
+                        "id": 2,
+                        "lang": "fr",
+                        "messageset_id": 1,
+                        "next_sequence_number": 1,
+                        "process_status": 0,
+                        "schedule": 1,
+                        "to_addr": "+064002",
+                        "updated_at": "2014-08-05T11:31:50.909025",
+                    },
+                    {
+                        "url": "http://127.0.0.1:8000/subscription/subscription/3/",
+                        "active": true,
+                        "completed": false,
+                        "contact_key": "contact_key_064001",
+                        "created_at": "2014-08-05T11:31:50.908974",
+                        "id": 3,
+                        "lang": "fr",
+                        "messageset_id": 1,
+                        "next_sequence_number": 1,
+                        "process_status": 0,
+                        "schedule": 1,
+                        "to_addr": "+064002",
+                        "updated_at": "2014-08-05T11:31:50.909025",
+                    }
+                ]
             }
         },
         // 04b Patch subscriptions
@@ -359,40 +351,21 @@ return [
                 'headers': {
                     'Authorization': ['Token test_key']
                 },
-                'url': 'http://127.0.0.1:8000/subscription/subscription/',
+                'url': 'http://127.0.0.1:8000/subscription/subscription/2/',
                 "data": {
-                    "objects": [
-                        {
-                            "url": "http://127.0.0.1:8000/subscription/subscription/1/",
-                            "active": true,
-                            "completed": false,
-                            "contact_key": "contact_key_064001",
-                            "created_at": "2014-08-05T11:22:34.838969",
-                            "id": 1,
-                            "lang": "en",
-                            "messageset_id": 1,
-                            "next_sequence_number": 1,
-                            "process_status": 0,
-                            "schedule": 1,
-                            "to_addr": "+064002",
-                            "updated_at": "2014-08-05T11:22:34.838996",
-                        },
-                        {
-                            "url": "http://127.0.0.1:8000/subscription/subscription/2/",
-                            "active": true,
-                            "completed": false,
-                            "contact_key": "contact_key_064001",
-                            "created_at": "2014-08-05T11:31:50.908974",
-                            "id": 2,
-                            "lang": "en",
-                            "messageset_id": 1,
-                            "next_sequence_number": 1,
-                            "process_status": 0,
-                            "schedule": 1,
-                            "to_addr": "+064002",
-                            "updated_at": "2014-08-05T11:31:50.909025",
-                        }
-                    ]
+                    "url": "http://127.0.0.1:8000/subscription/subscription/2/",
+                    "active": true,
+                    "completed": false,
+                    "contact_key": "contact_key_064001",
+                    "created_at": "2014-08-05T11:31:50.908974",
+                    "id": 2,
+                    "lang": "en",
+                    "messageset_id": 1,
+                    "next_sequence_number": 1,
+                    "process_status": 0,
+                    "schedule": 1,
+                    "to_addr": "+064002",
+                    "updated_at": "2014-08-05T11:31:50.909025",
                 }
             },
             'response': {
@@ -402,6 +375,37 @@ return [
                 }
             }
         },
+        {
+            'request': {
+                'method': 'PATCH',
+                'headers': {
+                    'Authorization': ['Token test_key']
+                },
+                'url': 'http://127.0.0.1:8000/subscription/subscription/3/',
+                "data": {
+                    "url": "http://127.0.0.1:8000/subscription/subscription/3/",
+                    "active": true,
+                    "completed": false,
+                    "contact_key": "contact_key_064001",
+                    "created_at": "2014-08-05T11:31:50.908974",
+                    "id": 3,
+                    "lang": "en",
+                    "messageset_id": 1,
+                    "next_sequence_number": 1,
+                    "process_status": 0,
+                    "schedule": 1,
+                    "to_addr": "+064002",
+                    "updated_at": "2014-08-05T11:31:50.909025",
+                }
+            },
+            'response': {
+                "code": 200,
+                "data": {
+                    "success": "true"
+                }
+            }
+        },
+
 
     // GET TOPICS FOR REFUGEE STEP 1 - FAQ 11
         {
