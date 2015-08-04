@@ -3519,7 +3519,7 @@ describe("refugeerights app", function() {
                                 "5. Arrefr",
                                 "6. Childrfr",
                                 "7. Helplinfr",
-                                "8. Back"
+                                "8. Main menu"
                             ].join('\n')
                         })
                         .run();
@@ -3527,7 +3527,7 @@ describe("refugeerights app", function() {
             });
 
             describe("When the user chooses a topic", function() {
-                describe("if they choose Back", function() {
+                describe("if they choose Main menu", function() {
                     it("should show the main menu", function() {
                         return tester
                             .setup.user.addr('064001')
@@ -3535,7 +3535,7 @@ describe("refugeerights app", function() {
                                 {session_event: 'new'}  // dial in first time
                                 , '1'  // state_registered_landing
                                 , '2'  // state_refugee_main
-                                , '8'  // state_faq_topics
+                                , '8'  // state_faq_topics - main menu
                             )
                             .check.interaction({
                                 state: "state_refugee_main"
@@ -3561,7 +3561,7 @@ describe("refugeerights app", function() {
                                     "1. Apply at Rfr",
                                     "2. Durbfr",
                                     "3. Musifr",
-                                    "4. Back"
+                                    "4. Previous menu"
                                 ].join('\n')
                             })
                             .run();
@@ -3570,7 +3570,7 @@ describe("refugeerights app", function() {
             });
 
             describe("When the user chooses a question", function() {
-                describe("if they choose Back", function() {
+                describe("if they choose Previous menu", function() {
                     it("should show the topics page", function() {
                         return tester
                             .setup.user.addr('064001')
@@ -3579,7 +3579,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_registered_landing
                                 , '2'  // state_refugee_main
                                 , '1'  // state_faq_topics - when/where to apply
-                                , '4'  // state_faq_questions - back
+                                , '4'  // state_faq_questions - previous menu
                             )
                             .check.interaction({
                                 state: "state_faq_topics"
