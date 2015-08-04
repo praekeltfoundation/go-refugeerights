@@ -3884,6 +3884,10 @@ describe("refugeerights app", function() {
                             var metrics = api.metrics.stores.refugeerights_test;
                             assert.deepEqual(metrics['total.change_language.last'].values, [1]);
                             assert.deepEqual(metrics['total.change_language.sum'].values, [1]);
+                            assert.deepEqual(metrics['total.subscription_lang_update_success.last'].values, [2]);
+                            assert.deepEqual(metrics['total.subscription_lang_update_success.sum'].values, [2]);
+                            assert.deepEqual(metrics['total.subscription_lang_update_fail.last'], undefined);
+                            assert.deepEqual(metrics['total.subscription_lang_update_fail.sum'], undefined);
                         })
                         .run();
                 });

@@ -5,6 +5,7 @@
 var go = {};
 go;
 
+/*jshint -W083 */
 var Q = require('q');
 var moment = require('moment');
 var vumigo = require('vumigo_v02');
@@ -233,28 +234,52 @@ go.utils = {
         .control_api_call("get", params, null, 'subscription/', im)
         .then(function(json_result) {
             // change all subscription languages
-            var update = json_result.data;
+            var subscriptions = json_result.data;
             var clean = true;  // clean tracks if api call is unnecessary
-            for (i=0; i<update.objects.length; i++) {
-                if (update.objects[i].lang !== contact.extra.lang) {
-                    update.objects[i].lang = contact.extra.lang;
+            var patch_calls = [];
+            for (i=0; i<subscriptions.length; i++) {
+                if (subscriptions[i].lang !== contact.extra.lang && subscriptions[i].active === true) {
+                    var updated_subscription = subscriptions[i];
+                    var endpoint = 'subscription/' + updated_subscription.id + '/';
+                    updated_subscription.lang = contact.extra.lang;
+                    // store the patch calls to be made
+                    patch_calls.push(function() {
+                        return go.utils.control_api_call("patch", {}, updated_subscription, endpoint, im);
+                    });
                     clean = false;
                 }
             }
             if (!clean) {
-                return go.utils
-                .control_api_call("patch", {}, update, 'subscription/', im)
-                .then(function(result) {
-                    if (result.code >= 200 && result.code < 300) {
+                return Q
+                .all(patch_calls.map(Q.try))
+                .then(function(results) {
+                    var lang_update_successes = 0;
+                    var lang_update_failures = 0;
+                    for (var index in results) {
+                        (results[index].code >= 200 && results[index].code < 300)
+                            ? lang_update_successes += 1
+                            : lang_update_failures += 1;
+                    }
+
+                    if (lang_update_successes > 0 && lang_update_failures > 0) {
                         return Q.all([
-                            im.metrics.fire.inc(["total", "subscription_lang_update_success", "last"].join('.')),
-                            im.metrics.fire.sum(["total", "subscription_lang_update_success", "sum"].join('.'), 1)
+                            im.metrics.fire.inc(["total", "subscription_lang_update_success", "last"].join('.'), {amount: lang_update_successes}),
+                            im.metrics.fire.sum(["total", "subscription_lang_update_success", "sum"].join('.'), lang_update_successes),
+                            im.metrics.fire.inc(["total", "subscription_lang_update_fail", "last"].join('.'), {amount: lang_update_failures}),
+                            im.metrics.fire.sum(["total", "subscription_lang_update_fail", "sum"].join('.'), lang_update_failures)
+                        ]);
+                    } else if (lang_update_successes > 0) {
+                        return Q.all([
+                            im.metrics.fire.inc(["total", "subscription_lang_update_success", "last"].join('.'), {amount: lang_update_successes}),
+                            im.metrics.fire.sum(["total", "subscription_lang_update_success", "sum"].join('.'), lang_update_successes)
+                        ]);
+                    } else if (lang_update_failures > 0) {
+                        return Q.all([
+                            im.metrics.fire.inc(["total", "subscription_lang_update_fail", "last"].join('.'), {amount: lang_update_failures}),
+                            im.metrics.fire.sum(["total", "subscription_lang_update_fail", "sum"].join('.'), lang_update_failures)
                         ]);
                     } else {
-                        return Q.all([
-                            im.metrics.fire.inc(["total", "subscription_lang_update_fail", "last"].join('.')),
-                            im.metrics.fire.sum(["total", "subscription_lang_update_fail", "sum"].join('.'), 1)
-                        ]);
+                        return Q();
                     }
                 });
             } else {
@@ -272,28 +297,52 @@ go.utils = {
         .control_api_call("get", params, null, 'subscription/', im)
         .then(function(json_result) {
             // make all subscriptions inactive
-            var update = json_result.data;
+            var subscriptions = json_result.data;
             var clean = true;  // clean tracks if api call is unnecessary
-            for (i=0; i<update.objects.length; i++) {
-                if (update.objects[i].active === true) {
-                    update.objects[i].active = false;
+            var patch_calls = [];
+            for (i=0; i<subscriptions.length; i++) {
+                if (subscriptions[i].active === true) {
+                    var updated_subscription = subscriptions[i];
+                    var endpoint = 'subscription/' + updated_subscription.id + '/';
+                    updated_subscription.active = false;
+                    // store the patch calls to be made
+                    patch_calls.push(function() {
+                        return go.utils.control_api_call("patch", {}, updated_subscription, endpoint, im);
+                    });
                     clean = false;
                 }
             }
             if (!clean) {
-                return go.utils
-                .control_api_call("patch", {}, update, 'subscription/', im)
-                .then(function(result) {
-                    if (result.code >= 200 && result.code < 300) {
+                return Q
+                .all(patch_calls.map(Q.try))
+                .then(function(results) {
+                    var unsubscribe_successes = 0;
+                    var unsubscribe_failures = 0;
+                    for (var index in results) {
+                        (results[index].code >= 200 && results[index].code < 300)
+                            ? unsubscribe_successes += 1
+                            : unsubscribe_failures += 1;
+                    }
+
+                    if (unsubscribe_successes > 0 && unsubscribe_failures > 0) {
                         return Q.all([
-                            im.metrics.fire.inc(["total", "subscription_unsubscribe_success", "last"].join('.')),
-                            im.metrics.fire.sum(["total", "subscription_unsubscribe_success", "sum"].join('.'), 1)
+                            im.metrics.fire.inc(["total", "subscription_unsubscribe_success", "last"].join('.'), {amount: unsubscribe_successes}),
+                            im.metrics.fire.sum(["total", "subscription_unsubscribe_success", "sum"].join('.'), unsubscribe_successes),
+                            im.metrics.fire.inc(["total", "subscription_unsubscribe_fail", "last"].join('.'), {amount: unsubscribe_failures}),
+                            im.metrics.fire.sum(["total", "subscription_unsubscribe_fail", "sum"].join('.'), unsubscribe_failures)
+                        ]);
+                    } else if (unsubscribe_successes > 0) {
+                        return Q.all([
+                            im.metrics.fire.inc(["total", "subscription_unsubscribe_success", "last"].join('.'), {amount: unsubscribe_successes}),
+                            im.metrics.fire.sum(["total", "subscription_unsubscribe_success", "sum"].join('.'), unsubscribe_successes)
+                        ]);
+                    } else if (unsubscribe_failures > 0) {
+                        return Q.all([
+                            im.metrics.fire.inc(["total", "subscription_unsubscribe_fail", "last"].join('.'), {amount: unsubscribe_failures}),
+                            im.metrics.fire.sum(["total", "subscription_unsubscribe_fail", "sum"].join('.'), unsubscribe_failures)
                         ]);
                     } else {
-                        return Q.all([
-                            im.metrics.fire.inc(["total", "subscription_unsubscribe_fail", "last"].join('.')),
-                            im.metrics.fire.sum(["total", "subscription_unsubscribe_fail", "sum"].join('.'), 1)
-                        ]);
+                        return Q();
                     }
                 });
             } else {
