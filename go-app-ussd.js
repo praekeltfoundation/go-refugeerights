@@ -1622,7 +1622,7 @@ go.app = function() {
                         .map(function(d) {
                             return new Choice(d.id, d.topic);
                         });
-                    choices.push(new Choice('back', $('Back')));
+                    choices.push(new Choice('back', $('Main menu')));
 
                     return new PaginatedChoiceState(name, {
                         question: $("Select an option:"),
@@ -1660,7 +1660,7 @@ go.app = function() {
                         .map(function(d) {
                             return new Choice(d.id, d.question);
                         });
-                    choices.push(new Choice('back', $('Back')));
+                    choices.push(new Choice('back', $('Previous menu')));
 
                     return new PaginatedChoiceState(name, {
                         question: $("Select an option:"),
