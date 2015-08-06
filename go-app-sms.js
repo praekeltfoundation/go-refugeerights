@@ -716,6 +716,23 @@ go.utils = {
             });
     },
 
+    nightingale_post_message: function(im, contact, message) {
+        var method = "post";
+        var params = null;
+        var endpoint = "snappymessage/";
+        var payload = {
+            contact_key: contact.key,
+            from_addr: contact.msisdn,
+            report: contact.extra.last_report_id,
+            message: message
+        };
+        return go.utils
+            .nightingale_api_call(method, params, payload, endpoint, im)
+            .then(function(response) {
+                return response;
+            });
+    },
+
     save_report_id_to_contact: function(im, contact, report_id) {
         contact.extra.last_report_id = report_id.toString();
         var reports_posted = (contact.extra.reports_posted === undefined)
@@ -766,13 +783,13 @@ go.app = function() {
                     'total.optins'
                 )
 
-                // Total opt-ins
+                // Total other
                 .add.total_state_actions(
                     {
-                        state: 'state_unrecognised',
+                        state: 'state_default',
                         action: 'enter'
                     },
-                    'total.unrecognised_sms'
+                    'total.other_sms'
                 );
 
             // Load self.contact
@@ -794,7 +811,7 @@ go.app = function() {
                 case "START":
                     return self.states.create("state_opt_in_enter");
                 default:
-                    return self.states.create("state_unrecognised");
+                    return self.states.create("state_default_enter");
             }
         });
 
@@ -832,11 +849,26 @@ go.app = function() {
             });
         });
 
+        self.states.add('state_default_enter', function(name) {
+            if (self.contact.extra.last_report_id) {
+                return go.utils
+                    .nightingale_post_message(self.im, self.contact, self.im.msg.content)
+                    .then(function() {
+                        return self.im.metrics.fire.inc(["total", "reportresponse", "last"].join('.'));
+                    })
+                    .then(function() {
+                        return self.states.create('state_default');
+                    });
+            } else {
+                return self.states.create('state_default');
+            }
+        });
+
 
     // UNRECOGNISED
-        self.states.add('state_unrecognised', function(name) {
+        self.states.add('state_default', function(name) {
             return new EndState(name, {
-                text: $('We do not recognise the message you sent us. Reply STOP to unsubscribe.'),
+                text: $('Thanks for your message. We will reply if appropriate. Reply STOP to unsubscribe.'),
                 next: 'state_start'
             });
         });
