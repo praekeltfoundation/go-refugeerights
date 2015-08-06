@@ -93,9 +93,9 @@ module.exports = function (grunt) {
             options: {
                 reporter: 'spec'
             },
-            // test_ussdapp: {
-            //     src: ['<%= paths.test.ussdapp %>']
-            // },
+            test_ussdapp: {
+                src: ['<%= paths.test.ussdapp %>']
+            },
             test_smsapp: {
                 src: ['<%= paths.test.smsapp %>']
             }
