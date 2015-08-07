@@ -220,12 +220,13 @@ describe("refugeerights app", function() {
                     // check metrics
                     .check(function(api) {
                         var metrics = api.metrics.stores.refugeerights_test;
-                        assert.equal(Object.keys(metrics).length, 5);
+                        assert.equal(Object.keys(metrics).length, 6);
                         assert.deepEqual(metrics['total.sms.unique_users'].values, [1]);
                         assert.deepEqual(metrics['total.sms.unique_users.transient'].values, [1]);
                         assert.deepEqual(metrics['total.other_sms'].values, [1]);
                         assert.deepEqual(metrics['total.other_sms.transient'].values, [1]);
                         assert.deepEqual(metrics['total.reportresponse.last'].values, [1]);
+                        assert.deepEqual(metrics['total.reportresponse.sum'].values, [1]);
                     })
                     .check(function(api) {
                         var optout_store = api.resources.resources.optout.optout_store;

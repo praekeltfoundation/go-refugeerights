@@ -751,6 +751,7 @@ go.app = function() {
     var MetricsHelper = require('go-jsbox-metrics-helper');
     var App = vumigo.App;
     var EndState = vumigo.states.EndState;
+    var Q = require('q');
 
 
     var GoRR = App.extend(function(self) {
@@ -854,7 +855,10 @@ go.app = function() {
                 return go.utils
                     .nightingale_post_message(self.im, self.contact, self.im.msg.content)
                     .then(function() {
-                        return self.im.metrics.fire.inc(["total", "reportresponse", "last"].join('.'));
+                        return Q.all([
+                            self.im.metrics.fire.inc(["total", "reportresponse", "last"].join('.')),
+                            self.im.metrics.fire.inc(["total", "reportresponse", "sum"].join('.'), 1)
+                        ]);
                     })
                     .then(function() {
                         return self.states.create('state_default');
