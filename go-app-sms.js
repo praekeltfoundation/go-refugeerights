@@ -869,7 +869,7 @@ go.app = function() {
         });
 
 
-    // UNRECOGNISED
+    // CLOSE SESSION
         self.states.add('state_default', function(name) {
             return new EndState(name, {
                 text: $('Thanks for your message. We will reply if appropriate. Reply STOP to unsubscribe.'),
