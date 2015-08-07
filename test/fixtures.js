@@ -1154,5 +1154,38 @@ return [
             }
         },
 
+    // POST RESPONSE TO REPORT 889
+        {
+            'repeatable': false,
+            'request': {
+                'method': 'POST',
+                'headers': {
+                    'Authorization': ['Token nightingaleapikey']
+                },
+                'url': 'https://nightingale_root/api/v1/snappymessage/',
+                "data": {
+                    "contact_key":"contact_key",
+                    "from_addr":"+064001",
+                    "report":"889",
+                    "message":"I need more support"
+                }
+            },
+            'response': {
+                "code": "201",
+                "data": {
+                    "id": 44,
+                    "integration": "integration_key_2939393",
+                    "report": 889,
+                    "target": "SNAPPY",
+                    "message": "Response back from SMS",
+                    "contact_key": "contact_key",
+                    "from_addr": "+064001",
+                    "to_addr": null,
+                    "delivered": false,
+                    "metadata": {}
+                }
+            }
+        },
+
 ];
 };
