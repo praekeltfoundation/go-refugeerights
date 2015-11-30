@@ -130,7 +130,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": [3.1415, 2.7182]
+                            "coordinates": [2.2, 2.22]
                         }
                     }
                 }
@@ -153,7 +153,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": [3.1415, 2.7182]
+                            "coordinates": [2.2, 2.22]
                         }
                     }
                 }
@@ -185,7 +185,7 @@ return [
                         "id": 1,
                         "point": {
                             "type": "Point",
-                            "coordinates": [3.1415, 2.7182]
+                            "coordinates": [2.2, 2.22]
                         }
                     }
                 }
@@ -212,7 +212,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": [3.1415, 2.7182]
+                            "coordinates": [2.2, 2.22]
                         }
                     }
                 }
@@ -235,7 +235,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": [3.1415, 2.7182]
+                            "coordinates": [2.2, 2.22]
                         }
                     }
                 }
@@ -266,7 +266,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": [3.1415, 2.7182]
+                            "coordinates": [2.2, 2.22]
                         }
                     }
                 }
@@ -877,7 +877,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": [3.1415, 2.7182]
+                            "coordinates": [2.2, 2.22]
                         }
                     },
                     "metadata": {
@@ -903,8 +903,8 @@ return [
                         "point": {
                             "type": "Point",
                             "coordinates": [
-                                3.1415,
-                                2.7182
+                                2.2,
+                                2.22
                             ]
                         }
                     },
@@ -935,7 +935,7 @@ return [
                     "location": {
                         "point": {
                             "type": "Point",
-                            "coordinates": [3.1415, 2.7182]
+                            "coordinates": [2.2, 2.22]
                         }
                     },
                     "metadata": {
@@ -961,8 +961,8 @@ return [
                         "point": {
                             "type": "Point",
                             "coordinates": [
-                                3.1415,
-                                2.7182
+                                2.2,
+                                2.22
                             ]
                         }
                     },
@@ -1004,8 +1004,8 @@ return [
                         "point": {
                             "type": "Point",
                             "coordinates": [
-                                3.1415,
-                                2.7182
+                                2.2,
+                                2.22
                             ]
                         }
                     },
@@ -1049,8 +1049,8 @@ return [
                         "point": {
                             "type": "Point",
                             "coordinates": [
-                                3.1415,
-                                2.7182
+                                2.2,
+                                2.22
                             ]
                         }
                     },
@@ -1093,8 +1093,8 @@ return [
                         "point": {
                             "type": "Point",
                             "coordinates": [
-                                3.1415,
-                                2.7182
+                                2.2,
+                                2.22
                             ]
                         }
                     },
@@ -1138,8 +1138,8 @@ return [
                         "point": {
                             "type": "Point",
                             "coordinates": [
-                                3.1415,
-                                2.7182
+                                2.2,
+                                2.22
                             ]
                         }
                     },
