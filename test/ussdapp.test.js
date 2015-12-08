@@ -36,6 +36,9 @@ describe("refugeerights app", function() {
                     endpoints: {
                         "sms": {"delivery_class": "sms"}
                     },
+                    open_street_map: {
+                        api_key: 'FAKE_API_KEY',
+                    },
                     snappy: {
                         "endpoint": "https://app.besnappy.com/api/v1/",
                         "username": "980d2423-292b-4c34-be81-c74784b9e99a",
@@ -144,7 +147,7 @@ describe("refugeerights app", function() {
                 });
 
             locations.push({
-                key: 'XXX',
+                key: 'FAKE_API_KEY',
                 query: "Quad Street",
                 bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                 address_limit: 4,
@@ -206,7 +209,7 @@ describe("refugeerights app", function() {
             });
 
             locations.push({
-                key: 'XXX',
+                key: 'FAKE_API_KEY',
                 query: "Friend Street",
                 bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                 address_limit: 4,

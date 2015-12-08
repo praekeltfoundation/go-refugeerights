@@ -497,7 +497,7 @@ go.app = function() {
                 
 
                 map_provider: new OpenStreetMap({
-                    api_key: 'XXX',
+                    api_key: self.im.config.open_street_map.api_key,
                     bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                     address_limit: 4,
 
@@ -706,7 +706,7 @@ go.app = function() {
                 skip_text: $('Skip'),
 
                 map_provider: new OpenStreetMap({
-                    api_key: 'XXX',
+                    api_key: self.im.config.open_street_map.api_key,
                     bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                     address_limit: 4,
 
