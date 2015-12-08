@@ -144,6 +144,7 @@ describe("refugeerights app", function() {
                 });
 
             locations.push({
+                key: 'XXX',
                 query: "Quad Street",
                 bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                 address_limit: 4,
@@ -177,8 +178,8 @@ describe("refugeerights app", function() {
                         }
                     },{
                         display_name:"Quad St 3, Sub 3",
-                        lon: '3.1415',
-                        lat: '2.7182',
+                        lon: '2.2',
+                        lat: '2.22',
                         address: {
                             road: "Quad St 3",
                             suburb: "Suburb number 3",
@@ -190,8 +191,8 @@ describe("refugeerights app", function() {
                         }
                     },{
                         display_name:"Quad St 4, Sub 4",
-                        lon: '3.1415',
-                        lat: '2.7182',
+                        lon: '2.2',
+                        lat: '2.22',
                         address: {
                             road: "Quad St 4",
                             suburb: "Suburb number 4",
@@ -205,14 +206,15 @@ describe("refugeerights app", function() {
             });
 
             locations.push({
+                key: 'XXX',
                 query: "Friend Street",
                 bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                 address_limit: 4,
                 response_data: [
                     {
                         display_name: "Friend Street, Suburb",
-                        lon: '3.1415',
-                        lat: '2.7182'
+                        lon: '2.2',
+                        lat: '2.22'
                     }
                 ]
             });
@@ -1307,7 +1309,7 @@ describe("refugeerights app", function() {
                             , '1'  // state_report_legal - i understand
                             , '3'  // state_report_category - looting
                             , 'Quad Street'  // state_report_location
-                            , '3'  // state_report_location
+                            , '2'  // state_report_location
                             , {session_event: 'close'}  // may or may not work
                         )
                         .check(function(api) {
@@ -1328,7 +1330,7 @@ describe("refugeerights app", function() {
                             , '1'  // state_report_legal - i understand
                             , '3'  // state_report_category - looting
                             , 'Quad Street'  // state_report_location
-                            , '3'  // state_report_location
+                            , '2'  // state_report_location
                             , {session_event: 'close'}  // may or may not work
                         )
                         .check(function(api) {
@@ -1351,7 +1353,7 @@ describe("refugeerights app", function() {
                             , '1'  // state_report_legal - i understand
                             , '3'  // state_report_category - looting
                             , 'Quad Street'  // state_report_location
-                            , '3'  // state_report_location
+                            , '2'  // state_report_location
                             , {session_event: 'close'}  // may or may not work
                             , {session_event: 'new'}
                             , '1'
@@ -1377,7 +1379,7 @@ describe("refugeerights app", function() {
                             , '1'  // state_report_legal - i understand
                             , '5'  // state_report_category - looting
                             , 'Quad Street'  // state_report_location
-                            , '3'  // state_report_location
+                            , '2'  // state_report_location
                             , {session_event: 'close'}  // may or may not work
                             , {session_event: 'new'}
                             , '1'
@@ -2503,9 +2505,10 @@ describe("refugeerights app", function() {
                                     "Please select your location:",
                                     "1. Suburb number 1, City number 1, WC",
                                     "2. Suburb number 2, Town number 2, GP",
-                                    "3. Suburb number 3, City number 3, FS",
                                     "n. More",
-                                    "p. Back"
+                                    "p. Back",
+                                    "r. Retry",
+                                    "s. Skip"
                                 ].join('\n')
                             })
                             .run();
@@ -2522,7 +2525,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                             )
                             // check navigation
                             .check.interaction({
@@ -2541,19 +2544,19 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                             )
                             .check(function(api) {
                                 var contact = _.find(api.contacts.store, {
                                                     msisdn: '+064001'
                                                 });
                                 assert.equal(contact.extra['location:formatted_address'],
-                                    'Suburb number 3, City number 3, FS');
-                                assert.equal(contact.extra['location:lon'], '3.1415');
-                                assert.equal(contact.extra['location:lat'], '2.7182');
-                                assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
-                                assert.equal(contact.extra['location:city'], 'City number 3');
-                                assert.equal(contact.extra['location:province'], 'FS');
+                                    'Suburb number 2, Town number 2, GP');
+                                assert.equal(contact.extra['location:lon'], '2.2');
+                                assert.equal(contact.extra['location:lat'], '2.22');
+                                assert.equal(contact.extra['location:suburb'], 'Suburb number 2');
+                                assert.equal(contact.extra['location:city'], 'Town number 2');
+                                assert.equal(contact.extra['location:province'], 'GP');
                             })
                             .run();
                     });
@@ -2567,7 +2570,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                             )
                             .check(function(api) {
                                 var metrics = api.metrics.stores.refugeerights_test;
@@ -2589,7 +2592,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                                 , 'Send help plz'  // state_report_details
                             )
                             // check navigation
@@ -2615,7 +2618,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                                 , 'Send help plz'  // state_report_details
                                 , '1'  // state_report_complete - main menu
                             )
@@ -2635,7 +2638,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '3'  // state_report_category - looting
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                                 , 'Send help plz'  // state_report_details
                                 , '2'  // state_report_complete - exit
                             )
@@ -2749,9 +2752,10 @@ describe("refugeerights app", function() {
                                     "Please select your location:",
                                     "1. Suburb number 1, City number 1, WC",
                                     "2. Suburb number 2, Town number 2, GP",
-                                    "3. Suburb number 3, City number 3, FS",
                                     "n. More",
-                                    "p. Back"
+                                    "p. Back",
+                                    "r. Retry",
+                                    "s. Skip"
                                 ].join('\n')
                             })
                             .run();
@@ -2768,7 +2772,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '5'  // state_report_category - other
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                             )
                             // check navigation
                             .check.interaction({
@@ -2787,19 +2791,19 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '5'  // state_report_category - other
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                             )
                             .check(function(api) {
                                 var contact = _.find(api.contacts.store, {
                                                     msisdn: '+064001'
                                                 });
                                 assert.equal(contact.extra['location:formatted_address'],
-                                    'Suburb number 3, City number 3, FS');
-                                assert.equal(contact.extra['location:lon'], '3.1415');
-                                assert.equal(contact.extra['location:lat'], '2.7182');
-                                assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
-                                assert.equal(contact.extra['location:city'], 'City number 3');
-                                assert.equal(contact.extra['location:province'], 'FS');
+                                    'Suburb number 2, Town number 2, GP');
+                                assert.equal(contact.extra['location:lon'], '2.2');
+                                assert.equal(contact.extra['location:lat'], '2.22');
+                                assert.equal(contact.extra['location:suburb'], 'Suburb number 2');
+                                assert.equal(contact.extra['location:city'], 'Town number 2');
+                                assert.equal(contact.extra['location:province'], 'GP');
                             })
                             .run();
                     });
@@ -2815,7 +2819,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '5'  // state_report_category - other
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                                 , 'Send help plz'  // state_report_details
                             )
                             // check navigation
@@ -2841,7 +2845,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '5'  // state_report_category - other
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                                 , 'Send help plz'  // state_report_details
                                 , '1'  // state_report_complete - main menu
                             )
@@ -2861,7 +2865,7 @@ describe("refugeerights app", function() {
                                 , '1'  // state_report_legal - i understand
                                 , '5'  // state_report_category - other
                                 , 'Quad Street'  // state_report_location
-                                , '3'  // state_report_location
+                                , '2'  // state_report_location
                                 , 'Send help plz'  // state_report_details
                                 , '2'  // state_report_complete - exit
                             )
@@ -2915,9 +2919,10 @@ describe("refugeerights app", function() {
                                 "Please select your location:",
                                 "1. Suburb number 1, City number 1, WC",
                                 "2. Suburb number 2, Town number 2, GP",
-                                "3. Suburb number 3, City number 3, FS",
                                 "n. More",
-                                "p. Back"
+                                "p. Back",
+                                "r. Retry",
+                                "s. Skip"
                             ].join('\n')
                         })
                         .run();
@@ -2937,9 +2942,12 @@ describe("refugeerights app", function() {
                             state: 'state_services',
                             reply: [
                                 "Please select your location:",
-                                "1. Suburb number 4, KZN",
+                                "1. Suburb number 3, City number 3, FS",
+                                "2. Suburb number 4, KZN",
                                 "n. More",
-                                "p. Back"
+                                "p. Back",
+                                "r. Retry",
+                                "s. Skip"
                             ].join('\n')
                         })
                         .run();
@@ -2953,19 +2961,19 @@ describe("refugeerights app", function() {
                             , '1'  // state_registered_landing - menu
                             , '6'  // state_refugee_main - find service
                             , 'Quad Street'  // state_services
-                            , '3'  // state_services
+                            , '2'  // state_services
                         )
                         .check(function(api) {
                             var contact = _.find(api.contacts.store, {
                                                 msisdn: '+064001'
                                             });
                             assert.equal(contact.extra['location:formatted_address'],
-                                'Suburb number 3, City number 3, FS');
-                            assert.equal(contact.extra['location:lon'], '3.1415');
-                            assert.equal(contact.extra['location:lat'], '2.7182');
-                            assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
-                            assert.equal(contact.extra['location:city'], 'City number 3');
-                            assert.equal(contact.extra['location:province'], 'FS');
+                                'Suburb number 2, Town number 2, GP');
+                            assert.equal(contact.extra['location:lon'], '2.2');
+                            assert.equal(contact.extra['location:lat'], '2.22');
+                            assert.equal(contact.extra['location:suburb'], 'Suburb number 2');
+                            assert.equal(contact.extra['location:city'], 'Town number 2');
+                            assert.equal(contact.extra['location:province'], 'GP');
                         })
                         .run();
                 });
@@ -2986,12 +2994,12 @@ describe("refugeerights app", function() {
                                                 msisdn: '+064001'
                                             });
                             assert.equal(contact.extra['location:formatted_address'],
-                                'Suburb number 4, n/a, KZN');
-                            assert.equal(contact.extra['location:lon'], '3.1415');
-                            assert.equal(contact.extra['location:lat'], '2.7182');
-                            assert.equal(contact.extra['location:suburb'], 'Suburb number 4');
-                            assert.equal(contact.extra['location:city'], 'n/a');
-                            assert.equal(contact.extra['location:province'], 'KZN');
+                                'Suburb number 3, City number 3, FS');
+                            assert.equal(contact.extra['location:lon'], '2.2');
+                            assert.equal(contact.extra['location:lat'], '2.22');
+                            assert.equal(contact.extra['location:suburb'], 'Suburb number 3');
+                            assert.equal(contact.extra['location:city'], 'City number 3');
+                            assert.equal(contact.extra['location:province'], 'FS');
                         })
                         .run();
                 });
@@ -3004,7 +3012,7 @@ describe("refugeerights app", function() {
                             , '1'  // state_registered_landing - menu
                             , '6'  // state_refugee_main - find service
                             , 'Quad Street'  // state_services
-                            , '3'  // state_services
+                            , '2'  // state_services
                         )
                         .check.interaction({
                             state: 'state_locate_stall_initial',
@@ -3024,7 +3032,7 @@ describe("refugeerights app", function() {
                             , '1'  // state_registered_landing - menu
                             , '6'  // state_refugee_main - find service
                             , 'Quad Street'  // state_services
-                            , '3'  // state_services
+                            , '2'  // state_services
                         )
                         .check(function(api) {
                             var metrics = api.metrics.stores.refugeerights_test;

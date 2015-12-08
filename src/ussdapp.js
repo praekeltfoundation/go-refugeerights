@@ -490,10 +490,14 @@ go.app = function() {
                 error_question:
                     $("Sorry, we're not sure which suburb you mean. Please re-enter your location again carefully and make sure you use the correct spelling."),
                 next: 'state_report_submit_critical',
-                next_text: 'More',
-                previous_text: 'Back',
+                next_text: $('More'),
+                previous_text: $('Back'),
+                retry_text: $('Retry'),
+                skip_text: $('Skip'),
+                
 
                 map_provider: new OpenStreetMap({
+                    api_key: 'XXX',
                     bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                     address_limit: 4,
 
@@ -696,10 +700,13 @@ go.app = function() {
                 error_question:
                     $("Sorry there are no results for your location. Please re-enter your location again carefully and make sure you use the correct spelling."),
                 next: 'state_locate_service',
-                next_text: 'More',
-                previous_text: 'Back',
+                next_text: $('More'),
+                previous_text: $('Back'),
+                retry_text: $('Retry'),
+                skip_text: $('Skip'),
 
                 map_provider: new OpenStreetMap({
+                    api_key: 'XXX',
                     bounding_box: ["16.4500", "-22.1278", "32.8917", "-34.8333"],
                     address_limit: 4,
 

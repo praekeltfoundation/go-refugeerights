@@ -22,12 +22,12 @@
   },
   "homepage": "https://github.com/praekelt/go-refugeerights",
   "dependencies": {
-    "vumigo_v02": "~0.2",
-    "q": "~0.9",
+    "go-jsbox-location": "^0.2.3",
+    "go-jsbox-metrics-helper": "~0.1.1",
     "lodash": "~2.4.1",
     "moment": "~2.6.0",
-    "go-jsbox-location": "0.2.0-alpha.1",
-    "go-jsbox-metrics-helper": "~0.1.1"
+    "q": "~0.9",
+    "vumigo_v02": "~0.2"
   },
   "devDependencies": {
     "mocha": "~1.18",
