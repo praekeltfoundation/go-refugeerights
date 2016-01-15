@@ -7,5 +7,5 @@ APP=("go-app-sms.js" "go-app-ussd.js")
 for app in $APP
 do
     APP_BASE=`basename "$app" .js`
-    jspot extract -k '$' go-app-sms.js -t "translations/$APP_BASE"
+    jspot extract -k '$' "$app" -t "translations/$APP_BASE"
 done
