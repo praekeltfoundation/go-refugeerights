@@ -1,0 +1,472 @@
+{
+    "": {
+        "pot-creation-date": "2016-01-15 01:22:+0000",
+        "project-id-version": "PACKAGE VERSION",
+        "language-team": "LANGUAGE <LL@li.org>",
+        "language": "",
+        "mime-version": "1.0",
+        "content-type": "text/plain; charset=utf-8",
+        "content-transfer-encoding": "8bit",
+        "po-revision-date": "YEAR-MO-DA HO:MI+ZONE"
+    },
+    "Please dial back in to {{ USSD_number }} to complete the registration.": [
+        null,
+        ""
+    ],
+    "Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}": [
+        null,
+        ""
+    ],
+    "Select an option:": [
+        null,
+        ""
+    ],
+    "Return to where I left off": [
+        null,
+        ""
+    ],
+    "Find more info": [
+        null,
+        ""
+    ],
+    "Report xenophobia": [
+        null,
+        ""
+    ],
+    "Report unlawful arrest": [
+        null,
+        ""
+    ],
+    "Report corruption": [
+        null,
+        ""
+    ],
+    "Report something else": [
+        null,
+        ""
+    ],
+    "Welcome! Would you like to find out about refugee and migrant rights in SA? First select your language:": [
+        null,
+        ""
+    ],
+    "English": [
+        null,
+        ""
+    ],
+    "French": [
+        null,
+        ""
+    ],
+    "Amharic": [
+        null,
+        ""
+    ],
+    "Swahili": [
+        null,
+        ""
+    ],
+    "Somali": [
+        null,
+        ""
+    ],
+    "To give you the info & help you need, we will:\n- Store your cell #, language & country of origin\n- Sometimes send u SMSs\nDo you consent to this?": [
+        null,
+        ""
+    ],
+    "Yes": [
+        null,
+        ""
+    ],
+    "No": [
+        null,
+        ""
+    ],
+    "We're sorry, we can't help without you providing consent to us storing your info & sending you SMSs. What would you like to do?": [
+        null,
+        ""
+    ],
+    "Go back to consent": [
+        null,
+        ""
+    ],
+    "Exit": [
+        null,
+        ""
+    ],
+    "Find info about refugee/migrant rights in SA": [
+        null,
+        ""
+    ],
+    "Select your country of origin:": [
+        null,
+        ""
+    ],
+    "Next": [
+        null,
+        ""
+    ],
+    "Back": [
+        null,
+        ""
+    ],
+    "Somalia": [
+        null,
+        ""
+    ],
+    "Ethiopia": [
+        null,
+        ""
+    ],
+    "Eritrea": [
+        null,
+        ""
+    ],
+    "Democratic Republic of Congo": [
+        null,
+        ""
+    ],
+    "Burundi": [
+        null,
+        ""
+    ],
+    "Kenya": [
+        null,
+        ""
+    ],
+    "Rwanda": [
+        null,
+        ""
+    ],
+    "Sudan/South Sudan": [
+        null,
+        ""
+    ],
+    "Zimbabwe": [
+        null,
+        ""
+    ],
+    "Uganda": [
+        null,
+        ""
+    ],
+    "Egypt": [
+        null,
+        ""
+    ],
+    "Mozambique": [
+        null,
+        ""
+    ],
+    "Syria": [
+        null,
+        ""
+    ],
+    "Angola": [
+        null,
+        ""
+    ],
+    "Would you like to find out if you qualify for refugee status?": [
+        null,
+        ""
+    ],
+    "Yes, I want to find out if I qualify": [
+        null,
+        ""
+    ],
+    "No, I'd like to access information for migrants": [
+        null,
+        ""
+    ],
+    "Have you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group?": [
+        null,
+        ""
+    ],
+    "Are you married to or depend upon a person who fled their country in fear of their life?": [
+        null,
+        ""
+    ],
+    "Are you married to a recognised refugee?": [
+        null,
+        ""
+    ],
+    "It looks like you may qualify for refugee status! Your asylum application process will confirm this. Please start this application now.": [
+        null,
+        ""
+    ],
+    "Find out more": [
+        null,
+        ""
+    ],
+    "You don't qualify for refugee status in SA. If you are a foreign national looking to work, study or run a business you'll need a visa.": [
+        null,
+        ""
+    ],
+    "Thank you for dialling into the refugee and migrants rights service. Please dial back in to find out more.": [
+        null,
+        ""
+    ],
+    "Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again.": [
+        null,
+        ""
+    ],
+    "Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved.": [
+        null,
+        ""
+    ],
+    "LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved.": [
+        null,
+        ""
+    ],
+    "Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved.": [
+        null,
+        ""
+    ],
+    "LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved.": [
+        null,
+        ""
+    ],
+    "I understand": [
+        null,
+        ""
+    ],
+    "Which of these xenophobic acts is taking place?": [
+        null,
+        ""
+    ],
+    "Why have you been arrested?": [
+        null,
+        ""
+    ],
+    "Where have you experienced corruption?": [
+        null,
+        ""
+    ],
+    "What would you like to report?": [
+        null,
+        ""
+    ],
+    "Physical threat": [
+        null,
+        ""
+    ],
+    "Protests in your area": [
+        null,
+        ""
+    ],
+    "Looting in your area": [
+        null,
+        ""
+    ],
+    "Not having an asylum permit": [
+        null,
+        ""
+    ],
+    "Not having a migrant visa": [
+        null,
+        ""
+    ],
+    "You don't know": [
+        null,
+        ""
+    ],
+    "Other": [
+        null,
+        ""
+    ],
+    "Refugee Reception Office": [
+        null,
+        ""
+    ],
+    "South African Police Service": [
+        null,
+        ""
+    ],
+    "Department of Home Affairs": [
+        null,
+        ""
+    ],
+    "Social services": [
+        null,
+        ""
+    ],
+    "A complaint": [
+        null,
+        ""
+    ],
+    "Please type the name of the suburb in which the incident took place.": [
+        null,
+        ""
+    ],
+    "Please select your location:": [
+        null,
+        ""
+    ],
+    "Sorry, we're not sure which suburb you mean. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        ""
+    ],
+    "More": [
+        null,
+        ""
+    ],
+    "Retry": [
+        null,
+        ""
+    ],
+    "Skip": [
+        null,
+        ""
+    ],
+    "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific - it'll enable us to send the right response & help you faster.": [
+        null,
+        ""
+    ],
+    "Please type the full name of the person who was arrested. Also, what happened to cause the arrest? And what documentation/permit does this person have, if any?": [
+        null,
+        ""
+    ],
+    "Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time": [
+        null,
+        ""
+    ],
+    "Please explain the incident in as much detail as you can: What happened; where it happened; the offender's name; his/her physical features; date/time.": [
+        null,
+        ""
+    ],
+    "Thank you very much. Your report has been submitted.": [
+        null,
+        ""
+    ],
+    "Main menu": [
+        null,
+        ""
+    ],
+    "Goodbye!": [
+        null,
+        ""
+    ],
+    "Report": [
+        null,
+        ""
+    ],
+    "Step 1: Applying for asylum": [
+        null,
+        ""
+    ],
+    "Step 2: Life in SA": [
+        null,
+        ""
+    ],
+    "Tips": [
+        null,
+        ""
+    ],
+    "About/T&Cs": [
+        null,
+        ""
+    ],
+    "Services Near Me": [
+        null,
+        ""
+    ],
+    "Change Settings": [
+        null,
+        ""
+    ],
+    "Step 1: Visa application": [
+        null,
+        ""
+    ],
+    "To find services near you we need to know what suburb or area you are in. Please type this in below & be specific. e.g. Inanda Sandton": [
+        null,
+        ""
+    ],
+    "Sorry there are no results for your location. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        ""
+    ],
+    "The system is looking up services near you. This usually takes less than a minute.": [
+        null,
+        ""
+    ],
+    "View services": [
+        null,
+        ""
+    ],
+    "Unfortunately we couldn't find any locations close to you. Try one more time or exit?": [
+        null,
+        ""
+    ],
+    "Try again": [
+        null,
+        ""
+    ],
+    "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off.": [
+        null,
+        ""
+    ],
+    "Select a service for more info": [
+        null,
+        ""
+    ],
+    "Previous menu": [
+        null,
+        ""
+    ],
+    "Send to me by SMS": [
+        null,
+        ""
+    ],
+    "Your SMS will be sent to you shortly. Don't forget to dial back in to {{ ussd_num }} to find all the info you need about applying for asylum and living in SA.": [
+        null,
+        ""
+    ],
+    "Select setting to change:": [
+        null,
+        ""
+    ],
+    "Language": [
+        null,
+        ""
+    ],
+    "Country": [
+        null,
+        ""
+    ],
+    "Status (refugee / migrant)": [
+        null,
+        ""
+    ],
+    "Back to Main Menu": [
+        null,
+        ""
+    ],
+    "Please choose your language:": [
+        null,
+        ""
+    ],
+    "Are you a refugee or migrant?": [
+        null,
+        ""
+    ],
+    "I am a refugee": [
+        null,
+        ""
+    ],
+    "I am a migrant": [
+        null,
+        ""
+    ],
+    "When you registered, you were identified as a {{status}}. Are you sure you would like to change your status?": [
+        null,
+        ""
+    ],
+    "Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za": [
+        null,
+        ""
+    ],
+    "Continue": [
+        null,
+        ""
+    ]
+}

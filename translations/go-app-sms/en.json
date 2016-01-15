@@ -1,0 +1,32 @@
+{
+    "": {
+        "pot-creation-date": "2016-01-15 01:22:+0000",
+        "project-id-version": "PACKAGE VERSION",
+        "language-team": "LANGUAGE <LL@li.org>",
+        "language": "",
+        "mime-version": "1.0",
+        "content-type": "text/plain; charset=utf-8",
+        "content-transfer-encoding": "8bit",
+        "po-revision-date": "YEAR-MO-DA HO:MI+ZONE"
+    },
+    "Please dial back in to {{ USSD_number }} to complete the registration.": [
+        null,
+        ""
+    ],
+    "Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}": [
+        null,
+        ""
+    ],
+    "Thank you. You will no longer receive messages from us. Reply START to opt back in.": [
+        null,
+        ""
+    ],
+    "Thank you. You will now receive messages from us again. Reply STOP to unsubscribe.": [
+        null,
+        ""
+    ],
+    "Thanks for your message. We will reply if appropriate. Reply STOP to unsubscribe.": [
+        null,
+        ""
+    ]
+}

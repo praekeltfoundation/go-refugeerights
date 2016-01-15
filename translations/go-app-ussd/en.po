@@ -1,0 +1,531 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2016-01-15 01:22:+0000\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+
+#: go-app-ussd.js:49
+msgid "Please dial back in to {{ USSD_number }} to complete the registration."
+msgstr ""
+
+#: go-app-ussd.js:66
+msgid ""
+"Thank you for you report. We need some extra information about the "
+"incident. Please let us know by dialing {{ USSD_number }}"
+msgstr ""
+
+#: go-app-ussd.js:831 go-app-ussd.js:899 go-app-ussd.js:985 go-app-ussd.js:1380 go-app-ussd.js:1411 go-app-ussd.js:1652 go-app-ussd.js:1690
+msgid "Select an option:"
+msgstr ""
+
+#: go-app-ussd.js:833
+msgid "Return to where I left off"
+msgstr ""
+
+#: go-app-ussd.js:834 go-app-ussd.js:901
+msgid "Find more info"
+msgstr ""
+
+#: go-app-ussd.js:835 go-app-ussd.js:902 go-app-ussd.js:988
+msgid "Report xenophobia"
+msgstr ""
+
+#: go-app-ussd.js:836 go-app-ussd.js:903 go-app-ussd.js:989
+msgid "Report unlawful arrest"
+msgstr ""
+
+#: go-app-ussd.js:837 go-app-ussd.js:904 go-app-ussd.js:990
+msgid "Report corruption"
+msgstr ""
+
+#: go-app-ussd.js:838 go-app-ussd.js:905 go-app-ussd.js:991
+msgid "Report something else"
+msgstr ""
+
+#: go-app-ussd.js:927
+msgid ""
+"Welcome! Would you like to find out about refugee and migrant rights in SA? "
+"First select your language:"
+msgstr ""
+
+#: go-app-ussd.js:929 go-app-ussd.js:1773
+msgid "English"
+msgstr ""
+
+#: go-app-ussd.js:930 go-app-ussd.js:1774
+msgid "French"
+msgstr ""
+
+#: go-app-ussd.js:931 go-app-ussd.js:1775
+msgid "Amharic"
+msgstr ""
+
+#: go-app-ussd.js:932 go-app-ussd.js:1776
+msgid "Swahili"
+msgstr ""
+
+#: go-app-ussd.js:933 go-app-ussd.js:1777
+msgid "Somali"
+msgstr ""
+
+#: go-app-ussd.js:947
+msgid ""
+"To give you the info & help you need, we will:\n"
+"- Store your cell #, language & country of origin\n"
+"- Sometimes send u SMSs\n"
+"Do you consent to this?"
+msgstr ""
+
+#: go-app-ussd.js:952 go-app-ussd.js:1068 go-app-ussd.js:1081 go-app-ussd.js:1094 go-app-ussd.js:1846
+msgid "Yes"
+msgstr ""
+
+#: go-app-ussd.js:953 go-app-ussd.js:1069 go-app-ussd.js:1082 go-app-ussd.js:1095 go-app-ussd.js:1847
+msgid "No"
+msgstr ""
+
+#: go-app-ussd.js:972
+msgid ""
+"We're sorry, we can't help without you providing consent to us storing your "
+"info & sending you SMSs. What would you like to do?"
+msgstr ""
+
+#: go-app-ussd.js:974
+msgid "Go back to consent"
+msgstr ""
+
+#: go-app-ussd.js:975 go-app-ussd.js:1124 go-app-ussd.js:1137 go-app-ussd.js:1173 go-app-ussd.js:1360 go-app-ussd.js:1562 go-app-ussd.js:1625
+msgid "Exit"
+msgstr ""
+
+#: go-app-ussd.js:987
+msgid "Find info about refugee/migrant rights in SA"
+msgstr ""
+
+#: go-app-ussd.js:1010 go-app-ussd.js:1791
+msgid "Select your country of origin:"
+msgstr ""
+
+#: go-app-ussd.js:1013 go-app-ussd.js:1718 go-app-ussd.js:1794
+msgid "Next"
+msgstr ""
+
+#: go-app-ussd.js:1014 go-app-ussd.js:1242 go-app-ussd.js:1452 go-app-ussd.js:1626 go-app-ussd.js:1719 go-app-ussd.js:1795
+msgid "Back"
+msgstr ""
+
+#: go-app-ussd.js:1016 go-app-ussd.js:1797
+msgid "Somalia"
+msgstr ""
+
+#: go-app-ussd.js:1017 go-app-ussd.js:1798
+msgid "Ethiopia"
+msgstr ""
+
+#: go-app-ussd.js:1018 go-app-ussd.js:1799
+msgid "Eritrea"
+msgstr ""
+
+#: go-app-ussd.js:1019 go-app-ussd.js:1800
+msgid "Democratic Republic of Congo"
+msgstr ""
+
+#: go-app-ussd.js:1020 go-app-ussd.js:1801
+msgid "Burundi"
+msgstr ""
+
+#: go-app-ussd.js:1021 go-app-ussd.js:1802
+msgid "Kenya"
+msgstr ""
+
+#: go-app-ussd.js:1022 go-app-ussd.js:1803
+msgid "Rwanda"
+msgstr ""
+
+#: go-app-ussd.js:1023 go-app-ussd.js:1804
+msgid "Sudan/South Sudan"
+msgstr ""
+
+#: go-app-ussd.js:1024 go-app-ussd.js:1805
+msgid "Zimbabwe"
+msgstr ""
+
+#: go-app-ussd.js:1025 go-app-ussd.js:1806
+msgid "Uganda"
+msgstr ""
+
+#: go-app-ussd.js:1026 go-app-ussd.js:1807
+msgid "Egypt"
+msgstr ""
+
+#: go-app-ussd.js:1027 go-app-ussd.js:1808
+msgid "Mozambique"
+msgstr ""
+
+#: go-app-ussd.js:1028 go-app-ussd.js:1809
+msgid "Syria"
+msgstr ""
+
+#: go-app-ussd.js:1029 go-app-ussd.js:1810
+msgid "Angola"
+msgstr ""
+
+#: go-app-ussd.js:1045
+msgid "Would you like to find out if you qualify for refugee status?"
+msgstr ""
+
+#: go-app-ussd.js:1047
+msgid "Yes, I want to find out if I qualify"
+msgstr ""
+
+#: go-app-ussd.js:1048
+msgid "No, I'd like to access information for migrants"
+msgstr ""
+
+#: go-app-ussd.js:1066
+msgid ""
+"Have you fled from your country in fear of your life due to your race, "
+"religion, nationality, gender, political or social group?"
+msgstr ""
+
+#: go-app-ussd.js:1079
+msgid ""
+"Are you married to or depend upon a person who fled their country in fear "
+"of their life?"
+msgstr ""
+
+#: go-app-ussd.js:1092
+msgid "Are you married to a recognised refugee?"
+msgstr ""
+
+#: go-app-ussd.js:1121
+msgid ""
+"It looks like you may qualify for refugee status! Your asylum application "
+"process will confirm this. Please start this application now."
+msgstr ""
+
+#: go-app-ussd.js:1123 go-app-ussd.js:1136
+msgid "Find out more"
+msgstr ""
+
+#: go-app-ussd.js:1134
+msgid ""
+"You don't qualify for refugee status in SA. If you are a foreign national "
+"looking to work, study or run a business you'll need a visa."
+msgstr ""
+
+#: go-app-ussd.js:1147
+msgid ""
+"Thank you for dialling into the refugee and migrants rights service. Please "
+"dial back in to find out more."
+msgstr ""
+
+#: go-app-ussd.js:1157
+msgid ""
+"Unfortunately you cannot submit a report without indicating you understand "
+"and agree to the terms & conditions. Please redial to try again."
+msgstr ""
+
+#: go-app-ussd.js:1164
+msgid ""
+"Reports are used to see where attacks may be in an area & warn others. LHR "
+"treats reports as serious. All rights reserved."
+msgstr ""
+
+#: go-app-ussd.js:1165
+msgid ""
+"LHR treats these reports as serious & will try to respond to critical "
+"reports as soon as possible. All rights reserved."
+msgstr ""
+
+#: go-app-ussd.js:1166
+msgid ""
+"Your details are confidential & used only by LHR & partners for "
+"investigation timeously, where possible. All rights reserved."
+msgstr ""
+
+#: go-app-ussd.js:1167
+msgid ""
+"LHR will process your info and try to respond timeously. Please don't abuse "
+"this system. All rights reserved."
+msgstr ""
+
+#: go-app-ussd.js:1172
+msgid "I understand"
+msgstr ""
+
+#: go-app-ussd.js:1189
+msgid "Which of these xenophobic acts is taking place?"
+msgstr ""
+
+#: go-app-ussd.js:1190
+msgid "Why have you been arrested?"
+msgstr ""
+
+#: go-app-ussd.js:1191
+msgid "Where have you experienced corruption?"
+msgstr ""
+
+#: go-app-ussd.js:1192
+msgid "What would you like to report?"
+msgstr ""
+
+#: go-app-ussd.js:1196
+msgid "Physical threat"
+msgstr ""
+
+#: go-app-ussd.js:1197
+msgid "Protests in your area"
+msgstr ""
+
+#: go-app-ussd.js:1198
+msgid "Looting in your area"
+msgstr ""
+
+#: go-app-ussd.js:1201
+msgid "Not having an asylum permit"
+msgstr ""
+
+#: go-app-ussd.js:1202
+msgid "Not having a migrant visa"
+msgstr ""
+
+#: go-app-ussd.js:1203
+msgid "You don't know"
+msgstr ""
+
+#: go-app-ussd.js:1204 go-app-ussd.js:1211 go-app-ussd.js:1215
+msgid "Other"
+msgstr ""
+
+#: go-app-ussd.js:1207
+msgid "Refugee Reception Office"
+msgstr ""
+
+#: go-app-ussd.js:1208
+msgid "South African Police Service"
+msgstr ""
+
+#: go-app-ussd.js:1209
+msgid "Department of Home Affairs"
+msgstr ""
+
+#: go-app-ussd.js:1210
+msgid "Social services"
+msgstr ""
+
+#: go-app-ussd.js:1214
+msgid "A complaint"
+msgstr ""
+
+#: go-app-ussd.js:1235
+msgid "Please type the name of the suburb in which the incident took place."
+msgstr ""
+
+#: go-app-ussd.js:1237 go-app-ussd.js:1447
+msgid "Please select your location:"
+msgstr ""
+
+#: go-app-ussd.js:1239
+msgid ""
+"Sorry, we're not sure which suburb you mean. Please re-enter your location "
+"again carefully and make sure you use the correct spelling."
+msgstr ""
+
+#: go-app-ussd.js:1241 go-app-ussd.js:1451 go-app-ussd.js:1627
+msgid "More"
+msgstr ""
+
+#: go-app-ussd.js:1243 go-app-ussd.js:1453
+msgid "Retry"
+msgstr ""
+
+#: go-app-ussd.js:1244 go-app-ussd.js:1454
+msgid "Skip"
+msgstr ""
+
+#: go-app-ussd.js:1333
+msgid ""
+"Please type an explanation of what's happening. Are you in danger? Is "
+"someone else? Be specific - it'll enable us to send the right response & "
+"help you faster."
+msgstr ""
+
+#: go-app-ussd.js:1334
+msgid ""
+"Please type the full name of the person who was arrested. Also, what "
+"happened to cause the arrest? And what documentation/permit does this "
+"person have, if any?"
+msgstr ""
+
+#: go-app-ussd.js:1335
+msgid ""
+"Please type a detailed explanation of the incident: what happened; where it "
+"happened; the offending official's name; his/her physical features; "
+"date/time"
+msgstr ""
+
+#: go-app-ussd.js:1336
+msgid ""
+"Please explain the incident in as much detail as you can: What happened; "
+"where it happened; the offender's name; his/her physical features; "
+"date/time."
+msgstr ""
+
+#: go-app-ussd.js:1357
+msgid "Thank you very much. Your report has been submitted."
+msgstr ""
+
+#: go-app-ussd.js:1359 go-app-ussd.js:1649
+msgid "Main menu"
+msgstr ""
+
+#: go-app-ussd.js:1370
+msgid "Goodbye!"
+msgstr ""
+
+#: go-app-ussd.js:1382 go-app-ussd.js:1413
+msgid "Report"
+msgstr ""
+
+#: go-app-ussd.js:1383
+msgid "Step 1: Applying for asylum"
+msgstr ""
+
+#: go-app-ussd.js:1384 go-app-ussd.js:1415
+msgid "Step 2: Life in SA"
+msgstr ""
+
+#: go-app-ussd.js:1385
+msgid "Tips"
+msgstr ""
+
+#: go-app-ussd.js:1386 go-app-ussd.js:1416
+msgid "About/T&Cs"
+msgstr ""
+
+#: go-app-ussd.js:1387 go-app-ussd.js:1417
+msgid "Services Near Me"
+msgstr ""
+
+#: go-app-ussd.js:1388 go-app-ussd.js:1418
+msgid "Change Settings"
+msgstr ""
+
+#: go-app-ussd.js:1414
+msgid "Step 1: Visa application"
+msgstr ""
+
+#: go-app-ussd.js:1445
+msgid ""
+"To find services near you we need to know what suburb or area you are in. "
+"Please type this in below & be specific. e.g. Inanda Sandton"
+msgstr ""
+
+#: go-app-ussd.js:1449
+msgid ""
+"Sorry there are no results for your location. Please re-enter your location "
+"again carefully and make sure you use the correct spelling."
+msgstr ""
+
+#: go-app-ussd.js:1542
+msgid ""
+"The system is looking up services near you. This usually takes less than a "
+"minute."
+msgstr ""
+
+#: go-app-ussd.js:1544
+msgid "View services"
+msgstr ""
+
+#: go-app-ussd.js:1559
+msgid ""
+"Unfortunately we couldn't find any locations close to you. Try one more "
+"time or exit?"
+msgstr ""
+
+#: go-app-ussd.js:1561
+msgid "Try again"
+msgstr ""
+
+#: go-app-ussd.js:1576
+msgid ""
+"Sorry, no nearby services available. You can still use the Useful Contacts "
+"Main Menu option to search for services that are further off."
+msgstr ""
+
+#: go-app-ussd.js:1606
+msgid "Select a service for more info"
+msgstr ""
+
+#: go-app-ussd.js:1687
+msgid "Previous menu"
+msgstr ""
+
+#: go-app-ussd.js:1720
+msgid "Send to me by SMS"
+msgstr ""
+
+#: go-app-ussd.js:1743
+msgid ""
+"Your SMS will be sent to you shortly. Don't forget to dial back in to {{ "
+"ussd_num }} to find all the info you need about applying for asylum and "
+"living in SA."
+msgstr ""
+
+#: go-app-ussd.js:1756
+msgid "Select setting to change:"
+msgstr ""
+
+#: go-app-ussd.js:1758
+msgid "Language"
+msgstr ""
+
+#: go-app-ussd.js:1759
+msgid "Country"
+msgstr ""
+
+#: go-app-ussd.js:1760
+msgid "Status (refugee / migrant)"
+msgstr ""
+
+#: go-app-ussd.js:1761
+msgid "Back to Main Menu"
+msgstr ""
+
+#: go-app-ussd.js:1771
+msgid "Please choose your language:"
+msgstr ""
+
+#: go-app-ussd.js:1824
+msgid "Are you a refugee or migrant?"
+msgstr ""
+
+#: go-app-ussd.js:1826
+msgid "I am a refugee"
+msgstr ""
+
+#: go-app-ussd.js:1827
+msgid "I am a migrant"
+msgstr ""
+
+#: go-app-ussd.js:1841
+msgid ""
+"When you registered, you were identified as a {{status}}. Are you sure you "
+"would like to change your status?"
+msgstr ""
+
+#: go-app-ussd.js:1869
+msgid ""
+"Your new settings have been saved. Brought to you by Lawyers for Humans "
+"Rights www.lhr.org.za"
+msgstr ""
+
+#: go-app-ussd.js:1871
+msgid "Continue"
+msgstr ""
