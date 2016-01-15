@@ -1,0 +1,14 @@
+This folder contains translation files for each application, with one
+sub-folder per application.
+
+The `messages.pot` files are translation template files and are generated
+from the Javascript source code using the `./utils/regenerate-pot.sh` script.
+
+The `.po` files are supplied by translators who create them based on the
+`.pot` templates. The `.po` files are copied into the folder by hand and
+placed next to their corresponding `messages.pot` file.
+
+The `.json` files are JSON formatted versions of the `.po` files and
+are generated using the `./utils/regenerate-json.sh` scripts.
+
+Please do not edit the generated files by hand.
