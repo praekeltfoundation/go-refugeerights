@@ -494,7 +494,7 @@ go.app = function() {
                 previous_text: $('Back'),
                 retry_text: $('Retry'),
                 skip_text: $('Skip'),
-                
+
 
                 map_provider: new OpenStreetMap({
                     api_key: self.im.config.open_street_map.api_key,
@@ -872,7 +872,7 @@ go.app = function() {
             var poi_results = opts.poi_results;
             return new PaginatedState(name, {
                 // TODO test for possible translation problems here
-                text: $(opts.poi_details),
+                text: opts.poi_details,
                 characters_per_page: 160,
                 exit: $('Exit'),
                 back: $('Back'),
