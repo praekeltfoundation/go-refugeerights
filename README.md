@@ -25,7 +25,7 @@ After installing `jspot` with
 translation happens as follows:
 
 1. Generate the `.pot` template files with `./utils/regenerate-pot.sh`. This
-   with write a `messages.pot` file into `translations/<app-name>` for each
+   will write a `messages.pot` file into `translations/<app-name>` for each
    application with translations.
 
 2. Send the `.pot` files to translators.
