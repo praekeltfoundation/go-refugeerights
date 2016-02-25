@@ -1,0 +1,652 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-22 08:38+0000\n"
+"PO-Revision-Date: 2016-01-22 14:24+0000\n"
+"Last-Translator: Botswang <botswang@praekelt.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1453472699.864126\n"
+
+#: go-app-ussd.js:49
+msgid "Please dial back in to {{ USSD_number }} to complete the registration."
+msgstr ""
+
+#: go-app-ussd.js:66
+msgid ""
+"Thank you for you report. We need some extra information about the incident. "
+"Please let us know by dialing {{ USSD_number }}"
+msgstr ""
+
+#: go-app-ussd.js:831
+#: go-app-ussd.js:899
+#: go-app-ussd.js:985
+#: go-app-ussd.js:1380
+#: go-app-ussd.js:1411
+#: go-app-ussd.js:1652
+#: go-app-ussd.js:1690
+msgid "Select an option:"
+msgstr "Sélectionnez une option:"
+
+#: go-app-ussd.js:833
+msgid "Return to where I left off"
+msgstr "Retourner d' où j'étais avant"
+
+#: go-app-ussd.js:834
+#: go-app-ussd.js:901
+msgid "Find more info"
+msgstr "Trouver plus d'info"
+
+#: go-app-ussd.js:835
+#: go-app-ussd.js:902
+#: go-app-ussd.js:988
+msgid "Report xenophobia"
+msgstr "Rapporter la xénophobie"
+
+#: go-app-ussd.js:836
+#: go-app-ussd.js:903
+#: go-app-ussd.js:989
+msgid "Report unlawful arrest"
+msgstr "Rapporter une arrêstation illégale"
+
+#: go-app-ussd.js:837
+#: go-app-ussd.js:904
+#: go-app-ussd.js:990
+msgid "Report corruption"
+msgstr "Rapporter la corruption"
+
+#: go-app-ussd.js:838
+#: go-app-ussd.js:905
+#: go-app-ussd.js:991
+msgid "Report something else"
+msgstr "Rapporter autre chose"
+
+#: go-app-ussd.js:927
+msgid ""
+"Welcome! Would you like to find out about refugee and migrant rights in SA? "
+"First select your language:"
+msgstr ""
+"Bienvenu! Aimeriez-vous savoir sur les droits des immigrants en RSA? "
+"Premièrement, sélectionnez votre langue:"
+
+#: go-app-ussd.js:929
+#: go-app-ussd.js:1773
+msgid "English"
+msgstr "Anglais"
+
+#: go-app-ussd.js:930
+#: go-app-ussd.js:1774
+msgid "French"
+msgstr "Français"
+
+#: go-app-ussd.js:931
+#: go-app-ussd.js:1775
+msgid "Amharic"
+msgstr "Amharique"
+
+#: go-app-ussd.js:932
+#: go-app-ussd.js:1776
+msgid "Swahili"
+msgstr "Swahili"
+
+#: go-app-ussd.js:933
+#: go-app-ussd.js:1777
+msgid "Somali"
+msgstr "Somalien"
+
+#: go-app-ussd.js:947
+msgid ""
+"To give you the info & help you need, we will:\n"
+"- Store your cell #, language & country of origin\n"
+"- Sometimes send u SMSs\n"
+"Do you consent to this?"
+msgstr ""
+"Pour vous donner l'information & assistance que vous avez besoin, nous "
+"allons:- Enregistrerons votre cell #, langue & pays d'origine- De temps en "
+"temps vous envoyer des petits messages (SMSs)Êtes -vous d'accord?"
+
+#: go-app-ussd.js:952
+#: go-app-ussd.js:1068
+#: go-app-ussd.js:1081
+#: go-app-ussd.js:1094
+#: go-app-ussd.js:1846
+msgid "Yes"
+msgstr "Oui"
+
+#: go-app-ussd.js:953
+#: go-app-ussd.js:1069
+#: go-app-ussd.js:1082
+#: go-app-ussd.js:1095
+#: go-app-ussd.js:1847
+msgid "No"
+msgstr "Non"
+
+#: go-app-ussd.js:972
+msgid ""
+"We're sorry, we can't help without you providing consent to us storing your "
+"info & sending you SMSs. What would you like to do?"
+msgstr ""
+"Désolés, nous ne pouvons pas vous assister sans votre consentement avec nous "
+"de garder votre information & vous envoyer les SMSs. Qu'est ce que vous "
+"aimeri faire?"
+
+#: go-app-ussd.js:974
+msgid "Go back to consent"
+msgstr "Retourner sur le consentement"
+
+#: go-app-ussd.js:975
+#: go-app-ussd.js:1124
+#: go-app-ussd.js:1137
+#: go-app-ussd.js:1173
+#: go-app-ussd.js:1360
+#: go-app-ussd.js:1562
+#: go-app-ussd.js:1625
+msgid "Exit"
+msgstr "Sortie"
+
+#: go-app-ussd.js:987
+msgid "Find info about refugee/migrant rights in SA"
+msgstr "Info sur les droits des refugiés/immigrants en RSA"
+
+#: go-app-ussd.js:1010
+#: go-app-ussd.js:1791
+msgid "Select your country of origin:"
+msgstr "Sélectionnez votre pays d'origine:"
+
+#: go-app-ussd.js:1013
+#: go-app-ussd.js:1718
+#: go-app-ussd.js:1794
+msgid "Next"
+msgstr ""
+
+#: go-app-ussd.js:1014
+#: go-app-ussd.js:1242
+#: go-app-ussd.js:1452
+#: go-app-ussd.js:1626
+#: go-app-ussd.js:1719
+#: go-app-ussd.js:1795
+msgid "Back"
+msgstr "Retournez"
+
+#: go-app-ussd.js:1016
+#: go-app-ussd.js:1797
+msgid "Somalia"
+msgstr ""
+
+#: go-app-ussd.js:1017
+#: go-app-ussd.js:1798
+msgid "Ethiopia"
+msgstr "Ethiopie"
+
+#: go-app-ussd.js:1018
+#: go-app-ussd.js:1799
+msgid "Eritrea"
+msgstr "Erythrée"
+
+#: go-app-ussd.js:1019
+#: go-app-ussd.js:1800
+msgid "Democratic Republic of Congo"
+msgstr "République Démocratique du Congo"
+
+#: go-app-ussd.js:1020
+#: go-app-ussd.js:1801
+msgid "Burundi"
+msgstr "Burundi"
+
+#: go-app-ussd.js:1021
+#: go-app-ussd.js:1802
+msgid "Kenya"
+msgstr "Kenya"
+
+#: go-app-ussd.js:1022
+#: go-app-ussd.js:1803
+msgid "Rwanda"
+msgstr "Rwanda"
+
+#: go-app-ussd.js:1023
+#: go-app-ussd.js:1804
+msgid "Sudan/South Sudan"
+msgstr "Soudan/Soudan du Sud"
+
+#: go-app-ussd.js:1024
+#: go-app-ussd.js:1805
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+#: go-app-ussd.js:1025
+#: go-app-ussd.js:1806
+msgid "Uganda"
+msgstr "Uganda"
+
+#: go-app-ussd.js:1026
+#: go-app-ussd.js:1807
+msgid "Egypt"
+msgstr "Égypte"
+
+#: go-app-ussd.js:1027
+#: go-app-ussd.js:1808
+msgid "Mozambique"
+msgstr "Mozambique"
+
+#: go-app-ussd.js:1028
+#: go-app-ussd.js:1809
+msgid "Syria"
+msgstr "Syrie"
+
+#: go-app-ussd.js:1029
+#: go-app-ussd.js:1810
+msgid "Angola"
+msgstr "Angola"
+
+#: go-app-ussd.js:1045
+msgid "Would you like to find out if you qualify for refugee status?"
+msgstr "Aimeriez-vous savoir si vous êtes qualifiés comme réfugié?"
+
+#: go-app-ussd.js:1047
+msgid "Yes, I want to find out if I qualify"
+msgstr "Oui, j'aimerai en savoir"
+
+#: go-app-ussd.js:1048
+msgid "No, I'd like to access information for migrants"
+msgstr "Non,j' aimerai avoir accès à l' information sur les immigrants"
+
+#: go-app-ussd.js:1066
+msgid ""
+"Have you fled from your country in fear of your life due to your race, "
+"religion, nationality, gender, political or social group?"
+msgstr ""
+"Avez-vous fui votre pays de peur que vous perdez votre vie à cause de votre "
+"race,religion,nationalité,genre,politique ou votre goupe sociale?"
+
+#: go-app-ussd.js:1079
+msgid ""
+"Are you married to or depend upon a person who fled their country in fear of "
+"their life?"
+msgstr "Êtes-vous mariés à ou dépendez-vous d' un réfugié?"
+
+#: go-app-ussd.js:1092
+msgid "Are you married to a recognised refugee?"
+msgstr "Êtes-vous mariés à une personne qui est reconnue comme réfugié?"
+
+#: go-app-ussd.js:1121
+msgid ""
+"It looks like you may qualify for refugee status! Your asylum application "
+"process will confirm this. Please start this application now."
+msgstr ""
+"Il semble que vous pourriez être qualifiés comme réfugié! Votre demande "
+"d'asile le confirmera. Veuillez commencer votre demande maintenant."
+
+#: go-app-ussd.js:1123
+#: go-app-ussd.js:1136
+msgid "Find out more"
+msgstr "En savoir plus"
+
+#: go-app-ussd.js:1134
+msgid ""
+"You don't qualify for refugee status in SA. If you are a foreign national "
+"looking to work, study or run a business you'll need a visa."
+msgstr ""
+"Vous n' êtes pas qualifiés comme réfugié en RSA. Si vous êtes un non-citoyen "
+"sud-africain désirant travailler, étudier, ou entreprendre des affaires vous "
+"devrez avoir un visa."
+
+#: go-app-ussd.js:1147
+msgid ""
+"Thank you for dialling into the refugee and migrants rights service. Please "
+"dial back in to find out more."
+msgstr ""
+"Merci de contacter le service des droits des réfugiés et immigrants. Veuller "
+"rappeler pour en savoir plus."
+
+#: go-app-ussd.js:1157
+msgid ""
+"Unfortunately you cannot submit a report without indicating you understand "
+"and agree to the terms & conditions. Please redial to try again."
+msgstr ""
+"Malheureusement vous ne pouvez pas soumettre le rapport sans indiquer que "
+"vous comprenez et etes d'accord sur les termes & conditions. Veuiller "
+"recompoer pour réessayer."
+
+#: go-app-ussd.js:1164
+msgid ""
+"Reports are used to see where attacks may be in an area & warn others. LHR "
+"treats reports as serious. All rights reserved."
+msgstr ""
+
+#: go-app-ussd.js:1165
+msgid ""
+"LHR treats these reports as serious & will try to respond to critical "
+"reports as soon as possible. All rights reserved."
+msgstr ""
+
+#: go-app-ussd.js:1166
+msgid ""
+"Your details are confidential & used only by LHR & partners for "
+"investigation timeously, where possible. All rights reserved."
+msgstr ""
+
+#: go-app-ussd.js:1167
+msgid ""
+"LHR will process your info and try to respond timeously. Please don't abuse "
+"this system. All rights reserved."
+msgstr ""
+"La LHR traitera votre info et essayera de vous répondre au moment opportun. "
+"Veuillez ne pas abuser ce systemeTous droits reservés."
+
+#: go-app-ussd.js:1172
+msgid "I understand"
+msgstr "Je comprend"
+
+#: go-app-ussd.js:1189
+msgid "Which of these xenophobic acts is taking place?"
+msgstr "Lesquelles de ces sortes d' attaques xénophobiques ont eu lieu?"
+
+#: go-app-ussd.js:1190
+msgid "Why have you been arrested?"
+msgstr "Pourquoi avez-vous été arrêtés?"
+
+#: go-app-ussd.js:1191
+msgid "Where have you experienced corruption?"
+msgstr "Ou avez eu l'expérience de la corruption?"
+
+#: go-app-ussd.js:1192
+msgid "What would you like to report?"
+msgstr "Qu'aimerez-vous rapportez?"
+
+#: go-app-ussd.js:1196
+msgid "Physical threat"
+msgstr "Ménace physique"
+
+#: go-app-ussd.js:1197
+msgid "Protests in your area"
+msgstr "Les protestations dans votre secteur"
+
+#: go-app-ussd.js:1198
+msgid "Looting in your area"
+msgstr "Pillage dans votre secteur"
+
+#: go-app-ussd.js:1201
+msgid "Not having an asylum permit"
+msgstr "Manque de permis de demandeur d'asyle"
+
+#: go-app-ussd.js:1202
+msgid "Not having a migrant visa"
+msgstr "Manque de visa d' immigrant"
+
+#: go-app-ussd.js:1203
+msgid "You don't know"
+msgstr "Vous ne connaissez pas"
+
+#: go-app-ussd.js:1204
+#: go-app-ussd.js:1211
+#: go-app-ussd.js:1215
+msgid "Other"
+msgstr "Autre"
+
+#: go-app-ussd.js:1207
+msgid "Refugee Reception Office"
+msgstr "Centre de Reception des refugiées"
+
+#: go-app-ussd.js:1208
+msgid "South African Police Service"
+msgstr "Service de Police Sud-Africain"
+
+#: go-app-ussd.js:1209
+msgid "Department of Home Affairs"
+msgstr "Département du Ministere de l'Intérieur"
+
+#: go-app-ussd.js:1210
+msgid "Social services"
+msgstr "Services Sociaux"
+
+#: go-app-ussd.js:1214
+msgid "A complaint"
+msgstr "Une plainte"
+
+#: go-app-ussd.js:1235
+msgid "Please type the name of the suburb in which the incident took place."
+msgstr "Veuillez écrire le nom du lieu où l' incident à eu lieu."
+
+#: go-app-ussd.js:1237
+#: go-app-ussd.js:1447
+msgid "Please select your location:"
+msgstr "Veuillez sélectionnez votre location:"
+
+#: go-app-ussd.js:1239
+msgid ""
+"Sorry, we're not sure which suburb you mean. Please re-enter your location "
+"again carefully and make sure you use the correct spelling."
+msgstr ""
+"Désolés, nous ne sommes pas sùr de la location indiquée. Veuillz faire "
+"reinserer votre location attentivemnt et rassuez - vous que vous avez "
+"correctement écrit l'orthographe"
+
+#: go-app-ussd.js:1241
+#: go-app-ussd.js:1451
+#: go-app-ussd.js:1627
+msgid "More"
+msgstr "Plus"
+
+#: go-app-ussd.js:1243
+#: go-app-ussd.js:1453
+msgid "Retry"
+msgstr "Réessayer"
+
+#: go-app-ussd.js:1244
+#: go-app-ussd.js:1454
+msgid "Skip"
+msgstr "Passer"
+
+#: go-app-ussd.js:1333
+msgid ""
+"Please type an explanation of what's happening. Are you in danger? Is "
+"someone else? Be specific - it'll enable us to send the right response & "
+"help you faster."
+msgstr ""
+"Veuillez écrire concrètemnet sur l' incident.Êtes-vous en danger? Quelqu'un "
+"d' autre? Soyez précis - Ça nous permettra d'envoyer une réponse appropriée "
+"& de vous aider rapidement."
+
+#: go-app-ussd.js:1334
+msgid ""
+"Please type the full name of the person who was arrested. Also, what "
+"happened to cause the arrest? And what documentation/permit does this person "
+"have, if any?"
+msgstr ""
+"Veuiller écrire tous les noms de la personne arrêtée, la cause de son "
+"arrestation, le genre de documentation/permis qu' il a, s'il y en a?"
+
+#: go-app-ussd.js:1335
+msgid ""
+"Please type a detailed explanation of the incident: what happened; where it "
+"happened; the offending official's name; his/her physical features; date/time"
+msgstr ""
+"Veuillez écrire explication bien détaillée sur l' incident: Dites ce qui "
+"c'est passé,où ça eu lieu, le nom et la charactéristique physique du criminel"
+
+#: go-app-ussd.js:1336
+msgid ""
+"Please explain the incident in as much detail as you can: What happened; "
+"where it happened; the offender's name; his/her physical features; date/time."
+msgstr ""
+"Veuillez expliquer l' incident avec tous les détails: Ce qui s'est passé?,où "
+"cel a eu lieu,le nom et charactéristiques physiques du criminel"
+
+#: go-app-ussd.js:1357
+msgid "Thank you very much. Your report has been submitted."
+msgstr "Merci beaucoup. Votre rapport a été soumis."
+
+#: go-app-ussd.js:1359
+#: go-app-ussd.js:1649
+msgid "Main menu"
+msgstr "Menu principal"
+
+#: go-app-ussd.js:1370
+msgid "Goodbye!"
+msgstr ""
+
+#: go-app-ussd.js:1382
+#: go-app-ussd.js:1413
+msgid "Report"
+msgstr "Rapport"
+
+#: go-app-ussd.js:1383
+msgid "Step 1: Applying for asylum"
+msgstr "Etape 1: Demande d'asile"
+
+#: go-app-ussd.js:1384
+#: go-app-ussd.js:1415
+msgid "Step 2: Life in SA"
+msgstr "Etape 2: La vie en RSA"
+
+#: go-app-ussd.js:1385
+msgid "Tips"
+msgstr "Conseils"
+
+#: go-app-ussd.js:1386
+#: go-app-ussd.js:1416
+msgid "About/T&Cs"
+msgstr "Sur/T&Cs"
+
+#: go-app-ussd.js:1387
+#: go-app-ussd.js:1417
+msgid "Services Near Me"
+msgstr "Services proches de moi"
+
+#: go-app-ussd.js:1388
+#: go-app-ussd.js:1418
+msgid "Change Settings"
+msgstr "Modifier les paramettres"
+
+#: go-app-ussd.js:1414
+msgid "Step 1: Visa application"
+msgstr "Etape 1: Demande d'asile"
+
+#: go-app-ussd.js:1445
+msgid ""
+"To find services near you we need to know what suburb or area you are in. "
+"Please type this in below & be specific. e.g. Inanda Sandton"
+msgstr ""
+"Veuillez trouver les services qui vous sont proches. Nous vouls connaitre "
+"votre localité ou zone. Veuillez écrire en-dessous & soyez spécifiques. "
+"Example, Inanda, Sandton"
+
+#: go-app-ussd.js:1449
+msgid ""
+"Sorry there are no results for your location. Please re-enter your location "
+"again carefully and make sure you use the correct spelling."
+msgstr ""
+"Désolés, il n' y a pas résultat pour votre localité. Veuillez réessayez "
+"votre localié soigneusement et soyez sûr de l' orthographe."
+
+#: go-app-ussd.js:1542
+msgid ""
+"The system is looking up services near you. This usually takes less than a "
+"minute."
+msgstr ""
+"Le systeme recherche les services proches de vous. Généralement ça prend "
+"moins d' une minute."
+
+#: go-app-ussd.js:1544
+msgid "View services"
+msgstr "Voir services"
+
+#: go-app-ussd.js:1559
+msgid ""
+"Unfortunately we couldn't find any locations close to you. Try one more time "
+"or exit?"
+msgstr ""
+"Malheureusement, Nous ne puovions pas trouver aucun service proche de vous. "
+"Essayez encore ou sortez."
+
+#: go-app-ussd.js:1561
+msgid "Try again"
+msgstr "Réessayez"
+
+#: go-app-ussd.js:1576
+msgid ""
+"Sorry, no nearby services available. You can still use the Useful Contacts "
+"Main Menu option to search for services that are further off."
+msgstr ""
+
+#: go-app-ussd.js:1606
+msgid "Select a service for more info"
+msgstr "Sélectionnez un service pour plus d' information"
+
+#: go-app-ussd.js:1687
+msgid "Previous menu"
+msgstr ""
+
+#: go-app-ussd.js:1720
+msgid "Send to me by SMS"
+msgstr ""
+
+#: go-app-ussd.js:1743
+msgid ""
+"Your SMS will be sent to you shortly. Don't forget to dial back in to {{ "
+"ussd_num }} to find all the info you need about applying for asylum and "
+"living in SA."
+msgstr ""
+"Votre SMS vous sera envoyé bientôt. N' oubliez pas de recomposer le {{ "
+"ussd_num }} pour avoir l' info que vous désirez sur la demande d' asile et "
+"vivre en RSA. "
+
+#: go-app-ussd.js:1756
+msgid "Select setting to change:"
+msgstr ""
+
+#: go-app-ussd.js:1758
+msgid "Language"
+msgstr "Langue"
+
+#: go-app-ussd.js:1759
+msgid "Country"
+msgstr ""
+
+#: go-app-ussd.js:1760
+msgid "Status (refugee / migrant)"
+msgstr ""
+
+#: go-app-ussd.js:1761
+msgid "Back to Main Menu"
+msgstr ""
+
+#: go-app-ussd.js:1771
+msgid "Please choose your language:"
+msgstr ""
+
+#: go-app-ussd.js:1824
+msgid "Are you a refugee or migrant?"
+msgstr ""
+
+#: go-app-ussd.js:1826
+msgid "I am a refugee"
+msgstr ""
+
+#: go-app-ussd.js:1827
+msgid "I am a migrant"
+msgstr ""
+
+#: go-app-ussd.js:1841
+msgid ""
+"When you registered, you were identified as a {{status}}. Are you sure you "
+"would like to change your status?"
+msgstr ""
+"Lors de votre enregistrement, vous aveze été enregistrés comme {{status}}. "
+"Êtes-vous sûrs que vous aimeriez changer votre status?"
+
+#: go-app-ussd.js:1869
+msgid ""
+"Your new settings have been saved. Brought to you by Lawyers for Humans "
+"Rights www.lhr.org.za"
+msgstr ""
+
+#: go-app-ussd.js:1871
+msgid "Continue"
+msgstr ""

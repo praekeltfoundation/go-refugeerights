@@ -1,0 +1,37 @@
+{
+    "": {
+        "project-id-version": "PACKAGE VERSION",
+        "report-msgid-bugs-to": "",
+        "pot-creation-date": "2016-01-22 08:38+0000",
+        "po-revision-date": "2016-01-22 09:54+0000",
+        "last-translator": "Botswang <botswang@praekelt.com>",
+        "language-team": "LANGUAGE <LL@li.org>",
+        "language": "fr",
+        "mime-version": "1.0",
+        "content-type": "text/plain; charset=UTF-8",
+        "content-transfer-encoding": "8bit",
+        "plural-forms": "nplurals=2; plural=(n > 1);",
+        "x-generator": "Pootle 2.5.1.1",
+        "x-pootle-mtime": "1453456468.523280"
+    },
+    "Please dial back in to {{ USSD_number }} to complete the registration.": [
+        null,
+        "Veuillez recomposer sur {{ USSD_number }} pour compléter votre inscription. "
+    ],
+    "Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}": [
+        null,
+        "Merci pour votre rapport. Nous voulons plus d'information sur l' incident. Veuillez nous contacter en composant sur {{ USSD_number }}"
+    ],
+    "Thank you. You will no longer receive messages from us. Reply START to opt back in.": [
+        null,
+        ""
+    ],
+    "Thank you. You will now receive messages from us again. Reply STOP to unsubscribe.": [
+        null,
+        ""
+    ],
+    "Thanks for your message. We will reply if appropriate. Reply STOP to unsubscribe.": [
+        null,
+        ""
+    ]
+}

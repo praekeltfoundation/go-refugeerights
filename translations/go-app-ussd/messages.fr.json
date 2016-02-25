@@ -1,0 +1,477 @@
+{
+    "": {
+        "project-id-version": "PACKAGE VERSION",
+        "report-msgid-bugs-to": "",
+        "pot-creation-date": "2016-01-22 08:38+0000",
+        "po-revision-date": "2016-01-22 14:24+0000",
+        "last-translator": "Botswang <botswang@praekelt.com>",
+        "language-team": "LANGUAGE <LL@li.org>",
+        "language": "fr",
+        "mime-version": "1.0",
+        "content-type": "text/plain; charset=UTF-8",
+        "content-transfer-encoding": "8bit",
+        "plural-forms": "nplurals=2; plural=(n > 1);",
+        "x-generator": "Pootle 2.5.1.1",
+        "x-pootle-mtime": "1453472699.864126"
+    },
+    "Please dial back in to {{ USSD_number }} to complete the registration.": [
+        null,
+        ""
+    ],
+    "Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}": [
+        null,
+        ""
+    ],
+    "Select an option:": [
+        null,
+        "Sélectionnez une option:"
+    ],
+    "Return to where I left off": [
+        null,
+        "Retourner d' où j'étais avant"
+    ],
+    "Find more info": [
+        null,
+        "Trouver plus d'info"
+    ],
+    "Report xenophobia": [
+        null,
+        "Rapporter la xénophobie"
+    ],
+    "Report unlawful arrest": [
+        null,
+        "Rapporter une arrêstation illégale"
+    ],
+    "Report corruption": [
+        null,
+        "Rapporter la corruption"
+    ],
+    "Report something else": [
+        null,
+        "Rapporter autre chose"
+    ],
+    "Welcome! Would you like to find out about refugee and migrant rights in SA? First select your language:": [
+        null,
+        "Bienvenu! Aimeriez-vous savoir sur les droits des immigrants en RSA? Premièrement, sélectionnez votre langue:"
+    ],
+    "English": [
+        null,
+        "Anglais"
+    ],
+    "French": [
+        null,
+        "Français"
+    ],
+    "Amharic": [
+        null,
+        "Amharique"
+    ],
+    "Swahili": [
+        null,
+        "Swahili"
+    ],
+    "Somali": [
+        null,
+        "Somalien"
+    ],
+    "To give you the info & help you need, we will:\n- Store your cell #, language & country of origin\n- Sometimes send u SMSs\nDo you consent to this?": [
+        null,
+        "Pour vous donner l'information & assistance que vous avez besoin, nous allons:- Enregistrerons votre cell #, langue & pays d'origine- De temps en temps vous envoyer des petits messages (SMSs)Êtes -vous d'accord?"
+    ],
+    "Yes": [
+        null,
+        "Oui"
+    ],
+    "No": [
+        null,
+        "Non"
+    ],
+    "We're sorry, we can't help without you providing consent to us storing your info & sending you SMSs. What would you like to do?": [
+        null,
+        "Désolés, nous ne pouvons pas vous assister sans votre consentement avec nous de garder votre information & vous envoyer les SMSs. Qu'est ce que vous aimeri faire?"
+    ],
+    "Go back to consent": [
+        null,
+        "Retourner sur le consentement"
+    ],
+    "Exit": [
+        null,
+        "Sortie"
+    ],
+    "Find info about refugee/migrant rights in SA": [
+        null,
+        "Info sur les droits des refugiés/immigrants en RSA"
+    ],
+    "Select your country of origin:": [
+        null,
+        "Sélectionnez votre pays d'origine:"
+    ],
+    "Next": [
+        null,
+        ""
+    ],
+    "Back": [
+        null,
+        "Retournez"
+    ],
+    "Somalia": [
+        null,
+        ""
+    ],
+    "Ethiopia": [
+        null,
+        "Ethiopie"
+    ],
+    "Eritrea": [
+        null,
+        "Erythrée"
+    ],
+    "Democratic Republic of Congo": [
+        null,
+        "République Démocratique du Congo"
+    ],
+    "Burundi": [
+        null,
+        "Burundi"
+    ],
+    "Kenya": [
+        null,
+        "Kenya"
+    ],
+    "Rwanda": [
+        null,
+        "Rwanda"
+    ],
+    "Sudan/South Sudan": [
+        null,
+        "Soudan/Soudan du Sud"
+    ],
+    "Zimbabwe": [
+        null,
+        "Zimbabwe"
+    ],
+    "Uganda": [
+        null,
+        "Uganda"
+    ],
+    "Egypt": [
+        null,
+        "Égypte"
+    ],
+    "Mozambique": [
+        null,
+        "Mozambique"
+    ],
+    "Syria": [
+        null,
+        "Syrie"
+    ],
+    "Angola": [
+        null,
+        "Angola"
+    ],
+    "Would you like to find out if you qualify for refugee status?": [
+        null,
+        "Aimeriez-vous savoir si vous êtes qualifiés comme réfugié?"
+    ],
+    "Yes, I want to find out if I qualify": [
+        null,
+        "Oui, j'aimerai en savoir"
+    ],
+    "No, I'd like to access information for migrants": [
+        null,
+        "Non,j' aimerai avoir accès à l' information sur les immigrants"
+    ],
+    "Have you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group?": [
+        null,
+        "Avez-vous fui votre pays de peur que vous perdez votre vie à cause de votre race,religion,nationalité,genre,politique ou votre goupe sociale?"
+    ],
+    "Are you married to or depend upon a person who fled their country in fear of their life?": [
+        null,
+        "Êtes-vous mariés à ou dépendez-vous d' un réfugié?"
+    ],
+    "Are you married to a recognised refugee?": [
+        null,
+        "Êtes-vous mariés à une personne qui est reconnue comme réfugié?"
+    ],
+    "It looks like you may qualify for refugee status! Your asylum application process will confirm this. Please start this application now.": [
+        null,
+        "Il semble que vous pourriez être qualifiés comme réfugié! Votre demande d'asile le confirmera. Veuillez commencer votre demande maintenant."
+    ],
+    "Find out more": [
+        null,
+        "En savoir plus"
+    ],
+    "You don't qualify for refugee status in SA. If you are a foreign national looking to work, study or run a business you'll need a visa.": [
+        null,
+        "Vous n' êtes pas qualifiés comme réfugié en RSA. Si vous êtes un non-citoyen sud-africain désirant travailler, étudier, ou entreprendre des affaires vous devrez avoir un visa."
+    ],
+    "Thank you for dialling into the refugee and migrants rights service. Please dial back in to find out more.": [
+        null,
+        "Merci de contacter le service des droits des réfugiés et immigrants. Veuller rappeler pour en savoir plus."
+    ],
+    "Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again.": [
+        null,
+        "Malheureusement vous ne pouvez pas soumettre le rapport sans indiquer que vous comprenez et etes d'accord sur les termes & conditions. Veuiller recompoer pour réessayer."
+    ],
+    "Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved.": [
+        null,
+        ""
+    ],
+    "LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved.": [
+        null,
+        ""
+    ],
+    "Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved.": [
+        null,
+        ""
+    ],
+    "LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved.": [
+        null,
+        "La LHR traitera votre info et essayera de vous répondre au moment opportun. Veuillez ne pas abuser ce systemeTous droits reservés."
+    ],
+    "I understand": [
+        null,
+        "Je comprend"
+    ],
+    "Which of these xenophobic acts is taking place?": [
+        null,
+        "Lesquelles de ces sortes d' attaques xénophobiques ont eu lieu?"
+    ],
+    "Why have you been arrested?": [
+        null,
+        "Pourquoi avez-vous été arrêtés?"
+    ],
+    "Where have you experienced corruption?": [
+        null,
+        "Ou avez eu l'expérience de la corruption?"
+    ],
+    "What would you like to report?": [
+        null,
+        "Qu'aimerez-vous rapportez?"
+    ],
+    "Physical threat": [
+        null,
+        "Ménace physique"
+    ],
+    "Protests in your area": [
+        null,
+        "Les protestations dans votre secteur"
+    ],
+    "Looting in your area": [
+        null,
+        "Pillage dans votre secteur"
+    ],
+    "Not having an asylum permit": [
+        null,
+        "Manque de permis de demandeur d'asyle"
+    ],
+    "Not having a migrant visa": [
+        null,
+        "Manque de visa d' immigrant"
+    ],
+    "You don't know": [
+        null,
+        "Vous ne connaissez pas"
+    ],
+    "Other": [
+        null,
+        "Autre"
+    ],
+    "Refugee Reception Office": [
+        null,
+        "Centre de Reception des refugiées"
+    ],
+    "South African Police Service": [
+        null,
+        "Service de Police Sud-Africain"
+    ],
+    "Department of Home Affairs": [
+        null,
+        "Département du Ministere de l'Intérieur"
+    ],
+    "Social services": [
+        null,
+        "Services Sociaux"
+    ],
+    "A complaint": [
+        null,
+        "Une plainte"
+    ],
+    "Please type the name of the suburb in which the incident took place.": [
+        null,
+        "Veuillez écrire le nom du lieu où l' incident à eu lieu."
+    ],
+    "Please select your location:": [
+        null,
+        "Veuillez sélectionnez votre location:"
+    ],
+    "Sorry, we're not sure which suburb you mean. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        "Désolés, nous ne sommes pas sùr de la location indiquée. Veuillz faire reinserer votre location attentivemnt et rassuez - vous que vous avez correctement écrit l'orthographe"
+    ],
+    "More": [
+        null,
+        "Plus"
+    ],
+    "Retry": [
+        null,
+        "Réessayer"
+    ],
+    "Skip": [
+        null,
+        "Passer"
+    ],
+    "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific - it'll enable us to send the right response & help you faster.": [
+        null,
+        "Veuillez écrire concrètemnet sur l' incident.Êtes-vous en danger? Quelqu'un d' autre? Soyez précis - Ça nous permettra d'envoyer une réponse appropriée & de vous aider rapidement."
+    ],
+    "Please type the full name of the person who was arrested. Also, what happened to cause the arrest? And what documentation/permit does this person have, if any?": [
+        null,
+        "Veuiller écrire tous les noms de la personne arrêtée, la cause de son arrestation, le genre de documentation/permis qu' il a, s'il y en a?"
+    ],
+    "Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time": [
+        null,
+        "Veuillez écrire explication bien détaillée sur l' incident: Dites ce qui c'est passé,où ça eu lieu, le nom et la charactéristique physique du criminel"
+    ],
+    "Please explain the incident in as much detail as you can: What happened; where it happened; the offender's name; his/her physical features; date/time.": [
+        null,
+        "Veuillez expliquer l' incident avec tous les détails: Ce qui s'est passé?,où cel a eu lieu,le nom et charactéristiques physiques du criminel"
+    ],
+    "Thank you very much. Your report has been submitted.": [
+        null,
+        "Merci beaucoup. Votre rapport a été soumis."
+    ],
+    "Main menu": [
+        null,
+        "Menu principal"
+    ],
+    "Goodbye!": [
+        null,
+        ""
+    ],
+    "Report": [
+        null,
+        "Rapport"
+    ],
+    "Step 1: Applying for asylum": [
+        null,
+        "Etape 1: Demande d'asile"
+    ],
+    "Step 2: Life in SA": [
+        null,
+        "Etape 2: La vie en RSA"
+    ],
+    "Tips": [
+        null,
+        "Conseils"
+    ],
+    "About/T&Cs": [
+        null,
+        "Sur/T&Cs"
+    ],
+    "Services Near Me": [
+        null,
+        "Services proches de moi"
+    ],
+    "Change Settings": [
+        null,
+        "Modifier les paramettres"
+    ],
+    "Step 1: Visa application": [
+        null,
+        "Etape 1: Demande d'asile"
+    ],
+    "To find services near you we need to know what suburb or area you are in. Please type this in below & be specific. e.g. Inanda Sandton": [
+        null,
+        "Veuillez trouver les services qui vous sont proches. Nous vouls connaitre votre localité ou zone. Veuillez écrire en-dessous & soyez spécifiques. Example, Inanda, Sandton"
+    ],
+    "Sorry there are no results for your location. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        "Désolés, il n' y a pas résultat pour votre localité. Veuillez réessayez votre localié soigneusement et soyez sûr de l' orthographe."
+    ],
+    "The system is looking up services near you. This usually takes less than a minute.": [
+        null,
+        "Le systeme recherche les services proches de vous. Généralement ça prend moins d' une minute."
+    ],
+    "View services": [
+        null,
+        "Voir services"
+    ],
+    "Unfortunately we couldn't find any locations close to you. Try one more time or exit?": [
+        null,
+        "Malheureusement, Nous ne puovions pas trouver aucun service proche de vous. Essayez encore ou sortez."
+    ],
+    "Try again": [
+        null,
+        "Réessayez"
+    ],
+    "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off.": [
+        null,
+        ""
+    ],
+    "Select a service for more info": [
+        null,
+        "Sélectionnez un service pour plus d' information"
+    ],
+    "Previous menu": [
+        null,
+        ""
+    ],
+    "Send to me by SMS": [
+        null,
+        ""
+    ],
+    "Your SMS will be sent to you shortly. Don't forget to dial back in to {{ ussd_num }} to find all the info you need about applying for asylum and living in SA.": [
+        null,
+        "Votre SMS vous sera envoyé bientôt. N' oubliez pas de recomposer le {{ ussd_num }} pour avoir l' info que vous désirez sur la demande d' asile et vivre en RSA. "
+    ],
+    "Select setting to change:": [
+        null,
+        ""
+    ],
+    "Language": [
+        null,
+        "Langue"
+    ],
+    "Country": [
+        null,
+        ""
+    ],
+    "Status (refugee / migrant)": [
+        null,
+        ""
+    ],
+    "Back to Main Menu": [
+        null,
+        ""
+    ],
+    "Please choose your language:": [
+        null,
+        ""
+    ],
+    "Are you a refugee or migrant?": [
+        null,
+        ""
+    ],
+    "I am a refugee": [
+        null,
+        ""
+    ],
+    "I am a migrant": [
+        null,
+        ""
+    ],
+    "When you registered, you were identified as a {{status}}. Are you sure you would like to change your status?": [
+        null,
+        "Lors de votre enregistrement, vous aveze été enregistrés comme {{status}}. Êtes-vous sûrs que vous aimeriez changer votre status?"
+    ],
+    "Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za": [
+        null,
+        ""
+    ],
+    "Continue": [
+        null,
+        ""
+    ]
+}

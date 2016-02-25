@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-22 11:40+0000\n"
+"PO-Revision-Date: 2016-01-25 07:46+0000\n"
+"Last-Translator: Botswang <botswang@praekelt.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: so\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1453708008.700304\n"
+
+#: go-app-sms.js:49
+msgid "Please dial back in to {{ USSD_number }} to complete the registration."
+msgstr ""
+"Fadlan booqo markale adeega {{ USSD_number }} siaad udhamaystirto "
+"Diinwangalintaada."
+
+#: go-app-sms.js:66
+msgid ""
+"Thank you for you report. We need some extra information about the incident. "
+"Please let us know by dialing {{ USSD_number }}"
+msgstr ""
+"Waad kumahadsantahay warbixintaada, waxaan ubaahanahay macluumaad dheeri ah "
+"oo kusaabsan dhacdada, fadlan noo soo gudbi adigoo adeegasanaya adeega {{ "
+"USSD_number }}"
+
+#: go-app-sms.js:831
+msgid ""
+"Thank you. You will no longer receive messages from us. Reply START to opt "
+"back in."
+msgstr ""
+
+#: go-app-sms.js:848
+msgid ""
+"Thank you. You will now receive messages from us again. Reply STOP to "
+"unsubscribe."
+msgstr ""
+
+#: go-app-sms.js:875
+msgid ""
+"Thanks for your message. We will reply if appropriate. Reply STOP to "
+"unsubscribe."
+msgstr ""

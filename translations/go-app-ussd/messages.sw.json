@@ -1,0 +1,477 @@
+{
+    "": {
+        "project-id-version": "PACKAGE VERSION",
+        "report-msgid-bugs-to": "",
+        "pot-creation-date": "2016-01-22 11:39+0000",
+        "po-revision-date": "2016-02-01 13:19+0000",
+        "last-translator": "Botswang <botswang@praekelt.com>",
+        "language-team": "LANGUAGE <LL@li.org>",
+        "language": "sw",
+        "mime-version": "1.0",
+        "content-type": "text/plain; charset=UTF-8",
+        "content-transfer-encoding": "8bit",
+        "plural-forms": "nplurals=2; plural=(n != 1);",
+        "x-generator": "Pootle 2.5.1.1",
+        "x-pootle-mtime": "1454332764.414410"
+    },
+    "Please dial back in to {{ USSD_number }} to complete the registration.": [
+        null,
+        "Tafadhali piga {{ USSD_number }} kamilisha usajili."
+    ],
+    "Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}": [
+        null,
+        "Asanti kwa reporti yako.Tuna hitaji habari zaidi kuhusu ajali. Tafadhali tujulishe ukipiga {{ USSD_number }}"
+    ],
+    "Select an option:": [
+        null,
+        "Kuchagua chaguo:"
+    ],
+    "Return to where I left off": [
+        null,
+        "Kurudi pale ambapo nilikuwepo"
+    ],
+    "Find more info": [
+        null,
+        "Kupata maelezo zaidi"
+    ],
+    "Report xenophobia": [
+        null,
+        "Ripoti chuki la wageni"
+    ],
+    "Report unlawful arrest": [
+        null,
+        "Ripoti kukamatwa kinyume na sheria"
+    ],
+    "Report corruption": [
+        null,
+        "Ripoti rushwa"
+    ],
+    "Report something else": [
+        null,
+        "Ripoti kitu kingine"
+    ],
+    "Welcome! Would you like to find out about refugee and migrant rights in SA? First select your language:": [
+        null,
+        "Karibu! Je ungependa kujua kuhusu wakimbizi na haki ya wahamaji SA? Kwanza chagua lugha yako:"
+    ],
+    "English": [
+        null,
+        "Kiingereza"
+    ],
+    "French": [
+        null,
+        "Kifaransa"
+    ],
+    "Amharic": [
+        null,
+        "Amharic"
+    ],
+    "Swahili": [
+        null,
+        "Kiswahili"
+    ],
+    "Somali": [
+        null,
+        "Somalia"
+    ],
+    "To give you the info & help you need, we will:\n- Store your cell #, language & country of origin\n- Sometimes send u SMSs\nDo you consent to this?": [
+        null,
+        "Kukupa maelezo na msaada unaohitaji tutafanya vifuatavyo:\n- Kuhifadhi namba simu#, Lugha & chi unayotaka\n - Mara nyingine kutumiwa SMSs\nUnakubali haya?"
+    ],
+    "Yes": [
+        null,
+        "Ndio"
+    ],
+    "No": [
+        null,
+        "La"
+    ],
+    "We're sorry, we can't help without you providing consent to us storing your info & sending you SMSs. What would you like to do?": [
+        null,
+        "Samahani.Hatuwezi kukusaidia bila ridhaa ya kuhifadhi habari yako na kutumiwa SMSs. Ungependa kujua utakapofanya?"
+    ],
+    "Go back to consent": [
+        null,
+        "Rudi kwa ridhaa"
+    ],
+    "Exit": [
+        null,
+        "Toka"
+    ],
+    "Find info about refugee/migrant rights in SA": [
+        null,
+        "Kupata maelezo kuhusu haki za wakimbizi na wahamiaji SA?"
+    ],
+    "Select your country of origin:": [
+        null,
+        "Inchi ya asili unatoka:"
+    ],
+    "Next": [
+        null,
+        "Matini"
+    ],
+    "Back": [
+        null,
+        "Nyuma"
+    ],
+    "Somalia": [
+        null,
+        "Somalia"
+    ],
+    "Ethiopia": [
+        null,
+        "Ethiopia"
+    ],
+    "Eritrea": [
+        null,
+        "Eritrea"
+    ],
+    "Democratic Republic of Congo": [
+        null,
+        "Serikali ya Demokrasia ya Congo"
+    ],
+    "Burundi": [
+        null,
+        "Burundi"
+    ],
+    "Kenya": [
+        null,
+        "Kenya"
+    ],
+    "Rwanda": [
+        null,
+        "Rwanda"
+    ],
+    "Sudan/South Sudan": [
+        null,
+        "Sudan/South Sudan"
+    ],
+    "Zimbabwe": [
+        null,
+        "Zimbabwe"
+    ],
+    "Uganda": [
+        null,
+        "Uganda"
+    ],
+    "Egypt": [
+        null,
+        "Egypt"
+    ],
+    "Mozambique": [
+        null,
+        "Msumbiji"
+    ],
+    "Syria": [
+        null,
+        "Syria"
+    ],
+    "Angola": [
+        null,
+        "Angola"
+    ],
+    "Would you like to find out if you qualify for refugee status?": [
+        null,
+        "Je ungependa kujua kama unastahili hadhi ya ukimbizi?"
+    ],
+    "Yes, I want to find out if I qualify": [
+        null,
+        "Ndiyo, Nataka kujua kama mimi nastahili"
+    ],
+    "No, I'd like to access information for migrants": [
+        null,
+        "Hapana, Ningepena kupata habari ya wahamaji"
+    ],
+    "Have you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group?": [
+        null,
+        "Je wewe umekimbia nchi yako kutokana na kunyanyaswa juu ya tofu, rangi, uraia, dini, gendi, siasa au kikundi cha jamii?"
+    ],
+    "Are you married to or depend upon a person who fled their country in fear of their life?": [
+        null,
+        "Umeolewa au unamtegemea mtu ambae ametoka nchi yake kwa sababu ya hofu?"
+    ],
+    "Are you married to a recognised refugee?": [
+        null,
+        "Je umeolewa na mkimbizi aliepewa hadhi za wakimbizi?"
+    ],
+    "It looks like you may qualify for refugee status! Your asylum application process will confirm this. Please start this application now.": [
+        null,
+        "Inaonekana kama unaweza kuhitimu kwa hadhi ya ukimbizi! Machakato hifadhi. Tafadhali anza maombi sasa hivi."
+    ],
+    "Find out more": [
+        null,
+        "Tafuta zingine chini"
+    ],
+    "You don't qualify for refugee status in SA. If you are a foreign national looking to work, study or run a business you'll need a visa.": [
+        null,
+        "Wewe huna haki ya kuwa na hadhi ya ukimbizi SA. Kama wewe ni mgeni na unatafuta kazi, masomo au biashara unahitaji visa."
+    ],
+    "Thank you for dialling into the refugee and migrants rights service. Please dial back in to find out more.": [
+        null,
+        "Shukrani kwa kugipia shirika la haki za wakimbizi and wahamaji. Tafadhali rudi nyuma kwa maelezo zaidi."
+    ],
+    "Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again.": [
+        null,
+        "Kwa bahati mbaya huwezi kutowa ripoti bila kuonyesha na kuelewa sherry & masharti. Tafadhali piga ukajalibu tena."
+    ],
+    "Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved.": [
+        null,
+        "Ripoti hutumiwa na LHR kutambua maeno ambao ana chuki za wageni. Kuwasiliana na polisi kwa kupata jibu la haraka. Haki zote zimehifadhiwa."
+    ],
+    "LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved.": [
+        null,
+        "Ripoti zinachukuliwa kama jambo la muhimu. LHR itakupigia kama majibu inawezekanavyo. Usitarajie jibu la haraka. Haki zote zimehifadhiwa."
+    ],
+    "Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved.": [
+        null,
+        "Maelezo yako ni siri na hutumiwa na LHR kwa ajili ya uchunguzi. LHR itakupigia kama kuna jibu lolote litawezekana. Haki zote zimehifadhiwa."
+    ],
+    "LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved.": [
+        null,
+        "LHR itachukua maelezo yako na kujaribu kukujibu mara kwa mara. Tafadhali usinyanyase idhaa hii. Haki zote zimehifadhiwa."
+    ],
+    "I understand": [
+        null,
+        "Nimeelewa"
+    ],
+    "Which of these xenophobic acts is taking place?": [
+        null,
+        "Vitendo gani vya chuki za wageni vinafanyika?"
+    ],
+    "Why have you been arrested?": [
+        null,
+        "Kwa sababu gani umekamatwa?"
+    ],
+    "Where have you experienced corruption?": [
+        null,
+        "Wapi umeona mambo ya rushwa?"
+    ],
+    "What would you like to report?": [
+        null,
+        "Ungependa kuripoti nini?"
+    ],
+    "Physical threat": [
+        null,
+        "Tishio kimwili"
+    ],
+    "Protests in your area": [
+        null,
+        "Mandamano katika maeneo unapoishi"
+    ],
+    "Looting in your area": [
+        null,
+        "Uporaji katika maeneo yako"
+    ],
+    "Not having an asylum permit": [
+        null,
+        "Kutokuwa na kibali cha ukimbizi"
+    ],
+    "Not having a migrant visa": [
+        null,
+        "Kutokuwa na viza wahamiaji"
+    ],
+    "You don't know": [
+        null,
+        "Sijui"
+    ],
+    "Other": [
+        null,
+        "Mengineo"
+    ],
+    "Refugee Reception Office": [
+        null,
+        "Kituo cha Kupokea Wakimbizi"
+    ],
+    "South African Police Service": [
+        null,
+        "Kituo cha Polisi ya Afrika Kusini"
+    ],
+    "Department of Home Affairs": [
+        null,
+        "Wizara ya Mambo ya Ndani"
+    ],
+    "Social services": [
+        null,
+        "Huduma ya Kijamii"
+    ],
+    "A complaint": [
+        null,
+        "Malalamiko"
+    ],
+    "Please type the name of the suburb in which the incident took place.": [
+        null,
+        "Tafadhali andika majina ya mahali tukio hilo limetokea."
+    ],
+    "Please select your location:": [
+        null,
+        "Tafadhali chagua eneo lako:"
+    ],
+    "Sorry, we're not sure which suburb you mean. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        "Pole hamna matokeo ya eneo lako. Tafadhali ingiza eneo lako kwa makini na hakikisha kama unatumia herufu sahihi."
+    ],
+    "More": [
+        null,
+        "Zaidi"
+    ],
+    "Retry": [
+        null,
+        "Jaribu tena"
+    ],
+    "Skip": [
+        null,
+        ""
+    ],
+    "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific - it'll enable us to send the right response & help you faster.": [
+        null,
+        "Tafadhali tupe maelezo kinachoendelea pale. Je uko hatarini? Ama mtu mwingine? Toa maelezo maalum. Vitaweza kutusaidia kukuhudumia haraka."
+    ],
+    "Please type the full name of the person who was arrested. Also, what happened to cause the arrest? And what documentation/permit does this person have, if any?": [
+        null,
+        "Tafadhali andika majina kamili ya aliye fungwa. Pia, nini iliyosabisha afungwe. Na aina gani ya nyaraka/kibali anayo, kama ipo?"
+    ],
+    "Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time": [
+        null,
+        "Tafadhali andika maelezo kamili juu ya kile kilichotokea; wapi matukio; afisa mkosefu ni nani: jina lake; maumbile/sura yake ina fanana namna gani; siku, tarahe/dakika gani"
+    ],
+    "Please explain the incident in as much detail as you can: What happened; where it happened; the offender's name; his/her physical features; date/time.": [
+        null,
+        "Tafadhali eleza tukio hilo katika maelezo vile unaweza: Kilichotendeka; lipodendenka; Jina mhalifu. Jina/sifa za maumbile; Tarehe/wakati. "
+    ],
+    "Thank you very much. Your report has been submitted.": [
+        null,
+        "Asanti sana. Repoti yak imewasilishwa."
+    ],
+    "Main menu": [
+        null,
+        "Orodha kuu"
+    ],
+    "Goodbye!": [
+        null,
+        ""
+    ],
+    "Report": [
+        null,
+        "Repoti"
+    ],
+    "Step 1: Applying for asylum": [
+        null,
+        "Hatua ya 1: Kuomba ukimbizi "
+    ],
+    "Step 2: Life in SA": [
+        null,
+        "Hatua ya 2: Maisha SA"
+    ],
+    "Tips": [
+        null,
+        "Mwanga"
+    ],
+    "About/T&Cs": [
+        null,
+        "Kusu sheria na masharti"
+    ],
+    "Services Near Me": [
+        null,
+        "Huduma karibu na mimi"
+    ],
+    "Change Settings": [
+        null,
+        "Mabadiliko ya mazingira"
+    ],
+    "Step 1: Visa application": [
+        null,
+        "Hatua ya 1: Kuomba viza"
+    ],
+    "To find services near you we need to know what suburb or area you are in. Please type this in below & be specific. e.g. Inanda Sandton": [
+        null,
+        ""
+    ],
+    "Sorry there are no results for your location. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        "Pole hamna matokeo ya eneo lako. Tafadhali ingiza eneo lako kwa makini na hakikisha kama unatumia herufu sahihi."
+    ],
+    "The system is looking up services near you. This usually takes less than a minute.": [
+        null,
+        "Mfumo ina angalia hadi huduma karibu na wewe. Kwa kawaida inachukua chini ya dakika moja."
+    ],
+    "View services": [
+        null,
+        "Tazama huduma"
+    ],
+    "Unfortunately we couldn't find any locations close to you. Try one more time or exit?": [
+        null,
+        "Samahani hatuwezi kupata huduma ilio karibu na we. Jaribu tena au  toka?"
+    ],
+    "Try again": [
+        null,
+        "Jaribu tena"
+    ],
+    "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off.": [
+        null,
+        "Samahani, hamna huduma karibu na wewe. Unaweza kutumia orodha au fursa 'Huduma karibu na mimi' na kutafuta huduma mahali pengineo"
+    ],
+    "Select a service for more info": [
+        null,
+        "Chagua huduma kwa maelezo zaidi"
+    ],
+    "Previous menu": [
+        null,
+        ""
+    ],
+    "Send to me by SMS": [
+        null,
+        ""
+    ],
+    "Your SMS will be sent to you shortly. Don't forget to dial back in to {{ ussd_num }} to find all the info you need about applying for asylum and living in SA.": [
+        null,
+        "Utatumiwa SMS baada ya muda mufupi . Usisahau piga tena {{ ussd_num }} ukapate taarifa zote unahitaji kuhusu namna kuomba visa  na kuishi katika SA."
+    ],
+    "Select setting to change:": [
+        null,
+        ""
+    ],
+    "Language": [
+        null,
+        "Lugha"
+    ],
+    "Country": [
+        null,
+        "Nchi"
+    ],
+    "Status (refugee / migrant)": [
+        null,
+        ""
+    ],
+    "Back to Main Menu": [
+        null,
+        ""
+    ],
+    "Please choose your language:": [
+        null,
+        ""
+    ],
+    "Are you a refugee or migrant?": [
+        null,
+        ""
+    ],
+    "I am a refugee": [
+        null,
+        ""
+    ],
+    "I am a migrant": [
+        null,
+        ""
+    ],
+    "When you registered, you were identified as a {{status}}. Are you sure you would like to change your status?": [
+        null,
+        "Wakati ulijiandikisha, Ulitambuliwaa kama {{status}}. Una hakika ya kwamba unataka kubadilisha hadhi yako?"
+    ],
+    "Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za": [
+        null,
+        ""
+    ],
+    "Continue": [
+        null,
+        ""
+    ]
+}
