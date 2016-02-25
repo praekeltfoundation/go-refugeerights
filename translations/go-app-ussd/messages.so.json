@@ -1,0 +1,477 @@
+{
+    "": {
+        "project-id-version": "PACKAGE VERSION",
+        "report-msgid-bugs-to": "",
+        "pot-creation-date": "2016-01-22 11:40+0000",
+        "po-revision-date": "2016-01-25 13:46+0000",
+        "last-translator": "Botswang <botswang@praekelt.com>",
+        "language-team": "LANGUAGE <LL@li.org>",
+        "language": "so",
+        "mime-version": "1.0",
+        "content-type": "text/plain; charset=UTF-8",
+        "content-transfer-encoding": "8bit",
+        "plural-forms": "nplurals=2; plural=(n != 1);",
+        "x-generator": "Pootle 2.5.1.1",
+        "x-pootle-mtime": "1453729564.172956"
+    },
+    "Please dial back in to {{ USSD_number }} to complete the registration.": [
+        null,
+        "Fadlan booqo markale adeega {{ USSD_number }} siaad udhamaystirto Diinwangalintaada."
+    ],
+    "Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}": [
+        null,
+        "Waad kumahadsantahay warbixintaada, waxaan ubaahanahay macluumaad dheeri ah oo kusaabsan dhacdada, fadlan noo soo gudbi adigoo adeegasanaya adeega {{ USSD_number }}"
+    ],
+    "Select an option:": [
+        null,
+        "Dooro qaybta:"
+    ],
+    "Return to where I left off": [
+        null,
+        "Kunoqo meeshii aad kagatagtay"
+    ],
+    "Find more info": [
+        null,
+        "Hel xog dheeri ah"
+    ],
+    "Report xenophobia": [
+        null,
+        "Soo gudbi xogta boobka"
+    ],
+    "Report unlawful arrest": [
+        null,
+        "Soo gudbi xogta xidhayga sharci darada ah"
+    ],
+    "Report corruption": [
+        null,
+        "Soo gudbi xogta musuqa"
+    ],
+    "Report something else": [
+        null,
+        "Soo gudbi xogkale oo dheeri ah"
+    ],
+    "Welcome! Would you like to find out about refugee and migrant rights in SA? First select your language:": [
+        null,
+        "Soodhawaw! Marabtaa inaad ogaato xuquuqda Qaxootiga iyo soogalootiga ee k/afrika"
+    ],
+    "English": [
+        null,
+        ""
+    ],
+    "French": [
+        null,
+        ""
+    ],
+    "Amharic": [
+        null,
+        ""
+    ],
+    "Swahili": [
+        null,
+        ""
+    ],
+    "Somali": [
+        null,
+        ""
+    ],
+    "To give you the info & help you need, we will:\n- Store your cell #, language & country of origin\n- Sometimes send u SMSs\nDo you consent to this?": [
+        null,
+        "Siaan kuusiino akhbaar, iyo caawimaad waxaan telefoonkaaga, luuqadaada iyo wadanka aad kasoojeedo, mararka qaar waxaan kuusoodiraynaa SMSs, maogoshahay midaas?"
+    ],
+    "Yes": [
+        null,
+        "Haa"
+    ],
+    "No": [
+        null,
+        "Maya"
+    ],
+    "We're sorry, we can't help without you providing consent to us storing your info & sending you SMSs. What would you like to do?": [
+        null,
+        "Waan kaxunahay, kuma caawinkarno adigoon nasiinin ogolaansho inaan kuusoodirno fariimaha SMSs, maxaad jeceshahay inaad samayso?"
+    ],
+    "Go back to consent": [
+        null,
+        "Ogolow markale"
+    ],
+    "Exit": [
+        null,
+        "Kabixitaan (Kabax)"
+    ],
+    "Find info about refugee/migrant rights in SA": [
+        null,
+        "Hel akhbaarta xuquuqda qaxootiga iyo soogalootiga ee k/afrika"
+    ],
+    "Select your country of origin:": [
+        null,
+        "Dooro wadanka aad kasoojeedo (Udhalatay):"
+    ],
+    "Next": [
+        null,
+        ""
+    ],
+    "Back": [
+        null,
+        ""
+    ],
+    "Somalia": [
+        null,
+        "Soomaaliya"
+    ],
+    "Ethiopia": [
+        null,
+        "Itoobiya"
+    ],
+    "Eritrea": [
+        null,
+        "Ereteriya"
+    ],
+    "Democratic Republic of Congo": [
+        null,
+        "Congo Kinsaasha"
+    ],
+    "Burundi": [
+        null,
+        "Burundi"
+    ],
+    "Kenya": [
+        null,
+        "Kiiniya"
+    ],
+    "Rwanda": [
+        null,
+        ""
+    ],
+    "Sudan/South Sudan": [
+        null,
+        "Suudaan/Koonfurta Suudaan"
+    ],
+    "Zimbabwe": [
+        null,
+        "Zimbaawi"
+    ],
+    "Uganda": [
+        null,
+        "Ugaandha"
+    ],
+    "Egypt": [
+        null,
+        "Masar"
+    ],
+    "Mozambique": [
+        null,
+        "Muuzaambiik"
+    ],
+    "Syria": [
+        null,
+        "Siiriya"
+    ],
+    "Angola": [
+        null,
+        "Angoola"
+    ],
+    "Would you like to find out if you qualify for refugee status?": [
+        null,
+        "Marabtaa inaad ogaato, inad xaq uleedahay helitaanka aqoonsiga qaxootiga?"
+    ],
+    "Yes, I want to find out if I qualify": [
+        null,
+        "Haa waan rabaa inaan ogaado inaan xaq uleeyahay iyo inkale"
+    ],
+    "No, I'd like to access information for migrants": [
+        null,
+        "Maya, waxaan rabaa inaan helo akhbaarta dadka soogalootiga ah"
+    ],
+    "Have you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group?": [
+        null,
+        "Miyaad ugasoo carartay wadankaagii, cabsi noloshaada khatar ku ah sababtoo ah, Midabkaaga,Diintaada,Qoomiyadaada, Jinsigaga sida Lab ama Dhadig, Hadafkaaga siyaasadeed, kamid ahaanshaha koox gaar ah?"
+    ],
+    "Are you married to or depend upon a person who fled their country in fear of their life?": [
+        null,
+        "Miyad guursatay ama kutiirsantahay shaqsi wadankiisii ugasoo cararay cabsi dhanka nolosha ah?"
+    ],
+    "Are you married to a recognised refugee?": [
+        null,
+        "Miyaad guursatay shaqsi Qaxootinimo loo aqoonsaday?"
+    ],
+    "It looks like you may qualify for refugee status! Your asylum application process will confirm this. Please start this application now.": [
+        null,
+        "Waxay uegtahay inaad kuguulaysandoonto helitaanka aqoonsiga qaxootiga, taasina waxaa qeexidoona habsami usocodka codsigaaga dhanka magangaliyada, fadlan hada billar."
+    ],
+    "Find out more": [
+        null,
+        "Raadi akhbaar dheeraad ah"
+    ],
+    "You don't qualify for refugee status in SA. If you are a foreign national looking to work, study or run a business you'll need a visa.": [
+        null,
+        "Umaqalantid inaad hesho aqoonsiga Qaxootiga ee k/afrika, waayo waxaadtahay soogalooti Shaqo,Waxbarasho iyo Ganacsi doon ah, waa inaad heshaa (haysataa) Dalkugal."
+    ],
+    "Thank you for dialling into the refugee and migrants rights service. Please dial back in to find out more.": [
+        null,
+        "Waad kumahadsantahay booqashadaada xarunta adeega Qaxootiga iyo soogalootiga, fadlan markale soobooqo siaad uhesho akhbaar dheerad ah."
+    ],
+    "Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again.": [
+        null,
+        "suurtagal maahan inaad gudbiso warbixin adigoon fahmin shuruucda iyo xuquuqda adeegan oo aan kuqancin, fadlan markale boqo adeega siaad isugu daydo marlabaad."
+    ],
+    "Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved.": [
+        null,
+        "Xogaha loo arko inay halis yihiin. waxaa kusoo wicidoona haayada xuquuqda aadanaha, hadii jawaab lagabixinkaro, Hasugin jawaab degdeg ah, Xuquuqda bogan waxaa iskaleh haayada xuquuqul insaanka."
+    ],
+    "LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved.": [
+        null,
+        "Xogaha loo arko inay halis yihiin. waxaa kusoo wicidoona haayada xuquuqda aadanaha, hadii jawaab lagabixinkaro, Hasugin jawaab degdeg ah, Xuquuqda bogan waxaa iskaleh haayada xuquuqul insaanka."
+    ],
+    "Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved.": [
+        null,
+        "Xogta aad bixiso waa mid lailaalinayo waxaana isticmaalaya haayada xuquul insaanka sibaadhitaan loosameeyo. waxaa kusoowici haayada xuquul insaanka hadii jawaab degdeg ah labixinkaro."
+    ],
+    "LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved.": [
+        null,
+        "Haayada xuquuqul insaanku waxay sii wadaysaa baadhitanka xogtaada waana lagulasoo xidhiidhidoonaa wakhiga kuhaboon. Fadlan hajabinin shuruucda."
+    ],
+    "I understand": [
+        null,
+        "Waan fahmay"
+    ],
+    "Which of these xenophobic acts is taking place?": [
+        null,
+        "Waa noocee boobka iyo jinsi nacaybka aad lakulantay?"
+    ],
+    "Why have you been arrested?": [
+        null,
+        "Maxaa laguu xidhay?"
+    ],
+    "Where have you experienced corruption?": [
+        null,
+        "Xageeg kula kulantay xaalada musuqmaasuqa?"
+    ],
+    "What would you like to report?": [
+        null,
+        "Waa maxay warbixinta aad soo gudbinayso?"
+    ],
+    "Physical threat": [
+        null,
+        "Dhaawac jismiga ah "
+    ],
+    "Protests in your area": [
+        null,
+        "Mudaharaadyo deegaankaaga kadhacaya"
+    ],
+    "Looting in your area": [
+        null,
+        "Boob iyo dhac deegaankaaga kadhacaya"
+    ],
+    "Not having an asylum permit": [
+        null,
+        "Haysasho la,aanta warqada sharciga qaxootiga"
+    ],
+    "Not having a migrant visa": [
+        null,
+        "Haysasho la,aanta dalkugalka soogalootiga"
+    ],
+    "You don't know": [
+        null,
+        "Magaranayo"
+    ],
+    "Other": [
+        null,
+        "Waxkale"
+    ],
+    "Refugee Reception Office": [
+        null,
+        "Xarumaha diiwaangalinta qaxootiga"
+    ],
+    "South African Police Service": [
+        null,
+        "Booliska k/afrika "
+    ],
+    "Department of Home Affairs": [
+        null,
+        "Wasarada arimaha gudahaiyo jinsiyada "
+    ],
+    "Social services": [
+        null,
+        "Goobaha deega bulshada"
+    ],
+    "A complaint": [
+        null,
+        "Cabasho"
+    ],
+    "Please type the name of the suburb in which the incident took place.": [
+        null,
+        "Fadlan qor nawaxaaxiga wax ka dheceen"
+    ],
+    "Please select your location:": [
+        null,
+        "Fadalan dooro tuuladaada:"
+    ],
+    "Sorry, we're not sure which suburb you mean. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        "Rali noqo ma ma hubno xafadaada dib u gali si taxadar ah hubi xafadaada"
+    ],
+    "More": [
+        null,
+        "Kasii badan"
+    ],
+    "Retry": [
+        null,
+        ""
+    ],
+    "Skip": [
+        null,
+        ""
+    ],
+    "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific - it'll enable us to send the right response & help you faster.": [
+        null,
+        "Fadlan sooqor xog macquul ah, makujirtaa halis noloshaada ama nolosha qofkale , fadlan qeex siay suurta gal unoqoto inaan jawaab degdeg ah kabixino kuuna caawino si degdeg ah."
+    ],
+    "Please type the full name of the person who was arrested. Also, what happened to cause the arrest? And what documentation/permit does this person have, if any?": [
+        null,
+        "Fadlan qor magaca qof laxidhay oo buuxa, sidookale waamaxay sababta xidhaygu, waase noocma sharciga uu qofka laxidhay haysto."
+    ],
+    "Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time": [
+        null,
+        "Fadlan faahfaahin kabixi goobta musuqu kadhacay, qaabka uu udhacay, masuulka falkan gaystay magiciisa/magaceeda iyo waliba calaamadaha lagu aqoonsankaro masuulkaas, taariikhda iyo saacada."
+    ],
+    "Please explain the incident in as much detail as you can: What happened; where it happened; the offender's name; his/her physical features; date/time.": [
+        null,
+        "Fadlan qeex qaabka dhacdada udhacda iyo magaca cida gaysatay goobta iyo xliga ay dhacdadani dhacday iyo wsaxyaabaha lagu aqoonsankaro shaqsiga gaystay."
+    ],
+    "Thank you very much. Your report has been submitted.": [
+        null,
+        "Aad ayaad umahadsantahay, warbixintaadu way gudubtay."
+    ],
+    "Main menu": [
+        null,
+        "Kunoqo boga hore"
+    ],
+    "Goodbye!": [
+        null,
+        ""
+    ],
+    "Report": [
+        null,
+        "Warbixin"
+    ],
+    "Step 1: Applying for asylum": [
+        null,
+        "Codsashada sharciga qaxootiga"
+    ],
+    "Step 2: Life in SA": [
+        null,
+        "Nolosha k/afrika"
+    ],
+    "Tips": [
+        null,
+        "Xogaha sirta ah"
+    ],
+    "About/T&Cs": [
+        null,
+        "Kusaabsan shuruucda iyo qaanuunka"
+    ],
+    "Services Near Me": [
+        null,
+        "Adeega iidhaw"
+    ],
+    "Change Settings": [
+        null,
+        "Qaybta waxkabadalka"
+    ],
+    "Step 1: Visa application": [
+        null,
+        "Codsiga dalkugalka"
+    ],
+    "To find services near you we need to know what suburb or area you are in. Please type this in below & be specific. e.g. Inanda Sandton": [
+        null,
+        "Si aad u hesho adeega kugu dhaw waxaan u baahanahay in aan helo xafada aad joogto si qeexan fadlan"
+    ],
+    "Sorry there are no results for your location. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        "Waan kaxunahay majirto natiijo muujinaysa goobta, xaafada aad sheegatay fadlan markale kafiirso adigoo saxaya xarfaha qoraalkaaga "
+    ],
+    "The system is looking up services near you. This usually takes less than a minute.": [
+        null,
+        "Nadaamku waxuu u muuqdaa mid kabadan shaqada marka kasta in ka yar hal daqiiqo iticmaal fiirso adeegaga"
+    ],
+    "View services": [
+        null,
+        "Fiirso adeegaga"
+    ],
+    "Unfortunately we couldn't find any locations close to you. Try one more time or exit?": [
+        null,
+        ""
+    ],
+    "Try again": [
+        null,
+        ""
+    ],
+    "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off.": [
+        null,
+        "Waan kaxunahay , majirto adeeg kuudhaw oo ah nooca aad dalbatay, waxaad wali isticmaali kartaa gobta baadhitaanka adeega guud si aad uhesho akhbaar dheeraad ah"
+    ],
+    "Select a service for more info": [
+        null,
+        "Dooro adeega in badan si aad u hesho akhbaar badan"
+    ],
+    "Previous menu": [
+        null,
+        ""
+    ],
+    "Send to me by SMS": [
+        null,
+        ""
+    ],
+    "Your SMS will be sent to you shortly. Don't forget to dial back in to {{ ussd_num }} to find all the info you need about applying for asylum and living in SA.": [
+        null,
+        "Waxad mardhow helidoontaa fariinta SMSka, fadlan xusuusnaw inaad markale booqato adeega  {{ ussd_num }} siaad uhesho macluumaad kusaabsan xuqauuqda iyo xaqa magangalyodoonka."
+    ],
+    "Select setting to change:": [
+        null,
+        ""
+    ],
+    "Language": [
+        null,
+        "Luuqadaada"
+    ],
+    "Country": [
+        null,
+        ""
+    ],
+    "Status (refugee / migrant)": [
+        null,
+        ""
+    ],
+    "Back to Main Menu": [
+        null,
+        ""
+    ],
+    "Please choose your language:": [
+        null,
+        ""
+    ],
+    "Are you a refugee or migrant?": [
+        null,
+        ""
+    ],
+    "I am a refugee": [
+        null,
+        ""
+    ],
+    "I am a migrant": [
+        null,
+        ""
+    ],
+    "When you registered, you were identified as a {{status}}. Are you sure you would like to change your status?": [
+        null,
+        ""
+    ],
+    "Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za": [
+        null,
+        ""
+    ],
+    "Continue": [
+        null,
+        ""
+    ]
+}
