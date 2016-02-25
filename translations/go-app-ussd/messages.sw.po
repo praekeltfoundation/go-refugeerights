@@ -1,0 +1,654 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-22 11:39+0000\n"
+"PO-Revision-Date: 2016-02-01 13:19+0000\n"
+"Last-Translator: Botswang <botswang@praekelt.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sw\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1454332764.414410\n"
+
+#: go-app-ussd.js:49
+msgid "Please dial back in to {{ USSD_number }} to complete the registration."
+msgstr "Tafadhali piga {{ USSD_number }} kamilisha usajili."
+
+#: go-app-ussd.js:66
+msgid ""
+"Thank you for you report. We need some extra information about the incident. "
+"Please let us know by dialing {{ USSD_number }}"
+msgstr ""
+"Asanti kwa reporti yako.Tuna hitaji habari zaidi kuhusu ajali. Tafadhali "
+"tujulishe ukipiga {{ USSD_number }}"
+
+#: go-app-ussd.js:831
+#: go-app-ussd.js:899
+#: go-app-ussd.js:985
+#: go-app-ussd.js:1380
+#: go-app-ussd.js:1411
+#: go-app-ussd.js:1652
+#: go-app-ussd.js:1690
+msgid "Select an option:"
+msgstr "Kuchagua chaguo:"
+
+#: go-app-ussd.js:833
+msgid "Return to where I left off"
+msgstr "Kurudi pale ambapo nilikuwepo"
+
+#: go-app-ussd.js:834
+#: go-app-ussd.js:901
+msgid "Find more info"
+msgstr "Kupata maelezo zaidi"
+
+#: go-app-ussd.js:835
+#: go-app-ussd.js:902
+#: go-app-ussd.js:988
+msgid "Report xenophobia"
+msgstr "Ripoti chuki la wageni"
+
+#: go-app-ussd.js:836
+#: go-app-ussd.js:903
+#: go-app-ussd.js:989
+msgid "Report unlawful arrest"
+msgstr "Ripoti kukamatwa kinyume na sheria"
+
+#: go-app-ussd.js:837
+#: go-app-ussd.js:904
+#: go-app-ussd.js:990
+msgid "Report corruption"
+msgstr "Ripoti rushwa"
+
+#: go-app-ussd.js:838
+#: go-app-ussd.js:905
+#: go-app-ussd.js:991
+msgid "Report something else"
+msgstr "Ripoti kitu kingine"
+
+#: go-app-ussd.js:927
+msgid ""
+"Welcome! Would you like to find out about refugee and migrant rights in SA? "
+"First select your language:"
+msgstr ""
+"Karibu! Je ungependa kujua kuhusu wakimbizi na haki ya wahamaji SA? Kwanza "
+"chagua lugha yako:"
+
+#: go-app-ussd.js:929
+#: go-app-ussd.js:1773
+msgid "English"
+msgstr "Kiingereza"
+
+#: go-app-ussd.js:930
+#: go-app-ussd.js:1774
+msgid "French"
+msgstr "Kifaransa"
+
+#: go-app-ussd.js:931
+#: go-app-ussd.js:1775
+msgid "Amharic"
+msgstr "Amharic"
+
+#: go-app-ussd.js:932
+#: go-app-ussd.js:1776
+msgid "Swahili"
+msgstr "Kiswahili"
+
+#: go-app-ussd.js:933
+#: go-app-ussd.js:1777
+msgid "Somali"
+msgstr "Somalia"
+
+#: go-app-ussd.js:947
+msgid ""
+"To give you the info & help you need, we will:\n"
+"- Store your cell #, language & country of origin\n"
+"- Sometimes send u SMSs\n"
+"Do you consent to this?"
+msgstr ""
+"Kukupa maelezo na msaada unaohitaji tutafanya vifuatavyo:\n"
+"- Kuhifadhi namba simu#, Lugha & chi unayotaka\n"
+" - Mara nyingine kutumiwa SMSs\n"
+"Unakubali haya?"
+
+#: go-app-ussd.js:952
+#: go-app-ussd.js:1068
+#: go-app-ussd.js:1081
+#: go-app-ussd.js:1094
+#: go-app-ussd.js:1846
+msgid "Yes"
+msgstr "Ndio"
+
+#: go-app-ussd.js:953
+#: go-app-ussd.js:1069
+#: go-app-ussd.js:1082
+#: go-app-ussd.js:1095
+#: go-app-ussd.js:1847
+msgid "No"
+msgstr "La"
+
+#: go-app-ussd.js:972
+msgid ""
+"We're sorry, we can't help without you providing consent to us storing your "
+"info & sending you SMSs. What would you like to do?"
+msgstr ""
+"Samahani.Hatuwezi kukusaidia bila ridhaa ya kuhifadhi habari yako na "
+"kutumiwa SMSs. Ungependa kujua utakapofanya?"
+
+#: go-app-ussd.js:974
+msgid "Go back to consent"
+msgstr "Rudi kwa ridhaa"
+
+#: go-app-ussd.js:975
+#: go-app-ussd.js:1124
+#: go-app-ussd.js:1137
+#: go-app-ussd.js:1173
+#: go-app-ussd.js:1360
+#: go-app-ussd.js:1562
+#: go-app-ussd.js:1625
+msgid "Exit"
+msgstr "Toka"
+
+#: go-app-ussd.js:987
+msgid "Find info about refugee/migrant rights in SA"
+msgstr "Kupata maelezo kuhusu haki za wakimbizi na wahamiaji SA?"
+
+#: go-app-ussd.js:1010
+#: go-app-ussd.js:1791
+msgid "Select your country of origin:"
+msgstr "Inchi ya asili unatoka:"
+
+#: go-app-ussd.js:1013
+#: go-app-ussd.js:1718
+#: go-app-ussd.js:1794
+msgid "Next"
+msgstr "Matini"
+
+#: go-app-ussd.js:1014
+#: go-app-ussd.js:1242
+#: go-app-ussd.js:1452
+#: go-app-ussd.js:1626
+#: go-app-ussd.js:1719
+#: go-app-ussd.js:1795
+msgid "Back"
+msgstr "Nyuma"
+
+#: go-app-ussd.js:1016
+#: go-app-ussd.js:1797
+msgid "Somalia"
+msgstr "Somalia"
+
+#: go-app-ussd.js:1017
+#: go-app-ussd.js:1798
+msgid "Ethiopia"
+msgstr "Ethiopia"
+
+#: go-app-ussd.js:1018
+#: go-app-ussd.js:1799
+msgid "Eritrea"
+msgstr "Eritrea"
+
+#: go-app-ussd.js:1019
+#: go-app-ussd.js:1800
+msgid "Democratic Republic of Congo"
+msgstr "Serikali ya Demokrasia ya Congo"
+
+#: go-app-ussd.js:1020
+#: go-app-ussd.js:1801
+msgid "Burundi"
+msgstr "Burundi"
+
+#: go-app-ussd.js:1021
+#: go-app-ussd.js:1802
+msgid "Kenya"
+msgstr "Kenya"
+
+#: go-app-ussd.js:1022
+#: go-app-ussd.js:1803
+msgid "Rwanda"
+msgstr "Rwanda"
+
+#: go-app-ussd.js:1023
+#: go-app-ussd.js:1804
+msgid "Sudan/South Sudan"
+msgstr "Sudan/South Sudan"
+
+#: go-app-ussd.js:1024
+#: go-app-ussd.js:1805
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+#: go-app-ussd.js:1025
+#: go-app-ussd.js:1806
+msgid "Uganda"
+msgstr "Uganda"
+
+#: go-app-ussd.js:1026
+#: go-app-ussd.js:1807
+msgid "Egypt"
+msgstr "Egypt"
+
+#: go-app-ussd.js:1027
+#: go-app-ussd.js:1808
+msgid "Mozambique"
+msgstr "Msumbiji"
+
+#: go-app-ussd.js:1028
+#: go-app-ussd.js:1809
+msgid "Syria"
+msgstr "Syria"
+
+#: go-app-ussd.js:1029
+#: go-app-ussd.js:1810
+msgid "Angola"
+msgstr "Angola"
+
+#: go-app-ussd.js:1045
+msgid "Would you like to find out if you qualify for refugee status?"
+msgstr "Je ungependa kujua kama unastahili hadhi ya ukimbizi?"
+
+#: go-app-ussd.js:1047
+msgid "Yes, I want to find out if I qualify"
+msgstr "Ndiyo, Nataka kujua kama mimi nastahili"
+
+#: go-app-ussd.js:1048
+msgid "No, I'd like to access information for migrants"
+msgstr "Hapana, Ningepena kupata habari ya wahamaji"
+
+#: go-app-ussd.js:1066
+msgid ""
+"Have you fled from your country in fear of your life due to your race, "
+"religion, nationality, gender, political or social group?"
+msgstr ""
+"Je wewe umekimbia nchi yako kutokana na kunyanyaswa juu ya tofu, rangi, "
+"uraia, dini, gendi, siasa au kikundi cha jamii?"
+
+#: go-app-ussd.js:1079
+msgid ""
+"Are you married to or depend upon a person who fled their country in fear of "
+"their life?"
+msgstr "Umeolewa au unamtegemea mtu ambae ametoka nchi yake kwa sababu ya hofu?"
+
+#: go-app-ussd.js:1092
+msgid "Are you married to a recognised refugee?"
+msgstr "Je umeolewa na mkimbizi aliepewa hadhi za wakimbizi?"
+
+#: go-app-ussd.js:1121
+msgid ""
+"It looks like you may qualify for refugee status! Your asylum application "
+"process will confirm this. Please start this application now."
+msgstr ""
+"Inaonekana kama unaweza kuhitimu kwa hadhi ya ukimbizi! Machakato hifadhi. "
+"Tafadhali anza maombi sasa hivi."
+
+#: go-app-ussd.js:1123
+#: go-app-ussd.js:1136
+msgid "Find out more"
+msgstr "Tafuta zingine chini"
+
+#: go-app-ussd.js:1134
+msgid ""
+"You don't qualify for refugee status in SA. If you are a foreign national "
+"looking to work, study or run a business you'll need a visa."
+msgstr ""
+"Wewe huna haki ya kuwa na hadhi ya ukimbizi SA. Kama wewe ni mgeni na "
+"unatafuta kazi, masomo au biashara unahitaji visa."
+
+#: go-app-ussd.js:1147
+msgid ""
+"Thank you for dialling into the refugee and migrants rights service. Please "
+"dial back in to find out more."
+msgstr ""
+"Shukrani kwa kugipia shirika la haki za wakimbizi and wahamaji. Tafadhali "
+"rudi nyuma kwa maelezo zaidi."
+
+#: go-app-ussd.js:1157
+msgid ""
+"Unfortunately you cannot submit a report without indicating you understand "
+"and agree to the terms & conditions. Please redial to try again."
+msgstr ""
+"Kwa bahati mbaya huwezi kutowa ripoti bila kuonyesha na kuelewa sherry & "
+"masharti. Tafadhali piga ukajalibu tena."
+
+#: go-app-ussd.js:1164
+msgid ""
+"Reports are used to see where attacks may be in an area & warn others. LHR "
+"treats reports as serious. All rights reserved."
+msgstr ""
+"Ripoti hutumiwa na LHR kutambua maeno ambao ana chuki za wageni. Kuwasiliana "
+"na polisi kwa kupata jibu la haraka. Haki zote zimehifadhiwa."
+
+#: go-app-ussd.js:1165
+msgid ""
+"LHR treats these reports as serious & will try to respond to critical "
+"reports as soon as possible. All rights reserved."
+msgstr ""
+"Ripoti zinachukuliwa kama jambo la muhimu. LHR itakupigia kama majibu "
+"inawezekanavyo. Usitarajie jibu la haraka. Haki zote zimehifadhiwa."
+
+#: go-app-ussd.js:1166
+msgid ""
+"Your details are confidential & used only by LHR & partners for "
+"investigation timeously, where possible. All rights reserved."
+msgstr ""
+"Maelezo yako ni siri na hutumiwa na LHR kwa ajili ya uchunguzi. LHR "
+"itakupigia kama kuna jibu lolote litawezekana. Haki zote zimehifadhiwa."
+
+#: go-app-ussd.js:1167
+msgid ""
+"LHR will process your info and try to respond timeously. Please don't abuse "
+"this system. All rights reserved."
+msgstr ""
+"LHR itachukua maelezo yako na kujaribu kukujibu mara kwa mara. Tafadhali "
+"usinyanyase idhaa hii. Haki zote zimehifadhiwa."
+
+#: go-app-ussd.js:1172
+msgid "I understand"
+msgstr "Nimeelewa"
+
+#: go-app-ussd.js:1189
+msgid "Which of these xenophobic acts is taking place?"
+msgstr "Vitendo gani vya chuki za wageni vinafanyika?"
+
+#: go-app-ussd.js:1190
+msgid "Why have you been arrested?"
+msgstr "Kwa sababu gani umekamatwa?"
+
+#: go-app-ussd.js:1191
+msgid "Where have you experienced corruption?"
+msgstr "Wapi umeona mambo ya rushwa?"
+
+#: go-app-ussd.js:1192
+msgid "What would you like to report?"
+msgstr "Ungependa kuripoti nini?"
+
+#: go-app-ussd.js:1196
+msgid "Physical threat"
+msgstr "Tishio kimwili"
+
+#: go-app-ussd.js:1197
+msgid "Protests in your area"
+msgstr "Mandamano katika maeneo unapoishi"
+
+#: go-app-ussd.js:1198
+msgid "Looting in your area"
+msgstr "Uporaji katika maeneo yako"
+
+#: go-app-ussd.js:1201
+msgid "Not having an asylum permit"
+msgstr "Kutokuwa na kibali cha ukimbizi"
+
+#: go-app-ussd.js:1202
+msgid "Not having a migrant visa"
+msgstr "Kutokuwa na viza wahamiaji"
+
+#: go-app-ussd.js:1203
+msgid "You don't know"
+msgstr "Sijui"
+
+#: go-app-ussd.js:1204
+#: go-app-ussd.js:1211
+#: go-app-ussd.js:1215
+msgid "Other"
+msgstr "Mengineo"
+
+#: go-app-ussd.js:1207
+msgid "Refugee Reception Office"
+msgstr "Kituo cha Kupokea Wakimbizi"
+
+#: go-app-ussd.js:1208
+msgid "South African Police Service"
+msgstr "Kituo cha Polisi ya Afrika Kusini"
+
+#: go-app-ussd.js:1209
+msgid "Department of Home Affairs"
+msgstr "Wizara ya Mambo ya Ndani"
+
+#: go-app-ussd.js:1210
+msgid "Social services"
+msgstr "Huduma ya Kijamii"
+
+#: go-app-ussd.js:1214
+msgid "A complaint"
+msgstr "Malalamiko"
+
+#: go-app-ussd.js:1235
+msgid "Please type the name of the suburb in which the incident took place."
+msgstr "Tafadhali andika majina ya mahali tukio hilo limetokea."
+
+#: go-app-ussd.js:1237
+#: go-app-ussd.js:1447
+msgid "Please select your location:"
+msgstr "Tafadhali chagua eneo lako:"
+
+#: go-app-ussd.js:1239
+msgid ""
+"Sorry, we're not sure which suburb you mean. Please re-enter your location "
+"again carefully and make sure you use the correct spelling."
+msgstr ""
+"Pole hamna matokeo ya eneo lako. Tafadhali ingiza eneo lako kwa makini na "
+"hakikisha kama unatumia herufu sahihi."
+
+#: go-app-ussd.js:1241
+#: go-app-ussd.js:1451
+#: go-app-ussd.js:1627
+msgid "More"
+msgstr "Zaidi"
+
+#: go-app-ussd.js:1243
+#: go-app-ussd.js:1453
+msgid "Retry"
+msgstr "Jaribu tena"
+
+#: go-app-ussd.js:1244
+#: go-app-ussd.js:1454
+msgid "Skip"
+msgstr ""
+
+#: go-app-ussd.js:1333
+msgid ""
+"Please type an explanation of what's happening. Are you in danger? Is "
+"someone else? Be specific - it'll enable us to send the right response & "
+"help you faster."
+msgstr ""
+"Tafadhali tupe maelezo kinachoendelea pale. Je uko hatarini? Ama mtu "
+"mwingine? Toa maelezo maalum. Vitaweza kutusaidia kukuhudumia haraka."
+
+#: go-app-ussd.js:1334
+msgid ""
+"Please type the full name of the person who was arrested. Also, what "
+"happened to cause the arrest? And what documentation/permit does this person "
+"have, if any?"
+msgstr ""
+"Tafadhali andika majina kamili ya aliye fungwa. Pia, nini iliyosabisha "
+"afungwe. Na aina gani ya nyaraka/kibali anayo, kama ipo?"
+
+#: go-app-ussd.js:1335
+msgid ""
+"Please type a detailed explanation of the incident: what happened; where it "
+"happened; the offending official's name; his/her physical features; date/time"
+msgstr ""
+"Tafadhali andika maelezo kamili juu ya kile kilichotokea; wapi matukio; "
+"afisa mkosefu ni nani: jina lake; maumbile/sura yake ina fanana namna gani; "
+"siku, tarahe/dakika gani"
+
+#: go-app-ussd.js:1336
+msgid ""
+"Please explain the incident in as much detail as you can: What happened; "
+"where it happened; the offender's name; his/her physical features; date/time."
+msgstr ""
+"Tafadhali eleza tukio hilo katika maelezo vile unaweza: Kilichotendeka; "
+"lipodendenka; Jina mhalifu. Jina/sifa za maumbile; Tarehe/wakati. "
+
+#: go-app-ussd.js:1357
+msgid "Thank you very much. Your report has been submitted."
+msgstr "Asanti sana. Repoti yak imewasilishwa."
+
+#: go-app-ussd.js:1359
+#: go-app-ussd.js:1649
+msgid "Main menu"
+msgstr "Orodha kuu"
+
+#: go-app-ussd.js:1370
+msgid "Goodbye!"
+msgstr ""
+
+#: go-app-ussd.js:1382
+#: go-app-ussd.js:1413
+msgid "Report"
+msgstr "Repoti"
+
+#: go-app-ussd.js:1383
+msgid "Step 1: Applying for asylum"
+msgstr "Hatua ya 1: Kuomba ukimbizi "
+
+#: go-app-ussd.js:1384
+#: go-app-ussd.js:1415
+msgid "Step 2: Life in SA"
+msgstr "Hatua ya 2: Maisha SA"
+
+#: go-app-ussd.js:1385
+msgid "Tips"
+msgstr "Mwanga"
+
+#: go-app-ussd.js:1386
+#: go-app-ussd.js:1416
+msgid "About/T&Cs"
+msgstr "Kusu sheria na masharti"
+
+#: go-app-ussd.js:1387
+#: go-app-ussd.js:1417
+msgid "Services Near Me"
+msgstr "Huduma karibu na mimi"
+
+#: go-app-ussd.js:1388
+#: go-app-ussd.js:1418
+msgid "Change Settings"
+msgstr "Mabadiliko ya mazingira"
+
+#: go-app-ussd.js:1414
+msgid "Step 1: Visa application"
+msgstr "Hatua ya 1: Kuomba viza"
+
+#: go-app-ussd.js:1445
+msgid ""
+"To find services near you we need to know what suburb or area you are in. "
+"Please type this in below & be specific. e.g. Inanda Sandton"
+msgstr ""
+
+#: go-app-ussd.js:1449
+msgid ""
+"Sorry there are no results for your location. Please re-enter your location "
+"again carefully and make sure you use the correct spelling."
+msgstr ""
+"Pole hamna matokeo ya eneo lako. Tafadhali ingiza eneo lako kwa makini na "
+"hakikisha kama unatumia herufu sahihi."
+
+#: go-app-ussd.js:1542
+msgid ""
+"The system is looking up services near you. This usually takes less than a "
+"minute."
+msgstr ""
+"Mfumo ina angalia hadi huduma karibu na wewe. Kwa kawaida inachukua chini ya "
+"dakika moja."
+
+#: go-app-ussd.js:1544
+msgid "View services"
+msgstr "Tazama huduma"
+
+#: go-app-ussd.js:1559
+msgid ""
+"Unfortunately we couldn't find any locations close to you. Try one more time "
+"or exit?"
+msgstr ""
+"Samahani hatuwezi kupata huduma ilio karibu na we. Jaribu tena au  toka?"
+
+#: go-app-ussd.js:1561
+msgid "Try again"
+msgstr "Jaribu tena"
+
+#: go-app-ussd.js:1576
+msgid ""
+"Sorry, no nearby services available. You can still use the Useful Contacts "
+"Main Menu option to search for services that are further off."
+msgstr ""
+"Samahani, hamna huduma karibu na wewe. Unaweza kutumia orodha au fursa "
+"'Huduma karibu na mimi' na kutafuta huduma mahali pengineo"
+
+#: go-app-ussd.js:1606
+msgid "Select a service for more info"
+msgstr "Chagua huduma kwa maelezo zaidi"
+
+#: go-app-ussd.js:1687
+msgid "Previous menu"
+msgstr ""
+
+#: go-app-ussd.js:1720
+msgid "Send to me by SMS"
+msgstr ""
+
+#: go-app-ussd.js:1743
+msgid ""
+"Your SMS will be sent to you shortly. Don't forget to dial back in to {{ "
+"ussd_num }} to find all the info you need about applying for asylum and "
+"living in SA."
+msgstr ""
+"Utatumiwa SMS baada ya muda mufupi . Usisahau piga tena {{ ussd_num }} "
+"ukapate taarifa zote unahitaji kuhusu namna kuomba visa  na kuishi katika SA."
+
+#: go-app-ussd.js:1756
+msgid "Select setting to change:"
+msgstr ""
+
+#: go-app-ussd.js:1758
+msgid "Language"
+msgstr "Lugha"
+
+#: go-app-ussd.js:1759
+msgid "Country"
+msgstr "Nchi"
+
+#: go-app-ussd.js:1760
+msgid "Status (refugee / migrant)"
+msgstr ""
+
+#: go-app-ussd.js:1761
+msgid "Back to Main Menu"
+msgstr ""
+
+#: go-app-ussd.js:1771
+msgid "Please choose your language:"
+msgstr ""
+
+#: go-app-ussd.js:1824
+msgid "Are you a refugee or migrant?"
+msgstr ""
+
+#: go-app-ussd.js:1826
+msgid "I am a refugee"
+msgstr ""
+
+#: go-app-ussd.js:1827
+msgid "I am a migrant"
+msgstr ""
+
+#: go-app-ussd.js:1841
+msgid ""
+"When you registered, you were identified as a {{status}}. Are you sure you "
+"would like to change your status?"
+msgstr ""
+"Wakati ulijiandikisha, Ulitambuliwaa kama {{status}}. Una hakika ya kwamba "
+"unataka kubadilisha hadhi yako?"
+
+#: go-app-ussd.js:1869
+msgid ""
+"Your new settings have been saved. Brought to you by Lawyers for Humans "
+"Rights www.lhr.org.za"
+msgstr ""
+
+#: go-app-ussd.js:1871
+msgid "Continue"
+msgstr ""
