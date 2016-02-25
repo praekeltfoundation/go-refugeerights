@@ -81,7 +81,6 @@ go.utils = {
         var lang_map = {
             en: 'english',
             fr: 'french',
-            am: 'amharic',
             sw: 'swahili',
             so: 'somali'
         };
@@ -928,7 +927,6 @@ go.app = function() {
                 choices: [
                     new Choice('en', $("English")),
                     new Choice('fr', $("French")),
-                    new Choice('am', $("Amharic")),
                     new Choice('sw', $("Swahili")),
                     new Choice('so', $("Somali")),
                 ],
@@ -1772,7 +1770,6 @@ go.app = function() {
                 choices: [
                     new Choice('en', $("English")),
                     new Choice('fr', $("French")),
-                    new Choice('am', $("Amharic")),
                     new Choice('sw', $("Swahili")),
                     new Choice('so', $("Somali")),
                 ],

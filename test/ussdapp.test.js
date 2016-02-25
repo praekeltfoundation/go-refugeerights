@@ -1430,9 +1430,8 @@ describe("refugeerights app", function() {
                                 "Welcome! Would you like to find out about refugee and migrant rights in SA? First select your language:",
                                 "1. English",
                                 "2. French",
-                                "3. Amharic",
-                                "4. Swahili",
-                                "5. Somali"
+                                "3. Swahili",
+                                "4. Somali"
                             ].join('\n')
                         })
                         .run();
