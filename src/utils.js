@@ -74,7 +74,6 @@ go.utils = {
         var lang_map = {
             en: 'english',
             fr: 'french',
-            am: 'amharic',
             sw: 'swahili',
             so: 'somali'
         };
