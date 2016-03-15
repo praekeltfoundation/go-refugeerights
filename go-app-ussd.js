@@ -557,7 +557,8 @@ go.utils = {
                     var topics = [];
                     for (var topic in response.data) {
                         current_topic = response.data[topic];
-                        if (current_topic.topic.substr(0,5) === lang_prefix) {
+                        if (current_topic.topic.substr(0, lang_prefix.length)
+                            === lang_prefix) {
                             current_topic.topic = current_topic.topic.substr(5);
                             topics.push(current_topic);
                         }
