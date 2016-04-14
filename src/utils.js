@@ -201,7 +201,7 @@ go.utils = {
             contact_key: contact.key,
             to_addr: contact.msisdn,
             lang: contact.extra.lang,
-            messageset_id: 3,
+            messageset_id: message_set_id,
             schedule: 1
         };
 
