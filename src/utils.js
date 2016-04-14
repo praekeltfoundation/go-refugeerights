@@ -169,7 +169,6 @@ go.utils = {
                 'Authorization': ['Token ' + im.config.control.api_key]
             }
         });
-        console.log(payload);
         switch (method) {
             case "post":
                 return http.post(im.config.control.url + endpoint, {
@@ -196,7 +195,6 @@ go.utils = {
     subscription_subscribe: function(contact, im) {
         var status = contact.extra.status;
         var message_set_id = im.config.welcome_message_sets[status];
-        console.log(message_set_id);
         var payload = {
             contact_key: contact.key,
             to_addr: contact.msisdn,
