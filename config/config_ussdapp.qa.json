@@ -26,8 +26,8 @@
     "poi_types": [],
     "template": "Nearby services: {{ results }}.",
     "welcome_message_sets": {
-        "refugee": "2",
-        "migrant": "3"
+        "refugee": 2,
+        "migrant": 3
         },
     "endpoints": {
         "sms": {
