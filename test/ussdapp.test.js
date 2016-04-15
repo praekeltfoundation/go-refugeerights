@@ -34,8 +34,8 @@ describe("refugeerights app", function() {
                     poi_types: ['lawyer', 'police'],
                     template: "Nearby services: {{ results }}.",  // SMS template
                     welcome_message_sets: {
-                        "refugee": "2", 
-                        "migrant": "3"
+                        "refugee": 2, 
+                        "migrant": 3
                     },
                     endpoints: {
                         "sms": {"delivery_class": "sms"}
@@ -98,6 +98,13 @@ describe("refugeerights app", function() {
                         msisdn: '+082111',
                         extra: {},
                         key: "contact_key_082111",
+                        user_account: "contact_user_account"
+                    });
+                    // new user 2
+                    api.contacts.add({
+                        msisdn: '+082777',
+                        extra: {},
+                        key: "contact_key_082777",
                         user_account: "contact_user_account"
                     });
                 })
@@ -2295,7 +2302,7 @@ describe("refugeerights app", function() {
             describe("upon state_ref_noqualify selection", function() {
                 it("should navigate to 1. state_migrant_main", function() {
                     return tester
-                        .setup.user.addr('082111')
+                        .setup.user.addr('082777')
                         .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
@@ -2316,7 +2323,7 @@ describe("refugeerights app", function() {
 
                 it("should navigate to 2. state_registration_end", function() {
                     return tester
-                        .setup.user.addr('082111')
+                        .setup.user.addr('082777')
                         .inputs(
                                 {session_event: 'new'}  // dial in
                                 , '2'  // state_language - french
