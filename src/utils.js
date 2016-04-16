@@ -193,11 +193,13 @@ go.utils = {
     },
 
     subscription_subscribe: function(contact, im) {
+        var status = contact.extra.status;
+        var message_set_id = im.config.welcome_message_sets[status];
         var payload = {
             contact_key: contact.key,
             to_addr: contact.msisdn,
             lang: contact.extra.lang,
-            messageset_id: 1,
+            messageset_id: message_set_id,
             schedule: 1
         };
 

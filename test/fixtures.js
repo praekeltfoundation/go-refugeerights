@@ -100,7 +100,7 @@ return [
                     "contact_key": "contact_key_082111",
                     "to_addr": "+082111",
                     "lang": "fr",
-                    "messageset_id": 1,
+                    "messageset_id": 2, // Refugee
                     "schedule": 1,
                 }
             },
@@ -108,6 +108,26 @@ return [
                 "code": 201,
             }
         },
+
+        // Vumi Subscription to messages for: 082777
+        {
+            "request": {
+                "method": "POST",
+                'headers': ['Token test_key'],
+                "url": 'http://127.0.0.1:8000/subscription/subscription/',
+                "data": {
+                    "contact_key": "contact_key_082777",
+                    "to_addr": "+082777",
+                    "lang": "fr",
+                    "messageset_id": 3, // Migrant
+                    "schedule": 1,
+                }
+            },
+            "response": {
+                "code": 201,
+            }
+        },
+
 
     // 03 Location finding
         // POST user data 064001
