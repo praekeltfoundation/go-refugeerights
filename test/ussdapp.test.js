@@ -4074,7 +4074,7 @@ describe("refugeerights app", function() {
                         .run();
                 });
 
-                it.only("should show the main menu corresponding with the new status", function() {
+                it("should show the main menu corresponding with the new status", function() {
                     return tester
                         .setup.user.addr('064002')
                         .inputs(

@@ -123,7 +123,7 @@ go.utils = {
     },
 
     update_status: function(im, contact, status) {
-        contact.extra.status;
+        contact.extra.status = status;
         var message_set_id = im.config.welcome_message_sets[status];
         var payload = {
             contact_key: contact.key,
