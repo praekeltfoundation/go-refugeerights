@@ -116,9 +116,16 @@ go.utils = {
     },
 
     update_status: function(im, contact, status) {
-        contact.extra.status = status;
+        contact.extra.status;
+        var message_set_id = im.config.welcome_message_sets[status];
+        var payload = {
+            contact_key: contact.key,
+            messageset_id: message_set_id,
+            schedule: 1
+        };
         return Q.all([
             im.contacts.save(contact),
+            go.utils.control_api_call("post", null, payload, 'switch_subscription/', im),
             im.metrics.fire.inc(['total', 'change_status', 'last'].join('.')),
             im.metrics.fire.sum(['total', 'change_status', 'sum'].join('.'), 1)
         ]);

@@ -57,6 +57,37 @@ return [
                 ]
             }
         },
+        //switch_subscription
+       {
+            "request": {
+                "method": "POST",
+                'headers': ['Token test_key'],
+                "url": 'http://127.0.0.1:8000/subscription/switch_subscription/',
+                "data": {
+                    "contact_key": "contact_key_064002",
+                    "messageset_id": 3, 
+                    "schedule": 1,
+                }
+            },
+            "response": {
+                "code": 200,
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                'headers': ['Token test_key'],
+                "url": 'http://127.0.0.1:8000/subscription/switch_subscription/',
+                "data": {
+                    "contact_key": "contact_key_064002",
+                    "messageset_id": 2, 
+                    "schedule": 1,
+                }
+            },
+            "response": {
+                "code": 200,
+            }
+        },
         // 01b Patch subscriptions
         {
             'request': {
