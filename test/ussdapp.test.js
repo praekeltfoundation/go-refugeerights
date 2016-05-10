@@ -1442,7 +1442,8 @@ describe("refugeerights app", function() {
                                 "1. English",
                                 "2. French",
                                 "3. Swahili",
-                                "4. Somali"
+                                "4. Somali",
+                                "5. Oromo"
                             ].join('\n')
                         })
                         .run();
