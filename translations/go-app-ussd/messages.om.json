@@ -1,0 +1,476 @@
+{
+    "": {
+        "project-id-version": "PACKAGE VERSION",
+        "pot-creation-date": "2016-01-15 01:33:+0000",
+        "po-revision-date": "2016-05-11 21:23+0000",
+        "last-translator": "Botswang <botswang@praekelt.com>",
+        "language-team": "LANGUAGE <LL@li.org>",
+        "language": "om",
+        "mime-version": "1.0",
+        "content-type": "text/plain; charset=utf-8",
+        "content-transfer-encoding": "8bit",
+        "plural-forms": "nplurals=2; plural=(n != 1);",
+        "x-generator": "Pootle 2.5.1.1",
+        "x-pootle-mtime": "1463001789.718127"
+    },
+    "Please dial back in to {{ USSD_number }} to complete the registration.": [
+        null,
+        "Maaloo irra deebi'aa {{ USSD_number }} Galmee keessan Xumuruuf."
+    ],
+    "Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}": [
+        null,
+        "Gabaasa keetiif galatoomi.Odeeffannoo dabalataa waa'ee tahii kanaa barbaanna.Maaloo akka lakkoofsa asii gadii kanatti Bilbila keetiin seeni nubeeksisi {{ USSD_number }}"
+    ],
+    "Select an option:": [
+        null,
+        "Filannoolee kana filadhu:"
+    ],
+    "Return to where I left off": [
+        null,
+        "Bakka duraaniitti deebi'uuf"
+    ],
+    "Find more info": [
+        null,
+        ""
+    ],
+    "Report xenophobia": [
+        null,
+        "Jibbansa Namoomaa gabaasuuf"
+    ],
+    "Report unlawful arrest": [
+        null,
+        "Hidhama Seeraan alaa gabaasuuf"
+    ],
+    "Report corruption": [
+        null,
+        "Malaan-maltummaa gabaasuuf"
+    ],
+    "Report something else": [
+        null,
+        "Waan biraa gabaasuuf"
+    ],
+    "Welcome! Would you like to find out about refugee and migrant rights in SA? First select your language:": [
+        null,
+        "Baga dhufte! Mirga baqataa fi kool-galtoonni SA keessatti qaban baruu barbaaddaa?Dura afaanoota asii gadii kana keessaa see filadha:"
+    ],
+    "English": [
+        null,
+        "Ingliffa"
+    ],
+    "French": [
+        null,
+        "Faransaayiffa"
+    ],
+    "Amharic": [
+        null,
+        ""
+    ],
+    "Swahili": [
+        null,
+        "Sawahiliffa"
+    ],
+    "Somali": [
+        null,
+        "Soomaliffa"
+    ],
+    "To give you the info & help you need, we will:\n- Store your cell #, language & country of origin\n- Sometimes send u SMSs\nDo you consent to this?": [
+        null,
+        "Gargaarsaa fi Odeeffannoo sibarbaachisu siif kennuuf bilbila kee qabanna#,Afaanii fi Biyya dhalootaa yeroo tokko tokko SMS siif godhama,Kanaaf Fedhii qabdaa"
+    ],
+    "Yes": [
+        null,
+        "Eeyye"
+    ],
+    "No": [
+        null,
+        "Miti"
+    ],
+    "We're sorry, we can't help without you providing consent to us storing your info & sending you SMSs. What would you like to do?": [
+        null,
+        "Dhiifama, Fedhinnaa lakkoofsa kee nuti qabchuu osoo nuuf hin himne Sigargaaruu akkasuma Odeeffannoo fi SMS siif erguu hin dandeenyu. Ati Maal Godhuu feeta?"
+    ],
+    "Go back to consent": [
+        null,
+        "fedhii kee ibsachuuf duubatti deebi'i"
+    ],
+    "Exit": [
+        null,
+        "Keessaa bahe"
+    ],
+    "Find info about refugee/migrant rights in SA": [
+        null,
+        "Odeeffannoo waa'ee baqattootaa fi Kool-galtoota SA keessa jiranii"
+    ],
+    "Select your country of origin:": [
+        null,
+        "Biyya dhaloota keetii filadhu:"
+    ],
+    "Next": [
+        null,
+        "Barruu"
+    ],
+    "Back": [
+        null,
+        "Duubatti"
+    ],
+    "Somalia": [
+        null,
+        "Somaaliyaa"
+    ],
+    "Ethiopia": [
+        null,
+        "Itoophiyaa"
+    ],
+    "Eritrea": [
+        null,
+        "Eertiraa"
+    ],
+    "Democratic Republic of Congo": [
+        null,
+        "Biyya dimokraasii Republika Koongoo"
+    ],
+    "Burundi": [
+        null,
+        "Burundii"
+    ],
+    "Kenya": [
+        null,
+        "Kiiniyaa"
+    ],
+    "Rwanda": [
+        null,
+        "Ruwaandaa"
+    ],
+    "Sudan/South Sudan": [
+        null,
+        "Suudaan Kaabaati fi Suudaan Kibbaa"
+    ],
+    "Zimbabwe": [
+        null,
+        "Zimbabwe"
+    ],
+    "Uganda": [
+        null,
+        "Uganda"
+    ],
+    "Egypt": [
+        null,
+        "Masri"
+    ],
+    "Mozambique": [
+        null,
+        "Muzaambik"
+    ],
+    "Syria": [
+        null,
+        "Siiriyaa"
+    ],
+    "Angola": [
+        null,
+        "Angoolaa"
+    ],
+    "Would you like to find out if you qualify for refugee status?": [
+        null,
+        "Koolagaltummaa kankeetiif fudhatama qabaachuu baruu barbaaddaa?"
+    ],
+    "Yes, I want to find out if I qualify": [
+        null,
+        "Eeyye, Ulaagaa guutuu koo baruun barbaada"
+    ],
+    "No, I'd like to access information for migrants": [
+        null,
+        "Miti,Odeeffannoo baqattummaa tan dabalataa baruun barbaada"
+    ],
+    "Have you fled from your country in fear of your life due to your race, religion, nationality, gender, political or social group?": [
+        null,
+        "Wanti biyyaa baqatteef Sodaa lubbuu teetiif wannti sababa ta'e,Sanyuummaa dhaa,Amantiidhaa,Sabummaa dhaa,Saala, Siyaassa moo Hawwaasumaadha?"
+    ],
+    "Are you married to or depend upon a person who fled their country in fear of their life?": [
+        null,
+        "Ati nama sodaa lubbuu isaatiif jecha biyyaa baqate kana fuute/heerumte moo jireenyaaf itti irkatte?"
+    ],
+    "Are you married to a recognised refugee?": [
+        null,
+        "Ati nama Koola-galtummaan fudhatametti fuute/Heerumte?"
+    ],
+    "It looks like you may qualify for refugee status! Your asylum application process will confirm this. Please start this application now.": [
+        null,
+        "Koolgaltummaaf fudhatama waan argatte fakkaata! Kun adeemsi iyyannoo koolugaltummaa keetii adda baasuuf jira.Maaloo iyyannoo keessan amma jalqabaa."
+    ],
+    "Find out more": [
+        null,
+        "Caalmayatti hubachuuf"
+    ],
+    "You don't qualify for refugee status in SA. If you are a foreign national looking to work, study or run a business you'll need a visa.": [
+        null,
+        "Ulaagaa kolgaltumaa biyyaa Afrikaa Kibbaa hin guuttu.yoo lammiilee biyya alaa hujii,Barnoota ykn Daldaluu barbaaddae Visaa Sibarbaachisa."
+    ],
+    "Thank you for dialling into the refugee and migrants rights service. Please dial back in to find out more.": [
+        null,
+        "Wirtuu mirga baqattootaa fi kolgaltummaatti bilbiluu keessaniif galatoomaa. Maaloo Caalmayaatti hubachuuf irra deebi'a bilbilaa."
+    ],
+    "Unfortunately you cannot submit a report without indicating you understand and agree to the terms & conditions. Please redial to try again.": [
+        null,
+        "Akka tasaa ta'ee odeeffannoo kee osoo haalduree fi walii galtee jiru hubatuu fi walii galuu kee hin agarsiisin hin galchin."
+    ],
+    "Reports are used to see where attacks may be in an area & warn others. LHR treats reports as serious. All rights reserved.": [
+        null,
+        ""
+    ],
+    "LHR treats these reports as serious & will try to respond to critical reports as soon as possible. All rights reserved.": [
+        null,
+        "Gabaasni kun hubannoo cimaanilaalama.LHR yoo siif deebisuun barbaachisaa tahe si yaama.Yeruma sanitti deebisaa hin eeggatin.Mirgi keessan Seeraan eeggamaadha."
+    ],
+    "Your details are confidential & used only by LHR & partners for investigation timeously, where possible. All rights reserved.": [
+        null,
+        "Iccitiin Odeeffannoo keetii eeggamee Qormaata qofaaf LHR itti fayyadama.Yoo si yaamuun danda'ame LHR si yaama.Mirgi keessan Seeraan eeggamaadha."
+    ],
+    "LHR will process your info and try to respond timeously. Please don't abuse this system. All rights reserved.": [
+        null,
+        "LHR odeeffanoo kee hordofee deebii yeroon siif kennuu yaala.Maaloo sirna kana hin dogoggorsiisinaa.Mirgi keessan Seeraan Eeggamaadha."
+    ],
+    "I understand": [
+        null,
+        "Hubadhe"
+    ],
+    "Which of these xenophobic acts is taking place?": [
+        null,
+        "Gocha Jibba namoomaa kamtu tahaa jira?"
+    ],
+    "Why have you been arrested?": [
+        null,
+        "Maalif hidhamte?"
+    ],
+    "Where have you experienced corruption?": [
+        null,
+        "Malaanmaltummaan kun eessatti simudate?"
+    ],
+    "What would you like to report?": [
+        null,
+        "Maal gabaasuu barbaadda?"
+    ],
+    "Physical threat": [
+        null,
+        "Doorsisa qaamaa/sodaachisa"
+    ],
+    "Protests in your area": [
+        null,
+        "Mormii/Hiriira Jibbansaatu naannoo keessanit tahaa jiraa?"
+    ],
+    "Looting in your area": [
+        null,
+        "Saamichaatu naannookeessanitti gaggeeffamaa jiraa?"
+    ],
+    "Not having an asylum permit": [
+        null,
+        "Hayyama kool-galtummaa dhabuufii?"
+    ],
+    "Not having a migrant visa": [
+        null,
+        "Viza Seera baqattummaa dhabuufii"
+    ],
+    "You don't know": [
+        null,
+        "Sababa hidhamteef hin beektuu"
+    ],
+    "Other": [
+        null,
+        "Kan biroo"
+    ],
+    "Refugee Reception Office": [
+        null,
+        "Waajjira simannaa baqattootaa?"
+    ],
+    "South African Police Service": [
+        null,
+        "Tajaajila polisi SA keessa?"
+    ],
+    "Department of Home Affairs": [
+        null,
+        "Waajjira Damee haajaa biyya keessaa?"
+    ],
+    "Social services": [
+        null,
+        "Tajaajila Hawaasaa keessa? "
+    ],
+    "A complaint": [
+        null,
+        "Komii"
+    ],
+    "Please type the name of the suburb in which the incident took place.": [
+        null,
+        "Maaloo maqaa ganda ta'iin kun itti raaw'atee barreessi."
+    ],
+    "Please select your location:": [
+        null,
+        "Maaloo iddoo jiraattu filadhu:"
+    ],
+    "Sorry, we're not sure which suburb you mean. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        "Dhiifama,Ganda kam akka jechuu barbaadde hin hubanne.Maaloo mee ammas bakka ganda qubsuma keetii dogoggora qubee eeggachaa irra deebii nuuf barreessi."
+    ],
+    "More": [
+        null,
+        "Kan biroo"
+    ],
+    "Retry": [
+        null,
+        "Lamuu Yaali"
+    ],
+    "Skip": [
+        null,
+        "Biradarbi"
+    ],
+    "Please type an explanation of what's happening. Are you in danger? Is someone else? Be specific - it'll enable us to send the right response & help you faster.": [
+        null,
+        "Maaloo waan tahaa jiru nuuf barreessaa.Gaaga'ama keessa jirtaa?Balaan kun sihi/nama biraati budate?Sirritti ifa nuuf taasisa.Dirmannaa hatattamaa isiniif godhuuf nugargaara. "
+    ],
+    "Please type the full name of the person who was arrested. Also, what happened to cause the arrest? And what documentation/permit does this person have, if any?": [
+        null,
+        "Maaloo nama hidhamee ture maqaa guutuu barreessaa.Akkasumaas tahii akkamtu hidhaaf isa/ishee mude? Fii waraqaan ragaa namni kun ittiin jiraatu kan akkami yoo qabaateeef."
+    ],
+    "Please type a detailed explanation of the incident: what happened; where it happened; the offending official's name; his/her physical features; date/time": [
+        null,
+        "Maaloo ibsa waan tahee qulqulleessii nuuf barreessi:maaltu tahe;Eessatti tahe;Maqaa Aaangawaa yakka raaw'atee;Bifa isaa/isii;guyyaa/yeroo"
+    ],
+    "Please explain the incident in as much detail as you can: What happened; where it happened; the offender's name; his/her physical features; date/time.": [
+        null,
+        "Maaloo ta'ii mudate hamma siif danda'ameen nuuf ibsi.Maalt ta'e;Eessatti tahe;Maqaa yakkamaa;Bifa isaa/isii;guyyaa/yeroo"
+    ],
+    "Thank you very much. Your report has been submitted.": [
+        null,
+        "Guddaa Galatoomi.Gabaasni kee nugahee jira."
+    ],
+    "Main menu": [
+        null,
+        "Fuula duraa irraa irra deebi'uu barbaaddaa"
+    ],
+    "Goodbye!": [
+        null,
+        ""
+    ],
+    "Report": [
+        null,
+        "Gabaasa"
+    ],
+    "Step 1: Applying for asylum": [
+        null,
+        "1ffaa:Iyyannoo kol-galtummaa"
+    ],
+    "Step 2: Life in SA": [
+        null,
+        "2ffaa.Haala jireenya SA "
+    ],
+    "Tips": [
+        null,
+        "Dabalataf"
+    ],
+    "About/T&Cs": [
+        null,
+        "Waa'ee/Waligaltefihaldure"
+    ],
+    "Services Near Me": [
+        null,
+        "Tajaajila natti dhihaatu"
+    ],
+    "Change Settings": [
+        null,
+        "Filannoo jijjiiri"
+    ],
+    "Step 1: Visa application": [
+        null,
+        "1ffaa Iyyannoo Vizaa"
+    ],
+    "To find services near you we need to know what suburb or area you are in. Please type this in below & be specific. e.g. Inanda Sandton": [
+        null,
+        "Tajaajila naannoo kee jiru beekuuf bakka ati jiraattu beekuu nubarbaachisa.Maaloo akka asii kanatti adda baasaa nuuf barreessaa.Fakkeenyaaf,Inaandaa,Santon"
+    ],
+    "Sorry there are no results for your location. Please re-enter your location again carefully and make sure you use the correct spelling.": [
+        null,
+        "Dhiifama Naannoo ati jiraattu argachuu hin dandeenye.Maaloo maqaa naannoo keetii sirritti dogoggora qubee eeggachaa barressii ergi."
+    ],
+    "The system is looking up services near you. This usually takes less than a minute.": [
+        null,
+        "Tooftaan Kun Tajaajila isinitti dhihaatu barbaadaa jira.Kun ammoo daqiiqaa tokkoo gad fudhata."
+    ],
+    "View services": [
+        null,
+        "Tajaajila kana ddowattaa"
+    ],
+    "Unfortunately we couldn't find any locations close to you. Try one more time or exit?": [
+        null,
+        "Akka Tasaa tahee Tajaajila sitti dhihaatu argachuu hin dandeenye.Carraa biraa yaalta moo keessaa baata?"
+    ],
+    "Try again": [
+        null,
+        "Deebi'ee yaaluu"
+    ],
+    "Sorry, no nearby services available. You can still use the Useful Contacts Main Menu option to search for services that are further off.": [
+        null,
+        "Dhiifama, Tajaajilli as dhihaatu hin jiru.Ammallee tajaajila itti dhihaatu argachuuf filannoo irra deebi'ee siif barbaadu filadhu."
+    ],
+    "Select a service for more info": [
+        null,
+        "Odeeffannoo dabalataatiif tajaajila asii gadii kana filadhu:"
+    ],
+    "Previous menu": [
+        null,
+        ""
+    ],
+    "Send to me by SMS": [
+        null,
+        ""
+    ],
+    "Your SMS will be sent to you shortly. Don't forget to dial back in to {{ ussd_num }} to find all the info you need about applying for asylum and living in SA.": [
+        null,
+        "Dhaamsi kee dhiheenyatti sigaha.Lakkoofsa {{ ussd_num }} kana irra deebitanii bilbiluu hin dagatinaa.Yoo odeeffannoo iyyata Vizaa fi Afrikaa Kibbaa Keessa jiraatuu feetan."
+    ],
+    "Select setting to change:": [
+        null,
+        ""
+    ],
+    "Language": [
+        null,
+        "Afaan"
+    ],
+    "Country": [
+        null,
+        "Biyya"
+    ],
+    "Status (refugee / migrant)": [
+        null,
+        "Barbaaddaa kool-galtoota"
+    ],
+    "Back to Main Menu": [
+        null,
+        ""
+    ],
+    "Please choose your language:": [
+        null,
+        ""
+    ],
+    "Are you a refugee or migrant?": [
+        null,
+        ""
+    ],
+    "I am a refugee": [
+        null,
+        ""
+    ],
+    "I am a migrant": [
+        null,
+        ""
+    ],
+    "When you registered, you were identified as a {{status}}. Are you sure you would like to change your status?": [
+        null,
+        "Ati yeroo galmoofte akka haala {{status}} tti hubatamte. Dhuguma haala kee jijjiiruu feetaa?"
+    ],
+    "Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za": [
+        null,
+        ""
+    ],
+    "Continue": [
+        null,
+        "Ittifufi"
+    ]
+}

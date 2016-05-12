@@ -1,0 +1,594 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2016-01-15 01:33:+0000\n"
+"PO-Revision-Date: 2016-05-11 21:23+0000\n"
+"Last-Translator: Botswang <botswang@praekelt.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: om\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1463001789.718127\n"
+
+#: go-app-ussd.js:49
+msgid "Please dial back in to {{ USSD_number }} to complete the registration."
+msgstr "Maaloo irra deebi'aa {{ USSD_number }} Galmee keessan Xumuruuf."
+
+#: go-app-ussd.js:66
+msgid ""
+"Thank you for you report. We need some extra information about the "
+"incident. Please let us know by dialing {{ USSD_number }}"
+msgstr ""
+"Gabaasa keetiif galatoomi.Odeeffannoo dabalataa waa'ee tahii kanaa "
+"barbaanna.Maaloo akka lakkoofsa asii gadii kanatti Bilbila keetiin seeni "
+"nubeeksisi {{ USSD_number }}"
+
+#: go-app-ussd.js:831 go-app-ussd.js:899 go-app-ussd.js:985 go-app-ussd.js:1380 go-app-ussd.js:1411 go-app-ussd.js:1652 go-app-ussd.js:1690
+msgid "Select an option:"
+msgstr "Filannoolee kana filadhu:"
+
+#: go-app-ussd.js:833
+msgid "Return to where I left off"
+msgstr "Bakka duraaniitti deebi'uuf"
+
+#: go-app-ussd.js:834 go-app-ussd.js:901
+msgid "Find more info"
+msgstr ""
+
+#: go-app-ussd.js:835 go-app-ussd.js:902 go-app-ussd.js:988
+msgid "Report xenophobia"
+msgstr "Jibbansa Namoomaa gabaasuuf"
+
+#: go-app-ussd.js:836 go-app-ussd.js:903 go-app-ussd.js:989
+msgid "Report unlawful arrest"
+msgstr "Hidhama Seeraan alaa gabaasuuf"
+
+#: go-app-ussd.js:837 go-app-ussd.js:904 go-app-ussd.js:990
+msgid "Report corruption"
+msgstr "Malaan-maltummaa gabaasuuf"
+
+#: go-app-ussd.js:838 go-app-ussd.js:905 go-app-ussd.js:991
+msgid "Report something else"
+msgstr "Waan biraa gabaasuuf"
+
+#: go-app-ussd.js:927
+msgid ""
+"Welcome! Would you like to find out about refugee and migrant rights in SA? "
+"First select your language:"
+msgstr ""
+"Baga dhufte! Mirga baqataa fi kool-galtoonni SA keessatti qaban baruu "
+"barbaaddaa?Dura afaanoota asii gadii kana keessaa see filadha:"
+
+#: go-app-ussd.js:929 go-app-ussd.js:1773
+msgid "English"
+msgstr "Ingliffa"
+
+#: go-app-ussd.js:930 go-app-ussd.js:1774
+msgid "French"
+msgstr "Faransaayiffa"
+
+#: go-app-ussd.js:931 go-app-ussd.js:1775
+msgid "Amharic"
+msgstr ""
+
+#: go-app-ussd.js:932 go-app-ussd.js:1776
+msgid "Swahili"
+msgstr "Sawahiliffa"
+
+#: go-app-ussd.js:933 go-app-ussd.js:1777
+msgid "Somali"
+msgstr "Soomaliffa"
+
+#: go-app-ussd.js:947
+msgid ""
+"To give you the info & help you need, we will:\n"
+"- Store your cell #, language & country of origin\n"
+"- Sometimes send u SMSs\n"
+"Do you consent to this?"
+msgstr ""
+"Gargaarsaa fi Odeeffannoo sibarbaachisu siif kennuuf bilbila kee qabanna#"
+",Afaanii fi Biyya dhalootaa yeroo tokko tokko SMS siif godhama,Kanaaf Fedhii "
+"qabdaa"
+
+#: go-app-ussd.js:952 go-app-ussd.js:1068 go-app-ussd.js:1081 go-app-ussd.js:1094 go-app-ussd.js:1846
+msgid "Yes"
+msgstr "Eeyye"
+
+#: go-app-ussd.js:953 go-app-ussd.js:1069 go-app-ussd.js:1082 go-app-ussd.js:1095 go-app-ussd.js:1847
+msgid "No"
+msgstr "Miti"
+
+#: go-app-ussd.js:972
+msgid ""
+"We're sorry, we can't help without you providing consent to us storing your "
+"info & sending you SMSs. What would you like to do?"
+msgstr ""
+"Dhiifama, Fedhinnaa lakkoofsa kee nuti qabchuu osoo nuuf hin himne "
+"Sigargaaruu akkasuma Odeeffannoo fi SMS siif erguu hin dandeenyu. Ati Maal "
+"Godhuu feeta?"
+
+#: go-app-ussd.js:974
+msgid "Go back to consent"
+msgstr "fedhii kee ibsachuuf duubatti deebi'i"
+
+#: go-app-ussd.js:975 go-app-ussd.js:1124 go-app-ussd.js:1137 go-app-ussd.js:1173 go-app-ussd.js:1360 go-app-ussd.js:1562 go-app-ussd.js:1625
+msgid "Exit"
+msgstr "Keessaa bahe"
+
+#: go-app-ussd.js:987
+msgid "Find info about refugee/migrant rights in SA"
+msgstr "Odeeffannoo waa'ee baqattootaa fi Kool-galtoota SA keessa jiranii"
+
+#: go-app-ussd.js:1010 go-app-ussd.js:1791
+msgid "Select your country of origin:"
+msgstr "Biyya dhaloota keetii filadhu:"
+
+#: go-app-ussd.js:1013 go-app-ussd.js:1718 go-app-ussd.js:1794
+msgid "Next"
+msgstr "Barruu"
+
+#: go-app-ussd.js:1014 go-app-ussd.js:1242 go-app-ussd.js:1452 go-app-ussd.js:1626 go-app-ussd.js:1719 go-app-ussd.js:1795
+msgid "Back"
+msgstr "Duubatti"
+
+#: go-app-ussd.js:1016 go-app-ussd.js:1797
+msgid "Somalia"
+msgstr "Somaaliyaa"
+
+#: go-app-ussd.js:1017 go-app-ussd.js:1798
+msgid "Ethiopia"
+msgstr "Itoophiyaa"
+
+#: go-app-ussd.js:1018 go-app-ussd.js:1799
+msgid "Eritrea"
+msgstr "Eertiraa"
+
+#: go-app-ussd.js:1019 go-app-ussd.js:1800
+msgid "Democratic Republic of Congo"
+msgstr "Biyya dimokraasii Republika Koongoo"
+
+#: go-app-ussd.js:1020 go-app-ussd.js:1801
+msgid "Burundi"
+msgstr "Burundii"
+
+#: go-app-ussd.js:1021 go-app-ussd.js:1802
+msgid "Kenya"
+msgstr "Kiiniyaa"
+
+#: go-app-ussd.js:1022 go-app-ussd.js:1803
+msgid "Rwanda"
+msgstr "Ruwaandaa"
+
+#: go-app-ussd.js:1023 go-app-ussd.js:1804
+msgid "Sudan/South Sudan"
+msgstr "Suudaan Kaabaati fi Suudaan Kibbaa"
+
+#: go-app-ussd.js:1024 go-app-ussd.js:1805
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+#: go-app-ussd.js:1025 go-app-ussd.js:1806
+msgid "Uganda"
+msgstr "Uganda"
+
+#: go-app-ussd.js:1026 go-app-ussd.js:1807
+msgid "Egypt"
+msgstr "Masri"
+
+#: go-app-ussd.js:1027 go-app-ussd.js:1808
+msgid "Mozambique"
+msgstr "Muzaambik"
+
+#: go-app-ussd.js:1028 go-app-ussd.js:1809
+msgid "Syria"
+msgstr "Siiriyaa"
+
+#: go-app-ussd.js:1029 go-app-ussd.js:1810
+msgid "Angola"
+msgstr "Angoolaa"
+
+#: go-app-ussd.js:1045
+msgid "Would you like to find out if you qualify for refugee status?"
+msgstr "Koolagaltummaa kankeetiif fudhatama qabaachuu baruu barbaaddaa?"
+
+#: go-app-ussd.js:1047
+msgid "Yes, I want to find out if I qualify"
+msgstr "Eeyye, Ulaagaa guutuu koo baruun barbaada"
+
+#: go-app-ussd.js:1048
+msgid "No, I'd like to access information for migrants"
+msgstr "Miti,Odeeffannoo baqattummaa tan dabalataa baruun barbaada"
+
+#: go-app-ussd.js:1066
+msgid ""
+"Have you fled from your country in fear of your life due to your race, "
+"religion, nationality, gender, political or social group?"
+msgstr ""
+"Wanti biyyaa baqatteef Sodaa lubbuu teetiif wannti sababa ta'e,Sanyuummaa "
+"dhaa,Amantiidhaa,Sabummaa dhaa,Saala, Siyaassa moo Hawwaasumaadha?"
+
+#: go-app-ussd.js:1079
+msgid ""
+"Are you married to or depend upon a person who fled their country in fear "
+"of their life?"
+msgstr ""
+"Ati nama sodaa lubbuu isaatiif jecha biyyaa baqate kana fuute/heerumte moo "
+"jireenyaaf itti irkatte?"
+
+#: go-app-ussd.js:1092
+msgid "Are you married to a recognised refugee?"
+msgstr "Ati nama Koola-galtummaan fudhatametti fuute/Heerumte?"
+
+#: go-app-ussd.js:1121
+msgid ""
+"It looks like you may qualify for refugee status! Your asylum application "
+"process will confirm this. Please start this application now."
+msgstr ""
+"Koolgaltummaaf fudhatama waan argatte fakkaata! Kun adeemsi iyyannoo "
+"koolugaltummaa keetii adda baasuuf jira.Maaloo iyyannoo keessan amma "
+"jalqabaa."
+
+#: go-app-ussd.js:1123 go-app-ussd.js:1136
+msgid "Find out more"
+msgstr "Caalmayatti hubachuuf"
+
+#: go-app-ussd.js:1134
+msgid ""
+"You don't qualify for refugee status in SA. If you are a foreign national "
+"looking to work, study or run a business you'll need a visa."
+msgstr ""
+"Ulaagaa kolgaltumaa biyyaa Afrikaa Kibbaa hin guuttu.yoo lammiilee biyya "
+"alaa hujii,Barnoota ykn Daldaluu barbaaddae Visaa Sibarbaachisa."
+
+#: go-app-ussd.js:1147
+msgid ""
+"Thank you for dialling into the refugee and migrants rights service. Please "
+"dial back in to find out more."
+msgstr ""
+"Wirtuu mirga baqattootaa fi kolgaltummaatti bilbiluu keessaniif galatoomaa. "
+"Maaloo Caalmayaatti hubachuuf irra deebi'a bilbilaa."
+
+#: go-app-ussd.js:1157
+msgid ""
+"Unfortunately you cannot submit a report without indicating you understand "
+"and agree to the terms & conditions. Please redial to try again."
+msgstr ""
+"Akka tasaa ta'ee odeeffannoo kee osoo haalduree fi walii galtee jiru hubatuu "
+"fi walii galuu kee hin agarsiisin hin galchin."
+
+#: go-app-ussd.js:1164
+msgid ""
+"Reports are used to see where attacks may be in an area & warn others. LHR "
+"treats reports as serious. All rights reserved."
+msgstr ""
+
+#: go-app-ussd.js:1165
+msgid ""
+"LHR treats these reports as serious & will try to respond to critical "
+"reports as soon as possible. All rights reserved."
+msgstr ""
+"Gabaasni kun hubannoo cimaanilaalama.LHR yoo siif deebisuun barbaachisaa "
+"tahe si yaama.Yeruma sanitti deebisaa hin eeggatin.Mirgi keessan Seeraan "
+"eeggamaadha."
+
+#: go-app-ussd.js:1166
+msgid ""
+"Your details are confidential & used only by LHR & partners for "
+"investigation timeously, where possible. All rights reserved."
+msgstr ""
+"Iccitiin Odeeffannoo keetii eeggamee Qormaata qofaaf LHR itti fayyadama.Yoo "
+"si yaamuun danda'ame LHR si yaama.Mirgi keessan Seeraan eeggamaadha."
+
+#: go-app-ussd.js:1167
+msgid ""
+"LHR will process your info and try to respond timeously. Please don't abuse "
+"this system. All rights reserved."
+msgstr ""
+"LHR odeeffanoo kee hordofee deebii yeroon siif kennuu yaala.Maaloo sirna "
+"kana hin dogoggorsiisinaa.Mirgi keessan Seeraan Eeggamaadha."
+
+#: go-app-ussd.js:1172
+msgid "I understand"
+msgstr "Hubadhe"
+
+#: go-app-ussd.js:1189
+msgid "Which of these xenophobic acts is taking place?"
+msgstr "Gocha Jibba namoomaa kamtu tahaa jira?"
+
+#: go-app-ussd.js:1190
+msgid "Why have you been arrested?"
+msgstr "Maalif hidhamte?"
+
+#: go-app-ussd.js:1191
+msgid "Where have you experienced corruption?"
+msgstr "Malaanmaltummaan kun eessatti simudate?"
+
+#: go-app-ussd.js:1192
+msgid "What would you like to report?"
+msgstr "Maal gabaasuu barbaadda?"
+
+#: go-app-ussd.js:1196
+msgid "Physical threat"
+msgstr "Doorsisa qaamaa/sodaachisa"
+
+#: go-app-ussd.js:1197
+msgid "Protests in your area"
+msgstr "Mormii/Hiriira Jibbansaatu naannoo keessanit tahaa jiraa?"
+
+#: go-app-ussd.js:1198
+msgid "Looting in your area"
+msgstr "Saamichaatu naannookeessanitti gaggeeffamaa jiraa?"
+
+#: go-app-ussd.js:1201
+msgid "Not having an asylum permit"
+msgstr "Hayyama kool-galtummaa dhabuufii?"
+
+#: go-app-ussd.js:1202
+msgid "Not having a migrant visa"
+msgstr "Viza Seera baqattummaa dhabuufii"
+
+#: go-app-ussd.js:1203
+msgid "You don't know"
+msgstr "Sababa hidhamteef hin beektuu"
+
+#: go-app-ussd.js:1204 go-app-ussd.js:1211 go-app-ussd.js:1215
+msgid "Other"
+msgstr "Kan biroo"
+
+#: go-app-ussd.js:1207
+msgid "Refugee Reception Office"
+msgstr "Waajjira simannaa baqattootaa?"
+
+#: go-app-ussd.js:1208
+msgid "South African Police Service"
+msgstr "Tajaajila polisi SA keessa?"
+
+#: go-app-ussd.js:1209
+msgid "Department of Home Affairs"
+msgstr "Waajjira Damee haajaa biyya keessaa?"
+
+#: go-app-ussd.js:1210
+msgid "Social services"
+msgstr "Tajaajila Hawaasaa keessa? "
+
+#: go-app-ussd.js:1214
+msgid "A complaint"
+msgstr "Komii"
+
+#: go-app-ussd.js:1235
+msgid "Please type the name of the suburb in which the incident took place."
+msgstr "Maaloo maqaa ganda ta'iin kun itti raaw'atee barreessi."
+
+#: go-app-ussd.js:1237 go-app-ussd.js:1447
+msgid "Please select your location:"
+msgstr "Maaloo iddoo jiraattu filadhu:"
+
+#: go-app-ussd.js:1239
+msgid ""
+"Sorry, we're not sure which suburb you mean. Please re-enter your location "
+"again carefully and make sure you use the correct spelling."
+msgstr ""
+"Dhiifama,Ganda kam akka jechuu barbaadde hin hubanne.Maaloo mee ammas bakka "
+"ganda qubsuma keetii dogoggora qubee eeggachaa irra deebii nuuf barreessi."
+
+#: go-app-ussd.js:1241 go-app-ussd.js:1451 go-app-ussd.js:1627
+msgid "More"
+msgstr "Kan biroo"
+
+#: go-app-ussd.js:1243 go-app-ussd.js:1453
+msgid "Retry"
+msgstr "Lamuu Yaali"
+
+#: go-app-ussd.js:1244 go-app-ussd.js:1454
+msgid "Skip"
+msgstr "Biradarbi"
+
+#: go-app-ussd.js:1333
+msgid ""
+"Please type an explanation of what's happening. Are you in danger? Is "
+"someone else? Be specific - it'll enable us to send the right response & "
+"help you faster."
+msgstr ""
+"Maaloo waan tahaa jiru nuuf barreessaa.Gaaga'ama keessa jirtaa?Balaan kun "
+"sihi/nama biraati budate?Sirritti ifa nuuf taasisa.Dirmannaa hatattamaa "
+"isiniif godhuuf nugargaara. "
+
+#: go-app-ussd.js:1334
+msgid ""
+"Please type the full name of the person who was arrested. Also, what "
+"happened to cause the arrest? And what documentation/permit does this "
+"person have, if any?"
+msgstr ""
+"Maaloo nama hidhamee ture maqaa guutuu barreessaa.Akkasumaas tahii akkamtu "
+"hidhaaf isa/ishee mude? Fii waraqaan ragaa namni kun ittiin jiraatu kan "
+"akkami yoo qabaateeef."
+
+#: go-app-ussd.js:1335
+msgid ""
+"Please type a detailed explanation of the incident: what happened; where it "
+"happened; the offending official's name; his/her physical features; "
+"date/time"
+msgstr ""
+"Maaloo ibsa waan tahee qulqulleessii nuuf barreessi:maaltu tahe;Eessatti "
+"tahe;Maqaa Aaangawaa yakka raaw'atee;Bifa isaa/isii;guyyaa/yeroo"
+
+#: go-app-ussd.js:1336
+msgid ""
+"Please explain the incident in as much detail as you can: What happened; "
+"where it happened; the offender's name; his/her physical features; "
+"date/time."
+msgstr ""
+"Maaloo ta'ii mudate hamma siif danda'ameen nuuf ibsi.Maalt ta'e;Eessatti "
+"tahe;Maqaa yakkamaa;Bifa isaa/isii;guyyaa/yeroo"
+
+#: go-app-ussd.js:1357
+msgid "Thank you very much. Your report has been submitted."
+msgstr "Guddaa Galatoomi.Gabaasni kee nugahee jira."
+
+#: go-app-ussd.js:1359 go-app-ussd.js:1649
+msgid "Main menu"
+msgstr "Fuula duraa irraa irra deebi'uu barbaaddaa"
+
+#: go-app-ussd.js:1370
+msgid "Goodbye!"
+msgstr ""
+
+#: go-app-ussd.js:1382 go-app-ussd.js:1413
+msgid "Report"
+msgstr "Gabaasa"
+
+#: go-app-ussd.js:1383
+msgid "Step 1: Applying for asylum"
+msgstr "1ffaa:Iyyannoo kol-galtummaa"
+
+#: go-app-ussd.js:1384 go-app-ussd.js:1415
+msgid "Step 2: Life in SA"
+msgstr "2ffaa.Haala jireenya SA "
+
+#: go-app-ussd.js:1385
+msgid "Tips"
+msgstr "Dabalataf"
+
+#: go-app-ussd.js:1386 go-app-ussd.js:1416
+msgid "About/T&Cs"
+msgstr "Waa'ee/Waligaltefihaldure"
+
+#: go-app-ussd.js:1387 go-app-ussd.js:1417
+msgid "Services Near Me"
+msgstr "Tajaajila natti dhihaatu"
+
+#: go-app-ussd.js:1388 go-app-ussd.js:1418
+msgid "Change Settings"
+msgstr "Filannoo jijjiiri"
+
+#: go-app-ussd.js:1414
+msgid "Step 1: Visa application"
+msgstr "1ffaa Iyyannoo Vizaa"
+
+#: go-app-ussd.js:1445
+msgid ""
+"To find services near you we need to know what suburb or area you are in. "
+"Please type this in below & be specific. e.g. Inanda Sandton"
+msgstr ""
+"Tajaajila naannoo kee jiru beekuuf bakka ati jiraattu beekuu "
+"nubarbaachisa.Maaloo akka asii kanatti adda baasaa nuuf "
+"barreessaa.Fakkeenyaaf,Inaandaa,Santon"
+
+#: go-app-ussd.js:1449
+msgid ""
+"Sorry there are no results for your location. Please re-enter your location "
+"again carefully and make sure you use the correct spelling."
+msgstr ""
+"Dhiifama Naannoo ati jiraattu argachuu hin dandeenye.Maaloo maqaa naannoo "
+"keetii sirritti dogoggora qubee eeggachaa barressii ergi."
+
+#: go-app-ussd.js:1542
+msgid ""
+"The system is looking up services near you. This usually takes less than a "
+"minute."
+msgstr ""
+"Tooftaan Kun Tajaajila isinitti dhihaatu barbaadaa jira.Kun ammoo daqiiqaa "
+"tokkoo gad fudhata."
+
+#: go-app-ussd.js:1544
+msgid "View services"
+msgstr "Tajaajila kana ddowattaa"
+
+#: go-app-ussd.js:1559
+msgid ""
+"Unfortunately we couldn't find any locations close to you. Try one more "
+"time or exit?"
+msgstr ""
+"Akka Tasaa tahee Tajaajila sitti dhihaatu argachuu hin dandeenye.Carraa "
+"biraa yaalta moo keessaa baata?"
+
+#: go-app-ussd.js:1561
+msgid "Try again"
+msgstr "Deebi'ee yaaluu"
+
+#: go-app-ussd.js:1576
+msgid ""
+"Sorry, no nearby services available. You can still use the Useful Contacts "
+"Main Menu option to search for services that are further off."
+msgstr ""
+"Dhiifama, Tajaajilli as dhihaatu hin jiru.Ammallee tajaajila itti dhihaatu "
+"argachuuf filannoo irra deebi'ee siif barbaadu filadhu."
+
+#: go-app-ussd.js:1606
+msgid "Select a service for more info"
+msgstr "Odeeffannoo dabalataatiif tajaajila asii gadii kana filadhu:"
+
+#: go-app-ussd.js:1687
+msgid "Previous menu"
+msgstr ""
+
+#: go-app-ussd.js:1720
+msgid "Send to me by SMS"
+msgstr ""
+
+#: go-app-ussd.js:1743
+msgid ""
+"Your SMS will be sent to you shortly. Don't forget to dial back in to {{ "
+"ussd_num }} to find all the info you need about applying for asylum and "
+"living in SA."
+msgstr ""
+"Dhaamsi kee dhiheenyatti sigaha.Lakkoofsa {{ ussd_num }} kana irra "
+"deebitanii bilbiluu hin dagatinaa.Yoo odeeffannoo iyyata Vizaa fi Afrikaa "
+"Kibbaa Keessa jiraatuu feetan."
+
+#: go-app-ussd.js:1756
+msgid "Select setting to change:"
+msgstr ""
+
+#: go-app-ussd.js:1758
+msgid "Language"
+msgstr "Afaan"
+
+#: go-app-ussd.js:1759
+msgid "Country"
+msgstr "Biyya"
+
+#: go-app-ussd.js:1760
+msgid "Status (refugee / migrant)"
+msgstr "Barbaaddaa kool-galtoota"
+
+#: go-app-ussd.js:1761
+msgid "Back to Main Menu"
+msgstr ""
+
+#: go-app-ussd.js:1771
+msgid "Please choose your language:"
+msgstr ""
+
+#: go-app-ussd.js:1824
+msgid "Are you a refugee or migrant?"
+msgstr ""
+
+#: go-app-ussd.js:1826
+msgid "I am a refugee"
+msgstr ""
+
+#: go-app-ussd.js:1827
+msgid "I am a migrant"
+msgstr ""
+
+#: go-app-ussd.js:1841
+msgid ""
+"When you registered, you were identified as a {{status}}. Are you sure you "
+"would like to change your status?"
+msgstr ""
+"Ati yeroo galmoofte akka haala {{status}} tti hubatamte. Dhuguma haala kee "
+"jijjiiruu feetaa?"
+
+#: go-app-ussd.js:1869
+msgid ""
+"Your new settings have been saved. Brought to you by Lawyers for Humans "
+"Rights www.lhr.org.za"
+msgstr ""
+
+#: go-app-ussd.js:1871
+msgid "Continue"
+msgstr "Ittifufi"
