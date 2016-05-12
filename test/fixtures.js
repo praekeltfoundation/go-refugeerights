@@ -175,7 +175,6 @@ return [
                         "type": "USSD",
                         "to_addr": "+064001",
                         "template": "Nearby services: {{ results }}.",
-                        "results": "",
                         "results_detailed": '[]'
                     },
                     "location": {
@@ -198,7 +197,6 @@ return [
                         "type": "USSD",
                         "to_addr": "+064001",
                         "template": "Nearby services: {{ results }}.",
-                        "results": "",
                         "results_detailed": '[]'
                     },
                     "location": {
@@ -229,7 +227,6 @@ return [
                         "type": "USSD",
                         "to_addr": "+064001",
                         "template": "Nearby services: {{ results }}.",
-                        "results": "Mowbray Police station (012 001 0002) AND Turkmenistan Police station",
                         "results_detailed": '[[1, "Mowbray Police (012 001 0002)"], [2, "Turkmenistan Police"]]'
                     },
                     "location": {
@@ -257,7 +254,6 @@ return [
                         "type": "USSD",
                         "to_addr": "+064003",
                         "template": "Nearby services: {{ results }}.",
-                        "results": "",
                         "results_detailed": '[]'
                     },
                     "location": {
@@ -280,7 +276,6 @@ return [
                         "type": "USSD",
                         "to_addr": "+064003",
                         "template": "Nearby services: {{ results }}.",
-                        "results": "",
                         "results_detailed": '[]'
                     },
                     "location": {
@@ -311,7 +306,6 @@ return [
                         "type": "USSD",
                         "to_addr": "+064003",
                         "template": "Nearby services: {{ results }}.",
-                        "results": "",
                         "results_detailed": '[]'
                     },
                     "location": {
