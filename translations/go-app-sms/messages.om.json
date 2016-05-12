@@ -1,0 +1,36 @@
+{
+    "": {
+        "project-id-version": "PACKAGE VERSION",
+        "pot-creation-date": "2016-01-15 01:33:+0000",
+        "po-revision-date": "2016-05-11 21:18+0000",
+        "last-translator": "Botswang <botswang@praekelt.com>",
+        "language-team": "LANGUAGE <LL@li.org>",
+        "language": "om",
+        "mime-version": "1.0",
+        "content-type": "text/plain; charset=utf-8",
+        "content-transfer-encoding": "8bit",
+        "plural-forms": "nplurals=2; plural=(n != 1);",
+        "x-generator": "Pootle 2.5.1.1",
+        "x-pootle-mtime": "1463001521.693720"
+    },
+    "Please dial back in to {{ USSD_number }} to complete the registration.": [
+        null,
+        "Maaloo irra deebi'aa {{ USSD_number }} Galmee keessan Xumuruuf."
+    ],
+    "Thank you for you report. We need some extra information about the incident. Please let us know by dialing {{ USSD_number }}": [
+        null,
+        "Gabaasa keetiif galatoomi.Odeeffannoo dabalataa waa'ee tahii kanaa barbaanna.Maaloo akka lakkoofsa asii gadii kanatti Bilbila keetiin seeni nubeeksisi {{ USSD_number }}"
+    ],
+    "Thank you. You will no longer receive messages from us. Reply START to opt back in.": [
+        null,
+        ""
+    ],
+    "Thank you. You will now receive messages from us again. Reply STOP to unsubscribe.": [
+        null,
+        ""
+    ],
+    "Thanks for your message. We will reply if appropriate. Reply STOP to unsubscribe.": [
+        null,
+        ""
+    ]
+}
