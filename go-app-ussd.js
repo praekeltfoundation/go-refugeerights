@@ -468,7 +468,6 @@ go.utils = {
                 type: "USSD",
                 to_addr: contact.msisdn,
                 template: im.config.template,  // used for SMS only
-                results: "",
                 results_detailed: '[]'
             },
             location: user_location
