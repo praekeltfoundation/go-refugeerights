@@ -82,8 +82,7 @@ go.utils = {
             en: 'english',
             fr: 'french',
             sw: 'swahili',
-            so: 'somali',
-            or: 'oromo'
+            so: 'somali'
         };
         contact.extra.lang = lang;
         contact.extra.language = lang_map[lang];
