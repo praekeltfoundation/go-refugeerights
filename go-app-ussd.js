@@ -83,7 +83,7 @@ go.utils = {
             fr: 'french',
             sw: 'swahili',
             so: 'somali',
-            or: 'oromo'
+            om: 'oromo'
         };
         contact.extra.lang = lang;
         contact.extra.language = lang_map[lang];
@@ -939,7 +939,7 @@ go.app = function() {
                     new Choice('fr', $("French")),
                     new Choice('sw', $("Swahili")),
                     new Choice('so', $("Somali")),
-                    new Choice('or', $("Oromo")),
+                    new Choice('om', $("Oromo")),
                 ],
                 next: function(choice) {
                     return go.utils
@@ -1783,7 +1783,7 @@ go.app = function() {
                     new Choice('fr', $("French")),
                     new Choice('sw', $("Swahili")),
                     new Choice('so', $("Somali")),
-                    new Choice('or', $("Oromo")),
+                    new Choice('om', $("Oromo")),
                 ],
                 next: function(choice) {
                     return go.utils

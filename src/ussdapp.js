@@ -182,7 +182,7 @@ go.app = function() {
                     new Choice('fr', $("French")),
                     new Choice('sw', $("Swahili")),
                     new Choice('so', $("Somali")),
-                    new Choice('or', $("Oromo")),
+                    new Choice('om', $("Oromo")),
                 ],
                 next: function(choice) {
                     return go.utils
@@ -1026,7 +1026,7 @@ go.app = function() {
                     new Choice('fr', $("French")),
                     new Choice('sw', $("Swahili")),
                     new Choice('so', $("Somali")),
-                    new Choice('or', $("Oromo")),
+                    new Choice('om', $("Oromo")),
                 ],
                 next: function(choice) {
                     return go.utils
