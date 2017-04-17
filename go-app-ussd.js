@@ -1871,8 +1871,6 @@ go.app = function() {
             });
         });
 
-
-
         self.add('state_change_confirmation', function(name) {
             return new ChoiceState(name, {
                 question: $("Your new settings have been saved. Brought to you by Lawyers for Humans Rights www.lhr.org.za"),
@@ -1884,6 +1882,38 @@ go.app = function() {
                 }
             });
         });
+
+
+    // TEST STATES
+
+        self.add('state_test_choice', function(name) {
+            return new ChoiceState(name, {
+                question: $("Choose what to test:"),
+                choices: [
+                    new Choice('state_test_paginated', $("PaginatedState")),
+                    new Choice('state_test_paginatedchoice', $("PaginatedChoiceState"))  // TODO Use unique end state
+                ],
+                next: function(choice) {
+                    return choice.value;
+                }
+            });
+        });
+
+        // PaginatedState
+        self.add('state_test_paginated', function(name) {
+            return new PaginatedState(name, {
+                text: $("You will get a Section 22 permit (Asylum-seeker permit) when you apply. It's proof you've applied. You're not a refugee yet. Your permit lets you work or study in SA. Check the permit conditions or ask. Know if it’s valid for 1 month or 3. Make a copy of the permit. Always carry it with you. Keep renewing it before it expires. A decision can take months or years. Tip: If you don’t renew your Section 22 permit before expiry, you could be arrested/detained/fined."),
+                more: $('Next'),
+                back: $('Back'),
+                exit: $('Send to me by SMS'),
+                next: function() {
+                    return 'state_start';
+                }
+            });
+        });
+
+
+
 
     });
 
